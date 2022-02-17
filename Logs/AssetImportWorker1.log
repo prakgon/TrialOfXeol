@@ -59,6 +59,7 @@ Direct3D:
     Vendor:   NVIDIA
     VRAM:     8044 MB
     Driver:   27.21.14.6692
+Shader 'Shadero Customs/LightningBump': fallback shader 'Sprites /Default' not found
 Initialize mono
 Mono path[0] = 'C:/Program Files/2021.2.9f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/2021.2.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
@@ -89,7 +90,7 @@ Domain Reload Profiling:
 			RebuildScriptCaches (25ms)
 			SetupLoadedEditorAssemblies (239ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (15ms)
+				InitializePlatformSupportModulesInManaged (16ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (49ms)
 				BeforeProcessingInitializeOnLoad (1ms)
@@ -446,7 +447,7 @@ Domain Reload Profiling:
 				AfterProcessingInitializeOnLoad (10ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
 Shader 'Shadero Customs/LightningBump': fallback shader 'Sprites /Default' not found
 Shader 'Shadero Customs/LightningBump': fallback shader 'Sprites /Default' not found
