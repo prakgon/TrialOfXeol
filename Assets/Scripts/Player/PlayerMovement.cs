@@ -93,7 +93,13 @@ namespace StarterAssets
 
 		private bool _hasAnimator;
 
-		private void Awake()
+		private bool _canSprint = true;
+		private PlayerMovementStates _currentPlayerState;
+
+        public PlayerMovementStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
+        public bool CanSprint { get => _canSprint; set => _canSprint = value; }
+
+        private void Awake()
 		{
 			// get a reference to our main camera
 			if (_mainCamera == null)
@@ -187,7 +193,24 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			//_currentPlayerState = PlayerMovementStates.Idle;
+			float targetSpeed;
+			if (_input.sprint && CanSprint)
+			{
+				targetSpeed = SprintSpeed;
+				CurrentPlayerState = PlayerMovementStates.Sprinting;
+			}
+
+			else
+			{
+				CurrentPlayerState = PlayerMovementStates.Running;
+				targetSpeed = MoveSpeed;
+			}
+
+			
+
+
+
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -332,4 +355,12 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 	}
+
+	public enum PlayerMovementStates
+    {
+		Idle,
+		Running,
+		Sprinting
+    }
+
 }

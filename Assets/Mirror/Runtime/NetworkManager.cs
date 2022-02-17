@@ -74,7 +74,7 @@ namespace Mirror
         // Player objects are created in the default handler for AddPlayer() on
         // the server. Implementing OnServerAddPlayer overrides this behaviour.
         [Header("Player Object")]
-        [FormerlySerializedAs("m_PlayerPrefab")]
+        [FormerlySerializedAs("m_PlayerPrefabç")]
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
         public GameObject playerPrefab;
 
