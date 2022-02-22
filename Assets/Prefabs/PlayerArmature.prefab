@@ -812,11 +812,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147927287329898608}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   MoveSpeed: 2
   SprintSpeed: 5.335
   RotationSmoothTime: 0.12
@@ -2059,7 +2061,6 @@ MonoBehaviour:
   _currentState: 0
   _input: {fileID: 2405106163574905868}
   _playerMovement: {fileID: 4017133197377439093}
-  _fillingBarTransform: {fileID: 2437128271830835639}
   _fullBarPoint: {fileID: 831253712848287388}
   _emptyBarPoint: {fileID: 2746939088228662420}
 --- !u!1 &5097075073838985329
