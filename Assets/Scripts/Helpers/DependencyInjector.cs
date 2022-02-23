@@ -25,14 +25,14 @@ namespace Helpers
             }
         }
 
-        private void ConfigureInjectionOnChildren()
+        protected virtual void ConfigureInjectionOnChildren()
         {
-            var injectorUsers = FindObjectsOfType<MonoBehaviour>().OfType<IInjectorUser>();
-            Debug.Log(injectorUsers.Last().GetType());
-            foreach (var yunk in injectorUsers)
-            {
-                yunk.ConfigureInjector(this);
-            }
+            //var injectorUsers = FindObjectsOfType<MonoBehaviour>().OfType<IInjectorUser>();
+            //Debug.Log(injectorUsers.Last().GetType());
+            //foreach (var yunk in injectorUsers)
+            //{
+            //    yunk.ConfigureInjector(this);
+            //}
         }
 
         public T GetDependency<T>()

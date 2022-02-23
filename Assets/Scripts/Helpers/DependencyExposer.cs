@@ -11,8 +11,6 @@ namespace Helpers
     /// </summary>
     public class DependencyExposer : MonoBehaviour
     {
-
-
         public IEnumerable<T> GetDependencies<T>()
         {
             FieldInfo[] myFieldInfo;

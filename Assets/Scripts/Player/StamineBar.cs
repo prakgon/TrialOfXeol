@@ -1,10 +1,11 @@
 using StarterAssets;
 using System.Collections;
 using UnityEngine;
+using Helpers;
 
 namespace Player
 {
-    public class StamineBar : MonoBehaviour
+    public class StamineBar : MonoBehaviour, IInjectorUser
     {
         [Header("Parameters")]
         [SerializeField] private float _coolDown;
@@ -13,11 +14,21 @@ namespace Player
         [SerializeField] private SliderBarStates _currentState;
         [Space(10)]
         [Header("References")]
-        [SerializeField] private StarterAssetsInputs _input;
-        [SerializeField] private PlayerMovement _playerMovement;
+        private StarterAssetsInputs _input;
+        private PlayerMovement _playerMovement;
         [SerializeField] private Transform _fullBarPoint;
         [SerializeField] private Transform _emptyBarPoint;
+        private DependencyInjector _inj;
 
+        private void Start()
+        {
+            GetDependencies();
+        }
+        public void ConfigureInjector(DependencyInjector inj)
+        {
+            _inj = inj;
+            Debug.Log(_inj);
+        }
 
         private void ProcessBar(float speed, Transform targetPos)
         {
@@ -89,6 +100,12 @@ namespace Player
             {
                 _playerMovement.CanSprint = true;
             }
+        }
+
+        public void GetDependencies()
+        {
+            _input = _inj.GetDependency<StarterAssetsInputs>();
+            _playerMovement = _inj.GetDependency<PlayerMovement>();
         }
     }
 
