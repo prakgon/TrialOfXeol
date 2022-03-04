@@ -1,10 +1,10 @@
 using Cinemachine;
-using Mirror;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
-
+using Photon.Pun;
+using Photon.Realtime;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
@@ -14,8 +14,8 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class PlayerMovement : NetworkBehaviour
-	{
+	public class PlayerMovement : MonoBehaviourPunCallbacks
+    {
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 10f;
@@ -108,23 +108,18 @@ namespace StarterAssets
 			}
 		}
 
-		public override void OnStartLocalPlayer()
-		{
-			GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
-				transform.GetChild(0).transform;
-		}
-
-		public override void OnStartAuthority()
-		{
-			base.OnStartAuthority();
-
-			PlayerInput playerInput = GetComponent<PlayerInput>();
-			playerInput.enabled = true;
-		}
 
 		private void Start()
 		{
-			_hasAnimator = TryGetComponent(out _animator);
+            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            {
+                return;
+            }
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = true;
+            GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
+                transform.GetChild(0).transform;
+            _hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 
@@ -137,9 +132,11 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if (!isLocalPlayer) return;
-			
-			_hasAnimator = TryGetComponent(out _animator);
+            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            {
+                return;
+            }
+            _hasAnimator = TryGetComponent(out _animator);
 			
 			JumpAndGravity();
 			GroundedCheck();

@@ -74,12 +74,10 @@ namespace Mirror
         // Player objects are created in the default handler for AddPlayer() on
         // the server. Implementing OnServerAddPlayer overrides this behaviour.
         [Header("Player Object")]
-        [FormerlySerializedAs("m_PlayerPrefabç")]
+        [FormerlySerializedAs("m_PlayerPrefab")]
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
         public GameObject playerPrefab;
 
-        [Header("Player Spawn Parent")]
-        public Transform _levelObject;
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>
         [FormerlySerializedAs("m_AutoCreatePlayer")]
         [Tooltip("Should Mirror automatically spawn the player after scene change?")]
@@ -1263,8 +1261,8 @@ namespace Mirror
         {
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation, _levelObject)
-                : Instantiate(playerPrefab, _levelObject);
+                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                : Instantiate(playerPrefab);
 
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
