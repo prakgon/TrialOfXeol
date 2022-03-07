@@ -14,7 +14,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class PlayerMovement : MonoBehaviourPunCallbacks
+	public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     {
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -98,7 +98,7 @@ namespace StarterAssets
 
         public PlayerMovementStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
         public bool CanSprint { get => _canSprint; set => _canSprint = value; }
-
+        public static GameObject LocalPlayerInstance;
         private void Awake()
 		{
 			// get a reference to our main camera
@@ -106,19 +106,25 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
-		}
+            if (photonView.IsMine)
+            {
+                PlayerMovement.LocalPlayerInstance = this.gameObject;
+            }
+            // #Critical
+            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+            DontDestroyOnLoad(this.gameObject);
+        }
 
 
 		private void Start()
 		{
-            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
-            {
-                return;
-            }
             PlayerInput playerInput = GetComponent<PlayerInput>();
             playerInput.enabled = true;
-            GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
-                transform.GetChild(0).transform;
+            if (photonView.IsMine)
+            {
+                GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
+                    transform.GetChild(0).transform;
+            }
             _hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
@@ -353,7 +359,11 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+        }
+    }
 
 	public enum PlayerMovementStates
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Helpers;
 
-namespace Player
+namespace TOX
 {
     public class StamineBar : MonoBehaviour, IInjectorUser
     {
