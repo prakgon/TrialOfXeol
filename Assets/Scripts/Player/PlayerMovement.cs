@@ -99,6 +99,7 @@ namespace StarterAssets
         public PlayerMovementStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
         public bool CanSprint { get => _canSprint; set => _canSprint = value; }
         public static GameObject LocalPlayerInstance;
+        [SerializeField] private GameObject _followCameraPrefab;
         private void Awake()
 		{
 			// get a reference to our main camera
@@ -122,7 +123,8 @@ namespace StarterAssets
             playerInput.enabled = true;
             if (photonView.IsMine)
             {
-                GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
+                GameObject followCamera = Instantiate(_followCameraPrefab);
+                followCamera.GetComponent<CinemachineVirtualCamera>().Follow =
                     transform.GetChild(0).transform;
             }
             _hasAnimator = TryGetComponent(out _animator);
