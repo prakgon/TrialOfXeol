@@ -1,10 +1,10 @@
 using Cinemachine;
-using Mirror;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
-
+using Photon.Pun;
+using Photon.Realtime;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
@@ -14,8 +14,8 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class PlayerMovement : NetworkBehaviour
-	{
+	public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
+    {
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 10f;
@@ -98,7 +98,8 @@ namespace StarterAssets
 
         public PlayerMovementStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
         public bool CanSprint { get => _canSprint; set => _canSprint = value; }
-
+        public static GameObject LocalPlayerInstance;
+        [SerializeField] private GameObject _followCameraPrefab;
         private void Awake()
 		{
 			// get a reference to our main camera
@@ -106,25 +107,27 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
-		}
+            if (photonView.IsMine)
+            {
+                PlayerMovement.LocalPlayerInstance = this.gameObject;
+            }
+            // #Critical
+            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+            DontDestroyOnLoad(this.gameObject);
+        }
 
-		public override void OnStartLocalPlayer()
-		{
-			GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow =
-				transform.GetChild(0).transform;
-		}
-
-		public override void OnStartAuthority()
-		{
-			base.OnStartAuthority();
-
-			PlayerInput playerInput = GetComponent<PlayerInput>();
-			playerInput.enabled = true;
-		}
 
 		private void Start()
 		{
-			_hasAnimator = TryGetComponent(out _animator);
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = true;
+            if (photonView.IsMine)
+            {
+                GameObject followCamera = Instantiate(_followCameraPrefab);
+                followCamera.GetComponent<CinemachineVirtualCamera>().Follow =
+                    transform.GetChild(0).transform;
+            }
+            _hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 
@@ -137,9 +140,11 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if (!isLocalPlayer) return;
-			
-			_hasAnimator = TryGetComponent(out _animator);
+            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            {
+                return;
+            }
+            _hasAnimator = TryGetComponent(out _animator);
 			
 			JumpAndGravity();
 			GroundedCheck();
@@ -356,7 +361,11 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+        }
+    }
 
 	public enum PlayerMovementStates
     {

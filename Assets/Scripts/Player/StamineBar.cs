@@ -2,10 +2,10 @@ using StarterAssets;
 using System.Collections;
 using UnityEngine;
 using Helpers;
-
-namespace Player
+using Photon.Pun;
+namespace TOX
 {
-    public class StamineBar : MonoBehaviour, IInjectorUser
+    public class StamineBar : MonoBehaviourPunCallbacks, IPunObservable, IInjectorUser
     {
         [Header("Parameters")]
         [SerializeField] private float _coolDown;
@@ -38,8 +38,11 @@ namespace Player
 
         private void Update()
         {
+            GetDependencies();
+
             DecideBehaviour();
             StamineBarBehaviour();
+            Debug.Log("tt");
         }
 
         private bool PlayerIsSprintingCheck()
@@ -54,6 +57,7 @@ namespace Player
 
         private void DecideBehaviour()
         {
+            Debug.Log(_playerMovement.enabled);
             if (PlayerIsSprintingCheck() && !_currentState.Equals(SliderBarStates.Cooldown))
             {
                 _currentState = SliderBarStates.Processing;
@@ -106,6 +110,9 @@ namespace Player
         {
             _input = _inj.GetDependency<StarterAssetsInputs>();
             _playerMovement = _inj.GetDependency<PlayerMovement>();
+        }
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
         }
     }
 
