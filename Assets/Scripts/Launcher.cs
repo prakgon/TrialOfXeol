@@ -111,7 +111,7 @@ namespace TOX
 
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("SampleScene");
+                PhotonNetwork.LoadLevel("OnlineScene");
             }
         }
 
