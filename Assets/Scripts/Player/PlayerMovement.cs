@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 #endif
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
- */
+*/
 
 namespace StarterAssets
 {
@@ -83,6 +84,7 @@ namespace StarterAssets
 		private int _animIDJump;
 		private int _animIDFreeFall;
 		private int _animIDMotionSpeed;
+		private int _animIDLightAttack;
 
 		private Animator _animator;
 		private CharacterController _controller;
@@ -149,9 +151,18 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			Attack();
 		}
 
-		private void LateUpdate()
+        private void Attack()
+        {
+            if (_hasAnimator)
+            {
+				_animator.SetBool(_animIDLightAttack, _input.lightAttack);
+            }
+        }
+
+        private void LateUpdate()
 		{
 			CameraRotation();
 		}
@@ -163,6 +174,7 @@ namespace StarterAssets
 			_animIDJump = Animator.StringToHash("Jump");
 			_animIDFreeFall = Animator.StringToHash("FreeFall");
 			_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+			_animIDLightAttack = Animator.StringToHash("LightAttack");
 		}
 
 		private void GroundedCheck()

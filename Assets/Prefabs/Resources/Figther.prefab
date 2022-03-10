@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: -485048110629139028}
   - component: {fileID: -5514300299190662658}
   m_Layer: 8
-  m_Name: Player
+  m_Name: Figther
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,10 +839,6 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
-  roll: 0
-  lightAttack: 0
-  heavyAttack: 0
-  block: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
