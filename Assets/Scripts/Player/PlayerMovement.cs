@@ -174,7 +174,7 @@ namespace StarterAssets
 			_animIDJump = Animator.StringToHash("Jump");
 			_animIDFreeFall = Animator.StringToHash("FreeFall");
 			_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-			_animIDLightAttack = Animator.StringToHash("LightAttack");
+			_animIDLightAttack = Animator.StringToHash("Attack");
 		}
 
 		private void GroundedCheck()
@@ -187,6 +187,7 @@ namespace StarterAssets
 			if (_hasAnimator)
 			{
 				_animator.SetBool(_animIDGrounded, Grounded);
+	
 			}
 		}
 
