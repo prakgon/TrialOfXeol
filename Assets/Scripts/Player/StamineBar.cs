@@ -42,7 +42,6 @@ namespace TOX
 
             DecideBehaviour();
             StamineBarBehaviour();
-            Debug.Log("tt");
         }
 
         private bool PlayerIsSprintingCheck()
@@ -57,7 +56,6 @@ namespace TOX
 
         private void DecideBehaviour()
         {
-            Debug.Log(_playerMovement.enabled);
             if (PlayerIsSprintingCheck() && !_currentState.Equals(SliderBarStates.Cooldown))
             {
                 _currentState = SliderBarStates.Processing;
