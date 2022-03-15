@@ -1078,8 +1078,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51beaeb22b7c8cf47937104c76439548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 7
-  SprintSpeed: 12
+  MoveSpeed: 6
+  SprintSpeed: 9
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 1.2
@@ -3405,8 +3405,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3382714730717703886}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &3828493032126265342
-MeshCollider:
+--- !u!136 &2754876902922073111
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3415,10 +3415,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 21ca816de6f3abd4cbee2c0462c8a186, type: 3}
+  m_Radius: 0.05
+  m_Height: 0.88
+  m_Direction: 1
+  m_Center: {x: -0.00022510199, y: 0.64, z: -0.00000017764636}
 --- !u!4 &116784160188473008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3418011884732149886, guid: 29b475577bd142043a2ccad80f84455f,

@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
-using Random = System.Random;
 
 public class CollisionController : MonoBehaviour
 {
@@ -14,8 +9,6 @@ public class CollisionController : MonoBehaviour
     //Dummy
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"trigger enter {other.name}");
-        
         if (other.gameObject.CompareTag("Weapon") && other.gameObject != playerWeapon)
         {
             StartCoroutine(DamageFeedback());
@@ -43,7 +36,6 @@ public class CollisionController : MonoBehaviour
     //Player
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log($"collider enter {hit.gameObject.name}");
         if (hit.gameObject.CompareTag("Weapon"))
         {
             StartCoroutine(DamageFeedback());

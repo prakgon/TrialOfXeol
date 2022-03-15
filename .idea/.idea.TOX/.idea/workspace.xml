@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="" />
+    <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_3_2022_14_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_3_2022_14_27__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_3_2022_14_27__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_3_2022_14_27__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CollisionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CollisionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_02.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_02.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_03.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_03.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Large_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Large_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Small_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Small_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_02.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_02.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_03.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_03.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_Fast_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_Fast_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordSlash_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordSlash_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordStab_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordStab_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Debris_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Debris_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Dust_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Dust_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Exhaust_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Exhaust_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Fire_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Fire_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Shoot_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Shoot_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Smoke_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Smoke_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterDrip_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterDrip_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterRipple_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterRipple_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Waterfall_Fall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Waterfall_Fall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Hard_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Hard_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Soft_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Soft_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Imports/Arena/Prefab/ARENA_LOW_POLY.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Imports/Arena/Prefab/ARENA_LOW_POLY.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Imports/Arena/Prefab/ARENA_LOW_POLY_FOG.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Imports/Arena/Prefab/ARENA_LOW_POLY_FOG.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Imports/Humanoid/Animations/MeleePack/roll/BasicMotions@LandRoll01 - Run.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Imports/Humanoid/Animations/MeleePack/roll/BasicMotions@LandRoll01 - Run.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Imports/Humanoid/Animator/HumanoidController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Imports/Humanoid/Animator/HumanoidController.controller" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="RollMechanic" />
+        <entry key="$PROJECT_DIR$" value="bdd5e5e50088ca1eebc681c81244ea158058ab8b" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,43 +64,11 @@
     <option name="defaultAccountId" value="3b608f3e-54c5-4326-bccf-39bd3cb22be1" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Runtime/Core/AxisState.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Devices/Commands/WarpMousePositionCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/Interactions/HoldInteraction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Plugins/EnhancedTouch/EnhancedTouchSupport.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Culling/ClipperRegistry.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/Settings/InputSettingsProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Editor/Editors/CinemachineTargetGroupEditor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/InputActionAsset.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Runtime/Animation/AnimationOutputWeightProcessor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/InputBinding.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CollisionController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/42/System.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Devices/Commands/QueryEditorWindowCoordinatesCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/Samples~/SimpleDemo/SimpleControls.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/InputBindingComposite.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/AssetEditor/InputActionEditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/IInputActionCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_MeshUtilities.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/DeviceSimulator/InputSystemPlugin.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/Samples~/Visualizers/InputControlVisualizer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Controls/CommonUsages.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/PropertyDrawers/InputActionDrawerBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/PropertyDrawers/InputActionMapDrawer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Editor/treeview/Snapping/SnapEngine.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Editor/Actions/ActionManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Editor/Trackhead.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Samples~/Customization/Tween/TweenMixerBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Plugins/PlayerInput/PlayerJoinBehavior.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Plugins/PlayerInput/InputValue.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Plugins/PlayerInput/PlayerInput.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/InputSystemObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Devices/Remote/RemoteInputPlayerConnection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Plugins/PlayerInput/PlayerInputManagerEditor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.3/Editor/CurveEditUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Samples~/Cinemachine Example Scenes/Shared/Scripts/PlayerMovePhysics.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Events/InputEvent.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="263jv8Ob0LLaeEKEuZdyrlwNmw4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -163,13 +165,28 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="light-attack-mechanic" />
+                        <option value="humanoid-animations" />
                       </list>
                     </value>
                   </entry>
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="humanoid-animations" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>

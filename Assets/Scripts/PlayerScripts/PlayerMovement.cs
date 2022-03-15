@@ -1,13 +1,10 @@
-using Cinemachine;
-using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
-using Photon.Pun;
-using Photon.Realtime;
 using System;
-using System.Diagnostics.CodeAnalysis;
-using Helpers;
+using Cinemachine;
+using Photon.Pun;
+using UnityEngine;
 using static Helpers.Literals;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -108,6 +105,8 @@ namespace StarterAssets
 
         private bool _hasAnimator;
         private bool _canSprint = true;
+        private bool _canMove = true;
+        private Vector3 _targetDirection;
         private PlayerStates _currentPlayerState;
 
         public PlayerStates CurrentPlayerState
@@ -135,7 +134,7 @@ namespace StarterAssets
 
             if (photonView.IsMine)
             {
-                PlayerMovement.LocalPlayerInstance = this.gameObject;
+                LocalPlayerInstance = this.gameObject;
             }
 
             // #Critical
@@ -177,18 +176,75 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            AnimationStateCheck();
+
+            ActionHandler();
             UpdateAnimator();
+        }
+
+        private void ActionHandler()
+        {
+            switch (_currentPlayerState)
+            {
+                case PlayerStates.Idle:
+                    Move();
+                    break;
+                case PlayerStates.Moving:
+                    Move();
+                    break;
+                case PlayerStates.Jumping:
+                    JumpAndGravity();
+                    break;
+                case PlayerStates.Rolling:
+                    Roll(_targetDirection);
+                    break;
+                case PlayerStates.Attacking:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void AnimationStateCheck()
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Walk Run Blend"))
+            {
+                Debug.Log("Idle Walk Run");
+                _canMove = true;
+                _currentPlayerState = PlayerStates.Moving;
+            }
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
+            {
+                Debug.Log("Roll");
+                _canMove = false;
+                _currentPlayerState = PlayerStates.Rolling;
+            }
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                Debug.Log("Attack");
+                _canMove = false;
+                _currentPlayerState = PlayerStates.Attacking;
+            }
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("JumpStart"))
+            {
+                Debug.Log("JumpStart");
+                _currentPlayerState = PlayerStates.Jumping;
+            }
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("InAir")) Debug.Log("InAir");
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLand")) Debug.Log("JumpLand");
         }
 
         private void UpdateAnimator()
         {
-            if (_hasAnimator)
-            {
-                _animator.SetBool(_animIDLightAttack, _input.lightAttack);
-                
-                _animator.SetBool(_animIDRoll, _input.roll);
-            }
+            if (!_hasAnimator) return;
+            _animator.SetBool(_animIDLightAttack, _input.lightAttack);
+
+            _animator.SetBool(_animIDRoll, _input.roll);
         }
 
         private void LateUpdate()
@@ -244,7 +300,7 @@ namespace StarterAssets
         {
             float targetSpeed;
 
-            if(_input.sprint && CanSprint)
+            if (_input.sprint && CanSprint)
             {
                 targetSpeed = SprintSpeed;
             }
@@ -263,7 +319,7 @@ namespace StarterAssets
             if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
-                _currentPlayerState = Literals.PlayerStates.Idle;
+                _currentPlayerState = PlayerStates.Idle;
             }
 
             // a reference to the players current horizontal velocity
@@ -297,19 +353,17 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
+            if (_input.move != Vector2.zero)
                 TransformRotation(inputDirection);
 
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
+            if (_canMove)
             {
-                _currentPlayerState = Literals.PlayerStates.Moving;
-                ControllerMove(targetDirection);
+                _currentPlayerState = PlayerStates.Moving;
+                ControllerMove(_targetDirection, _speed);
             }
-
-            else Roll(targetDirection);
 
             // update animator if using character
             if (_hasAnimator)
@@ -319,9 +373,12 @@ namespace StarterAssets
             }
         }
 
-        private void ControllerMove(Vector3 targetDirection) => _controller.Move(
-            targetDirection * (_speed * Time.deltaTime) +
-            new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        private void ControllerMove(Vector3 targetDirection, float speed)
+        {
+            _controller.Move(
+                targetDirection * (speed * Time.deltaTime) +
+                new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        }
 
         private void TransformRotation(Vector3 inputDirection)
         {
@@ -338,9 +395,9 @@ namespace StarterAssets
             const int fixedRollSpeed = 4;
             var rollSpeed = _speed < fixedRollSpeed ? fixedRollSpeed : _speed;
             if (!_animator.IsInTransition(0))
-                _controller.Move(transform.forward * (rollSpeed * Time.deltaTime) +
-                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-            else ControllerMove(targetDirection);
+                ControllerMove(transform.forward, rollSpeed);
+            else
+                ControllerMove(targetDirection, _speed);
         }
 
         private void JumpAndGravity()
@@ -366,7 +423,7 @@ namespace StarterAssets
                 // Jump
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    if (_animator.IsInTransition(0) || _animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) return;
+                    //if (_animator.IsInTransition(0) || _animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) return;
 
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
