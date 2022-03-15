@@ -6,7 +6,6 @@ namespace Helpers
         {
             Idle,
             Moving,
-            Jumping,
             Rolling,
             Attacking
         }

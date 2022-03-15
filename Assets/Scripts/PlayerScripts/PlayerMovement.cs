@@ -105,7 +105,6 @@ namespace StarterAssets
 
         private bool _hasAnimator;
         private bool _canSprint = true;
-        private bool _canMove = true;
         private Vector3 _targetDirection;
         private PlayerStates _currentPlayerState;
 
@@ -192,16 +191,17 @@ namespace StarterAssets
                 case PlayerStates.Moving:
                     Move();
                     break;
-                case PlayerStates.Jumping:
-                    JumpAndGravity();
-                    break;
+                /*case PlayerStates.Jumping:
+                    break;*/
                 case PlayerStates.Rolling:
                     Roll(_targetDirection);
                     break;
                 case PlayerStates.Attacking:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    Debug.Log("Default");
+                    Move();
+                    break;
             }
         }
 
@@ -210,41 +210,44 @@ namespace StarterAssets
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Walk Run Blend"))
             {
                 Debug.Log("Idle Walk Run");
-                _canMove = true;
                 _currentPlayerState = PlayerStates.Moving;
             }
 
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
             {
                 Debug.Log("Roll");
-                _canMove = false;
                 _currentPlayerState = PlayerStates.Rolling;
             }
 
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
                 Debug.Log("Attack");
-                _canMove = false;
                 _currentPlayerState = PlayerStates.Attacking;
             }
 
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("JumpStart"))
             {
                 Debug.Log("JumpStart");
-                _currentPlayerState = PlayerStates.Jumping;
             }
 
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("InAir")) Debug.Log("InAir");
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("InAir"))
+            {
+                Debug.Log("InAir");
+            }
 
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLand")) Debug.Log("JumpLand");
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("JumpLand"))
+            {
+                Debug.Log("JumpLand");
+            }
         }
 
         private void UpdateAnimator()
         {
-            if (!_hasAnimator) return;
-            _animator.SetBool(_animIDLightAttack, _input.lightAttack);
-
-            _animator.SetBool(_animIDRoll, _input.roll);
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDLightAttack, _input.lightAttack);
+                _animator.SetBool(_animIDRoll, _input.roll);
+            }
         }
 
         private void LateUpdate()
@@ -340,7 +343,6 @@ namespace StarterAssets
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
-
             else
             {
                 _speed = targetSpeed;
@@ -354,16 +356,17 @@ namespace StarterAssets
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
+            {
                 TransformRotation(inputDirection);
+            }
 
             _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            if (_canMove)
-            {
-                _currentPlayerState = PlayerStates.Moving;
-                ControllerMove(_targetDirection, _speed);
-            }
+
+            _currentPlayerState = PlayerStates.Moving;
+            ControllerMove(_targetDirection, _speed);
+
 
             // update animator if using character
             if (_hasAnimator)
@@ -395,14 +398,18 @@ namespace StarterAssets
             const int fixedRollSpeed = 4;
             var rollSpeed = _speed < fixedRollSpeed ? fixedRollSpeed : _speed;
             if (!_animator.IsInTransition(0))
+            {
                 ControllerMove(transform.forward, rollSpeed);
+            }
             else
+            {
                 ControllerMove(targetDirection, _speed);
+            }
         }
 
         private void JumpAndGravity()
         {
-            if (Grounded /*&& _currentPlayerState != PlayerMovementStates.Rolling*/)
+            if (Grounded)
             {
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
@@ -423,15 +430,16 @@ namespace StarterAssets
                 // Jump
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    //if (_animator.IsInTransition(0) || _animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) return;
-
-                    // the square root of H * -2 * G = how much velocity needed to reach desired height
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                    // update animator if using character
-                    if (_hasAnimator)
+                    if (_currentPlayerState == PlayerStates.Moving && !_animator.IsInTransition(0))
                     {
-                        _animator.SetBool(_animIDJump, true);
+                        // the square root of H * -2 * G = how much velocity needed to reach desired height
+                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                        
+                        // update animator if using character
+                        if (_hasAnimator)
+                        {
+                            _animator.SetBool(_animIDJump, true);
+                        }
                     }
                 }
 
