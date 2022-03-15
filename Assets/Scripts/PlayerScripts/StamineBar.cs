@@ -3,12 +3,14 @@ using System.Collections;
 using UnityEngine;
 using Helpers;
 using Photon.Pun;
-namespace TOX
+using static Helpers.Literals;
+
+namespace PlayerScripts
 {
-    public class StamineBar : MonoBehaviourPunCallbacks, IPunObservable, IInjectorUser
+    public class StamineBar : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
     {
         [Header("Parameters")]
-        [SerializeField] private float _coolDown;
+        [SerializeField] private float _coolDown;//usar esto cooldwon routien
         [SerializeField] private float _processSpeed;
         [SerializeField] private float _returnSpeed;
         [SerializeField] private SliderBarStates _currentState;
@@ -18,15 +20,16 @@ namespace TOX
         private PlayerMovement _playerMovement;
         [SerializeField] private Transform _fullBarPoint;
         [SerializeField] private Transform _emptyBarPoint;
-        private DependencyInjector _inj;
+        private PlayerMediator _med;
 
         private void Start()
         {
-            GetDependencies();
+            _playerMovement = _med.PlayerMovement;
+            _input = _med.StarterAssetsInputs;
         }
-        public void ConfigureInjector(DependencyInjector inj)
+        public void ConfigureMediator(PlayerMediator med)
         {
-            _inj = inj;
+            _med = med;
         }
 
         private void ProcessBar(float speed, Transform targetPos)
@@ -94,28 +97,15 @@ namespace TOX
 
         IEnumerator CooldownRoutine()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_coolDown);
             if (transform.position.x > _emptyBarPoint.position.x)
             {
                 _playerMovement.CanSprint = true;
             }
         }
 
-        public void GetDependencies()
-        {
-            _input = _inj.GetDependency<StarterAssetsInputs>();
-            _playerMovement = _inj.GetDependency<PlayerMovement>();
-        }
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
         }
-    }
-
-    public enum SliderBarStates
-    {
-        Idle,
-        Processing,
-        Returning,
-        Cooldown
     }
 }

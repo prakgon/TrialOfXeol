@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using StarterAssets;
-using TOX;
 
 namespace Helpers
 {
@@ -10,7 +8,7 @@ namespace Helpers
         [Header("MOVEMENT-related dependencies")]
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private StarterAssetsInputs _starterAssetsInputs;
-        [Header("STAMINE BAR-related dependencies")]
-        [SerializeField] private StamineBar _stamineBar;
+        //[Header("STAMINE BAR-related dependencies")]
+        //[SerializeField] private StamineBar _stamineBar;
     }
 }

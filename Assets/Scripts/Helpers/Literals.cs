@@ -9,5 +9,13 @@ namespace Helpers
             Rolling,
             Attacking
         }
+
+        public enum SliderBarStates
+        {
+            Idle,
+            Processing,
+            Returning,
+            Cooldown
+        }
     }
 }

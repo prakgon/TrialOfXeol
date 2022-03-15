@@ -859,12 +859,11 @@ GameObject:
   - component: {fileID: 2405106163574905868}
   - component: {fileID: 2147927287329898620}
   - component: {fileID: 4017133197377439093}
-  - component: {fileID: 1427782232830039941}
-  - component: {fileID: 3374405511871028912}
   - component: {fileID: 1784342461813926238}
   - component: {fileID: -485048110629139028}
   - component: {fileID: -5514300299190662658}
   - component: {fileID: 2991744648201045819}
+  - component: {fileID: 6644253823038711355}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1080,7 +1079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 7
-  SprintSpeed: 10
+  SprintSpeed: 12
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 1.2
@@ -1100,35 +1099,6 @@ MonoBehaviour:
   LockCameraPosition: 0
   _followCameraPrefab: {fileID: 2070925441746177671, guid: a1a802ecaf6775746bb2a929fb554ad8,
     type: 3}
---- !u!114 &1427782232830039941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147927287329898608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d135cf7e8d521479cd3f1073356d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerMovement: {fileID: 4017133197377439093}
-  _starterAssetsInputs: {fileID: 2405106163574905868}
-  _stamineBar: {fileID: 5817872568321163961}
---- !u!114 &3374405511871028912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147927287329898608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cddbdff07e0f20946bafb011fcec7cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _injectorUsers:
-  - {fileID: 4994841091179329008}
 --- !u!114 &1784342461813926238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,6 +1192,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMeshRenderer: {fileID: 7742388956085133792}
   playerWeapon: {fileID: 116784160188301968}
+--- !u!114 &6644253823038711355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147927287329898608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8cd368d25bcfe439b7a83c21d6532b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 4017133197377439093}
+  _starterAssetsInputs: {fileID: 2405106163574905868}
+  _stamineBar: {fileID: 5817872568321163961}
 --- !u!1 &2241015559435739563
 GameObject:
   m_ObjectHideFlags: 0

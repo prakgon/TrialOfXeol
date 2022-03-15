@@ -244,7 +244,7 @@ namespace StarterAssets
         {
             float targetSpeed;
 
-            if(_input.sprint)
+            if(_input.sprint && CanSprint)
             {
                 targetSpeed = SprintSpeed;
             }
