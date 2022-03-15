@@ -27,7 +27,6 @@ namespace TOX
         public void ConfigureInjector(DependencyInjector inj)
         {
             _inj = inj;
-            Debug.Log(_inj);
         }
 
         private void ProcessBar(float speed, Transform targetPos)
@@ -38,8 +37,6 @@ namespace TOX
 
         private void Update()
         {
-            GetDependencies();
-
             DecideBehaviour();
             StamineBarBehaviour();
         }

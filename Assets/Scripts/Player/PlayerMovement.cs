@@ -7,6 +7,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Helpers;
+using static Helpers.Literals;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
 */
@@ -106,9 +108,9 @@ namespace StarterAssets
 
         private bool _hasAnimator;
         private bool _canSprint = true;
-        private PlayerMovementStates _currentPlayerState;
+        private PlayerStates _currentPlayerState;
 
-        public PlayerMovementStates CurrentPlayerState
+        public PlayerStates CurrentPlayerState
         {
             get => _currentPlayerState;
             set => _currentPlayerState = value;
@@ -240,10 +242,19 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            //_currentPlayerState = PlayerMovementStates.Idle;
+            float targetSpeed;
 
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            if(_input.sprint)
+            {
+                targetSpeed = SprintSpeed;
+            }
+
+            else
+            {
+                targetSpeed = MoveSpeed;
+            }
+
+            //float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -252,7 +263,7 @@ namespace StarterAssets
             if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
-                _currentPlayerState = PlayerMovementStates.Idle;
+                _currentPlayerState = Literals.PlayerStates.Idle;
             }
 
             // a reference to the players current horizontal velocity
@@ -273,6 +284,7 @@ namespace StarterAssets
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
+
             else
             {
                 _speed = targetSpeed;
@@ -293,9 +305,10 @@ namespace StarterAssets
             // move the player
             if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
             {
-                _currentPlayerState = PlayerMovementStates.Moving;
+                _currentPlayerState = Literals.PlayerStates.Moving;
                 ControllerMove(targetDirection);
             }
+
             else Roll(targetDirection);
 
             // update animator if using character
@@ -321,7 +334,7 @@ namespace StarterAssets
 
         private void Roll(Vector3 targetDirection)
         {
-            _currentPlayerState = PlayerMovementStates.Rolling;
+            _currentPlayerState = PlayerStates.Rolling;
             const int fixedRollSpeed = 4;
             var rollSpeed = _speed < fixedRollSpeed ? fixedRollSpeed : _speed;
             if (!_animator.IsInTransition(0))
@@ -425,12 +438,5 @@ namespace StarterAssets
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
         }
-    }
-
-    public enum PlayerMovementStates
-    {
-        Idle,
-        Moving,
-        Rolling
     }
 }
