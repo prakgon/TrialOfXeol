@@ -19,7 +19,7 @@ namespace StarterAssets
     public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable
     {
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 10f;
+        public float MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 7.335f;
