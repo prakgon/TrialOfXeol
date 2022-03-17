@@ -150,29 +150,6 @@ namespace StarterAssets
             Move();
         }
 
-        //private void ActionHandler()
-        //{
-
-        //    if(_animController.CurrentPlayerState.Equals(PlayerStates.Roll))
-        //    {
-        //        Roll(TargetDirection);
-        //    }
-
-        //    else
-        //    {
-        //        Move();
-        //    }
-        //}
-
-        //private void UpdateAnimator()
-        //{
-        //    if (_hasAnimator)
-        //    {
-        //        _animator.SetBool(_animIDLightAttack, _input.lightAttack);
-        //        _animator.SetBool(_animIDRoll, _input.roll);
-        //    }
-        //}
-
         private void LateUpdate()
         {
             CameraRotation();
@@ -257,6 +234,7 @@ namespace StarterAssets
                 // round speed to 3 decimal places
                 Speed = Mathf.Round(Speed * 1000f) / 1000f;
             }
+
             else
             {
                 Speed = targetSpeed;
@@ -278,6 +256,7 @@ namespace StarterAssets
 
             // move the player
             ControllerMove(TargetDirection, Speed);
+
             UpdateAnimator(inputMagnitude);
         }
 
@@ -287,12 +266,12 @@ namespace StarterAssets
             _animController.ChangeState(PlayerParameters.MotionSpeed, inputMagnitude);
         }
 
-        public void ControllerMove(Vector3 targetDirection, float speed)
+        public void ControllerMove(Vector3 targetDirection, float speed) //working to apply the normal movement to run and sprint
         {
             _controller.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
-        public void ControllerMoveForward(float speed)
+        public void ControllerMoveForward(float speed) //working to apply an impulse forward when the player rolls
         {
             _controller.Move(transform.forward * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
