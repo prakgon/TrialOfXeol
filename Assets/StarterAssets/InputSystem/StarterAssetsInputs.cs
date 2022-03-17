@@ -49,11 +49,8 @@ namespace StarterAssets
         public void LookInput(Vector2 newLookDirection) => look = newLookDirection;
         public void JumpInput(bool newJumpState) => jump = newJumpState;
         public void SprintInput(bool newSprintState) => sprint = newSprintState;
-        public void RollInput(bool newRollState) 
-        {
-            _playerMechanics.Roll(newRollState);
-        } 
-        public void LightAttackInput(bool newLightAttackState) => lightAttack = newLightAttackState;
+        public void RollInput(bool newRollState) => _playerMechanics.Roll(newRollState);
+        public void LightAttackInput(bool newLightAttackState) => _playerMechanics.LightAttack(newLightAttackState);
         public void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
         public void BlockInput(bool newBlockState) => block = newBlockState;
 

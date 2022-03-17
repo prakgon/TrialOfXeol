@@ -3,9 +3,8 @@ using static Helpers.Literals;
 
 namespace PlayerScripts
 {
-    public class PlayerAnimatorController : MonoBehaviour/*, IMediatorUser*/
+    public class PlayerAnimatorController : MonoBehaviour
     {
-        //private PlayerMediator _med;
         private Animator _an;
         [SerializeField] private PlayerStates _currentPlayerState;
         [SerializeField] private PlayerParameters _lastActiveParameter;
@@ -14,34 +13,19 @@ namespace PlayerScripts
         public Animator An { get => _an; set => _an = value; }
         public PlayerParameters LastActiveParameter { get => _lastActiveParameter; set => _lastActiveParameter = value; }
 
-        //public void ConfigureMediator(PlayerMediator med)
-        //{
-        //    _med = med;
-        //}
-
         private void Start()
         {
             An = GetComponent<Animator>();
         }
-
-        public string GetCurrentAnimatorState(byte layer = 0)
+        public bool CompareAnimState(string stateToCompare, byte layer = 0)
         {
-            return An.GetCurrentAnimatorStateInfo(layer).ToString();
+            if (An.GetCurrentAnimatorStateInfo(layer).IsName(stateToCompare)) return true;
+            return false;
         }
 
         public bool IsTransition(byte layer = 0)
         {
             return An.IsInTransition(layer);
-        }
-
-        public void ChangeState(PlayerStates newState, bool state)
-        {
-            if(state)
-            {
-                CurrentPlayerState = newState;
-            }
-
-            An.SetBool(newState.ToString(), state);
         }
 
         public void ChangeState(PlayerParameters newState, bool state)

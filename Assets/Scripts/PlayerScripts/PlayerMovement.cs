@@ -74,6 +74,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         private bool _canSprint = true;
+        private bool _canMoove = true;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -101,6 +102,7 @@ namespace StarterAssets
         public bool CanSprint{ get => _canSprint; set => _canSprint = value; }
         public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
         public float Speed { get => _speed; set => _speed = value; }
+        public bool CanMoove { get => _canMoove; set => _canMoove = value; }
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -145,9 +147,11 @@ namespace StarterAssets
             {
                 return;
             }
+            CanMooveCheck();
             JumpAndGravity();
             GroundedCheck();
             Move();
+            
         }
 
         private void LateUpdate()
@@ -166,6 +170,13 @@ namespace StarterAssets
         //    _animIDLightAttack = Animator.StringToHash("Attack");
         //}
 
+        private void CanMooveCheck()
+        {
+            if (_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()) && !CanMoove) 
+            {
+                CanMoove = true;
+            }
+        }
         private void GroundedCheck()
         {
             // set sphere position, with offset
@@ -245,6 +256,7 @@ namespace StarterAssets
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
+            if (!CanMoove) return;
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
@@ -252,11 +264,9 @@ namespace StarterAssets
                 TransformRotation(inputDirection);
             }
 
+            //Move the player to the desired direction and Update animations
             TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // move the player
             ControllerMove(TargetDirection, Speed);
-
             UpdateAnimator(inputMagnitude);
         }
 
@@ -268,12 +278,13 @@ namespace StarterAssets
 
         public void ControllerMove(Vector3 targetDirection, float speed) //working to apply the normal movement to run and sprint
         {
+            
             _controller.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         public void ControllerMoveForward(float speed) //working to apply an impulse forward when the player rolls
         {
-            _controller.Move(transform.forward * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move((transform.forward + TargetDirection.normalized) * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         private void TransformRotation(Vector3 inputDirection)
