@@ -1,0 +1,233 @@
+Index: Assets/StarterAssets/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>%YAML 1.1\r\n%TAG !u! tag:unity3d.com,2011:\r\n--- !u!206 &-7550852685246512659\r\nBlendTree:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Blend Tree\r\n  m_Childs: []\r\n  m_BlendParameter: Speed\r\n  m_BlendParameterY: Speed\r\n  m_MinThreshold: 0\r\n  m_MaxThreshold: 1\r\n  m_UseAutomaticThresholds: 1\r\n  m_NormalizedBlendValues: 0\r\n  m_BlendType: 0\r\n--- !u!1102 &-7469282255733588732\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: InAir\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: -1241942381204629156}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 1\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: -2702400367771620057, guid: 063aa479676c4084ebf187660ca0a7b8,\r\n    type: 3}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!206 &-6795222753788589146\r\nBlendTree:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: BlendTree\r\n  m_Childs: []\r\n  m_BlendParameter: Speed\r\n  m_BlendParameterY: Speed\r\n  m_MinThreshold: 0\r\n  m_MaxThreshold: 1\r\n  m_UseAutomaticThresholds: 1\r\n  m_NormalizedBlendValues: 0\r\n  m_BlendType: 0\r\n--- !u!1101 &-5919244866238163409\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 2\r\n    m_ConditionEvent: Roll\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 6904719651407550685}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.25\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.8214286\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1107 &-5602963042399094863\r\nAnimatorStateMachine:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Base Layer\r\n  m_ChildStates:\r\n  - serializedVersion: 1\r\n    m_State: {fileID: 6904719651407550685}\r\n    m_Position: {x: 200, y: 400, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: -7469282255733588732}\r\n    m_Position: {x: 200, y: 600, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: -1645763842379584696}\r\n    m_Position: {x: 400, y: 490, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: 2316907928501487792}\r\n    m_Position: {x: 0, y: 490, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: 1738043337061605261}\r\n    m_Position: {x: 920, y: 320, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: 1427223941156874260}\r\n    m_Position: {x: 960, y: 380, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: -2235452635229010895}\r\n    m_Position: {x: 990, y: 450, z: 0}\r\n  - serializedVersion: 1\r\n    m_State: {fileID: 2942326920795932494}\r\n    m_Position: {x: 460, y: 400, z: 0}\r\n  m_ChildStateMachines: []\r\n  m_AnyStateTransitions: []\r\n  m_EntryTransitions: []\r\n  m_StateMachineTransitions: {}\r\n  m_StateMachineBehaviours: []\r\n  m_AnyStatePosition: {x: 10, y: 330, z: 0}\r\n  m_EntryPosition: {x: 220, y: 330, z: 0}\r\n  m_ExitPosition: {x: 680, y: 260, z: 0}\r\n  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}\r\n  m_DefaultState: {fileID: 6904719651407550685}\r\n--- !u!1101 &-5554260563948360725\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions: []\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 0}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.25\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.925\r\n  m_HasExitTime: 1\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &-5395363184730745010\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Grounded\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -1645763842379584696}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.13652915\r\n  m_TransitionOffset: 0.1872593\r\n  m_ExitTime: 0.65006435\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &-4639224020698590961\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: FreeFall\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -7469282255733588732}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.037536144\r\n  m_TransitionOffset: 0.23041831\r\n  m_ExitTime: 0.9466194\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &-3943826829571047522\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: FreeFall\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 0}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.037536144\r\n  m_TransitionOffset: 0.23041831\r\n  m_ExitTime: 0.9466194\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &-3768668417189682236\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 2\r\n    m_ConditionEvent: Flying\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -7469282255733588732}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.17459607\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.925\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1102 &-2235452635229010895\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: SlowRunCopy\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions: []\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 7400000, guid: e1a458636592f9e4388841eb25f19c1e, type: 2}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1102 &-1645763842379584696\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: JumpLand\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: 1965893691485178243}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 8738420251406115919}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1101 &-1241942381204629156\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Grounded\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -1645763842379584696}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.09764749\r\n  m_TransitionOffset: 0.08027425\r\n  m_ExitTime: 0.30146867\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!91 &9100000\r\nAnimatorController:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: StarterAssetsThirdPerson\r\n  serializedVersion: 5\r\n  m_AnimatorParameters:\r\n  - m_Name: Speed\r\n    m_Type: 1\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  - m_Name: Jump\r\n    m_Type: 4\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  - m_Name: Grounded\r\n    m_Type: 4\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  - m_Name: FreeFall\r\n    m_Type: 4\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  - m_Name: MotionSpeed\r\n    m_Type: 1\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  - m_Name: Roll\r\n    m_Type: 4\r\n    m_DefaultFloat: 0\r\n    m_DefaultInt: 0\r\n    m_DefaultBool: 0\r\n    m_Controller: {fileID: 0}\r\n  m_AnimatorLayers:\r\n  - serializedVersion: 5\r\n    m_Name: Base Layer\r\n    m_StateMachine: {fileID: -5602963042399094863}\r\n    m_Mask: {fileID: 0}\r\n    m_Motions: []\r\n    m_Behaviours: []\r\n    m_BlendingMode: 0\r\n    m_SyncedLayerIndex: -1\r\n    m_DefaultWeight: 0\r\n    m_IKPass: 0\r\n    m_SyncedLayerAffectsTiming: 0\r\n    m_Controller: {fileID: 9100000}\r\n--- !u!1101 &1381778882725410896\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Grounded\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -1645763842379584696}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.13652915\r\n  m_TransitionOffset: 0.1872593\r\n  m_ExitTime: 0.65006435\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 2\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1102 &1427223941156874260\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: SprintCopy\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions: []\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 7400000, guid: 6180dfa5add960a4db5fd5914fcff627, type: 2}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1101 &1705606405774109490\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions: []\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -7469282255733588732}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.47048202\r\n  m_TransitionOffset: 0.60876185\r\n  m_ExitTime: 0.66366935\r\n  m_HasExitTime: 1\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1102 &1725567275296691115\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Fly\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: -3768668417189682236}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: -4506558747437489242, guid: d3b2083e086810047ab04d540db8afbc,\r\n    type: 3}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1102 &1738043337061605261\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Blend Tree\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions: []\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: -7550852685246512659}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1101 &1965893691485178243\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions: []\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 6904719651407550685}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.4340285\r\n  m_TransitionOffset: 0.36290926\r\n  m_ExitTime: 0.39948252\r\n  m_HasExitTime: 1\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 2\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1102 &2316907928501487792\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: JumpStart\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: 1705606405774109490}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 1\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 7478122292733868173, guid: 98f277b0c8055e143b2fcf058d3c27dc,\r\n    type: 3}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1101 &2455683505482688366\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions: []\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -7469282255733588732}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.25\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.9466192\r\n  m_HasExitTime: 1\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1102 &2942326920795932494\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Roll\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: -5919244866238163409}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 0\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 0\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 7400000, guid: 6d11776678652bf488fcd1797ed7cab3, type: 2}\r\n  m_Tag: \r\n  m_SpeedParameter: \r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: \r\n--- !u!1101 &3956692567442318932\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Roll\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 2942326920795932494}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.25\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.8852773\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &5185278855704465556\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Flying\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 1725567275296691115}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.1320467\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.75\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 0\r\n--- !u!1102 &6904719651407550685\r\nAnimatorState:\r\n  serializedVersion: 6\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Idle Walk Run Blend\r\n  m_Speed: 1\r\n  m_CycleOffset: 0\r\n  m_Transitions:\r\n  - {fileID: -4639224020698590961}\r\n  - {fileID: 8635457214972911529}\r\n  - {fileID: 3956692567442318932}\r\n  m_StateMachineBehaviours: []\r\n  m_Position: {x: 50, y: 50, z: 0}\r\n  m_IKOnFeet: 1\r\n  m_WriteDefaultValues: 1\r\n  m_Mirror: 0\r\n  m_SpeedParameterActive: 1\r\n  m_MirrorParameterActive: 0\r\n  m_CycleOffsetParameterActive: 0\r\n  m_TimeParameterActive: 0\r\n  m_Motion: {fileID: 8571049798372811705}\r\n  m_Tag: \r\n  m_SpeedParameter: MotionSpeed\r\n  m_MirrorParameter: \r\n  m_CycleOffsetParameter: \r\n  m_TimeParameter: Speed\r\n--- !u!1101 &7604687646627025577\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Jump\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 0}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.07026386\r\n  m_TransitionOffset: 0.058338698\r\n  m_ExitTime: 0.8555227\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!1101 &8308480711204209675\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: FreeFall\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: -7469282255733588732}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.25\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.75\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!206 &8571049798372811705\r\nBlendTree:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Blend Tree\r\n  m_Childs:\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: -3100369314251171874, guid: 12e52e465ed793a4d801955e9f964a82,\r\n      type: 3}\r\n    m_Threshold: 0\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: 7400000, guid: e1a458636592f9e4388841eb25f19c1e, type: 2}\r\n    m_Threshold: 3\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: -203655887218126122, guid: 4236777899175014cb313fe5b7c9831a,\r\n      type: 3}\r\n    m_Threshold: 7\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  m_BlendParameter: Speed\r\n  m_BlendParameterY: Speed\r\n  m_MinThreshold: 0\r\n  m_MaxThreshold: 7\r\n  m_UseAutomaticThresholds: 0\r\n  m_NormalizedBlendValues: 0\r\n  m_BlendType: 0\r\n--- !u!1101 &8635457214972911529\r\nAnimatorStateTransition:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: \r\n  m_Conditions:\r\n  - m_ConditionMode: 1\r\n    m_ConditionEvent: Jump\r\n    m_EventTreshold: 0\r\n  m_DstStateMachine: {fileID: 0}\r\n  m_DstState: {fileID: 2316907928501487792}\r\n  m_Solo: 0\r\n  m_Mute: 0\r\n  m_IsExit: 0\r\n  serializedVersion: 3\r\n  m_TransitionDuration: 0.07026373\r\n  m_TransitionOffset: 0\r\n  m_ExitTime: 0.03574113\r\n  m_HasExitTime: 0\r\n  m_HasFixedDuration: 1\r\n  m_InterruptionSource: 0\r\n  m_OrderedInterruption: 1\r\n  m_CanTransitionToSelf: 1\r\n--- !u!206 &8738420251406115919\r\nBlendTree:\r\n  m_ObjectHideFlags: 1\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_Name: Blend Tree\r\n  m_Childs:\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: -9098803823909532060, guid: 98f277b0c8055e143b2fcf058d3c27dc,\r\n      type: 3}\r\n    m_Threshold: 0\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: 3062299877480904481, guid: 325a26d62b61fa94cb3c97c435efebc5,\r\n      type: 3}\r\n    m_Threshold: 2\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  - serializedVersion: 2\r\n    m_Motion: {fileID: -2817517482862745934, guid: 3c033631149b9c541bcf155cd94cccba,\r\n      type: 3}\r\n    m_Threshold: 6\r\n    m_Position: {x: 0, y: 0}\r\n    m_TimeScale: 1\r\n    m_CycleOffset: 0\r\n    m_DirectBlendParameter: Speed\r\n    m_Mirror: 0\r\n  m_BlendParameter: Speed\r\n  m_BlendParameterY: Speed\r\n  m_MinThreshold: 0\r\n  m_MaxThreshold: 6\r\n  m_UseAutomaticThresholds: 0\r\n  m_NormalizedBlendValues: 0\r\n  m_BlendType: 0\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/StarterAssets/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller b/Assets/StarterAssets/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller
+--- a/Assets/StarterAssets/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller	
++++ b/Assets/StarterAssets/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller	
+@@ -106,13 +106,13 @@
+     m_Position: {x: 0, y: 490, z: 0}
+   - serializedVersion: 1
+     m_State: {fileID: 1738043337061605261}
+-    m_Position: {x: 920, y: 320, z: 0}
++    m_Position: {x: 740, y: 320, z: 0}
+   - serializedVersion: 1
+     m_State: {fileID: 1427223941156874260}
+-    m_Position: {x: 960, y: 380, z: 0}
++    m_Position: {x: 740, y: 410, z: 0}
+   - serializedVersion: 1
+     m_State: {fileID: -2235452635229010895}
+-    m_Position: {x: 990, y: 450, z: 0}
++    m_Position: {x: 740, y: 500, z: 0}
+   - serializedVersion: 1
+     m_State: {fileID: 2942326920795932494}
+     m_Position: {x: 460, y: 400, z: 0}
+@@ -340,37 +340,37 @@
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   - m_Name: Jump
+     m_Type: 4
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   - m_Name: Grounded
+     m_Type: 4
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   - m_Name: FreeFall
+     m_Type: 4
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   - m_Name: MotionSpeed
+     m_Type: 1
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   - m_Name: Roll
+     m_Type: 4
+     m_DefaultFloat: 0
+     m_DefaultInt: 0
+     m_DefaultBool: 0
+-    m_Controller: {fileID: 0}
++    m_Controller: {fileID: 9100000}
+   m_AnimatorLayers:
+   - serializedVersion: 5
+     m_Name: Base Layer
+Index: Assets/Animations/RollCopy.anim
+===================================================================
+diff --git a/Assets/Animations/RollCopy.anim b/Assets/Animations/RollCopy.anim
+--- a/Assets/Animations/RollCopy.anim	
++++ b/Assets/Animations/RollCopy.anim	
+@@ -14,7 +14,32 @@
+   m_RotationCurves: []
+   m_CompressedRotationCurves: []
+   m_EulerCurves: []
+-  m_PositionCurves: []
++  m_PositionCurves:
++  - curve:
++      serializedVersion: 2
++      m_Curve:
++      - serializedVersion: 3
++        time: 0
++        value: {x: -0.089248985, y: 0.6833224, z: -0.09126201}
++        inSlope: {x: 0, y: 0, z: 0}
++        outSlope: {x: 0, y: 0, z: 0}
++        tangentMode: 0
++        weightedMode: 0
++        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
++        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
++      - serializedVersion: 3
++        time: 1.0166667
++        value: {x: -0.09, y: 0.56, z: -0.06}
++        inSlope: {x: 0, y: 0, z: 0}
++        outSlope: {x: 0, y: 0, z: 0}
++        tangentMode: 0
++        weightedMode: 0
++        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
++        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
++      m_PreInfinity: 2
++      m_PostInfinity: 2
++      m_RotationOrder: 4
++    path: Skeleton/Hips
+   m_ScaleCurves: []
+   m_FloatCurves:
+   - curve:
+@@ -58584,7 +58609,7 @@
+         outWeight: 0.33333334
+       - serializedVersion: 3
+         time: 1.0166667
+-        value: 0.33930504
++        value: 0.69
+         inSlope: 0.29314125
+         outSlope: 0.29314125
+         tangentMode: 0
+@@ -60719,6 +60744,13 @@
+     m_Extent: {x: 0, y: 0, z: 0}
+   m_ClipBindingConstant:
+     genericBindings:
++    - serializedVersion: 2
++      path: 3309724608
++      attribute: 1
++      script: {fileID: 0}
++      typeID: 4
++      customType: 0
++      isPPtrCurve: 0
+     - serializedVersion: 2
+       path: 0
+       attribute: 45
+@@ -120302,7 +120334,7 @@
+         outWeight: 0.33333334
+       - serializedVersion: 3
+         time: 1.0166667
+-        value: 0.33930504
++        value: 0.69
+         inSlope: 0.29314125
+         outSlope: 0.29314125
+         tangentMode: 0
+@@ -122428,6 +122460,90 @@
+     attribute: UpperChest Twist Left-Right
+     path: 
+     classID: 95
++    script: {fileID: 0}
++  - curve:
++      serializedVersion: 2
++      m_Curve:
++      - serializedVersion: 3
++        time: 0
++        value: -0.089248985
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      - serializedVersion: 3
++        time: 1.0166667
++        value: -0.09
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      m_PreInfinity: 2
++      m_PostInfinity: 2
++      m_RotationOrder: 4
++    attribute: m_LocalPosition.x
++    path: Skeleton/Hips
++    classID: 4
++    script: {fileID: 0}
++  - curve:
++      serializedVersion: 2
++      m_Curve:
++      - serializedVersion: 3
++        time: 0
++        value: 0.6833224
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      - serializedVersion: 3
++        time: 1.0166667
++        value: 0.56
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      m_PreInfinity: 2
++      m_PostInfinity: 2
++      m_RotationOrder: 4
++    attribute: m_LocalPosition.y
++    path: Skeleton/Hips
++    classID: 4
++    script: {fileID: 0}
++  - curve:
++      serializedVersion: 2
++      m_Curve:
++      - serializedVersion: 3
++        time: 0
++        value: -0.09126201
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      - serializedVersion: 3
++        time: 1.0166667
++        value: -0.06
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 136
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      m_PreInfinity: 2
++      m_PostInfinity: 2
++      m_RotationOrder: 4
++    attribute: m_LocalPosition.z
++    path: Skeleton/Hips
++    classID: 4
+     script: {fileID: 0}
+   m_EulerEditorCurves: []
+   m_HasGenericRootTransform: 0

@@ -11,7 +11,7 @@ public class PreventDestroy : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("aaa");
+        Debug.Log("Dont Destroy on Load: " + name);
         DontDestroyOnLoad(this.gameObject);
     }
 

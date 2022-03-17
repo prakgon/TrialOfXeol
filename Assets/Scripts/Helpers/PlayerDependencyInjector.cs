@@ -9,7 +9,7 @@ namespace Helpers
         {
             foreach (var yunk in _injectorUsers)
             {
-                yunk.GetComponent<IInjectorUser>().ConfigureInjector(this);
+                //yunk.GetComponent<IInjectorUser>().ConfigureInjector(this);
             }
         }
     }
