@@ -1,3 +1,5 @@
+using Helpers;
+using PlayerScripts;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -5,16 +7,18 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-    public class StarterAssetsInputs : MonoBehaviour
+    public class StarterAssetsInputs : MonoBehaviour, IMediatorUser
     {
         [Header("Character Input Values")] public Vector2 move;
         public Vector2 look;
         public bool jump;
         public bool sprint;
-        public bool roll;
+        //public bool roll;
         public bool lightAttack;
         public bool heavyAttack;
         public bool block;
+        private PlayerMediator _med;
+        private PlayerMechanics _playerMechanics;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -45,7 +49,10 @@ namespace StarterAssets
         public void LookInput(Vector2 newLookDirection) => look = newLookDirection;
         public void JumpInput(bool newJumpState) => jump = newJumpState;
         public void SprintInput(bool newSprintState) => sprint = newSprintState;
-        public void RollInput(bool newRollState) => roll = newRollState;
+        public void RollInput(bool newRollState) 
+        {
+            _playerMechanics.Roll(newRollState);
+        } 
         public void LightAttackInput(bool newLightAttackState) => lightAttack = newLightAttackState;
         public void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
         public void BlockInput(bool newBlockState) => block = newBlockState;
@@ -54,6 +61,12 @@ namespace StarterAssets
         private void OnApplicationFocus(bool hasFocus) => SetCursorState(cursorLocked);
         private void SetCursorState(bool newState) =>
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+
+        public void ConfigureMediator(PlayerMediator med)
+        {
+            _med = med;
+            _playerMechanics = _med.PlayerMechanics;
+        }
 #endif
     }
 }

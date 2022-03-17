@@ -4,10 +4,23 @@ namespace Helpers
     {
         public enum PlayerStates
         {
-            Idle,
-            Moving,
-            Rolling,
-            Attacking
+            IdleWalkRunBlend,
+            Roll,
+            Attack,
+            JumpLand,
+            InAir,
+            JumpStart
+        }
+
+        public enum PlayerParameters
+        {
+            Speed,
+            Jump,
+            Grounded,
+            FreeFall,
+            MotionSpeed,
+            Attack,
+            Roll
         }
 
         public enum SliderBarStates
@@ -16,6 +29,11 @@ namespace Helpers
             Processing,
             Returning,
             Cooldown
+        }
+
+        public enum Tags
+        {
+            MainCamera
         }
     }
 }

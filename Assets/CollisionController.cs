@@ -6,25 +6,25 @@ public class CollisionController : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
     [SerializeField] private GameObject playerWeapon;
 
-    //Dummy
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Weapon") && other.gameObject != playerWeapon)
-        {
-            StartCoroutine(DamageFeedback());
-            /*switch (gameObject.tag)
-            {
-            case "Player":
-                StartCoroutine(DamageFeedback());
-                break;
-            case "Dummy":
-                StartCoroutine(DummyFeedback());
-                break;
-            default:
-                return;
-            }*/
-        }
-    }
+    ////Dummy
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Weapon") && other.gameObject != playerWeapon)
+    //    {
+    //        StartCoroutine(DamageFeedback());
+    //        /*switch (gameObject.tag)
+    //        {
+    //        case "Player":
+    //            StartCoroutine(DamageFeedback());
+    //            break;
+    //        case "Dummy":
+    //            StartCoroutine(DummyFeedback());
+    //            break;
+    //        default:
+    //            return;
+    //        }*/
+    //    }
+    //}
 
     private IEnumerator DummyFeedback()
     {
@@ -34,13 +34,13 @@ public class CollisionController : MonoBehaviour
     }
 
     //Player
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.CompareTag("Weapon"))
-        {
-            StartCoroutine(DamageFeedback());
-        }
-    }
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if (hit.gameObject.CompareTag("Weapon"))
+    //    {
+    //        StartCoroutine(DamageFeedback());
+    //    }
+    //}
 
     private IEnumerator DamageFeedback()
     {

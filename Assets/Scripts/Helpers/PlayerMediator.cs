@@ -12,14 +12,18 @@ namespace Helpers
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private StarterAssetsInputs _starterAssetsInputs;
         
-        [Header("STAMINE BAR-related dependencies")]
+        [Header("GUI-related dependencies")]
         [SerializeField] private StamineBar _stamineBar;
 
-        [Header("ANIMATIONS-related dependencies")]
+        [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
+        [SerializeField] private PlayerMechanics _playerMechanics;
+
         public PlayerMovement PlayerMovement { get => _playerMovement; set => _playerMovement = value; }
         public StarterAssetsInputs StarterAssetsInputs { get => _starterAssetsInputs; set => _starterAssetsInputs = value; }
         public StamineBar StamineBar { get => _stamineBar; set => _stamineBar = value; }
+        public PlayerAnimatorController PlayerAnimatorController { get => _playerAnimatorController; set => _playerAnimatorController = value; }
+        public PlayerMechanics PlayerMechanics { get => _playerMechanics; set => _playerMechanics = value; }
 
         private void Awake()
         {
