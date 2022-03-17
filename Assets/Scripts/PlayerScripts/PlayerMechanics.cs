@@ -21,7 +21,6 @@ namespace PlayerScripts
 
         public void LightAttack(bool newState)
         {
-            _playerMovement.CanMoove = false;
             _animController.ChangeState(PlayerParameters.Attack, newState);
         }
 

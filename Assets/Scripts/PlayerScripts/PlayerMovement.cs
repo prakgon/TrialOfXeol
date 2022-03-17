@@ -74,7 +74,8 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         private bool _canSprint = true;
-        private bool _canMoove = true;
+        private bool _canMove = true;
+        private bool _canRotate = true;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -102,14 +103,14 @@ namespace StarterAssets
         public bool CanSprint{ get => _canSprint; set => _canSprint = value; }
         public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
         public float Speed { get => _speed; set => _speed = value; }
-        public bool CanMoove { get => _canMoove; set => _canMoove = value; }
+        public bool CanMove { get => _canMove; set => _canMove = value; }
+        public bool CanRotate { get => _canRotate; set => _canRotate = value; }
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
 
         private void Awake()
         {
-            // get a reference to our main camera
             if (_mainCamera == null)
             {
                 _mainCamera = GameObject.FindGameObjectWithTag(Tags.MainCamera.ToString());
@@ -119,8 +120,6 @@ namespace StarterAssets
             {
                 LocalPlayerInstance = gameObject;
             }
-            // #Critical
-            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
             DontDestroyOnLoad(gameObject);
         }
 
@@ -135,8 +134,6 @@ namespace StarterAssets
 
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-
-            // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
@@ -147,11 +144,11 @@ namespace StarterAssets
             {
                 return;
             }
-            CanMooveCheck();
+            CanRotateCheck();
+            CanMoveCheck();
             JumpAndGravity();
             GroundedCheck();
             Move();
-            
         }
 
         private void LateUpdate()
@@ -159,55 +156,53 @@ namespace StarterAssets
             CameraRotation();
         }
 
-        //private void AssignAnimationIDs() Do this if we need more performance, for now get just the strings so its more understandable and easier to debug from the editor
-        //{
-        //    _animIDSpeed = Animator.StringToHash("Speed");
-        //    _animIDGrounded = Animator.StringToHash("Grounded");
-        //    _animIDJump = Animator.StringToHash("Jump");
-        //    _animIDFreeFall = Animator.StringToHash("FreeFall");
-        //    _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-        //    _animIDRoll = Animator.StringToHash("Roll");
-        //    _animIDLightAttack = Animator.StringToHash("Attack");
-        //}
-
-        private void CanMooveCheck()
+        private void CanRotateCheck()
         {
-            if (_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()) && !CanMoove) 
+            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()) || _animController.CompareAnimState(PlayerStates.Attack.ToString()) || _animController.IsTransition())
             {
-                CanMoove = true;
+                CanRotate = false;
+            }
+
+            else
+            {
+                CanRotate = true;
+            }
+        }
+        private void CanMoveCheck()
+        {
+            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())*/) 
+            {
+                CanMove = false;
+            }
+
+            else
+            {
+                CanMove = true;
             }
         }
         private void GroundedCheck()
         {
-            // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
-
-            // update animator
             _animController.ChangeState(PlayerParameters.Grounded, Grounded);
         }
 
         private void CameraRotation()
         {
-            // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
                 _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
             }
 
-            // clamp our rotations so our values are limited 360 degrees
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-            // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw, 0.0f);
         }
 
         private void Move()
         {
             float targetSpeed;
-
             if (_input.sprint && CanSprint)
             {
                 targetSpeed = SprintSpeed;
@@ -218,28 +213,16 @@ namespace StarterAssets
                 targetSpeed = MoveSpeed;
             }
 
-            //float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
-            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
                 _animController.CurrentPlayerState = PlayerStates.IdleWalkRunBlend;
             }
-
-            // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
-            // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
             {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
                 Speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed /** inputMagnitude*/,Time.deltaTime * SpeedChangeRate);
 
                 // round speed to 3 decimal places
@@ -252,22 +235,22 @@ namespace StarterAssets
             }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-
-            // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if (!CanMoove) return;
-            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            if(CanRotate)
             {
-                TransformRotation(inputDirection);
+                if (_input.move != Vector2.zero)
+                {
+                    TransformRotation(inputDirection);
+                }
+                TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
             }
 
-            //Move the player to the desired direction and Update animations
-            TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-            ControllerMove(TargetDirection, Speed);
-            UpdateAnimator(inputMagnitude);
+            if (CanMove)
+            {
+                ControllerMove(TargetDirection, Speed);
+                UpdateAnimator(inputMagnitude);
+            }
         }
 
         private void UpdateAnimator(float inputMagnitude)
@@ -284,15 +267,13 @@ namespace StarterAssets
 
         public void ControllerMoveForward(float speed) //working to apply an impulse forward when the player rolls
         {
-            _controller.Move((transform.forward + TargetDirection.normalized) * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(transform.forward * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         private void TransformRotation(Vector3 inputDirection)
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                              _mainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
@@ -332,6 +313,7 @@ namespace StarterAssets
                     _jumpTimeoutDelta -= Time.deltaTime;
                 }
             }
+
             else
             {
                 // reset the jump timeout timer

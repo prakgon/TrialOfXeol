@@ -1,31 +1,26 @@
+using Helpers;
 using UnityEngine;
 using static Helpers.Literals;
 
 namespace PlayerScripts
 {
-    public class PlayerAnimatorController : MonoBehaviour
+    public class PlayerAnimatorController : MonoBehaviour, IMediatorUser
     {
-        private Animator _an;
         [SerializeField] private PlayerStates _currentPlayerState;
         [SerializeField] private PlayerParameters _lastActiveParameter;
-
+        private PlayerMediator _med;
+        private Animator _animator;
         public PlayerStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
-        public Animator An { get => _an; set => _an = value; }
         public PlayerParameters LastActiveParameter { get => _lastActiveParameter; set => _lastActiveParameter = value; }
 
-        private void Start()
-        {
-            An = GetComponent<Animator>();
-        }
         public bool CompareAnimState(string stateToCompare, byte layer = 0)
         {
-            if (An.GetCurrentAnimatorStateInfo(layer).IsName(stateToCompare)) return true;
-            return false;
+            return _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateToCompare);
         }
 
         public bool IsTransition(byte layer = 0)
         {
-            return An.IsInTransition(layer);
+            return _animator.IsInTransition(layer);
         }
 
         public void ChangeState(PlayerParameters newState, bool state)
@@ -34,13 +29,18 @@ namespace PlayerScripts
             {
                 LastActiveParameter = newState;
             }
-
-            An.SetBool(newState.ToString(), state);
+            _animator.SetBool(newState.ToString(), state);
         }
 
         public void ChangeState(PlayerParameters newState, float state)
         {
-            An.SetFloat(newState.ToString(), state);
+            _animator.SetFloat(newState.ToString(), state);
+        }
+
+        public void ConfigureMediator(PlayerMediator med)
+        {
+            _med = med;
+            _animator = _med.An;
         }
     }
 }
