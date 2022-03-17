@@ -235,22 +235,28 @@ namespace StarterAssets
             }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if(CanRotate)
-            {
-                if (_input.move != Vector2.zero)
-                {
-                    TransformRotation(inputDirection);
-                }
-                TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-            }
+            ApplyMovement(inputMagnitude);
+            HandlePlayerRotation();
+        }
 
-            if (CanMove)
+        private void ApplyMovement(float inputMagnitude)
+        {
+            if (!CanMove) return;
+            ControllerMove(TargetDirection, Speed);
+            UpdateAnimator(inputMagnitude);
+        }
+
+        public void HandlePlayerRotation()
+        {
+            if (!CanRotate) return;
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y);
+
+            if (_input.move != Vector2.zero)
             {
-                ControllerMove(TargetDirection, Speed);
-                UpdateAnimator(inputMagnitude);
+                TransformRotation(inputDirection);
             }
+            TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
         }
 
         private void UpdateAnimator(float inputMagnitude)
