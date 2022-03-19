@@ -18,7 +18,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class PlayerMovement : PlayerCansXD, IPunObservable, IMediatorUser
+    public class PlayerMovement : PlayerBase, IPunObservable, IMediatorUser
     {
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
@@ -74,8 +74,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         [Header("Roll Parameters")]
-        [SerializeField] private float _rollSpeedFactor;
-        [SerializeField] private Transform _rollDestiny;
+        [SerializeField] private float _rollSpeedFactor = 4;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -101,8 +100,6 @@ namespace StarterAssets
         private Vector3 _targetDirection;
         public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
         public float Speed { get => _speed; set => _speed = value; }
-        
-
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
 
@@ -147,15 +144,14 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            Hotfix();
+            ActionHandler();
         }
 
-        private void Hotfix()
+        private void ActionHandler()
         {
             if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
             {
-                float step = _rollSpeedFactor * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, _rollDestiny.position, step);
+                ControllerMove(transform.forward, _rollSpeedFactor);
             }
         }
 

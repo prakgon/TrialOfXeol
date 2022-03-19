@@ -3,14 +3,13 @@ using static Helpers.Literals;
 
 namespace PlayerScripts
 {
-    public class PlayerCansXD : MonoBehaviourPunCallbacks
+    public class PlayerBase : MonoBehaviourPunCallbacks
     {
         protected PlayerAnimatorController _animController;
         
         protected bool _canMove = true;
         protected bool _canRotate = true;
         protected bool _canJump = true;
-
         private bool _canSprint = true;
         public bool CanSprint { get => _canSprint; set => _canSprint = value; }
 
