@@ -79,6 +79,7 @@ namespace StarterAssets
         private bool _canSprint = true;
         private bool _canMove = true;
         private bool _canRotate = true;
+        private bool _canJump = true;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -147,6 +148,7 @@ namespace StarterAssets
             {
                 return;
             }
+            CanJumpCheck();
             CanRotateCheck();
             CanMoveCheck();
             JumpAndGravity();
@@ -155,6 +157,18 @@ namespace StarterAssets
             Hotfix();
         }
 
+        private void CanJumpCheck()
+        {
+            if(_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()))
+            {
+                _canJump = true;
+            }
+
+            else
+            {
+                _canJump = false;
+            }
+        }
         private void Hotfix()
         {
             if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
@@ -309,17 +323,21 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if(_canJump)
                 {
-                    if (_input.move != Vector2.zero && !_animController.IsTransition())
+                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
-                        // the square root of H * -2 * G = how much velocity needed to reach desired height
-                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                        if (_input.move != Vector2.zero && !_animController.IsTransition())
+                        {
+                            // the square root of H * -2 * G = how much velocity needed to reach desired height
+                            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                        // update animator
-                        _animController.ChangeState(PlayerParameters.Jump, true);
+                            // update animator
+                            _animController.ChangeState(PlayerParameters.Jump, true);
+                        }
                     }
                 }
+                
 
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
