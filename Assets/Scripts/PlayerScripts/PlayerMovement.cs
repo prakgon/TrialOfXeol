@@ -18,7 +18,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
+    public class PlayerMovement : PlayerCansXD, IPunObservable, IMediatorUser
     {
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
@@ -73,9 +73,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        private bool _canSprint = true;
-        private bool _canMove = true;
-        private bool _canRotate = true;
+        [Header("Roll Parameters")]
+        [SerializeField] private float _rollSpeedFactor;
+        [SerializeField] private Transform _rollDestiny;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -97,14 +97,11 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
         private PlayerMediator _med;
-        private PlayerAnimatorController _animController;
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-        public bool CanSprint{ get => _canSprint; set => _canSprint = value; }
         public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
         public float Speed { get => _speed; set => _speed = value; }
-        public bool CanMove { get => _canMove; set => _canMove = value; }
-        public bool CanRotate { get => _canRotate; set => _canRotate = value; }
+        
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -144,11 +141,22 @@ namespace StarterAssets
             {
                 return;
             }
+            CanJumpCheck();
             CanRotateCheck();
             CanMoveCheck();
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Hotfix();
+        }
+
+        private void Hotfix()
+        {
+            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
+            {
+                float step = _rollSpeedFactor * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, _rollDestiny.position, step);
+            }
         }
 
         private void LateUpdate()
@@ -156,30 +164,6 @@ namespace StarterAssets
             CameraRotation();
         }
 
-        private void CanRotateCheck()
-        {
-            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()) || _animController.CompareAnimState(PlayerStates.Attack.ToString()) || _animController.IsTransition())
-            {
-                CanRotate = false;
-            }
-
-            else
-            {
-                CanRotate = true;
-            }
-        }
-        private void CanMoveCheck()
-        {
-            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())*/) 
-            {
-                CanMove = false;
-            }
-
-            else
-            {
-                CanMove = true;
-            }
-        }
         private void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
@@ -242,14 +226,14 @@ namespace StarterAssets
 
         private void ApplyMovement(float inputMagnitude)
         {
-            if (!CanMove) return;
+            if (!_canMove) return;
             ControllerMove(TargetDirection, Speed);
             UpdateAnimator(inputMagnitude);
         }
 
         public void HandlePlayerRotation()
         {
-            if (!CanRotate) return;
+            if (!_canRotate) return;
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y);
 
             if (_input.move != Vector2.zero)
@@ -269,11 +253,6 @@ namespace StarterAssets
         {
             
             _controller.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-        }
-
-        public void ControllerMoveForward(float speed) //working to apply an impulse forward when the player rolls
-        {
-            _controller.Move(transform.forward * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         private void TransformRotation(Vector3 inputDirection)
@@ -301,17 +280,21 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if(_canJump)
                 {
-                    if (_input.move != Vector2.zero && !_animController.IsTransition())
+                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
-                        // the square root of H * -2 * G = how much velocity needed to reach desired height
-                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                        if (_input.move != Vector2.zero && !_animController.IsTransition())
+                        {
+                            // the square root of H * -2 * G = how much velocity needed to reach desired height
+                            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                        // update animator
-                        _animController.ChangeState(PlayerParameters.Jump, true);
+                            // update animator
+                            _animController.ChangeState(PlayerParameters.Jump, true);
+                        }
                     }
                 }
+                
 
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
