@@ -28,8 +28,8 @@ namespace Helpers
         private void Awake()
         {
             An = GetComponent<Animator>();
-            var mediatorUsers = FindObjectsOfType<MonoBehaviour>().OfType<IMediatorUser>();
-            var mediatorUsers2 = FindObjectsOfType<MonoBehaviourPunCallbacks>().OfType<IMediatorUser>();
+            var mediatorUsers = GetComponentsInChildren<MonoBehaviour>().OfType<IMediatorUser>();
+            var mediatorUsers2 = GetComponentsInChildren<MonoBehaviourPunCallbacks>().OfType<IMediatorUser>();
 
             foreach (var user in mediatorUsers)
             {
