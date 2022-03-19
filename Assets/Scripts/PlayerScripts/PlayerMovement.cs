@@ -137,6 +137,8 @@ namespace StarterAssets
         {
             if (photonView.IsMine)
             {
+                PlayerInput playerInput = GetComponent<PlayerInput>();
+                playerInput.enabled = true;
                 GameObject followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
             }
