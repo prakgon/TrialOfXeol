@@ -73,6 +73,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("Roll Parameters")]
+        [SerializeField] private float _rollSpeedFactor;
+        [SerializeField] private Transform _rollDestiny;
         private bool _canSprint = true;
         private bool _canMove = true;
         private bool _canRotate = true;
@@ -149,6 +152,16 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Hotfix();
+        }
+
+        private void Hotfix()
+        {
+            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
+            {
+                float step = _rollSpeedFactor * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, _rollDestiny.position, step);
+            }
         }
 
         private void LateUpdate()
@@ -269,11 +282,6 @@ namespace StarterAssets
         {
             
             _controller.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-        }
-
-        public void ControllerMoveForward(float speed) //working to apply an impulse forward when the player rolls
-        {
-            _controller.Move(transform.forward * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         private void TransformRotation(Vector3 inputDirection)
