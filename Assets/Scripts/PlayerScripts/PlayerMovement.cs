@@ -18,7 +18,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
+    public class PlayerMovement : PlayerCansXD, IPunObservable, IMediatorUser
     {
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
@@ -76,10 +76,6 @@ namespace StarterAssets
         [Header("Roll Parameters")]
         [SerializeField] private float _rollSpeedFactor;
         [SerializeField] private Transform _rollDestiny;
-        private bool _canSprint = true;
-        private bool _canMove = true;
-        private bool _canRotate = true;
-        private bool _canJump = true;
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -101,14 +97,11 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
         private PlayerMediator _med;
-        private PlayerAnimatorController _animController;
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-        public bool CanSprint{ get => _canSprint; set => _canSprint = value; }
         public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
         public float Speed { get => _speed; set => _speed = value; }
-        public bool CanMove { get => _canMove; set => _canMove = value; }
-        public bool CanRotate { get => _canRotate; set => _canRotate = value; }
+        
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -157,18 +150,6 @@ namespace StarterAssets
             Hotfix();
         }
 
-        private void CanJumpCheck()
-        {
-            if(_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()))
-            {
-                _canJump = true;
-            }
-
-            else
-            {
-                _canJump = false;
-            }
-        }
         private void Hotfix()
         {
             if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
@@ -183,30 +164,6 @@ namespace StarterAssets
             CameraRotation();
         }
 
-        private void CanRotateCheck()
-        {
-            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()) || _animController.CompareAnimState(PlayerStates.Attack.ToString()) || _animController.IsTransition())
-            {
-                CanRotate = false;
-            }
-
-            else
-            {
-                CanRotate = true;
-            }
-        }
-        private void CanMoveCheck()
-        {
-            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())*/) 
-            {
-                CanMove = false;
-            }
-
-            else
-            {
-                CanMove = true;
-            }
-        }
         private void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
@@ -269,14 +226,14 @@ namespace StarterAssets
 
         private void ApplyMovement(float inputMagnitude)
         {
-            if (!CanMove) return;
+            if (!_canMove) return;
             ControllerMove(TargetDirection, Speed);
             UpdateAnimator(inputMagnitude);
         }
 
         public void HandlePlayerRotation()
         {
-            if (!CanRotate) return;
+            if (!_canRotate) return;
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y);
 
             if (_input.move != Vector2.zero)
