@@ -21,7 +21,8 @@ namespace StarterAssets
     public class PlayerMovement : PlayerBase, IPunObservable, IMediatorUser
     {
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
+        public float
+            MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 7.335f;
@@ -73,8 +74,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        [Header("Roll Parameters")]
-        [SerializeField] private float _rollSpeedFactor = 4;
+        [Header("Roll Parameters")] [SerializeField]
+        private float _rollSpeedFactor = 4;
+
         //private int _animIDGrounded;
         //private int _animIDJump;
         //private int _animIDFreeFall;
@@ -85,6 +87,7 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
+        private PlayerStates _playerStates;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
@@ -98,8 +101,19 @@ namespace StarterAssets
         private PlayerMediator _med;
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-        public Vector3 TargetDirection { get => _targetDirection; set => _targetDirection = value; }
-        public float Speed { get => _speed; set => _speed = value; }
+
+        public Vector3 TargetDirection
+        {
+            get => _targetDirection;
+            set => _targetDirection = value;
+        }
+
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
 
@@ -114,6 +128,7 @@ namespace StarterAssets
             {
                 LocalPlayerInstance = gameObject;
             }
+
             DontDestroyOnLoad(gameObject);
         }
 
@@ -138,20 +153,39 @@ namespace StarterAssets
             {
                 return;
             }
-            CanJumpCheck();
-            CanRotateCheck();
-            CanMoveCheck();
+
+            _playerStates = _animController.CurrentPlayerAnimatorState;
+
+            AnimationStateCheck();
+
             JumpAndGravity();
             GroundedCheck();
-            Move();
-            ActionHandler();
+            ActionStateMachine();
         }
 
-        private void ActionHandler()
+        private void ActionStateMachine()
         {
-            if(_animController.CompareAnimState(PlayerStates.Roll.ToString()))
+            switch (_animController.CurrentPlayerAnimatorState)
             {
-                ControllerMove(transform.forward, _rollSpeedFactor);
+                case PlayerStates.IdleWalkRunBlend:
+                    Move();
+                    break;
+                case PlayerStates.Roll:
+                    Roll();
+                    break;
+                case PlayerStates.Attack:
+                    break;
+                case PlayerStates.JumpLand:
+                    Move();
+                    break;
+                case PlayerStates.InAir:
+                    Move();
+                    break;
+                case PlayerStates.JumpStart:
+                    Move();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -162,8 +196,10 @@ namespace StarterAssets
 
         private void GroundedCheck()
         {
-            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
-            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
+                transform.position.z);
+            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+                QueryTriggerInteraction.Ignore);
             _animController.ChangeState(PlayerParameters.Grounded, Grounded);
         }
 
@@ -177,7 +213,8 @@ namespace StarterAssets
 
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw, 0.0f);
+            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+                _cinemachineTargetYaw, 0.0f);
         }
 
         private void Move()
@@ -187,7 +224,6 @@ namespace StarterAssets
             {
                 targetSpeed = SprintSpeed;
             }
-
             else
             {
                 targetSpeed = MoveSpeed;
@@ -196,65 +232,58 @@ namespace StarterAssets
             if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
-                _animController.CurrentPlayerState = PlayerStates.IdleWalkRunBlend;
             }
-            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-            float speedOffset = 0.1f;
+
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-            if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-            {
-                Speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed /** inputMagnitude*/,Time.deltaTime * SpeedChangeRate);
-
-                // round speed to 3 decimal places
-                Speed = Mathf.Round(Speed * 1000f) / 1000f;
-            }
-
-            else
-            {
-                Speed = targetSpeed;
-            }
+            _speed = targetSpeed;
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-
-            ApplyMovement(inputMagnitude);
-            HandlePlayerRotation();
-        }
-
-        private void ApplyMovement(float inputMagnitude)
-        {
-            if (!_canMove) return;
-            ControllerMove(TargetDirection, Speed);
-            UpdateAnimator(inputMagnitude);
-        }
-
-        public void HandlePlayerRotation()
-        {
-            if (!_canRotate) return;
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y);
-
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
             if (_input.move != Vector2.zero)
             {
-                TransformRotation(inputDirection);
+                TransformRotation(inputDirection, RotationSmoothTime);
             }
-            TargetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+            ControllerMove(_targetDirection, Speed);
+
+
+            // update animator if using character
+            if (_animController.HasAnimator)
+            {
+                _animController.ChangeState(PlayerParameters.Speed, _animationBlend);
+                _animController.ChangeState(PlayerParameters.MotionSpeed, inputMagnitude);
+            }
         }
 
-        private void UpdateAnimator(float inputMagnitude)
+        private void ControllerMove(Vector3 targetDirection, float speed)
         {
-            _animController.ChangeState(PlayerParameters.Speed, _animationBlend);
-            _animController.ChangeState(PlayerParameters.MotionSpeed, inputMagnitude);
+            _controller.Move(targetDirection * (speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
-        public void ControllerMove(Vector3 targetDirection, float speed) //working to apply the normal movement to run and sprint
+        private void Roll()
         {
-            
-            _controller.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (_animController.IsInTransition())
+            {
+                var inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+                if (_input.move != Vector2.zero)
+                {
+                    TransformRotation(inputDirection, RotationSmoothTime / 2);
+                }
+            }
+
+            ControllerMove(transform.forward, _rollSpeedFactor);
         }
 
-        private void TransformRotation(Vector3 inputDirection)
+
+        private void TransformRotation(Vector3 inputDirection, float rotationSmoothTime)
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                              _mainCamera.transform.eulerAngles.y;
+            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                rotationSmoothTime);
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
@@ -266,8 +295,11 @@ namespace StarterAssets
                 _fallTimeoutDelta = FallTimeout;
 
                 // update animator 
-                _animController.ChangeState(PlayerParameters.Jump, false);
-                _animController.ChangeState(PlayerParameters.FreeFall, false);
+                if (_animController.HasAnimator)
+                {
+                    _animController.ChangeState(PlayerParameters.Jump, false);
+                    _animController.ChangeState(PlayerParameters.FreeFall, false);
+                }
 
                 // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
@@ -276,11 +308,12 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if(_canJump)
+                if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
+                    !_animController.IsInTransition())
                 {
                     if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
-                        if (_input.move != Vector2.zero && !_animController.IsTransition())
+                        if (_input.move != Vector2.zero && !_animController.IsInTransition())
                         {
                             // the square root of H * -2 * G = how much velocity needed to reach desired height
                             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -290,7 +323,6 @@ namespace StarterAssets
                         }
                     }
                 }
-                
 
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
@@ -341,7 +373,9 @@ namespace StarterAssets
             else Gizmos.color = transparentRed;
 
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+            Gizmos.DrawSphere(
+                new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
+                GroundedRadius);
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

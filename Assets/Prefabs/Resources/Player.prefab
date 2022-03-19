@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 7
   SprintSpeed: 10
-  RotationSmoothTime: 0
+  RotationSmoothTime: 0.123
   SpeedChangeRate: 10
   JumpHeight: 1.2
   Gravity: -15
@@ -1117,8 +1117,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  _rollSpeedFactor: 50
-  _rollDestiny: {fileID: 8545617343765028639}
+  _rollSpeedFactor: 6
   _followCameraPrefab: {fileID: 2070925441746177671, guid: a1a802ecaf6775746bb2a929fb554ad8,
     type: 3}
 --- !u!114 &1784342461813926238
@@ -1226,8 +1225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2db210fd43377648a7473fca0cfc5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPlayerState: 0
-  _lastActiveParameter: 0
+  currentPlayerAnimatorState: 0
+  lastActiveAnimatorParameter: 0
 --- !u!114 &2186839711043124155
 MonoBehaviour:
   m_ObjectHideFlags: 0

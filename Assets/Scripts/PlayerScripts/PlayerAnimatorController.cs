@@ -1,24 +1,46 @@
+using System;
 using Helpers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static Helpers.Literals;
 
 namespace PlayerScripts
 {
     public class PlayerAnimatorController : MonoBehaviour, IMediatorUser
     {
-        [SerializeField] private PlayerStates _currentPlayerState;
-        [SerializeField] private PlayerParameters _lastActiveParameter;
+        [FormerlySerializedAs("_currentPlayerState")] [SerializeField]
+        private PlayerStates currentPlayerAnimatorState;
+
+        [FormerlySerializedAs("_lastActiveParameter")] [SerializeField]
+        private PlayerParameters lastActiveAnimatorParameter;
+
         private PlayerMediator _med;
         private Animator _animator;
-        public PlayerStates CurrentPlayerState { get => _currentPlayerState; set => _currentPlayerState = value; }
-        public PlayerParameters LastActiveParameter { get => _lastActiveParameter; set => _lastActiveParameter = value; }
+        public bool HasAnimator { get; private set; }
+
+        public PlayerStates CurrentPlayerAnimatorState
+        {
+            get => currentPlayerAnimatorState;
+            set => currentPlayerAnimatorState = value;
+        }
+
+        public PlayerParameters LastActiveAnimatorParameter
+        {
+            get => lastActiveAnimatorParameter;
+            set => lastActiveAnimatorParameter = value;
+        }
+
+        private void Start()
+        {
+            HasAnimator = TryGetComponent(out _animator);
+        }
 
         public bool CompareAnimState(string stateToCompare, byte layer = 0)
         {
             return _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateToCompare);
         }
 
-        public bool IsTransition(byte layer = 0)
+        public bool IsInTransition(byte layer = 0)
         {
             return _animator.IsInTransition(layer);
         }
@@ -27,8 +49,9 @@ namespace PlayerScripts
         {
             if (state)
             {
-                LastActiveParameter = newState;
+                LastActiveAnimatorParameter = newState;
             }
+
             _animator.SetBool(newState.ToString(), state);
         }
 
