@@ -87,7 +87,6 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
-        private PlayerStates _playerStates;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
@@ -156,9 +155,8 @@ namespace StarterAssets
                 return;
             }
 
-            _playerStates = _animController.CurrentPlayerAnimatorState;
-
             AnimationStateCheck();
+
 
             JumpAndGravity();
             GroundedCheck();
@@ -293,66 +291,57 @@ namespace StarterAssets
         {
             if (Grounded)
             {
-                // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
 
-                // update animator 
                 if (_animController.HasAnimator)
                 {
                     _animController.ChangeState(PlayerParameters.Jump, false);
                     _animController.ChangeState(PlayerParameters.FreeFall, false);
                 }
 
-                // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
                 {
                     _verticalVelocity = -2f;
                 }
 
-                // Jump
-                if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
-                    !_animController.IsInTransition())
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                    if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
+                        !_animController.IsInTransition())
                     {
-                        if (_input.move != Vector2.zero && !_animController.IsInTransition())
-                        {
-                            // the square root of H * -2 * G = how much velocity needed to reach desired height
-                            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                            // update animator
+                        if (_animController.HasAnimator)
+                        {
                             _animController.ChangeState(PlayerParameters.Jump, true);
                         }
                     }
                 }
 
-                // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
                 {
                     _jumpTimeoutDelta -= Time.deltaTime;
                 }
             }
-
             else
             {
-                // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
 
-                // fall timeout
                 if (_fallTimeoutDelta >= 0.0f)
                 {
                     _fallTimeoutDelta -= Time.deltaTime;
                 }
                 else
                 {
-                    _animController.ChangeState(PlayerParameters.FreeFall, true);
+                    if (_animController.HasAnimator)
+                    {
+                        _animController.ChangeState(PlayerParameters.FreeFall, true);
+                    }
                 }
 
-                // if we are not grounded, do not jump
                 _input.jump = false;
             }
 
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
