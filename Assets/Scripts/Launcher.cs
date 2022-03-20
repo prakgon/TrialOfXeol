@@ -74,8 +74,6 @@ namespace TOX
         /// </summary>
         public void Connect()
         {
-            PhotonNetwork.AutomaticallySyncScene = true;
-
             DontDestroyOnLoad(gameObject);
             SceneManager.LoadScene("LoadingScreen");
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
