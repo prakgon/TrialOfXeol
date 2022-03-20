@@ -1,6 +1,8 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace TOX
 {
@@ -10,7 +12,8 @@ namespace TOX
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
-
+        [SerializeField] Button _singleButton, _multiButton;
+        private bool _isConnecting;
         #endregion
 
 
@@ -45,12 +48,21 @@ namespace TOX
         /// </summary>
         void Start()
         {
-            Connect();
+            _singleButton.onClick.AddListener(StartSingleplayer);
+            _multiButton.onClick.AddListener(Connect);
         }
 
 
         #endregion
 
+        #region Private Methods
+        private void StartSingleplayer()
+        {
+            PhotonNetwork.OfflineMode = true;
+            Connect();
+        }
+
+        #endregion
 
         #region Public Methods
 
@@ -62,7 +74,12 @@ namespace TOX
         /// </summary>
         public void Connect()
         {
+            PhotonNetwork.AutomaticallySyncScene = true;
+
+            DontDestroyOnLoad(gameObject);
+            SceneManager.LoadScene("LoadingScreen");
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
+            _isConnecting = true;
             if (PhotonNetwork.IsConnected)
             {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
@@ -84,7 +101,10 @@ namespace TOX
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            PhotonNetwork.JoinRandomRoom();
+            if (_isConnecting)
+            {
+                PhotonNetwork.JoinRandomRoom();
+            }
         }
 
 
@@ -106,11 +126,7 @@ namespace TOX
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                Debug.Log("We load the 'Room for 1' ");
-
-
-                // #Critical
-                // Load the Room Level.
+                SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
                 PhotonNetwork.LoadLevel("OnlineScene");
             }
         }
