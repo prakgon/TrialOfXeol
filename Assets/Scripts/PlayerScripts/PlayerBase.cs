@@ -42,6 +42,7 @@ namespace PlayerScripts
                 _animController.CurrentPlayerAnimatorState = PlayerStates.JumpLand;
             }
         }
+        
         protected void CanJumpCheck()
         {
             if (_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()))

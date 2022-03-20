@@ -3482,6 +3482,19 @@ CapsuleCollider:
   m_Height: 0.88
   m_Direction: 1
   m_Center: {x: -0.00022510199, y: 0.64, z: -0.00000017764636}
+--- !u!114 &8370600823739540677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116784160188301968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a4d71b306b3a14eb0de839f9c8cd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 98ada7580339ced47a35788a24667fa0, type: 2}
 --- !u!4 &116784160188473008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3418011884732149886, guid: 29b475577bd142043a2ccad80f84455f,
