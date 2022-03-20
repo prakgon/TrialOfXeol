@@ -1,4 +1,5 @@
 using System.Collections;
+using Helpers;
 using TMPro;
 using UnityEngine;
 using WeaponScripts;
@@ -22,7 +23,7 @@ namespace DummyScripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.gameObject.CompareTag($"Weapon")) return;
+            if (!other.gameObject.CompareTag(Literals.Tags.Weapon.ToString())) return;
 
             var damage = other.gameObject.GetComponent<WeaponColliderController>().weaponData.damage;
 
@@ -35,11 +36,11 @@ namespace DummyScripts
 
             UpdateUI();
 
-            gameObject.GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+            GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
 
             yield return new WaitForSeconds(1f);
 
-            gameObject.GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
+            GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
         }
 
         private void UpdateUI() =>
