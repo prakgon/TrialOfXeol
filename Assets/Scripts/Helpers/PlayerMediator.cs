@@ -3,6 +3,7 @@ using PlayerScripts;
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
+using TMPro;
 
 namespace Helpers
 {
@@ -16,7 +17,12 @@ namespace Helpers
         [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
         [SerializeField] private PlayerMechanics _playerMechanics;
-        [SerializeField] private Animator _an;
+        private Animator _an;
+        [Header("DEBUG-related dependencies")]
+        [SerializeField] private PlayerDataSO playerData;
+        [SerializeField] private GameObject playerWeapon;
+        [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
+        [SerializeField] private TMP_Text playerTMPText;
 
         public PlayerMovement PlayerMovement { get => _playerMovement; set => _playerMovement = value; }
         public StarterAssetsInputs StarterAssetsInputs { get => _starterAssetsInputs; set => _starterAssetsInputs = value; }
@@ -24,6 +30,10 @@ namespace Helpers
         public PlayerAnimatorController PlayerAnimatorController { get => _playerAnimatorController; set => _playerAnimatorController = value; }
         public PlayerMechanics PlayerMechanics { get => _playerMechanics; set => _playerMechanics = value; }
         public Animator An { get => _an; set => _an = value; }
+        public TMP_Text PlayerTMPText { get => playerTMPText; set => playerTMPText = value; }
+        public SkinnedMeshRenderer PlayerMeshRenderer { get => playerMeshRenderer; set => playerMeshRenderer = value; }
+        public GameObject PlayerWeapon { get => playerWeapon; set => playerWeapon = value; }
+        public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
 
         private void Awake()
         {

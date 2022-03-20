@@ -33,7 +33,8 @@ namespace Helpers
 
         public enum Tags
         {
-            MainCamera
+            MainCamera,
+            Weapon
         }
     }
 }
