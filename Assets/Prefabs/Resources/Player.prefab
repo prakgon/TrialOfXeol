@@ -909,7 +909,10 @@ MonoBehaviour:
   _stamineBar: {fileID: 5817872568321163961}
   _playerAnimatorController: {fileID: 4387597190941284282}
   _playerMechanics: {fileID: 2186839711043124155}
-  _an: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
+  playerWeapon: {fileID: 116784160188301968}
+  playerMeshRenderer: {fileID: 7742388956085133792}
+  playerTMPText: {fileID: 818262546043379961}
 --- !u!95 &4640119409714086064
 Animator:
   serializedVersion: 4
@@ -1211,10 +1214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9002cc514b88953478c25ce5f973a6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
-  playerWeapon: {fileID: 116784160188301968}
-  playerMeshRenderer: {fileID: 7742388956085133792}
-  playerTMPText: {fileID: 818262546043379961}
 --- !u!114 &4387597190941284282
 MonoBehaviour:
   m_ObjectHideFlags: 0
