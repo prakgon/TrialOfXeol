@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CountDownTimer : MonoBehaviourPunCallbacks
+public class CountDownTimer : MonoBehaviour
 {
     private Text _countDownText;
     private byte _seconds = 33;
@@ -11,7 +11,7 @@ public class CountDownTimer : MonoBehaviourPunCallbacks
 
     private byte _currentTime = 213;
 
-    private void Start()
+    private void OnEnable()
     {
         _countDownText = GetComponent<Text>();
         CountDownProcess();
