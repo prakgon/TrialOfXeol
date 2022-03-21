@@ -3,23 +3,26 @@ using Helpers;
 using TMPro;
 using UnityEngine;
 using WeaponScripts;
+using Photon.Pun;
 
 namespace PlayerScripts
 {
-    public class CollisionController : MonoBehaviour, IMediatorUser
+    public class CollisionController : MonoBehaviour, IMediatorUser, IPunObservable
     {
         private PlayerDataSO _playerData;
         private GameObject _playerWeapon;
         private SkinnedMeshRenderer _playerMeshRenderer;
         private TMP_Text _playerTMPText;
-        private float _currentHealth = 100;
+        private float _currentHealth;
+        private float _maximumHealth;
         private PlayerMediator _med;
 
         private void Start() => InitializePlayer();
 
         private void InitializePlayer()
         {
-            _currentHealth = _playerData.maximumHealth;
+            _maximumHealth = _playerData.maximumHealth;
+            _currentHealth = _maximumHealth;
             UpdateDebugUI();
         }
         
@@ -68,6 +71,22 @@ namespace PlayerScripts
             _playerWeapon = _med.PlayerWeapon;
             _playerMeshRenderer = _med.PlayerMeshRenderer;
             _playerTMPText = _med.PlayerTMPText;
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(_currentHealth);
+            }
+            else
+            {
+                this._currentHealth = (float)stream.ReceiveNext();
+                if (_currentHealth < _maximumHealth)
+                {
+                    UpdateDebugUI();
+                }
+            }
         }
     }
 }
