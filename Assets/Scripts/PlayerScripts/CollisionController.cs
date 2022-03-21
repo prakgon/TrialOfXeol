@@ -25,18 +25,11 @@ namespace PlayerScripts
         {
             _maximumHealth = _playerData.maximumHealth;
             _currentHealth = _maximumHealth;
-
             InitializeHealthBar();
-            
             //Debug
             UpdateDebugUI();
         }
-
-        private void InitializeHealthBar()
-        {
-            _healthBar.SetMaxValue(_currentHealth);
-        }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag(Literals.Tags.Weapon.ToString()) && other.gameObject != _playerWeapon)
@@ -50,26 +43,21 @@ namespace PlayerScripts
         {
             DecreaseHealth(damage);
             UpdateHealthBar();
-            
             //Debug
             UpdateDebugUI();
             DebugMaterialColor(Color.red);
             yield return new WaitForSeconds(1f);
             DebugMaterialColor(Color.white);
         }
-
-        private void UpdateHealthBar()
-        {
-            _healthBar.SetValue(_currentHealth);
-        }
-
+        
         private void DecreaseHealth(float decrement) => _currentHealth -= decrement;
+        private void InitializeHealthBar() => _healthBar.SetMaxValue(_currentHealth);
+        private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
+        private void SetDebugText(string message) => _playerTMPText.text = message;
 
         private void UpdateDebugUI() =>
             SetDebugText(_currentHealth > 0 ? $"Current {gameObject.name} health: {_currentHealth}" : "Death");
 
-        private void SetDebugText(string message) => _playerTMPText.text = message;
-        
         private void DebugMaterialColor(Color color)
         {
             foreach (var material in _playerMeshRenderer.materials)
@@ -96,7 +84,7 @@ namespace PlayerScripts
             }
             else
             {
-                this._currentHealth = (float)stream.ReceiveNext();
+                this._currentHealth = (float) stream.ReceiveNext();
                 if (_currentHealth < _maximumHealth)
                 {
                     UpdateDebugUI();
