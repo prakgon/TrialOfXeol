@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Photon.Pun;
 using TMPro;
+using UIScripts;
 
 namespace Helpers
 {
@@ -14,6 +15,7 @@ namespace Helpers
         [SerializeField] private StarterAssetsInputs _starterAssetsInputs;
         [Header("GUI-related dependencies")]
         [SerializeField] private StamineBar _stamineBar;
+        [SerializeField] private SliderBar healthBar;
         [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
         [SerializeField] private PlayerMechanics _playerMechanics;
@@ -34,6 +36,12 @@ namespace Helpers
         public SkinnedMeshRenderer PlayerMeshRenderer { get => playerMeshRenderer; set => playerMeshRenderer = value; }
         public GameObject PlayerWeapon { get => playerWeapon; set => playerWeapon = value; }
         public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
+
+        public SliderBar HealthBar
+        {
+            get => healthBar;
+            set => healthBar = value;
+        }
 
         private void Awake()
         {

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using WeaponScripts;
 using Photon.Pun;
+using UIScripts;
 
 namespace PlayerScripts
 {
@@ -15,6 +16,7 @@ namespace PlayerScripts
         private TMP_Text _playerTMPText;
         private float _currentHealth;
         private float _maximumHealth;
+        private SliderBar _healthBar;
         private PlayerMediator _med;
 
         private void Start() => InitializePlayer();
@@ -23,15 +25,23 @@ namespace PlayerScripts
         {
             _maximumHealth = _playerData.maximumHealth;
             _currentHealth = _maximumHealth;
+
+            InitializeHealthBar();
+            
+            //Debug
             UpdateDebugUI();
         }
-        
+
+        private void InitializeHealthBar()
+        {
+            _healthBar.SetMaxValue(_currentHealth);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag(Literals.Tags.Weapon.ToString()) && other.gameObject != _playerWeapon)
             {
                 var damage = other.gameObject.GetComponent<WeaponColliderController>().weaponData.damage;
-
                 StartCoroutine(TakeDamage(damage));
             }
         }
@@ -39,16 +49,20 @@ namespace PlayerScripts
         private IEnumerator TakeDamage(float damage)
         {
             DecreaseHealth(damage);
+            UpdateHealthBar();
             
+            //Debug
             UpdateDebugUI();
-            
             DebugMaterialColor(Color.red);
-
             yield return new WaitForSeconds(1f);
-
             DebugMaterialColor(Color.white);
         }
-        
+
+        private void UpdateHealthBar()
+        {
+            _healthBar.SetValue(_currentHealth);
+        }
+
         private void DecreaseHealth(float decrement) => _currentHealth -= decrement;
 
         private void UpdateDebugUI() =>
@@ -71,6 +85,7 @@ namespace PlayerScripts
             _playerWeapon = _med.PlayerWeapon;
             _playerMeshRenderer = _med.PlayerMeshRenderer;
             _playerTMPText = _med.PlayerTMPText;
+            _healthBar = _med.HealthBar;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -85,6 +100,7 @@ namespace PlayerScripts
                 if (_currentHealth < _maximumHealth)
                 {
                     UpdateDebugUI();
+                    UpdateHealthBar();
                 }
             }
         }
