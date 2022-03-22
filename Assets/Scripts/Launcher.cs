@@ -12,7 +12,7 @@ namespace TOX
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
-        [SerializeField] Button _singleButton, _multiButton;
+        [SerializeField] Button _singleButton, _multiButton, _spectatorButton;
         private bool _isConnecting;
         #endregion
 
@@ -50,6 +50,7 @@ namespace TOX
         {
             _singleButton.onClick.AddListener(StartSingleplayer);
             _multiButton.onClick.AddListener(Connect);
+            _spectatorButton.onClick.AddListener(StartFreeSpectator);
         }
 
 
@@ -59,6 +60,11 @@ namespace TOX
         private void StartSingleplayer()
         {
             PhotonNetwork.OfflineMode = true;
+            Connect();
+        }
+
+        private void StartFreeSpectator()
+        {
             Connect();
         }
 

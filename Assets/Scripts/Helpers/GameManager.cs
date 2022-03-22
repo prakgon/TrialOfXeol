@@ -10,6 +10,7 @@ namespace TOX
     {
 
         public GameObject playerPrefab;
+        public GameObject freeSpectatorPrefab;
         #region Photon Callbacks
 
 
