@@ -1,12 +1,13 @@
 using Cinemachine;
 using Helpers;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class FreeSpectatorMovement : MonoBehaviour
+public class FreeSpectatorMovement : MonoBehaviourPunCallbacks
 {
     private CharacterController _controller;
     private Vector3 _move;
@@ -23,8 +24,13 @@ public class FreeSpectatorMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        followCamera = Instantiate(_followCameraPrefab);
-        followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+        if (photonView.IsMine)
+        {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = true;
+            followCamera = Instantiate(_followCameraPrefab);
+            followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+        }
         _cameraTargetTransform = CinemachineCameraTarget.transform;
         _controller = GetComponent<CharacterController>();
     }
@@ -39,7 +45,6 @@ public class FreeSpectatorMovement : MonoBehaviour
 
     public void OnMove(InputValue value) {
         _move = value.Get<Vector3>();
-        Debug.Log(_move);
     }
 
     public void OnLook(InputValue value)
@@ -49,16 +54,12 @@ public class FreeSpectatorMovement : MonoBehaviour
 
     private void CameraRotation()
     {
-        //if (_look.sqrMagnitude >= _threshold && !LockCameraPosition)
-        //{
-            _cinemachineTargetYaw += _look.x * Time.deltaTime;
-            _cinemachineTargetPitch += _look.y * Time.deltaTime;
-        //}
+        _cinemachineTargetYaw += _look.x * Time.deltaTime;
+        _cinemachineTargetPitch += _look.y * Time.deltaTime;
 
         _cinemachineTargetYaw = HelperFunctions.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
         _cinemachineTargetPitch = HelperFunctions.ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch,
-            _cinemachineTargetYaw, 0.0f);
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
     }
 
 }

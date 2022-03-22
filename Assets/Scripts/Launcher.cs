@@ -3,6 +3,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using ExitGames.Client.Photon;
+using static Helpers.Literals;
 
 namespace TOX
 {
@@ -13,18 +15,17 @@ namespace TOX
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
         [SerializeField] Button _singleButton, _multiButton, _spectatorButton;
-        private bool _isConnecting;
         #endregion
 
 
         #region Private Fields
-
-
         /// <summary>
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
-
+        private bool _isConnecting;
+        private Hashtable _playerProperties;
+        private UserTypes _userType;
 
         #endregion
 
@@ -40,6 +41,7 @@ namespace TOX
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
+            _playerProperties = new Hashtable();
         }
 
 
@@ -48,6 +50,7 @@ namespace TOX
         /// </summary>
         void Start()
         {
+            _userType = UserTypes.Player;
             _singleButton.onClick.AddListener(StartSingleplayer);
             _multiButton.onClick.AddListener(Connect);
             _spectatorButton.onClick.AddListener(StartFreeSpectator);
@@ -65,6 +68,7 @@ namespace TOX
 
         private void StartFreeSpectator()
         {
+            _userType = UserTypes.FreeSpectator;
             Connect();
         }
 
@@ -81,6 +85,8 @@ namespace TOX
         public void Connect()
         {
             DontDestroyOnLoad(gameObject);
+            _playerProperties.Add("user_type", _userType);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(_playerProperties);
             SceneManager.LoadScene("LoadingScreen");
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             _isConnecting = true;
