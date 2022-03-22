@@ -1,3 +1,4 @@
+using System.Collections;
 using Helpers;
 using StarterAssets;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace PlayerScripts
         private PlayerMediator _med;
         private PlayerAnimatorController _animController;
         private PlayerMovement _playerMovement;
+        private bool _resettingAttackCount;
 
         public void Roll(bool newState)
         {
@@ -18,13 +20,43 @@ namespace PlayerScripts
 
         public void LightAttack(bool newState)
         {
-            _animController.ChangeState(PlayerParameters.Attack, newState);
-            if (_animController.CurrentPlayerAnimatorState != PlayerStates.Attack)
+            switch (_playerMovement.AttackCount)
             {
-                _playerMovement.AttackCount += 1;
+                case 0:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 0);
+                    break;
+                case 1:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 1);
+                    break;
+                case 2:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 2);
+                    break;
+                case 3:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 3);
+                    break;
+                case 4:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 4);
+                    break;
+                default:
+                    _animController.ChangeState(PlayerParameters.AttackCount, 0);
+                    break;
             }
-            _animController.ChangeState(PlayerParameters.AttackCount, _playerMovement.AttackCount);
 
+            _playerMovement.AttackCount++;
+            _animController.ChangeState(PlayerParameters.Attack, newState);
+
+            if (!_resettingAttackCount)
+            {
+                StartCoroutine(ResetAttackCount());
+            }
+        }
+
+        private IEnumerator ResetAttackCount()
+        {
+            _resettingAttackCount = true;
+            yield return new WaitForSeconds(4f);
+            _playerMovement.AttackCount = 0;
+            _resettingAttackCount = false;
         }
 
         public void ConfigureMediator(PlayerMediator med)
@@ -35,4 +67,3 @@ namespace PlayerScripts
         }
     }
 }
-

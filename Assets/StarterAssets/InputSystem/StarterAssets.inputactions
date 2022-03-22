@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "Roll",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "43dc030d-7507-41c9-86ad-6200f1b12f49",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "LightAttack",
@@ -56,7 +56,7 @@
                     "id": "57e2e27e-70f0-4e13-a01f-ef3544eef05b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 },
                 {

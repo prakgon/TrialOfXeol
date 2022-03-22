@@ -176,11 +176,6 @@ namespace StarterAssets
             {
                 case PlayerStates.IdleWalkRunBlend:
                     Move();
-                    if (_attackCount >= 4)
-                    {
-                        _attackCount = 0;
-                        _animController.ChangeState(PlayerParameters.AttackCount, _attackCount);
-                    }
                     break;
                 case PlayerStates.Roll:
                     Roll();
