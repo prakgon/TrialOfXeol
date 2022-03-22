@@ -6,10 +6,13 @@ namespace Helpers
         {
             IdleWalkRunBlend,
             Roll,
-            Attack,
             JumpLand,
             InAir,
-            JumpStart
+            JumpStart,
+            FirstAttack,
+            SecondAttack,
+            ThirdAttack,
+            FourthAttack
         }
 
         public enum PlayerParameters

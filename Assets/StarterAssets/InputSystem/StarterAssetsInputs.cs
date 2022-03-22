@@ -1,5 +1,6 @@
 using Helpers;
 using PlayerScripts;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -13,7 +14,7 @@ namespace StarterAssets
         public Vector2 look;
         public bool jump;
         public bool sprint;
-        //public bool roll;
+        public bool roll;
         public bool lightAttack;
         public bool heavyAttack;
         public bool block;
@@ -49,10 +50,21 @@ namespace StarterAssets
         public void LookInput(Vector2 newLookDirection) => look = newLookDirection;
         public void JumpInput(bool newJumpState) => jump = newJumpState;
         public void SprintInput(bool newSprintState) => sprint = newSprintState;
-        public void RollInput(bool newRollState) => _playerMechanics.Roll(newRollState);
-        public void LightAttackInput(bool newLightAttackState) => _playerMechanics.LightAttack(newLightAttackState);
-        public void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
-        public void BlockInput(bool newBlockState) => block = newBlockState;
+
+        private void RollInput(bool newRollState)
+        {
+            roll = newRollState; // Debug
+            _playerMechanics.Roll(newRollState);  
+        }
+
+        private void LightAttackInput(bool newLightAttackState)
+        {
+            lightAttack = newLightAttackState; // Debug
+            _playerMechanics.LightAttack(newLightAttackState);  
+        }
+
+        private void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
+        private void BlockInput(bool newBlockState) => block = newBlockState;
 
 #if !UNITY_IOS || !UNITY_ANDROID
         private void OnApplicationFocus(bool hasFocus) => SetCursorState(cursorLocked);

@@ -100,7 +100,6 @@ namespace StarterAssets
         private PlayerMediator _med;
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-        private int _attackCount;
 
         public Vector3 TargetDirection
         {
@@ -112,12 +111,6 @@ namespace StarterAssets
         {
             get => _speed;
             set => _speed = value;
-        }
-
-        public int AttackCount
-        {
-            get => _attackCount;
-            set => _attackCount = value;
         }
 
         public static GameObject LocalPlayerInstance;
@@ -180,8 +173,6 @@ namespace StarterAssets
                 case PlayerStates.Roll:
                     Roll();
                     break;
-                case PlayerStates.Attack:
-                    break;
                 case PlayerStates.JumpLand:
                     Move();
                     break;
@@ -191,6 +182,10 @@ namespace StarterAssets
                 case PlayerStates.JumpStart:
                     Move();
                     break;
+                case PlayerStates.FirstAttack:
+                case PlayerStates.SecondAttack:
+                case PlayerStates.ThirdAttack:
+                case PlayerStates.FourthAttack:
                 default:
                     break;
             }

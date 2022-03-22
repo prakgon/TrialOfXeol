@@ -10,8 +10,9 @@ namespace PlayerScripts
     {
         private PlayerMediator _med;
         private PlayerAnimatorController _animController;
-        private PlayerMovement _playerMovement;
+        private int _attackCount;
         private bool _resettingAttackCount;
+        private const float AttackCountResetTime = 5f;
 
         public void Roll(bool newState)
         {
@@ -20,42 +21,29 @@ namespace PlayerScripts
 
         public void LightAttack(bool newState)
         {
-            switch (_playerMovement.AttackCount)
-            {
-                case 0:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 0);
-                    break;
-                case 1:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 1);
-                    break;
-                case 2:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 2);
-                    break;
-                case 3:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 3);
-                    break;
-                case 4:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 4);
-                    break;
-                default:
-                    _animController.ChangeState(PlayerParameters.AttackCount, 0);
-                    break;
-            }
-
-            _playerMovement.AttackCount++;
+            Debug.Log(_animController.CurrentPlayerAnimatorState);
             _animController.ChangeState(PlayerParameters.Attack, newState);
-
-            if (!_resettingAttackCount)
+            if (newState)
             {
-                StartCoroutine(ResetAttackCount());
+                _animController.ChangeState(PlayerParameters.AttackCount, _attackCount);
+                _attackCount++;
             }
+            else
+            {
+                if (!_resettingAttackCount)
+                {
+                    StartCoroutine(ResetAttackCount());
+                }
+            }
+
+           
         }
 
         private IEnumerator ResetAttackCount()
         {
             _resettingAttackCount = true;
-            yield return new WaitForSeconds(4f);
-            _playerMovement.AttackCount = 0;
+            yield return new WaitForSeconds(AttackCountResetTime);
+            _attackCount = 0;
             _resettingAttackCount = false;
         }
 
@@ -63,7 +51,6 @@ namespace PlayerScripts
         {
             _med = med;
             _animController = _med.PlayerAnimatorController;
-            _playerMovement = _med.PlayerMovement;
         }
     }
 }
