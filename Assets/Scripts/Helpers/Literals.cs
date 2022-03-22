@@ -20,7 +20,8 @@ namespace Helpers
             FreeFall,
             MotionSpeed,
             Attack,
-            Roll
+            Roll,
+            AttackCount
         }
 
         public enum SliderBarStates

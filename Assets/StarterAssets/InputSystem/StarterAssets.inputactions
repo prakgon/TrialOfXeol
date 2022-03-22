@@ -52,12 +52,12 @@
                 },
                 {
                     "name": "LightAttack",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "57e2e27e-70f0-4e13-a01f-ef3544eef05b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HeavyAttack",

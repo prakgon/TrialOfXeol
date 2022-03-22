@@ -60,6 +60,11 @@ namespace PlayerScripts
             _animator.SetFloat(newState.ToString(), state);
         }
 
+        public void ChangeState(PlayerParameters newState, int parameter)
+        {
+            _animator.SetInteger(newState.ToString(), parameter);
+        }
+
         public void ConfigureMediator(PlayerMediator med)
         {
             _med = med;
