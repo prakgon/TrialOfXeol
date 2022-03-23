@@ -62,7 +62,11 @@ namespace StarterAssets
             _playerMechanics.LightAttack(newLightAttackState);  
         }
 
-        private void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
+        private void HeavyAttackInput(bool newHeavyAttackState)
+        {
+            heavyAttack = newHeavyAttackState;
+            _playerMechanics.HeavyAttack(newHeavyAttackState);
+        } 
         private void BlockInput(bool newBlockState) => block = newBlockState;
 
 #if !UNITY_IOS || !UNITY_ANDROID

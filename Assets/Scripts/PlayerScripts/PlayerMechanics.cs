@@ -33,13 +33,33 @@ namespace PlayerScripts
                 {
                     _attackCount++;
                     _animController.SetParameter(PlayerParameters.Attack, true);
-                    
+                    _animController.SetParameter(PlayerParameters.NormalAttack, true);
                 }
                 if (!_resettingAttackCount)
                 {
                     StartCoroutine(ResetAttackCount());
                 }
             }
+            _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
+        }
+
+        public void HeavyAttack(bool newState)
+        {
+            if (newState)
+            {
+                if (!_animController.GetParameterBool(PlayerParameters.Attack))
+                {
+                    _attackCount++;
+                    _animController.SetParameter(PlayerParameters.Attack, true);
+                    _animController.SetParameter(PlayerParameters.HeavyAttack, true);
+                }
+
+                if (!_resettingAttackCount)
+                {
+                    StartCoroutine(ResetAttackCount());
+                }
+            }
+
             _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
         }
         

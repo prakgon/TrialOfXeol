@@ -10,12 +10,10 @@
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack02.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack02.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack03.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack03.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack04.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack04.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/roll/BasicMotions@LandRoll01 - Run.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/roll/BasicMotions@LandRoll01 - Run.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/StarterAssetsAnim/Blend Idle Walk Run/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/StarterAssetsAnim/Blend Idle Walk Run/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/WeaponColliderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/WeaponColliderController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,6 +114,7 @@
       <workItem from="1647376556399" duration="3794000" />
       <workItem from="1647898371700" duration="2338000" />
       <workItem from="1647987357114" duration="4454000" />
+      <workItem from="1648046975767" duration="769000" />
     </task>
     <task id="LOCAL-00001" summary="Light attack input handler">
       <created>1646661520995</created>
@@ -182,6 +181,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
