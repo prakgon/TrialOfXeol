@@ -12,33 +12,40 @@ namespace PlayerScripts
         private PlayerAnimatorController _animController;
         private int _attackCount;
         private bool _resettingAttackCount;
-        private const float AttackCountResetTime = 5f;
+        private const float AttackCountResetTime = 4f;
 
         public void Roll(bool newState)
         {
-            _animController.ChangeState(PlayerParameters.Roll, newState);
+            if (newState)
+            {
+                if (!_animController.GetParameterBool(PlayerParameters.Roll))
+                {
+                    _animController.SetParameter(PlayerParameters.Roll, true);
+                }
+            }
         }
 
         public void LightAttack(bool newState)
         {
-            Debug.Log(_animController.CurrentPlayerAnimatorState);
-            _animController.ChangeState(PlayerParameters.Attack, newState);
             if (newState)
             {
-                _animController.ChangeState(PlayerParameters.AttackCount, _attackCount);
-                _attackCount++;
-            }
-            else
-            {
+                if (!_animController.GetParameterBool(PlayerParameters.Attack))
+                {
+                    _attackCount++;
+                    _animController.SetParameter(PlayerParameters.Attack, true);
+                    
+                }
                 if (!_resettingAttackCount)
                 {
                     StartCoroutine(ResetAttackCount());
                 }
             }
-
-           
+            _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
         }
-
+        
+        // This method is used by the animation events to disable animator parameters
+        private void DisableState(PlayerParameters parameter) => _animController.SetParameter(parameter, false);
+        
         private IEnumerator ResetAttackCount()
         {
             _resettingAttackCount = true;
@@ -46,6 +53,7 @@ namespace PlayerScripts
             _attackCount = 0;
             _resettingAttackCount = false;
         }
+
 
         public void ConfigureMediator(PlayerMediator med)
         {
