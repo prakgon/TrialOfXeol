@@ -37,7 +37,7 @@ namespace PlayerScripts
                 }
                 if (!_resettingAttackCount)
                 {
-                    StartCoroutine(ResetAttackCount());
+                    StartCoroutine(ResetAttackCount(AttackCountResetTime));
                 }
             }
             _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
@@ -56,7 +56,7 @@ namespace PlayerScripts
 
                 if (!_resettingAttackCount)
                 {
-                    StartCoroutine(ResetAttackCount());
+                    StartCoroutine(ResetAttackCount(7f));
                 }
             }
 
@@ -66,10 +66,10 @@ namespace PlayerScripts
         // This method is used by the animation events to disable animator parameters
         private void DisableState(PlayerParameters parameter) => _animController.SetParameter(parameter, false);
         
-        private IEnumerator ResetAttackCount()
+        private IEnumerator ResetAttackCount(float time)
         {
             _resettingAttackCount = true;
-            yield return new WaitForSeconds(AttackCountResetTime);
+            yield return new WaitForSeconds(time);
             _attackCount = 0;
             _resettingAttackCount = false;
         }
