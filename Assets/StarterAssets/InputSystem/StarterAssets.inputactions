@@ -362,6 +362,17 @@
                     "action": "LockTarget",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5400c9e1-2c8f-43a5-ae2d-9e27d354ae8b",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LockTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
