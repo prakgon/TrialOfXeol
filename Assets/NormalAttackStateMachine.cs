@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Helpers;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static Helpers.Literals;
 
-public class ResetIsAttacking : StateMachineBehaviour
+public class NormalAttackStateMachine : AttackStateMachine
 {
+    
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -20,7 +20,8 @@ public class ResetIsAttacking : StateMachineBehaviour
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      animator.SetBool(Literals.PlayerParameters.Attack.ToString(), false);  
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        animator.SetBool(PlayerParametersStrings.NormalAttack, false);
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
@@ -42,8 +43,7 @@ public class ResetIsAttacking : StateMachineBehaviour
     //}
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node
-    //override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
-    //{
-    //    
-    //}
+    public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
+    {
+    }
 }

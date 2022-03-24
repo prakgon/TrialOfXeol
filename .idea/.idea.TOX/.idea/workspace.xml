@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/AttackStateMachine.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack01.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack01.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack02.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack02.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack03.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack03.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack04.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/1H-RH@Attack04.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 2.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 3.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 3.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 4.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack 4.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animations/MeleePack/Attack/HeavyAttack.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ResetIsAttacking.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ResetIsAttacking.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AttackStateMachine.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssets.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssets.inputactions" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +120,7 @@
       <workItem from="1647898371700" duration="2338000" />
       <workItem from="1647987357114" duration="4454000" />
       <workItem from="1648046975767" duration="1998000" />
+      <workItem from="1648075017085" duration="5955000" />
     </task>
     <task id="LOCAL-00001" summary="Light attack input handler">
       <created>1646661520995</created>
@@ -176,7 +187,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />

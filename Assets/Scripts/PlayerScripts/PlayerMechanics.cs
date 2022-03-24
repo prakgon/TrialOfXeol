@@ -10,67 +10,69 @@ namespace PlayerScripts
     {
         private PlayerMediator _med;
         private PlayerAnimatorController _animController;
-        private int _attackCount;
         private bool _resettingAttackCount;
         private const float AttackCountResetTime = 4f;
+
+        public int AttackCounter { get; set; }
 
         public void Roll(bool newState)
         {
             if (newState)
             {
-                if (!_animController.GetParameterBool(PlayerParameters.Roll))
+                _animController.SetParameter(PlayerParameters.Roll, true);
+                /*if (!_animController.GetParameterBool(PlayerParameters.Roll))
                 {
-                    _animController.SetParameter(PlayerParameters.Roll, true);
-                }
+                }*/
             }
         }
 
         public void LightAttack(bool newState)
         {
-            if (newState)
+            if (!newState)
             {
-                if (!_animController.GetParameterBool(PlayerParameters.Attack))
-                {
-                    _attackCount++;
-                    _animController.SetParameter(PlayerParameters.Attack, true);
-                    _animController.SetParameter(PlayerParameters.NormalAttack, true);
-                }
-                if (!_resettingAttackCount)
-                {
-                    StartCoroutine(ResetAttackCount(AttackCountResetTime));
-                }
+                return;
             }
+            _animController.SetParameter(PlayerParameters.Attack, true);
+            _animController.SetParameter(PlayerParameters.NormalAttack, true);
+            /*if (!_animController.GetParameterBool(PlayerParameters.Attack))
+                {
             _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
+                }*/
+
+            if (!_resettingAttackCount)
+            {
+                StartCoroutine(ResetAttackCount(AttackCountResetTime));
+            }
         }
 
         public void HeavyAttack(bool newState)
         {
-            if (newState)
+            if (!newState)
             {
-                if (!_animController.GetParameterBool(PlayerParameters.Attack))
+                return;
+            }
+            //_attackCount++;
+            _animController.SetParameter(PlayerParameters.Attack, true);
+            _animController.SetParameter(PlayerParameters.HeavyAttack, true);
+            //_animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
+            /*if (!_animController.GetParameterBool(PlayerParameters.Attack))
                 {
-                    _attackCount++;
-                    _animController.SetParameter(PlayerParameters.Attack, true);
-                    _animController.SetParameter(PlayerParameters.HeavyAttack, true);
-                }
+                }*/
 
-                if (!_resettingAttackCount)
-                {
-                    StartCoroutine(ResetAttackCount(7f));
-                }
+            if (!_resettingAttackCount)
+            {
+                StartCoroutine(ResetAttackCount(7f));
             }
 
-            _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
         }
+
         
-        // This method is used by the animation events to disable animator parameters
-        private void DisableState(PlayerParameters parameter) => _animController.SetParameter(parameter, false);
-        
+
         private IEnumerator ResetAttackCount(float time)
         {
             _resettingAttackCount = true;
             yield return new WaitForSeconds(time);
-            _attackCount = 0;
+            //_attackCount = 0;
             _resettingAttackCount = false;
         }
 
