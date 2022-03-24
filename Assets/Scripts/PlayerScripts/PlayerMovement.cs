@@ -2,6 +2,8 @@
 using UnityEngine.InputSystem;
 #endif
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
@@ -239,11 +241,9 @@ namespace StarterAssets
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            if (_input.move != Vector2.zero)
-            {
-                TransformRotation(inputDirection, RotationSmoothTime);
-            }
-
+            
+            TransformRotation(inputDirection, RotationSmoothTime);
+            
             _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             ControllerMove(_targetDirection, Speed);
@@ -280,11 +280,44 @@ namespace StarterAssets
 
         private void TransformRotation(Vector3 inputDirection, float rotationSmoothTime)
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                              _mainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                rotationSmoothTime);
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            switch (_input.targetLock)
+            {
+                case true:
+                {
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    GameObject opponent = null;
+                    foreach (GameObject player in players)
+                    {
+                        if (player != gameObject)
+                        {
+                            opponent = player;
+                        }
+                    }
+
+                    if (opponent is not null)
+                    {
+                        Vector3 targetPosition = new Vector3(opponent.transform.position.x, transform.position.y,
+                            opponent.transform.position.z);
+                        transform.LookAt(targetPosition);
+                    }
+
+                    break;
+                }
+                default:
+                {
+                    if (_input.move != Vector2.zero && !_input.targetLock)
+                    {
+                        _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                                          _mainCamera.transform.eulerAngles.y;
+                        var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                            ref _rotationVelocity,
+                            rotationSmoothTime);
+                        transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                    }
+
+                    break;
+                }
+            }
         }
 
         private void JumpAndGravity()

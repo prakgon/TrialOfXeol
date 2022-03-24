@@ -988,6 +988,7 @@ MonoBehaviour:
   lightAttack: 0
   heavyAttack: 0
   block: 0
+  targetLock: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1

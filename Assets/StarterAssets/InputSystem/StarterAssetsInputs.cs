@@ -17,6 +17,7 @@ namespace StarterAssets
         public bool lightAttack;
         public bool heavyAttack;
         public bool block;
+        public bool targetLock = false;
         private PlayerMediator _med;
         private PlayerMechanics _playerMechanics;
 
@@ -41,6 +42,7 @@ namespace StarterAssets
         public void OnLightAttack(InputValue value) => LightAttackInput(value.isPressed);
         public void OnHeavyAttack(InputValue value) => HeavyAttackInput(value.isPressed);
         public void OnBlock(InputValue value) => BlockInput(value.isPressed);
+        public void OnLockTarget(InputValue value) => LockTargetInput();
 
 #else
 	// old input sys if we do decide to have it (most likely wont)...
@@ -53,6 +55,7 @@ namespace StarterAssets
         public void LightAttackInput(bool newLightAttackState) => _playerMechanics.LightAttack(newLightAttackState);
         public void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
         public void BlockInput(bool newBlockState) => block = newBlockState;
+        public void LockTargetInput() => targetLock = !targetLock;
 
 #if !UNITY_IOS || !UNITY_ANDROID
         private void OnApplicationFocus(bool hasFocus) => SetCursorState(cursorLocked);
