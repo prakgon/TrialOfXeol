@@ -6,11 +6,16 @@ using static Helpers.Literals;
 
 public class AttackStateMachine : StateMachineBehaviour
 {
-    public GameObject player;
-    public PlayerMechanics _playerMechanics;
+    [SerializeField] private GameObject player;
+    private PlayerMechanics _playerMechanics;
 
-    protected const int MaxAttackCounter = 4;
-
+    private const int MaxAttackCounter = 4;
+    
+    private void Awake()
+    {
+        _playerMechanics = player.GetComponent<PlayerMechanics>();
+    }
+    
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,22 +24,21 @@ public class AttackStateMachine : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-    }
-
-    // OnStateExit is called before OnStateExit is called on any state inside this state machine
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Debug.Log(_playerMechanics.AttackCounter);
+        if (!(stateInfo.normalizedTime >= 0.85f)) return;
+        Debug.Log(stateInfo.normalizedTime);
+        if (!animator.GetBool(PlayerParametersStrings.Attack)) return;
         _playerMechanics.AttackCounter++;
         if (_playerMechanics.AttackCounter >= MaxAttackCounter)
         {
             _playerMechanics.AttackCounter = 0;
         }
-        
-        Debug.Log("Exit " + _playerMechanics.AttackCounter);
         animator.SetInteger(PlayerParametersStrings.AttackCount, _playerMechanics.AttackCounter);
         animator.SetBool(PlayerParametersStrings.Attack, false);
-        
+    }
+
+    // OnStateExit is called before OnStateExit is called on any state inside this state machine
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
@@ -56,10 +60,4 @@ public class AttackStateMachine : StateMachineBehaviour
     public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
     {
     }
-
-    private void Awake()
-    {
-        _playerMechanics = player.GetComponent<PlayerMechanics>();
-    }
-    
 }

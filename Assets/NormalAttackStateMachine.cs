@@ -12,16 +12,17 @@ public class NormalAttackStateMachine : AttackStateMachine
     //}
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+        if (!animator.GetBool(PlayerParametersStrings.NormalAttack)) return;
+        animator.SetBool(PlayerParametersStrings.NormalAttack, false);
+    }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-        animator.SetBool(PlayerParametersStrings.NormalAttack, false);
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
