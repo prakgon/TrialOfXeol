@@ -20,6 +20,7 @@ namespace StarterAssets
         public bool targetLock = false;
         private PlayerMediator _med;
         private PlayerMechanics _playerMechanics;
+        private PlayerMovement _playerMovement;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -55,7 +56,7 @@ namespace StarterAssets
         public void LightAttackInput(bool newLightAttackState) => _playerMechanics.LightAttack(newLightAttackState);
         public void HeavyAttackInput(bool newHeavyAttackState) => heavyAttack = newHeavyAttackState;
         public void BlockInput(bool newBlockState) => block = newBlockState;
-        public void LockTargetInput() => targetLock = !targetLock;
+        public void LockTargetInput() => _playerMovement.ToggleTargetLock();
 
 #if !UNITY_IOS || !UNITY_ANDROID
         private void OnApplicationFocus(bool hasFocus) => SetCursorState(cursorLocked);
@@ -66,6 +67,7 @@ namespace StarterAssets
         {
             _med = med;
             _playerMechanics = _med.PlayerMechanics;
+            _playerMovement = _med.PlayerMovement;
         }
 #endif
     }
