@@ -25,9 +25,21 @@ namespace PlayerScripts
             {
                 _animController.CurrentPlayerAnimatorState = PlayerStates.Roll;
             }
-            else if (_animController.CompareAnimState(PlayerStates.Attack.ToString()))
+            else if (_animController.CompareAnimState(PlayerStates.FirstAttack.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.Attack;
+                _animController.CurrentPlayerAnimatorState = PlayerStates.FirstAttack;
+            }
+            else if (_animController.CompareAnimState(PlayerStates.SecondAttack.ToString()))
+            {
+                _animController.CurrentPlayerAnimatorState = PlayerStates.SecondAttack;
+            }
+            else if (_animController.CompareAnimState(PlayerStates.ThirdAttack.ToString()))
+            {
+                _animController.CurrentPlayerAnimatorState = PlayerStates.ThirdAttack;
+            }
+            else if (_animController.CompareAnimState(PlayerStates.FourthAttack.ToString()))
+            {
+                _animController.CurrentPlayerAnimatorState = PlayerStates.FourthAttack;
             }
             else if (_animController.CompareAnimState(PlayerStates.JumpStart.ToString()))
             {
@@ -56,7 +68,7 @@ namespace PlayerScripts
             }
         }
 
-        protected void CanRotateCheck()
+        /*protected void CanRotateCheck()
         {
             if (_animController.CompareAnimState(PlayerStates.Roll.ToString()) || _animController.CompareAnimState(PlayerStates.Attack.ToString()) || _animController.IsInTransition())
             {
@@ -70,7 +82,7 @@ namespace PlayerScripts
         }
         protected void CanMoveCheck()
         {
-            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())*/)
+            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())#1#)
             {
                 _canMove = false;
             }
@@ -79,7 +91,7 @@ namespace PlayerScripts
             {
                 _canMove = true;
             }
-        }
+        }*/
     }
 }
 

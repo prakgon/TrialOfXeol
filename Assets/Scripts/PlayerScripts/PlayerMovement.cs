@@ -170,7 +170,6 @@ namespace StarterAssets
 
             AnimationStateCheck();
 
-
             JumpAndGravity();
             GroundedCheck();
             ActionStateMachine();
@@ -186,8 +185,6 @@ namespace StarterAssets
                 case PlayerStates.Roll:
                     Roll();
                     break;
-                case PlayerStates.Attack:
-                    break;
                 case PlayerStates.JumpLand:
                     Move();
                     break;
@@ -197,6 +194,10 @@ namespace StarterAssets
                 case PlayerStates.JumpStart:
                     Move();
                     break;
+                case PlayerStates.FirstAttack:
+                case PlayerStates.SecondAttack:
+                case PlayerStates.ThirdAttack:
+                case PlayerStates.FourthAttack:
                 default:
                     break;
             }
@@ -213,7 +214,7 @@ namespace StarterAssets
                 transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
-            _animController.ChangeState(PlayerParameters.Grounded, Grounded);
+            _animController.SetParameter(PlayerParameters.Grounded, Grounded);
         }
 
         private void CameraRotation()
@@ -270,8 +271,8 @@ namespace StarterAssets
             // update animator if using character
             if (_animController.HasAnimator)
             {
-                _animController.ChangeState(PlayerParameters.Speed, _animationBlend);
-                _animController.ChangeState(PlayerParameters.MotionSpeed, inputMagnitude);
+                _animController.SetParameter(PlayerParameters.Speed, _animationBlend);
+                _animController.SetParameter(PlayerParameters.MotionSpeed, inputMagnitude);
             }
         }
 
@@ -336,8 +337,8 @@ namespace StarterAssets
 
                 if (_animController.HasAnimator)
                 {
-                    _animController.ChangeState(PlayerParameters.Jump, false);
-                    _animController.ChangeState(PlayerParameters.FreeFall, false);
+                    _animController.SetParameter(PlayerParameters.Jump, false);
+                    _animController.SetParameter(PlayerParameters.FreeFall, false);
                 }
 
                 if (_verticalVelocity < 0.0f)
@@ -354,7 +355,7 @@ namespace StarterAssets
 
                         if (_animController.HasAnimator)
                         {
-                            _animController.ChangeState(PlayerParameters.Jump, true);
+                            _animController.SetParameter(PlayerParameters.Jump, true);
                         }
                     }
                 }
@@ -376,7 +377,7 @@ namespace StarterAssets
                 {
                     if (_animController.HasAnimator)
                     {
-                        _animController.ChangeState(PlayerParameters.FreeFall, true);
+                        _animController.SetParameter(PlayerParameters.FreeFall, true);
                     }
                 }
 

@@ -45,19 +45,52 @@ namespace PlayerScripts
             return _animator.IsInTransition(layer);
         }
 
-        public void ChangeState(PlayerParameters newState, bool state)
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
-            if (state)
-            {
-                LastActiveAnimatorParameter = newState;
-            }
-
-            _animator.SetBool(newState.ToString(), state);
+            _animator.applyRootMotion = isInteracting;
+            _animator.SetBool("isInteracting", isInteracting);
+            _animator.CrossFade(targetAnimation, 0.2f);
         }
 
-        public void ChangeState(PlayerParameters newState, float state)
+        // This method returns the lenght time of the current animation
+        public float GetCurrentAnimationTime(byte layer = 0)
         {
-            _animator.SetFloat(newState.ToString(), state);
+            return _animator.GetCurrentAnimatorStateInfo(layer).length;
+        }
+
+        public void SetParameter(PlayerParameters parameter, bool value)
+        {
+            if (value)
+            {
+                LastActiveAnimatorParameter = parameter;
+            }
+
+            _animator.SetBool(parameter.ToString(), value);
+        }
+
+        public void SetParameter(PlayerParameters parameter, float value)
+        {
+            _animator.SetFloat(parameter.ToString(), value);
+        }
+
+        public void SetParameter(PlayerParameters parameter, int value)
+        {
+            _animator.SetInteger(parameter.ToString(), value);
+        }
+
+        public bool GetParameterBool(PlayerParameters parameter)
+        {
+            return _animator.GetBool(parameter.ToString());
+        }
+
+        public float GetParameterFloat(PlayerParameters parameter)
+        {
+            return _animator.GetFloat(parameter.ToString());
+        }
+
+        public int GetParameterInteger(PlayerParameters parameter)
+        {
+            return _animator.GetInteger(parameter.ToString());
         }
 
         public void ConfigureMediator(PlayerMediator med)
