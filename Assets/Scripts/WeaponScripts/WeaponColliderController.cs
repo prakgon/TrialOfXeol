@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Helpers;
 using PlayerScripts;
-using StarterAssets;
 using UnityEngine;
 
 namespace WeaponScripts

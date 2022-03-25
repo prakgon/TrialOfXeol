@@ -9,9 +9,9 @@ namespace PlayerScripts
         protected PlayerAnimatorController _animController;
 
         public bool isInteracting;
-        private bool _canSprint = true;
+        private bool _isSprinting = true;
         
-        public bool CanSprint { get => _canSprint; set => _canSprint = value; }
+        public bool isSprinting { get => _isSprinting; set => _isSprinting = value; }
 
         protected void AnimationStateCheck()
         {
@@ -55,7 +55,7 @@ namespace PlayerScripts
 
         protected void HandleInteractions()
         {
-            isInteracting = _animController.GetParameterBool(PlayerParameters.isInteracting);
+            isInteracting = _animController.GetBool(PlayerParameters.isInteracting);
         }
         
 

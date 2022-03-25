@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using Helpers;
-using StarterAssets;
 using UnityEngine;
 using static Helpers.Literals;
 
@@ -18,17 +16,22 @@ namespace PlayerScripts
 
         public void Roll(bool newState)
         {
+            float delta = Time.time;
+            Debug.Log(delta);
             if (!newState) return;
-            if (_animController.GetParameterBool(PlayerParameters.isInteracting)) return;
+            if (_animController.GetBool(PlayerParameters.isInteracting)) return;
             _animController.PlayTargetAnimation(PlayerStatesStrings.Roll, true);
         }
 
         public void LightAttack(bool newState)
         {
-            if (!newState) return;
+            /*if (!newState) return;
             if (_animController.GetParameterBool(PlayerParameters.isInteracting)) return;
             _animController.SetParameter(PlayerParameters.NormalAttack, true);
-            _animController.PlayTargetAnimation("Attack", true);
+            _animController.PlayTargetAnimation("Attack", true);*/
+            
+            
+            
             /*switch (AttackCounter)
             {
                 case 0:

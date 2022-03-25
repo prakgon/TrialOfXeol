@@ -6,6 +6,7 @@ namespace Helpers
         {
             IdleWalkRunBlend,
             Roll,
+            BackStep,
             JumpLand,
             InAir,
             JumpStart,
@@ -19,6 +20,7 @@ namespace Helpers
         {
             public static readonly string IdleWalkRunBlend = PlayerStates.IdleWalkRunBlend.ToString();
             public static readonly string Roll = PlayerStates.Roll.ToString();
+            public static readonly string BackStep = PlayerStates.BackStep.ToString();
             public static readonly string JumpLand = PlayerStates.JumpLand.ToString();
             public static readonly string InAir = PlayerStates.InAir.ToString();
             public static readonly string JumpStart = PlayerStates.JumpStart.ToString();

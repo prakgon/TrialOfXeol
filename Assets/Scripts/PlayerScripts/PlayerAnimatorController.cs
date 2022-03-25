@@ -44,18 +44,19 @@ namespace PlayerScripts
         {
             return _animator.IsInTransition(layer);
         }
-
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
+        
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int layer = 0)
         {
             _animator.applyRootMotion = isInteracting;
-            _animator.SetBool("isInteracting", isInteracting);
-            _animator.CrossFade(targetAnimation, 0.2f);
-        }
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int layer)
-        {
-            _animator.applyRootMotion = isInteracting;
-            _animator.SetBool("isInteracting", isInteracting);
+            _animator.SetBool(PlayerParametersStrings.isInteracting, isInteracting);
             _animator.CrossFade(targetAnimation, 0.2f, layer);
+        }
+        
+        public void PlayTargetAnimation(PlayerParameters targetAnimation, bool isInteracting, int layer = 0)
+        {
+            _animator.applyRootMotion = isInteracting;
+            _animator.SetBool( PlayerParametersStrings.isInteracting, isInteracting);
+            _animator.CrossFade(targetAnimation.ToString(), 0.2f, layer);
         }
 
         // This method returns the lenght time of the current animation
@@ -84,17 +85,17 @@ namespace PlayerScripts
             _animator.SetInteger(parameter.ToString(), value);
         }
 
-        public bool GetParameterBool(PlayerParameters parameter)
+        public bool GetBool(PlayerParameters parameter)
         {
             return _animator.GetBool(parameter.ToString());
         }
 
-        public float GetParameterFloat(PlayerParameters parameter)
+        public float GetFloat(PlayerParameters parameter)
         {
             return _animator.GetFloat(parameter.ToString());
         }
 
-        public int GetParameterInteger(PlayerParameters parameter)
+        public int GetInteger(PlayerParameters parameter)
         {
             return _animator.GetInteger(parameter.ToString());
         }

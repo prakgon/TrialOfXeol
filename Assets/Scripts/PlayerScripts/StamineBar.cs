@@ -1,4 +1,3 @@
-using StarterAssets;
 using System.Collections;
 using UnityEngine;
 using Helpers;
@@ -7,7 +6,7 @@ using static Helpers.Literals;
 
 namespace PlayerScripts
 {
-    public class StamineBar : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
+    /*public class StamineBar : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
     {
         [Header("Parameters")]
         [SerializeField] private float _coolDown;//usar esto cooldwon routien
@@ -62,14 +61,14 @@ namespace PlayerScripts
                 if (GetCurrentPos() == _emptyBarPoint.position.x)
                 {
                     _currentState = SliderBarStates.Cooldown;
-                    _playerMovement.CanSprint = false;
+                    _playerMovement.isSprinting = false;
                     StartCoroutine(CooldownRoutine());
                 }
             }
 
             if (!PlayerIsSprintingCheck())
             {
-                _playerMovement.CanSprint = true;
+                _playerMovement.isSprinting = true;
                 _currentState = SliderBarStates.Returning;
                 if (GetCurrentPos() == _fullBarPoint.position.x)
                 {
@@ -100,12 +99,12 @@ namespace PlayerScripts
             yield return new WaitForSeconds(_coolDown);
             if (transform.position.x > _emptyBarPoint.position.x)
             {
-                _playerMovement.CanSprint = true;
+                _playerMovement.isSprinting = true;
             }
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
         }
-    }
+    }*/
 }

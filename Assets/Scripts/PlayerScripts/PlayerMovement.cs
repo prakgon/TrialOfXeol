@@ -1,31 +1,24 @@
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-using UnityEngine.InputSystem;
-#endif
-using System;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
+using InputSystem;
 using PlayerScripts;
 
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
-*/
 
-namespace StarterAssets
+namespace TOX
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-    [RequireComponent(typeof(PlayerInput))]
-#endif
     public class PlayerMovement : PlayerBase, IPunObservable, IMediatorUser
     {
+        /*This values are not being used, in runTime the editor gets the values configured
+        in the inspector of the script attached to the player*/
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
-        public float
-            MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
+        public float MoveSpeed = 5f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 7.335f;
+        public float SprintSpeed = 7f;
 
         [Tooltip("How fast the character turns to face movement direction")] [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -77,13 +70,7 @@ namespace StarterAssets
         [Header("Roll Parameters")] [SerializeField]
         private float _rollSpeedFactor = 4;
 
-        //private int _animIDGrounded;
-        //private int _animIDJump;
-        //private int _animIDFreeFall;
-        //private int _animIDMotionSpeed;
-        //private int _animIDRoll;
-        //private int _animIDLightAttack;
-        //private int _animIDSpeed;
+
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
@@ -94,10 +81,12 @@ namespace StarterAssets
         private float _terminalVelocity = 53.0f;
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+
         private CharacterController _controller;
-        private StarterAssetsInputs _input;
+        private InputHandler _inputHandler;
         private GameObject _mainCamera;
         private PlayerMediator _med;
+
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
 
@@ -105,12 +94,6 @@ namespace StarterAssets
         {
             get => _targetDirection;
             set => _targetDirection = value;
-        }
-
-        public float Speed
-        {
-            get => _speed;
-            set => _speed = value;
         }
 
         public static GameObject LocalPlayerInstance;
@@ -136,17 +119,18 @@ namespace StarterAssets
         {
             if (photonView.IsMine)
             {
-                PlayerInput playerInput = GetComponent<PlayerInput>();
-                playerInput.enabled = true;
+                _inputHandler = GetComponent<InputHandler>();
+                _inputHandler.enabled = true;
                 GameObject followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
             }
 
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
+            _inputHandler = GetComponent<InputHandler>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
+
 
         private void Update()
         {
@@ -155,51 +139,31 @@ namespace StarterAssets
                 return;
             }
 
+            float delta = Time.deltaTime;
+            _inputHandler.TickInput(delta);
+            Debug.Log(delta + " movement");
+            
             AnimationStateCheck();
             HandleInteractions();
-            
+
             JumpAndGravity();
             GroundedCheck();
-            ActionStateMachine();
-        }
 
-        private void ActionStateMachine()
-        {
-            if (isInteracting) return;
+            HandlePlayerLocomotion();
+            HandleRollingAndSprinting(delta);
             
-            HandleMovement();
-            /*switch (_animController.CurrentPlayerAnimatorState)
-            {
-                case PlayerStates.IdleWalkRunBlend:
-                    HandleMovement();
-                    break;
-                case PlayerStates.Roll:
-                    /*
-                    Roll();
-                    #1#
-                    break;
-                case PlayerStates.JumpLand:
-                    HandleMovement();
-                    break;
-                case PlayerStates.InAir:
-                    HandleMovement();
-                    break;
-                case PlayerStates.JumpStart:
-                    HandleMovement();
-                    break;
-                case PlayerStates.FirstAttack:
-                case PlayerStates.SecondAttack:
-                case PlayerStates.ThirdAttack:
-                case PlayerStates.FourthAttack:
-                default:
-                    break;
-            }*/
+            _inputHandler.isInteracting = _animController.GetBool(PlayerParameters.isInteracting);
+            _inputHandler.rollFlag = false;
+            _inputHandler.sprintFlag = false;
         }
 
         private void LateUpdate()
         {
             CameraRotation();
         }
+
+
+        #region Ground Check
 
         private void GroundedCheck()
         {
@@ -210,12 +174,17 @@ namespace StarterAssets
             _animController.SetParameter(PlayerParameters.Grounded, Grounded);
         }
 
+        #endregion
+
+
+        #region Camera Rotation
+
         private void CameraRotation()
         {
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (_inputHandler.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-                _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
+                _cinemachineTargetYaw += _inputHandler.look.x * Time.deltaTime;
+                _cinemachineTargetPitch += _inputHandler.look.y * Time.deltaTime;
             }
 
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
@@ -224,43 +193,21 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void HandleMovement()
+        #endregion
+
+
+        #region Movement
+
+        private void HandlePlayerLocomotion()
         {
-            float targetSpeed;
-            if (_input.sprint && CanSprint)
+            if (isInteracting)
             {
-                targetSpeed = SprintSpeed;
+                // Applying gravity when interacting e.g. Rolling Animation.
+                ControllerMove(new Vector3(0, 0, 0), 0);
             }
             else
             {
-                targetSpeed = MoveSpeed;
-            }
-
-            if (_input.move == Vector2.zero)
-            {
-                targetSpeed = 0.0f;
-            }
-
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-            _speed = targetSpeed;
-
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            if (_input.move != Vector2.zero)
-            {
-                TransformRotation(inputDirection, RotationSmoothTime);
-            }
-
-            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            ControllerMove(_targetDirection, Speed);
-
-
-            // update animator if using character
-            if (_animController.HasAnimator)
-            {
-                _animController.SetParameter(PlayerParameters.Speed, _animationBlend);
-                _animController.SetParameter(PlayerParameters.MotionSpeed, inputMagnitude);
+                HandleMovement();
             }
         }
 
@@ -269,21 +216,69 @@ namespace StarterAssets
             _controller.Move(targetDirection * (speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
-
-        private void Roll()
+        
+        private void HandleRollingAndSprinting(float delta)
         {
-            if (_animController.IsInTransition())
+            if (_animController.GetBool(PlayerParameters.isInteracting)) return;
+
+            if (_inputHandler.rollFlag)
             {
-                var inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-                if (_input.move != Vector2.zero)
+
+                if (_inputHandler.moveAmount > 0)
                 {
-                    TransformRotation(inputDirection, RotationSmoothTime / 2);
+                    _animController.PlayTargetAnimation(PlayerParameters.Roll, true);
+                    _targetDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
+                    transform.rotation = rollRotation;
+                }
+                else
+                {
+                    _animController.PlayTargetAnimation("BackStep", true);
                 }
             }
-
-            ControllerMove(transform.forward, _rollSpeedFactor);
         }
 
+        private void HandleMovement()
+        {
+            float targetSpeed;
+            if (_inputHandler.sprintFlag && isSprinting)
+            {
+                targetSpeed = SprintSpeed;
+            }
+            else
+            {
+                targetSpeed = MoveSpeed * _inputHandler.moveAmount;
+            }
+
+            if (_inputHandler.move == Vector2.zero)
+            {
+                targetSpeed = 0.0f;
+            }
+
+            float inputMagnitude = _inputHandler.move.magnitude;
+            _speed = targetSpeed;
+
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            Vector3 inputDirection = new Vector3(_inputHandler.move.x, 0.0f, _inputHandler.move.y).normalized;
+            if (_inputHandler.move != Vector2.zero)
+            {
+                TransformRotation(inputDirection, RotationSmoothTime);
+            }
+
+            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            // update animator if using character
+            ControllerMove(_targetDirection, _speed);
+            if (_animController.HasAnimator)
+            {
+                _animController.SetParameter(PlayerParameters.Speed, _animationBlend);
+                _animController.SetParameter(PlayerParameters.MotionSpeed, inputMagnitude);
+            }
+        }
+
+        #endregion
+
+
+        #region Player Rotation
 
         private void TransformRotation(Vector3 inputDirection, float rotationSmoothTime)
         {
@@ -293,6 +288,11 @@ namespace StarterAssets
                 rotationSmoothTime);
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
+
+        #endregion
+
+
+        #region Jump and Gravity
 
         private void JumpAndGravity()
         {
@@ -311,10 +311,10 @@ namespace StarterAssets
                     _verticalVelocity = -2f;
                 }
 
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (_inputHandler.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
-                        !_animController.IsInTransition())
+                        !_animController.IsInTransition() && !isInteracting)
                     {
                         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
@@ -346,7 +346,7 @@ namespace StarterAssets
                     }
                 }
 
-                _input.jump = false;
+                _inputHandler.jump = false;
             }
 
             if (_verticalVelocity < _terminalVelocity)
@@ -354,6 +354,11 @@ namespace StarterAssets
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
         }
+
+        #endregion
+
+
+        #region Helpers
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
@@ -375,6 +380,8 @@ namespace StarterAssets
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
         }
+
+        #endregion
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
