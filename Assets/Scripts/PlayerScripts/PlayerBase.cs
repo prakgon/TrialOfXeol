@@ -7,10 +7,8 @@ namespace PlayerScripts
     public class PlayerBase : MonoBehaviourPunCallbacks
     {
         protected PlayerAnimatorController _animController;
-        
-        protected bool _canMove = true;
-        protected bool _canRotate = true;
-        protected bool _canJump = true;
+
+        public bool isInteracting;
         private bool _canSprint = true;
         
         public bool CanSprint { get => _canSprint; set => _canSprint = value; }
@@ -54,44 +52,13 @@ namespace PlayerScripts
                 _animController.CurrentPlayerAnimatorState = PlayerStates.JumpLand;
             }
         }
+
+        protected void HandleInteractions()
+        {
+            isInteracting = _animController.GetParameterBool(PlayerParameters.isInteracting);
+        }
         
-        protected void CanJumpCheck()
-        {
-            if (_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()))
-            {
-                _canJump = true;
-            }
 
-            else
-            {
-                _canJump = false;
-            }
-        }
-
-        /*protected void CanRotateCheck()
-        {
-            if (_animController.CompareAnimState(PlayerStates.Roll.ToString()) || _animController.CompareAnimState(PlayerStates.Attack.ToString()) || _animController.IsInTransition())
-            {
-                _canRotate = false;
-            }
-
-            else
-            {
-                _canRotate = true;
-            }
-        }
-        protected void CanMoveCheck()
-        {
-            if (_animController.CompareAnimState(PlayerStates.Attack.ToString()) /*|| _animController.CompareAnimState(PlayerStates.Roll.ToString())#1#)
-            {
-                _canMove = false;
-            }
-
-            else
-            {
-                _canMove = true;
-            }
-        }*/
     }
 }
 

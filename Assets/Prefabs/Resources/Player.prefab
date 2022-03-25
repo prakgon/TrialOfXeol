@@ -927,7 +927,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5ef0496227ae96e469167c1a02119572, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51beaeb22b7c8cf47937104c76439548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
   MoveSpeed: 7
   SprintSpeed: 10
   RotationSmoothTime: 0.123
@@ -1211,6 +1212,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: HeavyAttack
+  - Type: 4
+    SynchronizeType: 0
+    Name: isInteracting
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0

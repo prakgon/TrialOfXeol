@@ -51,6 +51,12 @@ namespace PlayerScripts
             _animator.SetBool("isInteracting", isInteracting);
             _animator.CrossFade(targetAnimation, 0.2f);
         }
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int layer)
+        {
+            _animator.applyRootMotion = isInteracting;
+            _animator.SetBool("isInteracting", isInteracting);
+            _animator.CrossFade(targetAnimation, 0.2f, layer);
+        }
 
         // This method returns the lenght time of the current animation
         public float GetCurrentAnimationTime(byte layer = 0)

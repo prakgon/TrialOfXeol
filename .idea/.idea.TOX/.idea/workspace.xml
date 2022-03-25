@@ -5,20 +5,178 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/AttackStateMachine.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/HeavyAttackStateMachine.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/NormalAttackStateMachine.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/RollStateMachine.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/RollStateMachine.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AttackStateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AttackStateMachine.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/AttackStateMachine.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeavyAttackStateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HeavyAttackStateMachine.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/HeavyAttackStateMachine.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Rolls/roll_forward.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Rolls/roll_forward.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NormalAttackStateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NormalAttackStateMachine.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/NormalAttackStateMachine.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/50-Mirror__Network Manager-NewNetworkManager.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/50-Mirror__Network Manager-NewNetworkManager.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/51-Mirror__Network Authenticator-NewNetworkAuthenticator.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/51-Mirror__Network Authenticator-NewNetworkAuthenticator.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/53-Mirror__Custom Interest Management-CustomInterestManagement.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/53-Mirror__Custom Interest Management-CustomInterestManagement.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/54-Mirror__Network Room Manager-NewNetworkRoomManager.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/54-Mirror__Network Room Manager-NewNetworkRoomManager.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/55-Mirror__Network Room Player-NewNetworkRoomPlayer.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/55-Mirror__Network Room Player-NewNetworkRoomPlayer.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/56-Mirror__Network Discovery-NewNetworkDiscovery.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/56-Mirror__Network Discovery-NewNetworkDiscovery.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/57-Mirror__Network Transform-NewNetworkTransform.cs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptTemplates/57-Mirror__Network Transform-NewNetworkTransform.cs.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMechanics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_02.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_02.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_03.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Steam_03.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Large_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Large_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Small_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SunBeam_Small_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_02.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_02.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_03.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_03.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_Fast_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Swirl_Fast_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordSlash_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordSlash_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordStab_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_SwordStab_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Debris_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Debris_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Dust_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Dust_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Exhaust_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Exhaust_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Fire_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Trail_Fire_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Shoot_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Shoot_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Smoke_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Volcano_Smoke_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterDrip_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterDrip_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterRipple_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_WaterRipple_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Waterfall_Fall.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Waterfall_Fall.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Hard_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Hard_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Soft_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Prefabs/FX_Wind_Soft_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Bubble.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Bubble.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Bubble_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Bubble_02.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_BulletTrail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_BulletTrail.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Circle_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Circle_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Circle_Dark_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Circle_Dark_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Fumes_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Fumes_02.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Fumes_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Fumes_04.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_GroundBreak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_GroundBreak.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_HalfCircle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_HalfCircle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Hexagon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Hexagon.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Lightning_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Lightning_02.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Portal_Single_Chipped.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Portal_Single_Chipped.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_RainbowCircle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_RainbowCircle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Ring_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Ring_02.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_RitualCircle_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_RitualCircle_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_SemiCircle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_SemiCircle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Shell_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Shell_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Smoke_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Smoke_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Soft_Spot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Soft_Spot.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Soft_Spot_Dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Soft_Spot_Dark.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Sparkle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Sparkle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Swipe_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Swipe_01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Swipe_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Swipe_02.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Wind.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Wind.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Wings_Grid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ThirdParty/vfx/Textures/PolygonParticles_Wings_Grid.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Template.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Template/prototype_texture_512x512.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Template/prototype_texture_512x512.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_blue3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_brown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_brown.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_cyan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_cyan.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_green3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_grey4.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_magenta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_magenta.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_olive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_olive.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_orange.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_pink.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_pink.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_purple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_purple.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_red.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_white.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_yellow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures/prototype_512x512_yellow.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +204,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b526748ec21a48248a53736a4ba9a60e26c00/be/8b43f186/StateMachineBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Editor/Internal/InputActionSerializationHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Runtime/Behaviours/CinemachineMixingCamera.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Runtime/Core/SignalSourceAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ResetIsInteracting.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

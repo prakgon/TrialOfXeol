@@ -156,7 +156,8 @@ namespace StarterAssets
             }
 
             AnimationStateCheck();
-
+            HandleInteractions();
+            
             JumpAndGravity();
             GroundedCheck();
             ActionStateMachine();
@@ -164,22 +165,27 @@ namespace StarterAssets
 
         private void ActionStateMachine()
         {
-            switch (_animController.CurrentPlayerAnimatorState)
+            if (isInteracting) return;
+            
+            HandleMovement();
+            /*switch (_animController.CurrentPlayerAnimatorState)
             {
                 case PlayerStates.IdleWalkRunBlend:
-                    Move();
+                    HandleMovement();
                     break;
                 case PlayerStates.Roll:
+                    /*
                     Roll();
+                    #1#
                     break;
                 case PlayerStates.JumpLand:
-                    Move();
+                    HandleMovement();
                     break;
                 case PlayerStates.InAir:
-                    Move();
+                    HandleMovement();
                     break;
                 case PlayerStates.JumpStart:
-                    Move();
+                    HandleMovement();
                     break;
                 case PlayerStates.FirstAttack:
                 case PlayerStates.SecondAttack:
@@ -187,7 +193,7 @@ namespace StarterAssets
                 case PlayerStates.FourthAttack:
                 default:
                     break;
-            }
+            }*/
         }
 
         private void LateUpdate()
@@ -218,7 +224,7 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void Move()
+        private void HandleMovement()
         {
             float targetSpeed;
             if (_input.sprint && CanSprint)

@@ -35,6 +35,7 @@ namespace Helpers
             Grounded,
             FreeFall,
             MotionSpeed,
+            isInteracting,
             Attack,
             Roll,
             AttackCount,
@@ -49,6 +50,7 @@ namespace Helpers
             public static readonly string Grounded = PlayerParameters.Grounded.ToString();
             public static readonly string FreeFall = PlayerParameters.FreeFall.ToString();
             public static readonly string MotionSpeed = PlayerParameters.MotionSpeed.ToString();
+            public static readonly string isInteracting = PlayerParameters.isInteracting.ToString();
             public static readonly string Attack = PlayerParameters.Attack.ToString();
             public static readonly string Roll = PlayerParameters.Roll.ToString();
             public static readonly string AttackCount = PlayerParameters.AttackCount.ToString();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Helpers;
 using StarterAssets;
@@ -17,32 +18,43 @@ namespace PlayerScripts
 
         public void Roll(bool newState)
         {
-            if (newState)
-            {
-                _animController.SetParameter(PlayerParameters.Roll, true);
-                /*if (!_animController.GetParameterBool(PlayerParameters.Roll))
-                {
-                }*/
-            }
+            if (!newState) return;
+            if (_animController.GetParameterBool(PlayerParameters.isInteracting)) return;
+            _animController.PlayTargetAnimation(PlayerStatesStrings.Roll, true);
         }
 
         public void LightAttack(bool newState)
         {
-            if (!newState)
-            {
-                return;
-            }
-            _animController.SetParameter(PlayerParameters.Attack, true);
+            if (!newState) return;
+            if (_animController.GetParameterBool(PlayerParameters.isInteracting)) return;
             _animController.SetParameter(PlayerParameters.NormalAttack, true);
+            _animController.PlayTargetAnimation("Attack", true);
+            /*switch (AttackCounter)
+            {
+                case 0:
+                    _animController.PlayTargetAnimation(PlayerStatesStrings.FirstAttack, true);
+                    break;
+                case 1:
+                    _animController.PlayTargetAnimation(PlayerStatesStrings.FirstAttack, true);
+                    break;
+                case 2:
+                    _animController.PlayTargetAnimation(PlayerStatesStrings.FirstAttack, true);
+                    break;
+                case 3:
+                    _animController.PlayTargetAnimation(PlayerStatesStrings.FirstAttack, true);
+                    break;
+            }*/
+
+            //_animController.SetParameter(PlayerParameters.NormalAttack, true);
             /*if (!_animController.GetParameterBool(PlayerParameters.Attack))
                 {
             _animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
                 }*/
 
-            if (!_resettingAttackCount)
+            /*if (!_resettingAttackCount)
             {
                 StartCoroutine(ResetAttackCount(AttackCountResetTime));
-            }
+            }*/
         }
 
         public void HeavyAttack(bool newState)
@@ -51,6 +63,7 @@ namespace PlayerScripts
             {
                 return;
             }
+
             //_attackCount++;
             _animController.SetParameter(PlayerParameters.Attack, true);
             _animController.SetParameter(PlayerParameters.HeavyAttack, true);
@@ -63,10 +76,8 @@ namespace PlayerScripts
             {
                 StartCoroutine(ResetAttackCount(7f));
             }
-
         }
 
-        
 
         private IEnumerator ResetAttackCount(float time)
         {
