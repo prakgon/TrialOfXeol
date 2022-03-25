@@ -2,6 +2,8 @@
 using UnityEngine.InputSystem;
 #endif
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
@@ -94,9 +96,12 @@ namespace StarterAssets
         private float _terminalVelocity = 53.0f;
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+        private bool _targetLock = false;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private GameObject[] players;
+        private GameObject opponent;
         private PlayerMediator _med;
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
@@ -150,6 +155,14 @@ namespace StarterAssets
 
         private void Update()
         {
+            players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player != gameObject)
+                {
+                    opponent = player;
+                }
+            }
             if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
             {
                 return;
@@ -205,9 +218,18 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (!LockCameraPosition)
             {
-                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+                switch (_targetLock)
+                {
+                    case true:
+                        _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
+                        break;
+                    default:
+                        _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+                        break;
+                }
+
                 _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
             }
 
@@ -239,16 +261,12 @@ namespace StarterAssets
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            if (_input.move != Vector2.zero)
-            {
-                TransformRotation(inputDirection, RotationSmoothTime);
-            }
+
+            TransformRotation(inputDirection, RotationSmoothTime);
 
             _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
             ControllerMove(_targetDirection, Speed);
-
-
+            
             // update animator if using character
             if (_animController.HasAnimator)
             {
@@ -282,9 +300,32 @@ namespace StarterAssets
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                rotationSmoothTime);
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            switch (_targetLock)
+            {
+                case true:
+                {
+                    if (opponent is not null)
+                    {
+                        Vector3 targetPosition = new Vector3(opponent.transform.position.x, transform.position.y,
+                            opponent.transform.position.z);
+                        transform.LookAt(targetPosition);
+                    }
+
+                    break;
+                }
+                default:
+                {
+                    if (_input.move != Vector2.zero && !_targetLock)
+                    {
+                        var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                            ref _rotationVelocity,
+                            rotationSmoothTime);
+                        transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                    }
+
+                    break;
+                }
+            }
         }
 
         private void JumpAndGravity()
@@ -361,6 +402,20 @@ namespace StarterAssets
             Gizmos.DrawSphere(
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
+        }
+
+        public void ToggleTargetLock()
+        {
+            players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player != gameObject)
+                {
+                    opponent = player;
+                }
+            }
+
+            _targetLock = !_targetLock;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
