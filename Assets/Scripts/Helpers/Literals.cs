@@ -36,5 +36,11 @@ namespace Helpers
             MainCamera,
             Weapon
         }
+
+        public enum UserTypes
+        {
+            Player,
+            FreeSpectator
+        }
     }
 }

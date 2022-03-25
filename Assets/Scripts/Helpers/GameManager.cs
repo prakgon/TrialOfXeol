@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using StarterAssets;
+using static Helpers.Literals;
 
 namespace TOX
 {
@@ -10,6 +11,7 @@ namespace TOX
     {
 
         public GameObject playerPrefab;
+        public GameObject freeSpectatorPrefab;
         #region Photon Callbacks
 
 
@@ -33,7 +35,16 @@ namespace TOX
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    UserTypes userType = (UserTypes) PhotonNetwork.LocalPlayer.CustomProperties["user_type"];
+                    switch (userType)
+                    {
+                        case UserTypes.Player:
+                            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                            break;
+                        case UserTypes.FreeSpectator:
+                            PhotonNetwork.Instantiate(this.freeSpectatorPrefab.name, new Vector3(0f, 5f, -10f), Quaternion.identity, 0);
+                            break;
+                    }
                 }
                 else
                 {
