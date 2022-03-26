@@ -18,5 +18,9 @@ MonoBehaviour:
   iconSprite: {fileID: 0}
   itemName: 0
   OH_Light_Attack_1: 0
-  OH_Heavy_Attack_1: 1
+  OH_Light_Attack_2: 1
+  OH_Light_Attack_3: 2
+  OH_Heavy_Attack_1: 3
+  OH_Heavy_Attack_2: 4
+  OH_Heavy_Attack_3: 5
   damage: 10

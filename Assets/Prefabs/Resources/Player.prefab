@@ -1287,6 +1287,7 @@ MonoBehaviour:
   jump: 0
   rollFlag: 0
   sprintFlag: 0
+  comboFlag: 0
   rollInputTimer: 0
   eastButtonInput: 0
   rightButtonInput: 0
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteracting: 0
   isSprinting: 0
+  canDoCombo: 0
 --- !u!114 &7008467895422926144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,6 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f23fc0f29746bcae41bc3d1afd2300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttack: 0
 --- !u!1 &2241015559435739563
 GameObject:
   m_ObjectHideFlags: 0

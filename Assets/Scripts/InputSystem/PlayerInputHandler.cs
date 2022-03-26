@@ -8,24 +8,24 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     // Basic inputs
-    [Header("Basic player inputs")]
-    public Vector2 move;
+    [Header("Basic player inputs")] public Vector2 move;
     public float moveAmount;
     public Vector2 look;
     public bool jump;
 
     // Combat mechanics inputs
-    [Header("Combat input flags")]
-    public bool rollFlag;
+    [Header("Combat input flags")] public bool rollFlag;
     public bool sprintFlag;
+    public bool comboFlag;
     public float rollInputTimer;
-    
+
     // Controller convection keys Input Handlers
-    [Header("Controller convection inputs")]
-    [Tooltip("This button handles roll and sprint inputs")]
+    [Header("Controller convection inputs")] [Tooltip("This button handles roll and sprint inputs")]
     public bool eastButtonInput;
+
     [Tooltip("This button handles right handed light attack inputs")]
     public bool rightButtonInput;
+
     [Tooltip("This button handles right handed heavy attack inputs")]
     public bool rightTriggerInput;
 
@@ -41,7 +41,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     #region Input Events
-    
+
     public void OnMove(InputAction.CallbackContext context) => MoveHandler(context);
     public void OnLook(InputAction.CallbackContext context) => look = context.ReadValue<Vector2>();
     public void OnRollAndSprint(InputAction.CallbackContext context) => RollAndSprintHandler(context);
@@ -53,18 +53,18 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Debug.Log(context.phase == InputActionPhase.Started);
     }
-    
+
     #endregion
 
 
     #region Event Handlers
-    
+
     private void MoveHandler(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
         moveAmount = Mathf.Clamp01(Mathf.Abs(move.x) + Mathf.Abs(move.y));
     }
-    
+
     private void JumpHandler(InputAction.CallbackContext context)
     {
         jump = context.phase switch
@@ -81,7 +81,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void RollAndSprintHandler(InputAction.CallbackContext context)
     {
         eastButtonInput = context.phase == InputActionPhase.Performed;
-        
+
         switch (context.phase)
         {
             case InputActionPhase.Disabled:
@@ -102,6 +102,7 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     rollFlag = true;
                 }
+
                 break;
             case InputActionPhase.Performed:
                 break;
@@ -111,6 +112,7 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     rollFlag = true;
                 }
+
                 sprintFlag = false;
                 rollInputTimer = 0;
                 break;
@@ -118,45 +120,46 @@ public class PlayerInputHandler : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
     private void LightAttackHandler(InputAction.CallbackContext context)
     {
         rightButtonInput = context.phase == InputActionPhase.Started;
-        /*rightButtonInput = context.phase switch
-        {
-            InputActionPhase.Disabled => false,
-            InputActionPhase.Waiting => false,
-            InputActionPhase.Started => true,
-            InputActionPhase.Performed => false,
-            InputActionPhase.Canceled => false,
-            _ => throw new ArgumentOutOfRangeException()
-        };*/
-        
+
         if (rightButtonInput && !_playerController.isInteracting)
         {
-            _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+            if (_playerController.canDoCombo)
+            {
+                comboFlag = true;
+                _playerAttacker.HandleWeaponCombo(_playerInventory.rightWeapon);
+                comboFlag = false;
+            }
+            else
+            {
+                if (_playerController.canDoCombo) return;
+                _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+            }
         }
     }
-    
+
     private void HeavyAttackHandler(InputAction.CallbackContext context)
     {
         rightTriggerInput = context.phase == InputActionPhase.Started;
-        /*{
-            InputActionPhase.Disabled => false,
-            InputActionPhase.Waiting => false,
-            InputActionPhase.Started => true,
-            InputActionPhase.Performed => true,
-            InputActionPhase.Canceled => false,
-            _ => throw new ArgumentOutOfRangeException()
-        };*/
-        
+
         if (rightTriggerInput && !_playerController.isInteracting)
         {
-            _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
+            if (_playerController.canDoCombo)
+            {
+                comboFlag = true;
+                _playerAttacker.HandleWeaponCombo(_playerInventory.rightWeapon);
+                comboFlag = false;
+            }
+            else
+            {
+                if (_playerController.canDoCombo) return;
+                _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
+            }
         }
     }
-    
-    
-    #endregion
 
+    #endregion
 }

@@ -196,7 +196,7 @@ namespace TOX
 
         public void HandleRollingAndSprinting()
         {
-            if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
+            if (_animController.GetBool(AnimatorParameters.IsInteracting)) return;
 
             if (!_input.rollFlag) return;
             if (_input.moveAmount > 0)

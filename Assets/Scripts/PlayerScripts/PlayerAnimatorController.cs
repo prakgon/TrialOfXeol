@@ -47,23 +47,28 @@ namespace PlayerScripts
         public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
             _animator.applyRootMotion = isInteracting;
-            _animator.SetBool(AnimatorParametersStrings.isInteracting, isInteracting);
+            SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation, 0.2f);
         }
 
         public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting)
         {
             _animator.applyRootMotion = isInteracting;
-            _animator.SetBool( AnimatorParametersStrings.isInteracting, isInteracting);
+            SetParameter( AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f);
         }
 
-
-        // This method returns the lenght time of the current animation
-        public float GetCurrentAnimationTime(byte layer = 0)
+        public void EnableCombo()
         {
-            return _animator.GetCurrentAnimatorStateInfo(layer).length;
+            SetParameter(AnimatorParameters.CanDoCombo, true);
+            Debug.Log("Enable Combo");
         }
+
+        public void DisableCombo()
+        {
+            SetParameter(AnimatorParameters.CanDoCombo, true);  
+            Debug.Log("Disable combo");
+        } 
 
         public void SetParameter(AnimatorParameters state, bool value)
         {
@@ -75,29 +80,12 @@ namespace PlayerScripts
             _animator.SetBool(state.ToString(), value);
         }
 
-        public void SetParameter(AnimatorParameters state, float value)
-        {
-            _animator.SetFloat(state.ToString(), value);
-        }
-
-        public void SetParameter(AnimatorParameters state, int value)
-        {
-            _animator.SetInteger(state.ToString(), value);
-        }
-
+        public void SetParameter(AnimatorParameters state, float value) => _animator.SetFloat(state.ToString(), value);
+        public void SetParameter(AnimatorParameters state, int value) => _animator.SetInteger(state.ToString(), value);
+        
         public bool GetBool(AnimatorParameters state)
         {
             return _animator.GetBool(state.ToString());
-        }
-
-        public float GetFloat(AnimatorParameters state)
-        {
-            return _animator.GetFloat(state.ToString());
-        }
-
-        public int GetInteger(AnimatorParameters state)
-        {
-            return _animator.GetInteger(state.ToString());
         }
 
         public void ConfigureMediator(PlayerMediator med)

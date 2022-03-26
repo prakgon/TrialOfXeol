@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Flags")]
     public bool isInteracting;
     public bool isSprinting;
+    public bool canDoCombo;
     
     
     // Start is called before the first frame update
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
         isSprinting = _input.sprintFlag;
         _input.rightTriggerInput = false; // Light attack
         _input.rightTriggerInput = false; // Heavy Attack
-        isInteracting = _animatorController.GetBool(AnimatorParameters.isInteracting);
+        isInteracting = _animatorController.GetBool(AnimatorParameters.IsInteracting);
+        _input.comboFlag = false;
+        canDoCombo = _animatorController.GetBool(AnimatorParameters.CanDoCombo);
     }
 }

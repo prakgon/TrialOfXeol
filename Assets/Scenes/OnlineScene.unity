@@ -860,7 +860,7 @@ MonoBehaviour:
     - Roll: Left Shift + WASD
 
     - Dodge
-    forwad: Left Shift
+    back: Left Shift
 
     - Light Attack: E
 
@@ -882,7 +882,7 @@ MonoBehaviour:
     - Roll: East
     Button + Left Stick
 
-    - Dodge forwad: East Button / B / O
+    - Dodge back: East Button / B / O
 
     - Light Attack:
     RB / R1
