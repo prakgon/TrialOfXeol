@@ -15,8 +15,8 @@ namespace TOX
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateUpdate(animator, stateInfo, layerIndex);
-            if (!animator.GetBool(PlayerParametersStrings.NormalAttack)) return;
-            animator.SetBool(PlayerParametersStrings.NormalAttack, false);
+            if (!animator.GetBool(AnimatorParametersStrings.NormalAttack)) return;
+            animator.SetBool(AnimatorParametersStrings.NormalAttack, false);
         }
 
         // OnStateExit is called before OnStateExit is called on any state inside this state machine

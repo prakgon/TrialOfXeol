@@ -15,47 +15,47 @@ namespace PlayerScripts
 
         protected void AnimationStateCheck()
         {
-            if (_animController.CompareAnimState(PlayerStates.IdleWalkRunBlend.ToString()))
+            if (_animController.CompareAnimState(AnimatorStates.IdleWalkRunBlend.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.IdleWalkRunBlend;
+                _animController.CurrentAnimatorState = AnimatorStates.IdleWalkRunBlend;
             }
-            else if (_animController.CompareAnimState(PlayerStates.Roll.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.Roll.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.Roll;
+                _animController.CurrentAnimatorState = AnimatorStates.Roll;
             }
-            else if (_animController.CompareAnimState(PlayerStates.FirstAttack.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.FirstAttack.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.FirstAttack;
+                _animController.CurrentAnimatorState = AnimatorStates.FirstAttack;
             }
-            else if (_animController.CompareAnimState(PlayerStates.SecondAttack.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.SecondAttack.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.SecondAttack;
+                _animController.CurrentAnimatorState = AnimatorStates.SecondAttack;
             }
-            else if (_animController.CompareAnimState(PlayerStates.ThirdAttack.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.ThirdAttack.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.ThirdAttack;
+                _animController.CurrentAnimatorState = AnimatorStates.ThirdAttack;
             }
-            else if (_animController.CompareAnimState(PlayerStates.FourthAttack.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.FourthAttack.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.FourthAttack;
+                _animController.CurrentAnimatorState = AnimatorStates.FourthAttack;
             }
-            else if (_animController.CompareAnimState(PlayerStates.JumpStart.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.JumpStart.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.JumpStart;
+                _animController.CurrentAnimatorState = AnimatorStates.JumpStart;
             }
-            else if (_animController.CompareAnimState(PlayerStates.InAir.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.InAir.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.InAir;
+                _animController.CurrentAnimatorState = AnimatorStates.InAir;
             }
-            else if (_animController.CompareAnimState(PlayerStates.JumpLand.ToString()))
+            else if (_animController.CompareAnimState(AnimatorStates.JumpLand.ToString()))
             {
-                _animController.CurrentPlayerAnimatorState = PlayerStates.JumpLand;
+                _animController.CurrentAnimatorState = AnimatorStates.JumpLand;
             }
         }
 
         protected void HandleInteractions()
         {
-            isInteracting = _animController.GetBool(PlayerParameters.isInteracting);
+            isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
         }
         
 

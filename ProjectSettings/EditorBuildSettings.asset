@@ -15,5 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/OnlineScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
+    com.unity.input.settings: {fileID: 11400000, guid: fc4a80786246504408025637658c2415,
       type: 2}

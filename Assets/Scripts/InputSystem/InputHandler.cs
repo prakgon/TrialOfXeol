@@ -1,15 +1,16 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace InputSystem
 {
-    public class InputHandler : MonoBehaviour
+    public class InputHandler : MonoBehaviour, IPunObservable
     {
         // Basic inputs
         public Vector2 move;
         public float moveAmount;
         public Vector2 look;
-        
+
         // Combat mechanics inputs
         public bool jump;
         public bool rollFlag;
@@ -19,12 +20,14 @@ namespace InputSystem
 
         private InputActionSystem _inputActions;
         //private CameraHandler _cameraHandler;
-        
+
         // Input Handlers
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
 
         public bool b_Input;
+        private IPunObservable _punObservableImplementation;
+
         private void Awake()
         {
             /*
@@ -48,8 +51,10 @@ namespace InputSystem
             if (_inputActions == null)
             {
                 _inputActions = new InputActionSystem();
-                _inputActions.PlayerMovement.Move.performed += inputActions => _movementInput = inputActions.ReadValue<Vector2>();
-                _inputActions.PlayerMovement.Look.performed += inputActions => _cameraInput = inputActions.ReadValue<Vector2>();
+                _inputActions.PlayerMovement.Move.performed +=
+                    inputActions => _movementInput = inputActions.ReadValue<Vector2>();
+                _inputActions.PlayerMovement.Look.performed +=
+                    inputActions => _cameraInput = inputActions.ReadValue<Vector2>();
             }
 
             _inputActions.Enable();
@@ -64,7 +69,6 @@ namespace InputSystem
         {
             HandleBasicsMovementInputs();
             HandleRollingAndSprintingInputs(delta);
-            Debug.Log(delta + " input");
         }
 
         private void HandleBasicsMovementInputs()
@@ -94,6 +98,11 @@ namespace InputSystem
 
                 rollInputTimer = 0;
             }
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            
         }
     }
 }

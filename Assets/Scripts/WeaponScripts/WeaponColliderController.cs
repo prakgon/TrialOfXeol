@@ -34,10 +34,10 @@ namespace WeaponScripts
         private void Update()
         {
             if (!_canCheckAnimator) return;
-            var enable = _playerAnimatorController.CompareAnimState(Literals.PlayerStates.FirstAttack.ToString()) ||
-                         _playerAnimatorController.CompareAnimState(Literals.PlayerStates.SecondAttack.ToString()) ||
-                         _playerAnimatorController.CompareAnimState(Literals.PlayerStates.ThirdAttack.ToString()) ||
-                         _playerAnimatorController.CompareAnimState(Literals.PlayerStates.FourthAttack.ToString());
+            var enable = _playerAnimatorController.CompareAnimState(Literals.AnimatorStates.FirstAttack.ToString()) ||
+                         _playerAnimatorController.CompareAnimState(Literals.AnimatorStates.SecondAttack.ToString()) ||
+                         _playerAnimatorController.CompareAnimState(Literals.AnimatorStates.ThirdAttack.ToString()) ||
+                         _playerAnimatorController.CompareAnimState(Literals.AnimatorStates.FourthAttack.ToString());
             EnableCollider(enable);
         }
 

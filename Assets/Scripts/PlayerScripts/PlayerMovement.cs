@@ -141,8 +141,7 @@ namespace TOX
 
             float delta = Time.deltaTime;
             _inputHandler.TickInput(delta);
-            Debug.Log(delta + " movement");
-            
+
             AnimationStateCheck();
             HandleInteractions();
 
@@ -151,8 +150,8 @@ namespace TOX
 
             HandlePlayerLocomotion();
             HandleRollingAndSprinting(delta);
-            
-            _inputHandler.isInteracting = _animController.GetBool(PlayerParameters.isInteracting);
+
+            _inputHandler.isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
             _inputHandler.rollFlag = false;
             _inputHandler.sprintFlag = false;
         }
@@ -171,7 +170,7 @@ namespace TOX
                 transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
-            _animController.SetParameter(PlayerParameters.Grounded, Grounded);
+            _animController.SetParameter(AnimatorParameters.Grounded, Grounded);
         }
 
         #endregion
@@ -216,24 +215,32 @@ namespace TOX
             _controller.Move(targetDirection * (speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
-        
+
+        // TODO: Move to Animator Controller
         private void HandleRollingAndSprinting(float delta)
         {
-            if (_animController.GetBool(PlayerParameters.isInteracting)) return;
+            if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
 
             if (_inputHandler.rollFlag)
             {
-
+                _animController.SetParameter(AnimatorParameters.Horizontal, 1);
+                _animController.SetParameter(AnimatorParameters.Horizontal, 1);
+                /*_animController.SetParameter(AnimatorParameters.Horizontal, _inputHandler.move.x);
+                _animController.SetParameter(AnimatorParameters.Vertical, _inputHandler.move.y);*/
                 if (_inputHandler.moveAmount > 0)
                 {
-                    _animController.PlayTargetAnimation(PlayerParameters.Roll, true);
+                    //_animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int)PlayerLayers.Rolls);
+                    _animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int) PlayerLayers.BaseLayer);
+                    //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
                     _targetDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
                     transform.rotation = rollRotation;
                 }
                 else
                 {
-                    _animController.PlayTargetAnimation("BackStep", true);
+                    //_animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int)PlayerLayers.Rolls);
+                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int)PlayerLayers.BaseLayer);
+                    //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
                 }
             }
         }
@@ -270,8 +277,8 @@ namespace TOX
             ControllerMove(_targetDirection, _speed);
             if (_animController.HasAnimator)
             {
-                _animController.SetParameter(PlayerParameters.Speed, _animationBlend);
-                _animController.SetParameter(PlayerParameters.MotionSpeed, inputMagnitude);
+                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+                _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
             }
         }
 
@@ -302,8 +309,8 @@ namespace TOX
 
                 if (_animController.HasAnimator)
                 {
-                    _animController.SetParameter(PlayerParameters.Jump, false);
-                    _animController.SetParameter(PlayerParameters.FreeFall, false);
+                    _animController.SetParameter(AnimatorParameters.Jump, false);
+                    _animController.SetParameter(AnimatorParameters.FreeFall, false);
                 }
 
                 if (_verticalVelocity < 0.0f)
@@ -313,14 +320,14 @@ namespace TOX
 
                 if (_inputHandler.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
+                    if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
                         !_animController.IsInTransition() && !isInteracting)
                     {
                         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
                         if (_animController.HasAnimator)
                         {
-                            _animController.SetParameter(PlayerParameters.Jump, true);
+                            _animController.SetParameter(AnimatorParameters.Jump, true);
                         }
                     }
                 }
@@ -342,7 +349,7 @@ namespace TOX
                 {
                     if (_animController.HasAnimator)
                     {
-                        _animController.SetParameter(PlayerParameters.FreeFall, true);
+                        _animController.SetParameter(AnimatorParameters.FreeFall, true);
                     }
                 }
 

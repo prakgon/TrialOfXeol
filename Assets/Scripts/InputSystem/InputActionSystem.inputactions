@@ -130,7 +130,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Xbox Controller;PS4 Controller",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -152,7 +152,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false),StickDeadzone,ScaleVector2(x=300,y=300)",
-                    "groups": "Gamepad;Xbox Controller;PS4 Controller",
+                    "groups": "Gamepad",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -213,7 +213,7 @@
                 {
                     "name": "",
                     "id": "663715dc-5e6f-4f4b-95d3-e5d27f6f79c2",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -227,7 +227,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Xbox Controller;PS4 Controller",
+                    "groups": "Gamepad",
                     "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false

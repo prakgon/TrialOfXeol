@@ -18,9 +18,9 @@ namespace PlayerScripts
         {
             float delta = Time.time;
             Debug.Log(delta);
-            if (!newState) return;
-            if (_animController.GetBool(PlayerParameters.isInteracting)) return;
-            _animController.PlayTargetAnimation(PlayerStatesStrings.Roll, true);
+            /*if (!newState) return;
+            if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
+            _animController.PlayTargetAnimation(AnimatorStates.Roll.ToString(), true, PlayerLayers.Rolls);*/
         }
 
         public void LightAttack(bool newState)
@@ -68,8 +68,8 @@ namespace PlayerScripts
             }
 
             //_attackCount++;
-            _animController.SetParameter(PlayerParameters.Attack, true);
-            _animController.SetParameter(PlayerParameters.HeavyAttack, true);
+            _animController.SetParameter(AnimatorParameters.Attack, true);
+            _animController.SetParameter(AnimatorParameters.HeavyAttack, true);
             //_animController.SetParameter(PlayerParameters.AttackCount, _attackCount);
             /*if (!_animController.GetParameterBool(PlayerParameters.Attack))
                 {

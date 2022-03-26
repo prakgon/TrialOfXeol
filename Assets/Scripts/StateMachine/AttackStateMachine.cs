@@ -26,15 +26,15 @@ namespace TOX
         {
             Debug.Log(stateInfo.normalizedTime);
             if (!(stateInfo.normalizedTime >= 0.7f)) return;
-            if (!animator.GetBool(PlayerParametersStrings.Attack)) return;
+            if (!animator.GetBool(AnimatorParametersStrings.Attack)) return;
             _playerMechanics.AttackCounter++;
             if (_playerMechanics.AttackCounter >= MaxAttackCounter)
             {
                 _playerMechanics.AttackCounter = 0;
             }
 
-            animator.SetInteger(PlayerParametersStrings.AttackCount, _playerMechanics.AttackCounter);
-            animator.SetBool(PlayerParametersStrings.Attack, false);
+            animator.SetInteger(AnimatorParametersStrings.AttackCount, _playerMechanics.AttackCounter);
+            animator.SetBool(AnimatorParametersStrings.Attack, false);
         }
 
         // OnStateExit is called before OnStateExit is called on any state inside this state machine
