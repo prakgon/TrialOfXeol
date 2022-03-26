@@ -879,7 +879,6 @@ GameObject:
   - component: {fileID: -5514300299190662658}
   - component: {fileID: 2991744648201045819}
   - component: {fileID: 4387597190941284282}
-  - component: {fileID: 2186839711043124155}
   - component: {fileID: 7999654713921530471}
   - component: {fileID: 4289067332944146655}
   - component: {fileID: 1438482235913973120}
@@ -926,7 +925,6 @@ MonoBehaviour:
   _playerMovement: {fileID: 4017133197377439093}
   healthBar: {fileID: 606694543231277429}
   _playerAnimatorController: {fileID: 4387597190941284282}
-  _playerMechanics: {fileID: 2186839711043124155}
   playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
   playerWeapon: {fileID: 0}
   playerMeshRenderer: {fileID: 7742388956085133792}
@@ -1128,18 +1126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAnimatorState: 0
   lastActiveAnimatorState: 0
---- !u!114 &2186839711043124155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147927287329898608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c19d403801b34f84d9acdfae4ec9718d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7999654713921530471
 MonoBehaviour:
   m_ObjectHideFlags: 0

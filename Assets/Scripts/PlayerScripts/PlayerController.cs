@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         
         float delta = Time.deltaTime;
         
-        _playerMovement.AnimationStateCheck();
+        //_playerMovement.AnimationStateCheck();
         
         _playerMovement.JumpAndGravity();
         _playerMovement.GroundedCheck();

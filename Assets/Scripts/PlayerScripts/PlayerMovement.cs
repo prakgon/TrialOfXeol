@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 namespace TOX
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovement : PlayerBase, IPunObservable, IMediatorUser
+    public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
     {
         /*This values are not being used, in runTime the editor gets the values configured
         in the inspector of the script attached to the player*/
@@ -66,8 +66,7 @@ namespace TOX
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-
-
+        
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
@@ -85,6 +84,7 @@ namespace TOX
         private PlayerController _playerController;
         private GameObject _mainCamera;
         private PlayerMediator _med;
+        private PlayerAnimatorController _animController;
 
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
