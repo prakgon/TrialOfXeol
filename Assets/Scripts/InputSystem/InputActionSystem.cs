@@ -46,7 +46,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Roll"",
+                    ""name"": ""Roll and Sprint"",
                     ""type"": ""Value"",
                     ""id"": ""11cba245-4296-45d0-b258-16ef3da7df92"",
                     ""expectedControlType"": ""Analog"",
@@ -241,7 +241,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Xbox Controller;PS4 Controller"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -319,7 +319,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Roll"",
+                    ""action"": ""Roll and Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -330,7 +330,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Roll"",
+                    ""action"": ""Roll and Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -391,7 +391,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
+        m_Player_RollandSprint = m_Player.FindAction("Roll and Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
@@ -457,7 +457,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Roll;
+    private readonly InputAction m_Player_RollandSprint;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
@@ -468,7 +468,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         public PlayerActions(@InputActionSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @Roll => m_Wrapper.m_Player_Roll;
+        public InputAction @RollandSprint => m_Wrapper.m_Player_RollandSprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
@@ -488,9 +488,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
-                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
-                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @RollandSprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRollandSprint;
+                @RollandSprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRollandSprint;
+                @RollandSprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRollandSprint;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
@@ -513,9 +513,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
-                @Roll.started += instance.OnRoll;
-                @Roll.performed += instance.OnRoll;
-                @Roll.canceled += instance.OnRoll;
+                @RollandSprint.started += instance.OnRollandSprint;
+                @RollandSprint.performed += instance.OnRollandSprint;
+                @RollandSprint.canceled += instance.OnRollandSprint;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -572,7 +572,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnRoll(InputAction.CallbackContext context);
+        void OnRollandSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);

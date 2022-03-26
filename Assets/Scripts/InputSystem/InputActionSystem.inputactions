@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Roll",
+                    "name": "Roll and Sprint",
                     "type": "Value",
                     "id": "11cba245-4296-45d0-b258-16ef3da7df92",
                     "expectedControlType": "Analog",
@@ -219,7 +219,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Xbox Controller;PS4 Controller",
+                    "groups": "Gamepad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -297,7 +297,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Roll",
+                    "action": "Roll and Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -308,7 +308,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Roll",
+                    "action": "Roll and Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

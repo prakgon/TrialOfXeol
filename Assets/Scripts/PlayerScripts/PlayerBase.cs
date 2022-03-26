@@ -7,13 +7,8 @@ namespace PlayerScripts
     public class PlayerBase : MonoBehaviourPunCallbacks
     {
         protected PlayerAnimatorController _animController;
-
-        public bool isInteracting;
-        private bool _isSprinting = true;
         
-        public bool isSprinting { get => _isSprinting; set => _isSprinting = value; }
-
-        protected void AnimationStateCheck()
+        public void AnimationStateCheck()
         {
             if (_animController.CompareAnimState(AnimatorStates.IdleWalkRunBlend.ToString()))
             {
@@ -52,13 +47,6 @@ namespace PlayerScripts
                 _animController.CurrentAnimatorState = AnimatorStates.JumpLand;
             }
         }
-
-        protected void HandleInteractions()
-        {
-            isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
-        }
-        
-
     }
 }
 

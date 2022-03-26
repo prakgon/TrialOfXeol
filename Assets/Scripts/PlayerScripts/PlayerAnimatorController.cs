@@ -1,3 +1,4 @@
+using System;
 using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -57,7 +58,7 @@ namespace PlayerScripts
             _animator.SetBool( AnimatorParametersStrings.isInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, layer);
         }
-        
+
 
         // This method returns the lenght time of the current animation
         public float GetCurrentAnimationTime(byte layer = 0)

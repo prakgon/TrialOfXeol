@@ -3,7 +3,6 @@ using Photon.Pun;
 using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
-using InputSystem;
 using PlayerScripts;
 using UnityEngine.InputSystem;
 
@@ -68,9 +67,6 @@ namespace TOX
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        [Header("Roll Parameters")] [SerializeField]
-        private float _rollSpeedFactor = 4;
-
 
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -84,20 +80,14 @@ namespace TOX
         private float _fallTimeoutDelta;
 
         private CharacterController _controller;
-        //private InputHandler _inputHandler;
-        private PlayerInputController _input;
+        private PlayerInputHandler _input;
         private PlayerInput _playerInput;
+        private PlayerController _playerController;
         private GameObject _mainCamera;
         private PlayerMediator _med;
 
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-
-        public Vector3 TargetDirection
-        {
-            get => _targetDirection;
-            set => _targetDirection = value;
-        }
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -122,55 +112,37 @@ namespace TOX
         {
             if (photonView.IsMine)
             {
-                _input = GetComponent<PlayerInputController>();
+                _input = GetComponent<PlayerInputHandler>();
                 _playerInput = GetComponent<PlayerInput>();
                 _playerInput.enabled = true;
-                /*_inputHandler = GetComponent<InputHandler>();
-                _playerInput.enabled = true;*/
                 GameObject followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
             }
 
+            _playerController = GetComponent<PlayerController>();
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<PlayerInputController>();
+            _input = GetComponent<PlayerInputHandler>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
 
+        #region Photon Methods
 
-        private void Update()
+        public bool CheckPhotonView()
         {
-            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
-            {
-                return;
-            }
-
-            float delta = Time.deltaTime;
-            /*_input.TickInput(delta);*/
-
-            AnimationStateCheck();
-            HandleInteractions();
-
-            JumpAndGravity();
-            GroundedCheck();
-
-            HandlePlayerLocomotion();
-            HandleRollingAndSprinting(delta);
-
-            _input.rollFlag = false;
-            /*_input.isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
-            _input.sprintFlag = false;*/
+            return (photonView.IsMine == false && PhotonNetwork.IsConnected == true);
         }
 
-        private void LateUpdate()
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-            CameraRotation();
         }
+
+        #endregion
 
 
         #region Ground Check
 
-        private void GroundedCheck()
+        public void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
@@ -184,7 +156,7 @@ namespace TOX
 
         #region Camera Rotation
 
-        private void CameraRotation()
+        public void CameraRotation()
         {
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
@@ -203,9 +175,9 @@ namespace TOX
 
         #region Movement
 
-        private void HandlePlayerLocomotion()
+        public void HandlePlayerLocomotion()
         {
-            if (isInteracting)
+            if (_playerController.isInteracting)
             {
                 // Applying gravity when interacting e.g. Rolling Animation.
                 ControllerMove(new Vector3(0, 0, 0), 0);
@@ -223,18 +195,18 @@ namespace TOX
         }
 
         // TODO: Move to Animator Controller
-        private void HandleRollingAndSprinting(float delta)
+        public void HandleRollingAndSprinting(float delta)
         {
             if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
 
             if (_input.rollFlag)
             {
-                _animController.SetParameter(AnimatorParameters.Horizontal, 1);
-                _animController.SetParameter(AnimatorParameters.Horizontal, 1);
                 /*_animController.SetParameter(AnimatorParameters.Horizontal, _playerInput.move.x);
                 _animController.SetParameter(AnimatorParameters.Vertical, _playerInput.move.y);*/
                 if (_input.moveAmount > 0)
                 {
+                    _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
+                    _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
                     //_animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int)PlayerLayers.Rolls);
                     _animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int) PlayerLayers.BaseLayer);
                     //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
@@ -245,7 +217,7 @@ namespace TOX
                 else
                 {
                     //_animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int)PlayerLayers.Rolls);
-                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int)PlayerLayers.BaseLayer);
+                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int) PlayerLayers.BaseLayer);
                     //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
                 }
             }
@@ -254,7 +226,7 @@ namespace TOX
         private void HandleMovement()
         {
             float targetSpeed;
-            if (_input.sprintFlag && isSprinting)
+            if (_input.sprintFlag && _playerController.isSprinting)
             {
                 targetSpeed = SprintSpeed;
             }
@@ -307,7 +279,7 @@ namespace TOX
 
         #region Jump and Gravity
 
-        private void JumpAndGravity()
+        public void JumpAndGravity()
         {
             if (Grounded)
             {
@@ -324,10 +296,10 @@ namespace TOX
                     _verticalVelocity = -2f;
                 }
 
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
-                        !_animController.IsInTransition() && !isInteracting)
+                        !_animController.IsInTransition() && !_playerController.isInteracting)
                     {
                         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
@@ -396,9 +368,6 @@ namespace TOX
 
         #endregion
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-        }
 
         public void ConfigureMediator(PlayerMediator med)
         {
