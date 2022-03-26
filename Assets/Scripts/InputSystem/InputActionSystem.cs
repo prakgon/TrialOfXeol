@@ -24,7 +24,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     ""name"": ""InputActionSystem"",
     ""maps"": [
         {
-            ""name"": ""Player Movement"",
+            ""name"": ""Player"",
             ""id"": ""f62a4b92-ef5e-4175-8f4c-c9075429d32c"",
             ""actions"": [
                 {
@@ -32,7 +32,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""6bc1aaf4-b110-4ff7-891e-5b9fe6f32c4d"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -44,6 +44,51 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Value"",
+                    ""id"": ""11cba245-4296-45d0-b258-16ef3da7df92"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Value"",
+                    ""id"": ""69411388-b96d-45a4-923b-c850dff8adf4"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""d77173c7-8d24-461b-952f-8d6ddf28941e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2baf1d1e-5551-43b1-ada5-86049c0bf6ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Block"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""24df0046-2c31-4597-ab14-3653e2013634"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,85 +223,10 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Player Combat"",
-            ""id"": ""657fc9e3-69de-4060-a212-92d31e3b56e3"",
-            ""actions"": [
-                {
-                    ""name"": ""Roll"",
-                    ""type"": ""Value"",
-                    ""id"": ""1f842724-4824-496b-a016-937ba964050d"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Value"",
-                    ""id"": ""903cfe1d-84f4-4413-aef5-9d0e9e0e16ba"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""LightAttack"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""5a6f04f9-171a-4bde-bbf9-05882e98a439"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""HeavyAttack"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""987c4617-e82e-495b-af11-ecaefeee6212"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Block"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""4fa2cf6b-47e9-4f94-a9a9-290c361a83f2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""663715dc-5e6f-4f4b-95d3-e5d27f6f79c2"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Roll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b50dc2af-d7d1-495f-81f3-7f2c8dec7f2c"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Roll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""99bbff3a-0ae8-472e-9bbd-f799f9be22d1"",
+                    ""id"": ""6bd81c92-20e7-46ca-ac36-3a87358f643d"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -267,7 +237,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3f9d531c-e1c2-46ee-9357-957cf25653c0"",
+                    ""id"": ""0811111c-4c69-4564-b5a4-db2037e5599a"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -278,7 +248,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""264b03ee-9c4e-41fd-b15e-93dfaf29a97a"",
+                    ""id"": ""694456fd-c576-4275-8046-ff513e33f57d"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -289,7 +259,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d895b3fb-a4be-4605-ad9f-3e235c478567"",
+                    ""id"": ""dc36f04a-ccec-4a30-83fd-f5c6757ba1d8"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -300,7 +270,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e7074d83-0541-4b03-9345-b02595a26887"",
+                    ""id"": ""7ca3252b-0ec6-4cbc-b835-c8a13c456363"",
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -311,7 +281,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bf376614-b366-433a-888c-d987fcb321be"",
+                    ""id"": ""3b09342f-8fa1-4ed9-880a-6f57dd5d911f"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -322,7 +292,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""16b6bcc0-fbb0-481b-aa99-877fdcb69398"",
+                    ""id"": ""d8808156-b48d-4069-93e7-ff30fd5561a8"",
                     ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -333,12 +303,34 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f3540157-121c-49f3-8066-9d71f3b432e5"",
+                    ""id"": ""ae0f4f4a-2576-4fa3-b106-6c051531a9d8"",
                     ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89f5bc4c-fdd6-4f3f-b103-9025782471fa"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aaf9ba5a-d1ff-4aad-bcaf-87cf5cc0d5c7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -395,17 +387,15 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player Movement
-        m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
-        m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
-        m_PlayerMovement_Look = m_PlayerMovement.FindAction("Look", throwIfNotFound: true);
-        // Player Combat
-        m_PlayerCombat = asset.FindActionMap("Player Combat", throwIfNotFound: true);
-        m_PlayerCombat_Roll = m_PlayerCombat.FindAction("Roll", throwIfNotFound: true);
-        m_PlayerCombat_Jump = m_PlayerCombat.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerCombat_LightAttack = m_PlayerCombat.FindAction("LightAttack", throwIfNotFound: true);
-        m_PlayerCombat_HeavyAttack = m_PlayerCombat.FindAction("HeavyAttack", throwIfNotFound: true);
-        m_PlayerCombat_Block = m_PlayerCombat.FindAction("Block", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
+        m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -462,34 +452,59 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player Movement
-    private readonly InputActionMap m_PlayerMovement;
-    private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
-    private readonly InputAction m_PlayerMovement_Move;
-    private readonly InputAction m_PlayerMovement_Look;
-    public struct PlayerMovementActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Roll;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_LightAttack;
+    private readonly InputAction m_Player_HeavyAttack;
+    private readonly InputAction m_Player_Block;
+    public struct PlayerActions
     {
         private @InputActionSystem m_Wrapper;
-        public PlayerMovementActions(@InputActionSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_PlayerMovement_Move;
-        public InputAction @Look => m_Wrapper.m_PlayerMovement_Look;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
+        public PlayerActions(@InputActionSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
+        public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerMovementActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_PlayerMovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
-                @Look.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLook;
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @LightAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
+                @LightAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
+                @LightAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
+                @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
             }
-            m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -498,56 +513,6 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
-            }
-        }
-    }
-    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
-
-    // Player Combat
-    private readonly InputActionMap m_PlayerCombat;
-    private IPlayerCombatActions m_PlayerCombatActionsCallbackInterface;
-    private readonly InputAction m_PlayerCombat_Roll;
-    private readonly InputAction m_PlayerCombat_Jump;
-    private readonly InputAction m_PlayerCombat_LightAttack;
-    private readonly InputAction m_PlayerCombat_HeavyAttack;
-    private readonly InputAction m_PlayerCombat_Block;
-    public struct PlayerCombatActions
-    {
-        private @InputActionSystem m_Wrapper;
-        public PlayerCombatActions(@InputActionSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Roll => m_Wrapper.m_PlayerCombat_Roll;
-        public InputAction @Jump => m_Wrapper.m_PlayerCombat_Jump;
-        public InputAction @LightAttack => m_Wrapper.m_PlayerCombat_LightAttack;
-        public InputAction @HeavyAttack => m_Wrapper.m_PlayerCombat_HeavyAttack;
-        public InputAction @Block => m_Wrapper.m_PlayerCombat_Block;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerCombatActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerCombatActions instance)
-        {
-            if (m_Wrapper.m_PlayerCombatActionsCallbackInterface != null)
-            {
-                @Roll.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnRoll;
-                @Roll.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnRoll;
-                @Roll.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnRoll;
-                @Jump.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnJump;
-                @LightAttack.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnLightAttack;
-                @LightAttack.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnLightAttack;
-                @LightAttack.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnLightAttack;
-                @HeavyAttack.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnHeavyAttack;
-                @HeavyAttack.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnHeavyAttack;
-                @HeavyAttack.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnHeavyAttack;
-                @Block.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnBlock;
-                @Block.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnBlock;
-                @Block.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnBlock;
-            }
-            m_Wrapper.m_PlayerCombatActionsCallbackInterface = instance;
-            if (instance != null)
-            {
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
@@ -566,7 +531,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayerCombatActions @PlayerCombat => new PlayerCombatActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -603,13 +568,10 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_PS4ControllerSchemeIndex];
         }
     }
-    public interface IPlayerMovementActions
+    public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-    }
-    public interface IPlayerCombatActions
-    {
         void OnRoll(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);

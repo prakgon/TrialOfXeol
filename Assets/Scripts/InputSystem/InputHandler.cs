@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace InputSystem
 {
-    public class InputHandler : MonoBehaviour, IPunObservable
+    public class InputHandler : MonoBehaviour
     {
         // Basic inputs
         public Vector2 move;
@@ -26,7 +26,6 @@ namespace InputSystem
         private Vector2 _cameraInput;
 
         public bool b_Input;
-        private IPunObservable _punObservableImplementation;
 
         private void Awake()
         {
@@ -51,10 +50,10 @@ namespace InputSystem
             if (_inputActions == null)
             {
                 _inputActions = new InputActionSystem();
-                _inputActions.PlayerMovement.Move.performed +=
+                /*_inputActions.Player.Move.performed +=
                     inputActions => _movementInput = inputActions.ReadValue<Vector2>();
-                _inputActions.PlayerMovement.Look.performed +=
-                    inputActions => _cameraInput = inputActions.ReadValue<Vector2>();
+                _inputActions.Player.Look.performed +=
+                    inputActions => _cameraInput = inputActions.ReadValue<Vector2>();*/
             }
 
             _inputActions.Enable();
@@ -76,12 +75,13 @@ namespace InputSystem
             move = _movementInput.normalized;
             moveAmount = move.magnitude;
             look = _cameraInput;
-            jump = _inputActions.PlayerCombat.Jump.phase == InputActionPhase.Started;
+            //jump = _inputActions.Player.Jump.phase == InputActionPhase.Started;
+
         }
 
         private void HandleRollingAndSprintingInputs(float delta)
         {
-            b_Input = _inputActions.PlayerCombat.Roll.phase == InputActionPhase.Started;
+            //b_Input = _inputActions.Player.Roll.phase == InputActionPhase.Started;
 
             if (b_Input)
             {
@@ -98,11 +98,6 @@ namespace InputSystem
 
                 rollInputTimer = 0;
             }
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            
         }
     }
 }

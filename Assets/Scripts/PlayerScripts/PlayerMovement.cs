@@ -5,6 +5,7 @@ using static Helpers.Literals;
 using Helpers;
 using InputSystem;
 using PlayerScripts;
+using UnityEngine.InputSystem;
 
 
 namespace TOX
@@ -83,7 +84,9 @@ namespace TOX
         private float _fallTimeoutDelta;
 
         private CharacterController _controller;
-        private InputHandler _inputHandler;
+        //private InputHandler _inputHandler;
+        private PlayerInputController _input;
+        private PlayerInput _playerInput;
         private GameObject _mainCamera;
         private PlayerMediator _med;
 
@@ -119,14 +122,17 @@ namespace TOX
         {
             if (photonView.IsMine)
             {
-                _inputHandler = GetComponent<InputHandler>();
-                _inputHandler.enabled = true;
+                _input = GetComponent<PlayerInputController>();
+                _playerInput = GetComponent<PlayerInput>();
+                _playerInput.enabled = true;
+                /*_inputHandler = GetComponent<InputHandler>();
+                _playerInput.enabled = true;*/
                 GameObject followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
             }
 
             _controller = GetComponent<CharacterController>();
-            _inputHandler = GetComponent<InputHandler>();
+            _input = GetComponent<PlayerInputController>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
@@ -140,7 +146,7 @@ namespace TOX
             }
 
             float delta = Time.deltaTime;
-            _inputHandler.TickInput(delta);
+            /*_input.TickInput(delta);*/
 
             AnimationStateCheck();
             HandleInteractions();
@@ -151,9 +157,9 @@ namespace TOX
             HandlePlayerLocomotion();
             HandleRollingAndSprinting(delta);
 
-            _inputHandler.isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
-            _inputHandler.rollFlag = false;
-            _inputHandler.sprintFlag = false;
+            _input.rollFlag = false;
+            /*_input.isInteracting = _animController.GetBool(AnimatorParameters.isInteracting);
+            _input.sprintFlag = false;*/
         }
 
         private void LateUpdate()
@@ -180,10 +186,10 @@ namespace TOX
 
         private void CameraRotation()
         {
-            if (_inputHandler.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                _cinemachineTargetYaw += _inputHandler.look.x * Time.deltaTime;
-                _cinemachineTargetPitch += _inputHandler.look.y * Time.deltaTime;
+                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+                _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
             }
 
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
@@ -221,13 +227,13 @@ namespace TOX
         {
             if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
 
-            if (_inputHandler.rollFlag)
+            if (_input.rollFlag)
             {
                 _animController.SetParameter(AnimatorParameters.Horizontal, 1);
                 _animController.SetParameter(AnimatorParameters.Horizontal, 1);
-                /*_animController.SetParameter(AnimatorParameters.Horizontal, _inputHandler.move.x);
-                _animController.SetParameter(AnimatorParameters.Vertical, _inputHandler.move.y);*/
-                if (_inputHandler.moveAmount > 0)
+                /*_animController.SetParameter(AnimatorParameters.Horizontal, _playerInput.move.x);
+                _animController.SetParameter(AnimatorParameters.Vertical, _playerInput.move.y);*/
+                if (_input.moveAmount > 0)
                 {
                     //_animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int)PlayerLayers.Rolls);
                     _animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int) PlayerLayers.BaseLayer);
@@ -248,26 +254,26 @@ namespace TOX
         private void HandleMovement()
         {
             float targetSpeed;
-            if (_inputHandler.sprintFlag && isSprinting)
+            if (_input.sprintFlag && isSprinting)
             {
                 targetSpeed = SprintSpeed;
             }
             else
             {
-                targetSpeed = MoveSpeed * _inputHandler.moveAmount;
+                targetSpeed = MoveSpeed * _input.moveAmount;
             }
 
-            if (_inputHandler.move == Vector2.zero)
+            if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
             }
 
-            float inputMagnitude = _inputHandler.move.magnitude;
+            float inputMagnitude = _input.move.magnitude;
             _speed = targetSpeed;
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            Vector3 inputDirection = new Vector3(_inputHandler.move.x, 0.0f, _inputHandler.move.y).normalized;
-            if (_inputHandler.move != Vector2.zero)
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            if (_input.move != Vector2.zero)
             {
                 TransformRotation(inputDirection, RotationSmoothTime);
             }
@@ -318,7 +324,7 @@ namespace TOX
                     _verticalVelocity = -2f;
                 }
 
-                if (_inputHandler.jump && _jumpTimeoutDelta <= 0.0f)
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
                         !_animController.IsInTransition() && !isInteracting)
@@ -353,7 +359,7 @@ namespace TOX
                     }
                 }
 
-                _inputHandler.jump = false;
+                _input.jump = false;
             }
 
             if (_verticalVelocity < _terminalVelocity)
