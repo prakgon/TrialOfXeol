@@ -65,18 +65,18 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""LightAttack"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""d77173c7-8d24-461b-952f-8d6ddf28941e"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""HeavyAttack"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""2baf1d1e-5551-43b1-ada5-86049c0bf6ea"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -249,7 +249,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""694456fd-c576-4275-8046-ff513e33f57d"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -271,7 +271,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7ca3252b-0ec6-4cbc-b835-c8a13c456363"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -282,7 +282,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3b09342f-8fa1-4ed9-880a-6f57dd5d911f"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

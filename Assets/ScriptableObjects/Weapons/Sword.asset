@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1fca05779425448a8e95d26fa03f22, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  iconSprite: {fileID: 0}
-  itemName: Sword
-  damage: 10
   modelPrefab: {fileID: 4793895746358313261, guid: 258d3523215ac074094de4476c7dfe2e,
     type: 3}
   isUnarmed: 0
+  iconSprite: {fileID: 0}
+  itemName: 0
+  OH_Light_Attack_1: 0
+  OH_Heavy_Attack_1: 1
+  damage: 10

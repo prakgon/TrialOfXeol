@@ -66,7 +66,18 @@ namespace Helpers
         public enum PlayerLayers
         {
             BaseLayer = 0,
-            Rolls = 1,
+            Override = 1,
+        }
+        
+        public enum AttackAnimations
+        {
+            OH_Light_Attack_1,
+            OH_Heavy_Attack_1
+        }
+
+        public enum ItemNames
+        {
+            Sword
         }
 
         public enum SliderBarStates

@@ -45,18 +45,18 @@ namespace PlayerScripts
             return _animator.IsInTransition(layer);
         }
         
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int layer = 0)
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
             _animator.applyRootMotion = isInteracting;
             _animator.SetBool(AnimatorParametersStrings.isInteracting, isInteracting);
-            _animator.CrossFade(targetAnimation, 0.2f, layer);
+            _animator.CrossFade(targetAnimation, 0.2f);
         }
 
-        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting, int layer = 0)
+        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting)
         {
             _animator.applyRootMotion = isInteracting;
             _animator.SetBool( AnimatorParametersStrings.isInteracting, isInteracting);
-            _animator.CrossFade(targetAnimation.ToString(), 0.2f, layer);
+            _animator.CrossFade(targetAnimation.ToString(), 0.2f);
         }
 
 

@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: 4289067332944146655}
   - component: {fileID: 1438482235913973120}
   - component: {fileID: 7008467895422926144}
+  - component: {fileID: 1898708954298292171}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1301,7 +1302,9 @@ MonoBehaviour:
   rollFlag: 0
   sprintFlag: 0
   rollInputTimer: 0
-  b_Input: 0
+  eastButtonInput: 0
+  rightButtonInput: 0
+  rightTriggerInput: 0
 --- !u!114 &1438482235913973120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,6 +1333,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 98ada7580339ced47a35788a24667fa0, type: 2}
   leftWeapon: {fileID: 11400000, guid: 98ada7580339ced47a35788a24667fa0, type: 2}
+--- !u!114 &1898708954298292171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147927287329898608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f23fc0f29746bcae41bc3d1afd2300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2241015559435739563
 GameObject:
   m_ObjectHideFlags: 0

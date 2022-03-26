@@ -13,12 +13,10 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimatorController _animatorController;
     private PlayerMovement _playerMovement;
     
-    public bool isInteracting;
-    
     [Header("Player Flags")]
+    public bool isInteracting;
     public bool isSprinting;
     
-
     
     // Start is called before the first frame update
     private void Start()
@@ -41,7 +39,7 @@ public class PlayerController : MonoBehaviour
         _playerMovement.GroundedCheck();
 
         _playerMovement.HandlePlayerLocomotion();
-        _playerMovement.HandleRollingAndSprinting(delta);
+        _playerMovement.HandleRollingAndSprinting();
         
     }
 
@@ -51,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
         _input.rollFlag = false;
         isSprinting = _input.sprintFlag;
+        _input.rightTriggerInput = false; // Light attack
+        _input.rightTriggerInput = false; // Heavy Attack
         isInteracting = _animatorController.GetBool(AnimatorParameters.isInteracting);
     }
 }

@@ -194,50 +194,44 @@ namespace TOX
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
-        // TODO: Move to Animator Controller
-        public void HandleRollingAndSprinting(float delta)
+        public void HandleRollingAndSprinting()
         {
             if (_animController.GetBool(AnimatorParameters.isInteracting)) return;
 
-            if (_input.rollFlag)
+            if (!_input.rollFlag) return;
+            if (_input.moveAmount > 0)
             {
-                /*_animController.SetParameter(AnimatorParameters.Horizontal, _playerInput.move.x);
-                _animController.SetParameter(AnimatorParameters.Vertical, _playerInput.move.y);*/
-                if (_input.moveAmount > 0)
-                {
-                    _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
-                    _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
-                    //_animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int)PlayerLayers.Rolls);
-                    _animController.PlayTargetAnimation(AnimatorStates.Roll, true, (int) PlayerLayers.BaseLayer);
-                    //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
-                    _targetDirection.y = 0;
-                    Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
-                    transform.rotation = rollRotation;
-                }
-                else
-                {
-                    //_animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int)PlayerLayers.Rolls);
-                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, (int) PlayerLayers.BaseLayer);
-                    //_animController.PlayTargetAnimation(AnimatorStates.Rolls, true, (int) PlayerLayers.BaseLayer);
-                }
+                _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
+                _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
+                _animController.PlayTargetAnimation(AnimatorStates.Roll, true);
+                _targetDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
+                transform.rotation = rollRotation;
+            }
+            else
+            {
+                _animController.PlayTargetAnimation(AnimatorStates.BackStep, true);
             }
         }
 
         private void HandleMovement()
         {
             float targetSpeed;
-            if (_input.sprintFlag && _playerController.isSprinting)
+            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5)
             {
                 targetSpeed = SprintSpeed;
+                _playerController.isSprinting = true;
             }
             else
             {
                 targetSpeed = MoveSpeed * _input.moveAmount;
+                _playerController.isSprinting = false;
             }
 
             if (_input.move == Vector2.zero)
             {
                 targetSpeed = 0.0f;
+                _playerController.isSprinting = false;
             }
 
             float inputMagnitude = _input.move.magnitude;
@@ -296,7 +290,7 @@ namespace TOX
                     _verticalVelocity = -2f;
                 }
 
-                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
                         !_animController.IsInTransition() && !_playerController.isInteracting)
