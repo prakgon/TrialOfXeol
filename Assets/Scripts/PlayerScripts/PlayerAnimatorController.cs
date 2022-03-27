@@ -61,13 +61,11 @@ namespace PlayerScripts
         public void EnableCombo()
         {
             SetParameter(AnimatorParameters.CanDoCombo, true);
-            Debug.Log("Enable Combo");
         }
 
         public void DisableCombo()
         {
-            SetParameter(AnimatorParameters.CanDoCombo, true);  
-            Debug.Log("Disable combo");
+            SetParameter(AnimatorParameters.CanDoCombo, false);  
         } 
 
         public void SetParameter(AnimatorParameters state, bool value)

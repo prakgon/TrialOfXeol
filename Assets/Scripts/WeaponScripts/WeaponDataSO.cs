@@ -16,9 +16,21 @@ namespace WeaponScripts
         public AttackAnimations OH_Light_Attack_1;
         public AttackAnimations OH_Light_Attack_2;
         public AttackAnimations OH_Light_Attack_3;
+        public AttackAnimations OH_Light_Attack_4;
+        public AttackAnimations OH_Light_Attack_5;
+        public AttackAnimations OH_Light_Attack_6;
         public AttackAnimations OH_Heavy_Attack_1;
         public AttackAnimations OH_Heavy_Attack_2;
         public AttackAnimations OH_Heavy_Attack_3;
+        public AttackAnimations OH_Heavy_Attack_4;
+        public AttackAnimations OH_Heavy_Attack_5;
+        public AttackAnimations OH_Heavy_Attack_6;
+        public AttackAnimations Skill_A;
+        public AttackAnimations Skill_B;
+        public AttackAnimations Skill_C;
+        public AttackAnimations Skill_D;
+        public AttackAnimations Skill_E;
+        public AttackAnimations Skill_F;
         
         [Header("Stats")]
         public float damage;

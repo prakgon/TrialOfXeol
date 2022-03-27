@@ -60,6 +60,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "SpecialAttack",
+                    "type": "Value",
+                    "id": "97f8241e-e30d-43fb-afa0-71b26eb8ced1",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Block",
                     "type": "PassThrough",
                     "id": "24df0046-2c31-4597-ab14-3653e2013634",
@@ -227,7 +236,7 @@
                 {
                     "name": "",
                     "id": "694456fd-c576-4275-8046-ff513e33f57d",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -249,7 +258,7 @@
                 {
                     "name": "",
                     "id": "7ca3252b-0ec6-4cbc-b835-c8a13c456363",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -309,6 +318,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Roll and Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0278239c-91cf-4dbc-aa2a-0c648c1c6b93",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9250dc5-0221-4c4a-aa1a-1b68a9e9dbaf",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpecialAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

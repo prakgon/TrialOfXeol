@@ -1,9 +1,9 @@
 using UnityEngine;
 using static Helpers.Literals;
 
-namespace PlayerScripts
+namespace AnimatorStateMachine
 {
-    public class ResetAnimatorBool : StateMachineBehaviour
+    public class ResetAnimatorBoolOnEnter : StateMachineBehaviour
     {
         public AnimatorParameters targetBool;
         public bool status;
