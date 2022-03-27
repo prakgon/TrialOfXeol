@@ -17,7 +17,8 @@ namespace WeaponScripts
         private Animator _animator;
         private Collider _damageCollider;
         private bool _canCheckAnimator;
-        public WeaponDataSO weaponData;
+        public WeaponDataSO weaponData; 
+        private GameObject _player; // This gameObject handles player reference collision with his own weapon
 
         public void ConfigureMediator(PlayerMediator med)
         {
@@ -32,6 +33,17 @@ namespace WeaponScripts
             _damageCollider.enabled = false;
         }
 
+        private void Start()
+        {
+            FindPlayerReference();
+        }
+
+        private void FindPlayerReference()
+        {
+            // Refactor this
+            _player = gameObject.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.gameObject;
+        }
+
         public void EnableDamageCollider() => _damageCollider.enabled = true;  
         
 
@@ -40,7 +52,7 @@ namespace WeaponScripts
         private void OnTriggerEnter(Collider other)
         {
             
-            if (other.CompareTag(Tags.Player.ToString()))
+            if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
             {
                 PlayerStats playerStats = other.GetComponent<PlayerStats>();
 
@@ -61,10 +73,10 @@ namespace WeaponScripts
                 }
             }
 
-            if (other.CompareTag(Tags.Enemy.ToString()))
+            /*if (other.CompareTag(Tags.Enemy.ToString()))
             {
                 //EnemyStats enemyStats;
-            }
+            }*/
             
         }
     }
