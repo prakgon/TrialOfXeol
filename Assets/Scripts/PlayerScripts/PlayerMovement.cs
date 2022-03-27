@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
@@ -66,7 +67,7 @@ namespace TOX
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-        
+
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
@@ -177,14 +178,21 @@ namespace TOX
 
         public void HandlePlayerLocomotion()
         {
-            if (_playerController.isInteracting)
+            try
             {
-                // Applying gravity when interacting e.g. Rolling Animation.
-                ControllerMove(new Vector3(0, 0, 0), 0);
+                if (_playerController.isInteracting)
+                {
+                    // Applying gravity when interacting e.g. Rolling Animation.
+                    ControllerMove(new Vector3(0, 0, 0), 0);
+                }
+                else
+                {
+                    HandleMovement();
+                }
             }
-            else
+            catch (Exception e)
             {
-                HandleMovement();
+                Debug.Log(e);
             }
         }
 
@@ -214,6 +222,8 @@ namespace TOX
             }
         }
 
+        #endregion
+
         private void HandleMovement()
         {
             float targetSpeed;
@@ -234,17 +244,43 @@ namespace TOX
                 _playerController.isSprinting = false;
             }
 
+            // a reference to the players current horizontal velocity
+            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+            float speedOffset = 0.1f;
+
+            //
             float inputMagnitude = _input.move.magnitude;
-            _speed = targetSpeed;
+            /*_speed = targetSpeed;*/
+//
+
+            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+                currentHorizontalSpeed > targetSpeed + speedOffset)
+            {
+                // creates curved result rather than a linear one giving a more organic speed change
+                // note T in Lerp is clamped, so we don't need to clamp our speed
+                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                    Time.deltaTime * SpeedChangeRate);
+
+                // round speed to 3 decimal places
+                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            }
+            else
+            {
+                _speed = targetSpeed;
+            }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
             if (_input.move != Vector2.zero)
             {
                 TransformRotation(inputDirection, RotationSmoothTime);
             }
 
             _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
             // update animator if using character
             ControllerMove(_targetDirection, _speed);
             if (_animController.HasAnimator)
@@ -253,8 +289,6 @@ namespace TOX
                 _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
             }
         }
-
-        #endregion
 
 
         #region Player Rotation
@@ -290,18 +324,25 @@ namespace TOX
                     _verticalVelocity = -2f;
                 }
 
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                try
                 {
-                    if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
-                        !_animController.IsInTransition() && !_playerController.isInteracting)
+                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
-                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                        if (_animController.HasAnimator)
+                        if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
+                            !_animController.IsInTransition() && !_playerController.isInteracting)
                         {
-                            _animController.SetParameter(AnimatorParameters.Jump, true);
+                            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                            if (_animController.HasAnimator)
+                            {
+                                _animController.SetParameter(AnimatorParameters.Jump, true);
+                            }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
                 }
 
                 if (_jumpTimeoutDelta >= 0.0f)

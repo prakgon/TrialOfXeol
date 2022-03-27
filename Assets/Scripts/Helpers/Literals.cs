@@ -27,7 +27,7 @@ namespace Helpers
             IntroAnimation
         }
 
-        public enum PlayerLayers
+        public enum AnimatorLayers
         {
             BaseLayer = 0,
             Override = 1,
@@ -56,6 +56,14 @@ namespace Helpers
             Skill_F,
         }
 
+        public enum DamageAnimations
+        {
+            Damage_01,
+            Damage_Die,
+            Damage_Die_Loop
+        }
+        
+
         public enum ItemNames
         {
             Sword,
@@ -76,7 +84,10 @@ namespace Helpers
         public enum Tags
         {
             MainCamera,
-            Weapon
+            Weapon,
+            Player,
+            Dummy,
+            Enemy
         }
 
     }

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1fca05779425448a8e95d26fa03f22, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 4793895746358313261, guid: e45bd15964154584fbf0bb255d53473e,
+  modelPrefab: {fileID: 8368131331464666792, guid: e45bd15964154584fbf0bb255d53473e,
     type: 3}
   isUnarmed: 0
   iconSprite: {fileID: 0}
-  itemName: 0
+  itemName: 1
   OH_Light_Attack_1: 0
   OH_Light_Attack_2: 1
   OH_Light_Attack_3: 2

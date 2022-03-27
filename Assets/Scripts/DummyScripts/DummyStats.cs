@@ -6,7 +6,7 @@ using WeaponScripts;
 
 namespace DummyScripts
 {
-    public class DummyCollisionController : MonoBehaviour
+    public class DummyStats : MonoBehaviour
     {
         [SerializeField] private DummyDataSO dummyData;
         [SerializeField] private TMP_Text dummyTMPText;
@@ -21,26 +21,19 @@ namespace DummyScripts
             UpdateUI();
         }
 
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag(Literals.Tags.Weapon.ToString())) return;
 
-            var damage = other.gameObject.GetComponent<WeaponColliderController>().weaponData.damage;
+            var damage = other.gameObject.GetComponent<DamageCollider>().weaponData.damage;
 
             StartCoroutine(TakeDamage(damage));
-        }
+        }*/
 
-        private IEnumerator TakeDamage(float damageTaken)
+        public void TakeDamage(float damage)
         {
-            DecreaseHealth(damageTaken);
-
+            DecreaseHealth(damage);
             UpdateUI();
-
-            GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-
-            yield return new WaitForSeconds(1f);
-
-            GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
         }
 
         private void UpdateUI() =>

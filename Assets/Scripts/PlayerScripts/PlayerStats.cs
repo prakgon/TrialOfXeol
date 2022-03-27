@@ -8,13 +8,13 @@ using UIScripts;
 
 namespace PlayerScripts
 {
-    public class CollisionController : MonoBehaviour, IMediatorUser, IPunObservable
+    public class PlayerStats : MonoBehaviour, IMediatorUser, IPunObservable
     {
         private PlayerDataSO _playerData;
         private GameObject _playerWeapon;
-        private SkinnedMeshRenderer _playerMeshRenderer;
         private TMP_Text _playerTMPText;
         private float _currentHealth;
+        private PlayerAnimatorController _animatorController;
         private float _maximumHealth;
         private SliderBar _healthBar;
         private PlayerMediator _med;
@@ -29,25 +29,22 @@ namespace PlayerScripts
             //Debug
             UpdateDebugUI();
         }
-        
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag(Literals.Tags.Weapon.ToString()) && other.gameObject != _playerWeapon)
-            {
-                var damage = other.gameObject.GetComponent<WeaponColliderController>().weaponData.damage;
-                StartCoroutine(TakeDamage(damage));
-            }
-        }
 
-        private IEnumerator TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             DecreaseHealth(damage);
             UpdateHealthBar();
             //Debug
             UpdateDebugUI();
-            DebugMaterialColor(Color.red);
-            yield return new WaitForSeconds(1f);
-            DebugMaterialColor(Color.white);
+            
+            _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_01.ToString(), true);
+
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+                _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_Die.ToString(), true);
+                // Handle player death
+            }
         }
         
         private void DecreaseHealth(float decrement) => _currentHealth -= decrement;
@@ -58,22 +55,14 @@ namespace PlayerScripts
         private void UpdateDebugUI() =>
             SetDebugText(_currentHealth > 0 ? $"Current {gameObject.name} health: {_currentHealth}" : "Death");
 
-        private void DebugMaterialColor(Color color)
-        {
-            foreach (var material in _playerMeshRenderer.materials)
-            {
-                material.color = color;
-            }
-        }
-
         public void ConfigureMediator(PlayerMediator med)
         {
             _med = med;
             _playerData = _med.PlayerData;
             _playerWeapon = _med.PlayerWeapon;
-            _playerMeshRenderer = _med.PlayerMeshRenderer;
             _playerTMPText = _med.PlayerTMPText;
             _healthBar = _med.HealthBar;
+            _animatorController = _med.PlayerAnimatorController;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

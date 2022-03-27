@@ -58,15 +58,8 @@ namespace PlayerScripts
             _animator.CrossFade(targetAnimation.ToString(), 0.2f);
         }
 
-        public void EnableCombo()
-        {
-            SetParameter(AnimatorParameters.CanDoCombo, true);
-        }
-
-        public void DisableCombo()
-        {
-            SetParameter(AnimatorParameters.CanDoCombo, false);  
-        } 
+        public void EnableCombo() => SetParameter(AnimatorParameters.CanDoCombo, true);
+        public void DisableCombo() => SetParameter(AnimatorParameters.CanDoCombo, false);
 
         public void SetParameter(AnimatorParameters state, bool value)
         {

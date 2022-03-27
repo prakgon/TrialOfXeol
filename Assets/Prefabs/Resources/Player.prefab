@@ -791,7 +791,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 421568733818664515}
-  - component: {fileID: 3976197588068452183}
   m_Layer: 0
   m_Name: SwordShieldAnimsetPro_part1
   m_TagString: Untagged
@@ -816,18 +815,6 @@ Transform:
   m_Father: {fileID: 1622748115865606858}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3976197588068452183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421568733818628707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8cf260e92641cc83443a9c0582e933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &421568733818628709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,8 +3432,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1622748115865606858}
   - component: {fileID: 4387597190941284282}
-  - component: {fileID: 6644253823038711355}
+  - component: {fileID: 5745716703444602817}
   - component: {fileID: 4640119409714086064}
+  - component: {fileID: 6644253823038711355}
   - component: {fileID: 2147927287329898618}
   - component: {fileID: 4017133197377439093}
   - component: {fileID: 1784342461813926238}
@@ -3498,7 +3486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAnimatorState: 0
   lastActiveAnimatorState: 0
---- !u!114 &6644253823038711355
+--- !u!114 &5745716703444602817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3507,16 +3495,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2147927287329898608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8cd368d25bcfe439b7a83c21d6532b, type: 3}
+  m_Script: {fileID: 11500000, guid: df8cf260e92641cc83443a9c0582e933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMovement: {fileID: 4017133197377439093}
-  healthBar: {fileID: 606694543231277429}
-  _playerAnimatorController: {fileID: 4387597190941284282}
-  playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
-  playerWeapon: {fileID: 0}
-  playerMeshRenderer: {fileID: 7742388956085133792}
-  playerTMPText: {fileID: 818262546043379961}
 --- !u!95 &4640119409714086064
 Animator:
   serializedVersion: 4
@@ -3537,6 +3518,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6644253823038711355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147927287329898608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8cd368d25bcfe439b7a83c21d6532b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 4017133197377439093}
+  healthBar: {fileID: 606694543231277429}
+  _playerAnimatorController: {fileID: 4387597190941284282}
+  playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
+  playerWeapon: {fileID: 0}
+  playerMeshRenderer: {fileID: 7742388956085133792}
+  playerTMPText: {fileID: 818262546043379961}
 --- !u!143 &2147927287329898618
 CharacterController:
   m_ObjectHideFlags: 0
