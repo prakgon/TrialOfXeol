@@ -10,8 +10,9 @@ namespace AnimatorStateMachine
         
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            //Debug.Log(stateInfo.normalizedTime);
             if (!animator.GetBool(Literals.AnimatorParameters.CanDoCombo.ToString())) return;
-            if (stateInfo.normalizedTime > 0.4f) animator.SetBool(targetBool.ToString(), status);
+            if (stateInfo.normalizedTime > 2f) animator.SetBool(targetBool.ToString(), status);
         }
     }
 }

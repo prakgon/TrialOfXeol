@@ -205,20 +205,26 @@ namespace TOX
         public void HandleRollingAndSprinting()
         {
             if (_animController.GetBool(AnimatorParameters.IsInteracting)) return;
-
-            if (!_input.rollFlag) return;
-            if (_input.moveAmount > 0)
+            try
             {
-                _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
-                _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
-                _animController.PlayTargetAnimation(AnimatorStates.Roll, true);
-                _targetDirection.y = 0;
-                Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
-                transform.rotation = rollRotation;
+                if (!_input.rollFlag) return;
+                if (_input.moveAmount > 0)
+                {
+                    _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
+                    _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
+                    _animController.PlayTargetAnimation(AnimatorStates.Roll, true, 1);
+                    _targetDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
+                    transform.rotation = rollRotation;
+                }
+                else
+                {
+                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, 1);
+                }
             }
-            else
+            catch (Exception e)
             {
-                _animController.PlayTargetAnimation(AnimatorStates.BackStep, true);
+                Debug.Log(e);
             }
         }
 

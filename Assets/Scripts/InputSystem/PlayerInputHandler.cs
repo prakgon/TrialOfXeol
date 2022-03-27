@@ -32,13 +32,13 @@ public class PlayerInputHandler : MonoBehaviour
     [Tooltip("This button handles special attack inputs")]
     public bool leftTriggerInput;
 
-    private PlayerAttacker _playerAttacker;
+    private PlayerCombatManager _playerCombatManager;
     private PlayerInventory _playerInventory;
     private PlayerController _playerController;
 
     private void Start()
     {
-        _playerAttacker = GetComponent<PlayerAttacker>();
+        _playerCombatManager = GetComponent<PlayerCombatManager>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerController = GetComponent<PlayerController>();
     }
@@ -106,7 +106,7 @@ public class PlayerInputHandler : MonoBehaviour
                 {
                     rollFlag = true;
                 }
-                
+
                 break;
             case InputActionPhase.Performed:
                 break;
@@ -129,20 +129,19 @@ public class PlayerInputHandler : MonoBehaviour
     {
         rightButtonInput = context.phase is InputActionPhase.Started;
 
-        if (rightButtonInput && !_playerController.isInteracting)
-        {
-            if (_playerController.canDoCombo)
-            {
-                comboFlag = true;
-                _playerAttacker.HandleLightWeaponCombo(_playerInventory.rightWeapon);
-                comboFlag = false;
-            }
-            else
-            {
-                if (_playerController.canDoCombo) return;
-                _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
-            }
+        if (!rightButtonInput || _playerController.isInteracting) return;
+            comboFlag = true;
+            _playerCombatManager.HandleLightWeaponCombo(_playerInventory.rightWeapon);
+            comboFlag = false;
+        /*
+        if (_playerController.canDoCombo)
+        */
+        /*{
         }
+        else
+        {
+            _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+        }*/
     }
 
     private void HeavyAttackHandler(InputAction.CallbackContext context)
@@ -150,37 +149,33 @@ public class PlayerInputHandler : MonoBehaviour
         rightTriggerInput = context.phase is InputActionPhase.Started;
 
         if (!rightTriggerInput || _playerController.isInteracting) return;
-        if (_playerController.canDoCombo)
-        {
             comboFlag = true;
-            _playerAttacker.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
+            _playerCombatManager.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
             comboFlag = false;
+        /*if (_playerController.canDoCombo)
+        {
         }
         else
         {
-            if (_playerController.canDoCombo) return;
             _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
-        }
+        }*/
     }
 
     private void SpecialAttackHandler(InputAction.CallbackContext context)
     {
         leftTriggerInput = context.phase is InputActionPhase.Started;
 
-        if (leftTriggerInput && !_playerController.isInteracting)
+        if (!leftTriggerInput || _playerController.isInteracting) return;
+            comboFlag = true;
+            _playerCombatManager.HandleSkillWeaponCombo(_playerInventory.rightWeapon);
+            comboFlag = false;
+        /*if (_playerController.canDoCombo)
         {
-            if (_playerController.canDoCombo)
-            {
-                comboFlag = true;
-                _playerAttacker.HandleSkillWeaponCombo(_playerInventory.rightWeapon);
-                comboFlag = false;
-            }
-            else
-            {
-                if (comboFlag) return;
-                _playerAttacker.HandleSkillAttack(_playerInventory.rightWeapon);
-            }
         }
+        else
+        {
+            _playerAttacker.HandleSkillAttack(_playerInventory.rightWeapon);
+        }*/
     }
 
     #endregion

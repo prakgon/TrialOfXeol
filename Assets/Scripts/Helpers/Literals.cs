@@ -54,6 +54,7 @@ namespace Helpers
             Skill_D,
             Skill_E,
             Skill_F,
+            InitialState
         }
 
         public enum DamageAnimations

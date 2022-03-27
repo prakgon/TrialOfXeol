@@ -44,18 +44,18 @@ namespace PlayerScripts
             return _animator.IsInTransition(layer);
         }
         
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int indexLayer)
         {
             _animator.applyRootMotion = isInteracting;
             SetParameter(AnimatorParameters.IsInteracting, isInteracting);
-            _animator.CrossFade(targetAnimation, 0.2f);
+            _animator.CrossFade(targetAnimation, 0.2f, indexLayer);
         }
 
-        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting)
+        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting, int indexLayer)
         {
             _animator.applyRootMotion = isInteracting;
             SetParameter( AnimatorParameters.IsInteracting, isInteracting);
-            _animator.CrossFade(targetAnimation.ToString(), 0.2f);
+            _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
 
         public void EnableCombo() => SetParameter(AnimatorParameters.CanDoCombo, true);

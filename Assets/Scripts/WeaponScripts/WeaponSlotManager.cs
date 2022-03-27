@@ -11,6 +11,8 @@ namespace WeaponScripts
         private DamageCollider _leftHandDamageCollider;
         private DamageCollider _rightHandDamageCollider;
 
+        private PlayerEffectsManager _playerEffectsManager; 
+
         private void Awake()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
@@ -25,6 +27,8 @@ namespace WeaponScripts
                     _rightHandSlot = weaponSlot;
                 }
             }
+
+            _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         }
 
         public void LoadWeaponOnSlot(WeaponDataSO weaponData, bool isLeft)
@@ -48,6 +52,8 @@ namespace WeaponScripts
             try
             {
                 _leftHandDamageCollider = _leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+                _playerEffectsManager.leftWeaponFX =
+                    _leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
             }
             catch
             {
@@ -60,7 +66,8 @@ namespace WeaponScripts
             try
             {
                 _rightHandDamageCollider = _rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-
+                _playerEffectsManager.rightWeaponFX =
+                    _rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
             }
             catch
             {

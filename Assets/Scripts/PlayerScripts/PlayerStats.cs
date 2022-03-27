@@ -17,6 +17,7 @@ namespace PlayerScripts
         private PlayerAnimatorController _animatorController;
         private float _maximumHealth;
         private SliderBar _healthBar;
+        private PlayerEffectsManager _effectsManager;
         private PlayerMediator _med;
 
         private void Start() => InitializePlayer();
@@ -28,6 +29,8 @@ namespace PlayerScripts
             InitializeHealthBar();
             //Debug
             UpdateDebugUI();
+
+            _effectsManager = GetComponent<PlayerEffectsManager>();
         }
 
         [PunRPC]
@@ -38,12 +41,13 @@ namespace PlayerScripts
             //Debug
             UpdateDebugUI();
             
-            _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_01.ToString(), true);
+            _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_01.ToString(), true,1);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
-                _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_Die.ToString(), true);
+                _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_Die.ToString(), true, 1);
+                _effectsManager.PlayDeathFX();
                 // Handle player death
             }
         }
