@@ -1,5 +1,6 @@
 using DummyScripts;
 using Helpers;
+using Photon.Pun;
 using PlayerScripts;
 using UnityEngine;
 using static Helpers.Literals;
@@ -45,6 +46,7 @@ namespace WeaponScripts
 
         public void DisableDamageCollider() => _damageCollider.enabled = false;
         
+        [PunRPC]
         private void OnTriggerEnter(Collider other)
         {
             
@@ -54,6 +56,7 @@ namespace WeaponScripts
 
                 if (playerStats != null)
                 {
+                    
                     playerStats.TakeDamage(weaponData.damage);
                 }
             }

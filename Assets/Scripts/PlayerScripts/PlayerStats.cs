@@ -30,6 +30,7 @@ namespace PlayerScripts
             UpdateDebugUI();
         }
 
+        [PunRPC]
         public void TakeDamage(float damage)
         {
             DecreaseHealth(damage);
@@ -47,6 +48,7 @@ namespace PlayerScripts
             }
         }
         
+        [PunRPC]
         private void DecreaseHealth(float decrement) => _currentHealth -= decrement;
         private void InitializeHealthBar() => _healthBar.SetMaxValue(_currentHealth);
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);

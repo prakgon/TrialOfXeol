@@ -15,7 +15,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Awake()
     {
-        _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        _weaponSlotManager = GetComponent<WeaponSlotManager>();
     }
 
     private void Start()
