@@ -25,6 +25,7 @@ namespace WeaponScripts
         public AttackAnimations OH_Heavy_Attack_4;
         public AttackAnimations OH_Heavy_Attack_5;
         public AttackAnimations OH_Heavy_Attack_6;
+        public AttackAnimations OH_Heavy_Attack_7;
         public AttackAnimations Skill_A;
         public AttackAnimations Skill_B;
         public AttackAnimations Skill_C;

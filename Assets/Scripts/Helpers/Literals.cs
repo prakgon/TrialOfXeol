@@ -47,6 +47,7 @@ namespace Helpers
             OH_Heavy_Attack_4,
             OH_Heavy_Attack_5,
             OH_Heavy_Attack_6,
+            OH_Heavy_Attack_7,
             Skill_A,
             Skill_B,
             Skill_C,

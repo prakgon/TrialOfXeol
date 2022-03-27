@@ -5,44 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatorStateMachine.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatorStateMachine/ResetAnimatorBoolOnUpdate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatorStateMachine/ResetAnimatorBoolOnUpdate.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_1.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_2.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_3.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_3Combo_3.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_1B_Inplace.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_1B_Inplace.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_2.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_3.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_3.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_4.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_4Combo_4.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_1.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_2.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_3.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_3.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_4.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_4.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_5.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_5.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_6.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_6.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_7.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Attack_7Combo_7.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Dodge_Front.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Dodge_Front.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Intro.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Intro.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Jogging_8Way_verA_F.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Jogging_8Way_verA_F.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Jump_End.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Jump_End.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Run_Fast_ver_A.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Run_Fast_ver_A.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Run_Fast_ver_B.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Run_Fast_ver_B.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Walk_ver_A_Front.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Walk_ver_A_Front.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Walk_ver_B_Front.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Powerful sword/Walk_ver_B_Front.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Humanoid/Animator/HumanoidController.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/GreatSword.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/GreatSword.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/PlayerInputHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAnimatorController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAttacker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerAttacker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/ResetAnimatorBool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatorStateMachine/ResetAnimatorBoolOnEnter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/ResetAnimatorBool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatorStateMachine/ResetAnimatorBoolOnEnter.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/WeaponDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/WeaponDataSO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +143,8 @@
       <workItem from="1648129092517" duration="2820000" />
       <workItem from="1648229441091" duration="12228000" />
       <workItem from="1648290294365" duration="25877000" />
-      <workItem from="1648324623208" duration="14019000" />
+      <workItem from="1648324623208" duration="14623000" />
+      <workItem from="1648372842592" duration="1769000" />
     </task>
     <task id="LOCAL-00001" summary="Light attack input handler">
       <created>1646661520995</created>

@@ -29,10 +29,11 @@ MonoBehaviour:
   OH_Heavy_Attack_4: 9
   OH_Heavy_Attack_5: 10
   OH_Heavy_Attack_6: 11
-  Skill_A: 12
-  Skill_B: 13
-  Skill_C: 14
-  Skill_D: 15
-  Skill_E: 16
-  Skill_F: 17
+  OH_Heavy_Attack_7: 12
+  Skill_A: 13
+  Skill_B: 14
+  Skill_C: 15
+  Skill_D: 16
+  Skill_E: 17
+  Skill_F: 18
   damage: 10

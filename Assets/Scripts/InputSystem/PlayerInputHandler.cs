@@ -127,7 +127,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void LightAttackHandler(InputAction.CallbackContext context)
     {
-        rightButtonInput = context.phase is InputActionPhase.Started or InputActionPhase.Performed;
+        rightButtonInput = context.phase is InputActionPhase.Started;
 
         if (rightButtonInput && !_playerController.isInteracting)
         {
@@ -147,27 +147,25 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void HeavyAttackHandler(InputAction.CallbackContext context)
     {
-        rightTriggerInput = context.phase is InputActionPhase.Started or InputActionPhase.Performed;
+        rightTriggerInput = context.phase is InputActionPhase.Started;
 
-        if (rightTriggerInput && !_playerController.isInteracting)
+        if (!rightTriggerInput || _playerController.isInteracting) return;
+        if (_playerController.canDoCombo)
         {
-            if (_playerController.canDoCombo)
-            {
-                comboFlag = true;
-                _playerAttacker.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
-                comboFlag = false;
-            }
-            else
-            {
-                if (_playerController.canDoCombo) return;
-                _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
-            }
+            comboFlag = true;
+            _playerAttacker.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
+            comboFlag = false;
+        }
+        else
+        {
+            if (_playerController.canDoCombo) return;
+            _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
         }
     }
 
     private void SpecialAttackHandler(InputAction.CallbackContext context)
     {
-        leftTriggerInput = context.phase is InputActionPhase.Started or InputActionPhase.Performed;
+        leftTriggerInput = context.phase is InputActionPhase.Started;
 
         if (leftTriggerInput && !_playerController.isInteracting)
         {
