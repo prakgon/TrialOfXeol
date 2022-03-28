@@ -1,4 +1,5 @@
 using Helpers;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Helpers.Literals;
@@ -15,6 +16,7 @@ namespace PlayerScripts
 
         private PlayerMediator _med;
         private Animator _animator;
+        PhotonView _photonView;
         public bool HasAnimator { get; private set; }
 
         public AnimatorStates CurrentAnimatorState
@@ -32,6 +34,7 @@ namespace PlayerScripts
         private void Start()
         {
             HasAnimator = TryGetComponent(out _animator);
+            _photonView = PhotonView.Get(gameObject);
         }
 
         public bool CompareAnimState(string stateToCompare, byte layer = 0)
@@ -43,22 +46,46 @@ namespace PlayerScripts
         {
             return _animator.IsInTransition(layer);
         }
-        
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int indexLayer)
+
+        [PunRPC]
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int indexLayer,
+            bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.All, targetAnimation, isInteracting, indexLayer, true);
+            }
+
             _animator.applyRootMotion = isInteracting;
             SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation, 0.2f, indexLayer);
         }
 
-        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting, int indexLayer)
+        [PunRPC]
+        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting, int indexLayer,
+            bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.All, targetAnimation, isInteracting, indexLayer, true);
+            }
+
             _animator.applyRootMotion = isInteracting;
-            SetParameter( AnimatorParameters.IsInteracting, isInteracting);
+            SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
 
-        public void EnableCombo() => SetParameter(AnimatorParameters.CanDoCombo, true);
+        [PunRPC]
+        public void EnableCombo(bool isRemote = false)
+        {
+            if (!isRemote)
+            {
+                _photonView.RPC("EnableCombo", RpcTarget.All, true);
+            }
+
+            SetParameter(AnimatorParameters.CanDoCombo, true);
+        }
+
         public void DisableCombo() => SetParameter(AnimatorParameters.CanDoCombo, false);
 
         public void SetParameter(AnimatorParameters state, bool value)
@@ -73,7 +100,7 @@ namespace PlayerScripts
 
         public void SetParameter(AnimatorParameters state, float value) => _animator.SetFloat(state.ToString(), value);
         public void SetParameter(AnimatorParameters state, int value) => _animator.SetInteger(state.ToString(), value);
-        
+
         public bool GetBool(AnimatorParameters state)
         {
             return _animator.GetBool(state.ToString());
