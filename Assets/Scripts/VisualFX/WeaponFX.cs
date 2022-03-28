@@ -6,11 +6,19 @@ using UnityEngine;
 public class WeaponFX : MonoBehaviour
 {
     [Header("Weapon FX")] public ParticleSystem normalWeaponTrail;
+
+    public ParticleSystem glowWeapon;
     // fire weapon trail
     // dark weapon trail
     // lightning weapon trail
 
-    public void PlayWeaponFX()
+    private void Awake()
+    {
+        normalWeaponTrail.Stop();
+        glowWeapon.Stop();
+    }
+
+    public void PlayWeaponTrailFX()
     {
         try
         {
@@ -26,14 +34,21 @@ public class WeaponFX : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayWeaponGlowFX()
     {
-        
+        try
+        {
+            glowWeapon.Stop();
+
+            if (glowWeapon.isStopped)
+            {
+                glowWeapon.Play();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 }

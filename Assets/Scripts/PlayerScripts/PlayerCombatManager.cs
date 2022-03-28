@@ -82,7 +82,8 @@ namespace PlayerScripts
                     break;
             }
             
-            _playerEffectsManager.PlayWeaponFX(false);
+            _playerEffectsManager.PlayWeaponTrailFX(false);
+            //_playerEffectsManager.PlayWeaponGlowFX(false);
         }
 
         public void HandleLightWeaponCombo(WeaponDataSO weaponData)
@@ -144,7 +145,7 @@ namespace PlayerScripts
                     break;
             }
             
-            _playerEffectsManager.PlayWeaponFX(false);
+            _playerEffectsManager.PlayWeaponTrailFX(false);
         }
 
         public void HandleHeavyWeaponCombo(WeaponDataSO weaponData)
@@ -212,7 +213,7 @@ namespace PlayerScripts
                     break;
             }
             
-            _playerEffectsManager.PlayWeaponFX(false);
+            _playerEffectsManager.PlayWeaponTrailFX(false);
         }
 
         private void CanDoCombo()

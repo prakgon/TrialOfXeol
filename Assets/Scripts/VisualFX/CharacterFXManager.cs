@@ -6,20 +6,37 @@ namespace DefaultNamespace
     {
         public WeaponFX rightWeaponFX;
         public WeaponFX leftWeaponFX;
-        public virtual void PlayWeaponFX(bool isLeft)
+        public virtual void PlayWeaponTrailFX(bool isLeft)
         {
             if (isLeft == false)
             {
                 if (rightWeaponFX != null)
                 {
-                    rightWeaponFX.PlayWeaponFX();
+                    rightWeaponFX.PlayWeaponTrailFX();
                 }
             }
             else
             {
                 if (leftWeaponFX != null)
                 {
-                    leftWeaponFX.PlayWeaponFX();
+                    leftWeaponFX.PlayWeaponTrailFX();
+                }
+            }
+        }
+        public virtual void PlayWeaponGlowFX(bool isLeft)
+        {
+            if (isLeft == false)
+            {
+                if (rightWeaponFX != null)
+                {
+                    rightWeaponFX.PlayWeaponGlowFX();
+                }
+            }
+            else
+            {
+                if (leftWeaponFX != null)
+                {
+                    leftWeaponFX.PlayWeaponGlowFX();
                 }
             }
         }
