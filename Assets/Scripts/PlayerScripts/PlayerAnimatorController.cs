@@ -53,7 +53,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.All, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -67,7 +67,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.All, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -80,7 +80,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("EnableCombo", RpcTarget.All, true);
+                _photonView.RPC("EnableCombo", RpcTarget.Others, true);
             }
 
             SetParameter(AnimatorParameters.CanDoCombo, true);
