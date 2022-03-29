@@ -2,58 +2,76 @@ namespace Helpers
 {
     public static class Literals
     {
-        public enum PlayerStates
+        public enum AnimatorStates
         {
             IdleWalkRunBlend,
             Roll,
+            Rolls,
+            BackStep,
             JumpLand,
             InAir,
             JumpStart,
-            FirstAttack,
-            SecondAttack,
-            ThirdAttack,
-            FourthAttack
         }
 
-        public static class PlayerStatesStrings
-        {
-            public static readonly string IdleWalkRunBlend = PlayerStates.IdleWalkRunBlend.ToString();
-            public static readonly string Roll = PlayerStates.Roll.ToString();
-            public static readonly string JumpLand = PlayerStates.JumpLand.ToString();
-            public static readonly string InAir = PlayerStates.InAir.ToString();
-            public static readonly string JumpStart = PlayerStates.JumpStart.ToString();
-            public static readonly string FirstAttack = PlayerStates.FirstAttack.ToString();
-            public static readonly string SecondAttack = PlayerStates.SecondAttack.ToString();
-            public static readonly string ThirdAttack = PlayerStates.ThirdAttack.ToString();
-            public static readonly string FourthAttack = PlayerStates.FourthAttack.ToString();
-        }
-
-        public enum PlayerParameters
+        public enum AnimatorParameters
         {
             Speed,
             Jump,
             Grounded,
             FreeFall,
             MotionSpeed,
-            Attack,
-            Roll,
-            AttackCount,
-            NormalAttack,
-            HeavyAttack
+            IsInteracting,
+            Horizontal,
+            Vertical,
+            CanDoCombo,
+            IntroAnimation
         }
 
-        public class PlayerParametersStrings
+        public enum AnimatorLayers
         {
-            public static readonly string Speed = PlayerParameters.Speed.ToString();
-            public static readonly string Jump = PlayerParameters.Jump.ToString();
-            public static readonly string Grounded = PlayerParameters.Grounded.ToString();
-            public static readonly string FreeFall = PlayerParameters.FreeFall.ToString();
-            public static readonly string MotionSpeed = PlayerParameters.MotionSpeed.ToString();
-            public static readonly string Attack = PlayerParameters.Attack.ToString();
-            public static readonly string Roll = PlayerParameters.Roll.ToString();
-            public static readonly string AttackCount = PlayerParameters.AttackCount.ToString();
-            public static readonly string NormalAttack = PlayerParameters.NormalAttack.ToString();
-            public static readonly string HeavyAttack = PlayerParameters.HeavyAttack.ToString();
+            BaseLayer = 0,
+            Override = 1,
+        }
+        
+        public enum AttackAnimations
+        {
+            OH_Light_Attack_1,
+            OH_Light_Attack_2,
+            OH_Light_Attack_3,
+            OH_Light_Attack_4,
+            OH_Light_Attack_5,
+            OH_Light_Attack_6,
+            OH_Heavy_Attack_1,
+            OH_Heavy_Attack_2,
+            OH_Heavy_Attack_3,
+            OH_Heavy_Attack_4,
+            OH_Heavy_Attack_5,
+            OH_Heavy_Attack_6,
+            OH_Heavy_Attack_7,
+            Skill_A,
+            Skill_B,
+            Skill_C,
+            Skill_D,
+            Skill_E,
+            Skill_F,
+            InitialState
+        }
+
+        public enum DamageAnimations
+        {
+            Damage_01,
+            Damage_Die,
+            Damage_Die_Loop
+        }
+        
+
+        public enum ItemNames
+        {
+            Sword,
+            GreatSword,
+            Katana,
+            Shield,
+            Spear
         }
 
         public enum SliderBarStates
@@ -67,7 +85,10 @@ namespace Helpers
         public enum Tags
         {
             MainCamera,
-            Weapon
+            Weapon,
+            Player,
+            Dummy,
+            Enemy
         }
 
         public enum UserTypes

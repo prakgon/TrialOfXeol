@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-using StarterAssets;
-using static Helpers.Literals;
 
 namespace TOX
 {

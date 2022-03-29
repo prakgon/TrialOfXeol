@@ -1,6 +1,3 @@
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-using UnityEngine.InputSystem;
-#endif
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
@@ -10,24 +7,21 @@ using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
 using PlayerScripts;
+using UnityEngine.InputSystem;
 
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
-*/
 
-namespace StarterAssets
+namespace TOX
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-    [RequireComponent(typeof(PlayerInput))]
-#endif
-    public class PlayerMovement : PlayerBase, IPunObservable, IMediatorUser
+    public class PlayerMovement : MonoBehaviourPunCallbacks, IPunObservable, IMediatorUser
     {
+        /*This values are not being used, in runTime the editor gets the values configured
+        in the inspector of the script attached to the player*/
         [Header("Player")] [Tooltip("Move speed of the character in m/s")]
-        public float
-            MoveSpeed = 10f; //This values are not being used, in runTime the editor gets the values configured in the inspector of the script attached to the player
+        public float MoveSpeed = 5f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 7.335f;
+        public float SprintSpeed = 7f;
 
         [Tooltip("How fast the character turns to face movement direction")] [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -76,16 +70,6 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        [Header("Roll Parameters")] [SerializeField]
-        private float _rollSpeedFactor = 4;
-
-        //private int _animIDGrounded;
-        //private int _animIDJump;
-        //private int _animIDFreeFall;
-        //private int _animIDMotionSpeed;
-        //private int _animIDRoll;
-        //private int _animIDLightAttack;
-        //private int _animIDSpeed;
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _speed;
@@ -97,26 +81,19 @@ namespace StarterAssets
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
         private bool _targetLock = false;
+
         private CharacterController _controller;
-        private StarterAssetsInputs _input;
+        private PlayerInputHandler _input;
+        private PlayerInput _playerInput;
+        private PlayerController _playerController;
         private GameObject _mainCamera;
         private GameObject[] players;
         private GameObject opponent;
         private PlayerMediator _med;
+        private PlayerAnimatorController _animController;
+
         private const float _threshold = 0.01f;
         private Vector3 _targetDirection;
-
-        public Vector3 TargetDirection
-        {
-            get => _targetDirection;
-            set => _targetDirection = value;
-        }
-
-        public float Speed
-        {
-            get => _speed;
-            set => _speed = value;
-        }
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -141,83 +118,51 @@ namespace StarterAssets
         {
             if (photonView.IsMine)
             {
-                PlayerInput playerInput = GetComponent<PlayerInput>();
-                playerInput.enabled = true;
+                _input = GetComponent<PlayerInputHandler>();
+                _playerInput = GetComponent<PlayerInput>();
+                _playerInput.enabled = true;
                 GameObject followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
             }
 
+            _playerController = GetComponent<PlayerController>();
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
+            _input = GetComponent<PlayerInputHandler>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
 
-        private void Update()
+        #region Photon Methods
+
+        public bool CheckPhotonView()
         {
-            players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in players)
-            {
-                if (player != gameObject)
-                {
-                    opponent = player;
-                }
-            }
-            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
-            {
-                return;
-            }
-
-            AnimationStateCheck();
-
-            JumpAndGravity();
-            GroundedCheck();
-            ActionStateMachine();
+            return (photonView.IsMine == false && PhotonNetwork.IsConnected == true);
         }
 
-        private void ActionStateMachine()
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-            switch (_animController.CurrentPlayerAnimatorState)
-            {
-                case PlayerStates.IdleWalkRunBlend:
-                    Move();
-                    break;
-                case PlayerStates.Roll:
-                    Roll();
-                    break;
-                case PlayerStates.JumpLand:
-                    Move();
-                    break;
-                case PlayerStates.InAir:
-                    Move();
-                    break;
-                case PlayerStates.JumpStart:
-                    Move();
-                    break;
-                case PlayerStates.FirstAttack:
-                case PlayerStates.SecondAttack:
-                case PlayerStates.ThirdAttack:
-                case PlayerStates.FourthAttack:
-                default:
-                    break;
-            }
         }
 
-        private void LateUpdate()
-        {
-            CameraRotation();
-        }
+        #endregion
 
-        private void GroundedCheck()
+
+        #region Ground Check
+
+        public void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
-            _animController.SetParameter(PlayerParameters.Grounded, Grounded);
+            _animController.SetParameter(AnimatorParameters.Grounded, Grounded);
         }
 
-        private void CameraRotation()
+        #endregion
+
+
+        #region Camera Rotation
+
+        public void CameraRotation()
         {
             if (!LockCameraPosition)
             {
@@ -240,39 +185,28 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void Move()
+        #endregion
+
+
+        #region Movement
+
+        public void HandlePlayerLocomotion()
         {
-            float targetSpeed;
-            if (_input.sprint && CanSprint)
+            try
             {
-                targetSpeed = SprintSpeed;
+                if (_playerController.isInteracting)
+                {
+                    // Applying gravity when interacting e.g. Rolling Animation.
+                    ControllerMove(new Vector3(0, 0, 0), 0);
+                }
+                else
+                {
+                    HandleMovement();
+                }
             }
-            else
+            catch (Exception e)
             {
-                targetSpeed = MoveSpeed;
-            }
-
-            if (_input.move == Vector2.zero)
-            {
-                targetSpeed = 0.0f;
-            }
-
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-            _speed = targetSpeed;
-
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-            TransformRotation(inputDirection, RotationSmoothTime);
-
-            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-            ControllerMove(_targetDirection, Speed);
-            
-            // update animator if using character
-            if (_animController.HasAnimator)
-            {
-                _animController.SetParameter(PlayerParameters.Speed, _animationBlend);
-                _animController.SetParameter(PlayerParameters.MotionSpeed, inputMagnitude);
+                Debug.Log(e);
             }
         }
 
@@ -282,20 +216,104 @@ namespace StarterAssets
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
-        private void Roll()
+        public void HandleRollingAndSprinting()
         {
-            if (_animController.IsInTransition())
+            if (_animController.GetBool(AnimatorParameters.IsInteracting)) return;
+            try
             {
-                var inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-                if (_input.move != Vector2.zero)
+                if (!_input.rollFlag) return;
+                if (_input.moveAmount > 0)
                 {
-                    TransformRotation(inputDirection, RotationSmoothTime / 2);
+                    _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
+                    _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
+                    _animController.PlayTargetAnimation(AnimatorStates.Roll, true, 1);
+                    _targetDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
+                    transform.rotation = rollRotation;
+                }
+                else
+                {
+                    _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, 1);
                 }
             }
-
-            ControllerMove(transform.forward, _rollSpeedFactor);
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
         }
 
+        #endregion
+
+        private void HandleMovement()
+        {
+            float targetSpeed;
+            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5)
+            {
+                targetSpeed = SprintSpeed;
+                _playerController.isSprinting = true;
+            }
+            else
+            {
+                targetSpeed = MoveSpeed * _input.moveAmount;
+                _playerController.isSprinting = false;
+            }
+
+            if (_input.move == Vector2.zero)
+            {
+                targetSpeed = 0.0f;
+                _playerController.isSprinting = false;
+            }
+
+            // a reference to the players current horizontal velocity
+            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+            float speedOffset = 0.1f;
+
+            //
+            float inputMagnitude = _input.move.magnitude;
+            /*_speed = targetSpeed;*/
+//
+
+            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+                currentHorizontalSpeed > targetSpeed + speedOffset)
+            {
+                // creates curved result rather than a linear one giving a more organic speed change
+                // note T in Lerp is clamped, so we don't need to clamp our speed
+                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                    Time.deltaTime * SpeedChangeRate);
+
+                // round speed to 3 decimal places
+                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            }
+            else
+            {
+                _speed = targetSpeed;
+            }
+
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+            if (_input.move != Vector2.zero)
+            {
+                TransformRotation(inputDirection, RotationSmoothTime);
+            }
+
+            TransformRotation(inputDirection, RotationSmoothTime);
+
+            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+            // update animator if using character
+            ControllerMove(_targetDirection, _speed);
+            if (_animController.HasAnimator)
+            {
+                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+                _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
+            }
+        }
+
+
+        #region Player Rotation
 
         private void TransformRotation(Vector3 inputDirection, float rotationSmoothTime)
         {
@@ -329,7 +347,12 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
+        #endregion
+
+
+        #region Jump and Gravity
+
+        public void JumpAndGravity()
         {
             if (Grounded)
             {
@@ -337,8 +360,8 @@ namespace StarterAssets
 
                 if (_animController.HasAnimator)
                 {
-                    _animController.SetParameter(PlayerParameters.Jump, false);
-                    _animController.SetParameter(PlayerParameters.FreeFall, false);
+                    _animController.SetParameter(AnimatorParameters.Jump, false);
+                    _animController.SetParameter(AnimatorParameters.FreeFall, false);
                 }
 
                 if (_verticalVelocity < 0.0f)
@@ -346,18 +369,25 @@ namespace StarterAssets
                     _verticalVelocity = -2f;
                 }
 
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                try
                 {
-                    if (_animController.CurrentPlayerAnimatorState == PlayerStates.IdleWalkRunBlend &&
-                        !_animController.IsInTransition())
+                    if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
-                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                        if (_animController.HasAnimator)
+                        if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
+                            !_animController.IsInTransition() && !_playerController.isInteracting)
                         {
-                            _animController.SetParameter(PlayerParameters.Jump, true);
+                            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                            if (_animController.HasAnimator)
+                            {
+                                _animController.SetParameter(AnimatorParameters.Jump, true);
+                            }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
                 }
 
                 if (_jumpTimeoutDelta >= 0.0f)
@@ -377,7 +407,7 @@ namespace StarterAssets
                 {
                     if (_animController.HasAnimator)
                     {
-                        _animController.SetParameter(PlayerParameters.FreeFall, true);
+                        _animController.SetParameter(AnimatorParameters.FreeFall, true);
                     }
                 }
 
@@ -390,6 +420,17 @@ namespace StarterAssets
             }
         }
 
+        #endregion
+
+
+        #region Helpers
+
+        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
 
         private void OnDrawGizmosSelected()
         {
@@ -405,23 +446,8 @@ namespace StarterAssets
                 GroundedRadius);
         }
 
-        public void ToggleTargetLock()
-        {
-            players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in players)
-            {
-                if (player != gameObject)
-                {
-                    opponent = player;
-                }
-            }
+        #endregion
 
-            _targetLock = !_targetLock;
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-        }
 
         public void ConfigureMediator(PlayerMediator med)
         {

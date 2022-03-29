@@ -1,5 +1,5 @@
-using System;
 using Helpers;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Helpers.Literals;
@@ -9,30 +9,32 @@ namespace PlayerScripts
     public class PlayerAnimatorController : MonoBehaviour, IMediatorUser
     {
         [FormerlySerializedAs("_currentPlayerState")] [SerializeField]
-        private PlayerStates currentPlayerAnimatorState;
+        private AnimatorStates currentAnimatorState;
 
         [FormerlySerializedAs("_lastActiveParameter")] [SerializeField]
-        private PlayerParameters lastActiveAnimatorParameter;
+        private AnimatorParameters lastActiveAnimatorState;
 
         private PlayerMediator _med;
         private Animator _animator;
+        PhotonView _photonView;
         public bool HasAnimator { get; private set; }
 
-        public PlayerStates CurrentPlayerAnimatorState
+        public AnimatorStates CurrentAnimatorState
         {
-            get => currentPlayerAnimatorState;
-            set => currentPlayerAnimatorState = value;
+            get => currentAnimatorState;
+            set => currentAnimatorState = value;
         }
 
-        public PlayerParameters LastActiveAnimatorParameter
+        public AnimatorParameters LastActiveAnimatorState
         {
-            get => lastActiveAnimatorParameter;
-            set => lastActiveAnimatorParameter = value;
+            get => lastActiveAnimatorState;
+            set => lastActiveAnimatorState = value;
         }
 
         private void Start()
         {
             HasAnimator = TryGetComponent(out _animator);
+            _photonView = PhotonView.Get(gameObject);
         }
 
         public bool CompareAnimState(string stateToCompare, byte layer = 0)
@@ -45,52 +47,63 @@ namespace PlayerScripts
             return _animator.IsInTransition(layer);
         }
 
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
+        [PunRPC]
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting, int indexLayer,
+            bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+            }
+
             _animator.applyRootMotion = isInteracting;
-            _animator.SetBool("isInteracting", isInteracting);
-            _animator.CrossFade(targetAnimation, 0.2f);
+            SetParameter(AnimatorParameters.IsInteracting, isInteracting);
+            _animator.CrossFade(targetAnimation, 0.2f, indexLayer);
         }
 
-        // This method returns the lenght time of the current animation
-        public float GetCurrentAnimationTime(byte layer = 0)
+        [PunRPC]
+        public void PlayTargetAnimation(AnimatorStates targetAnimation, bool isInteracting, int indexLayer,
+            bool isRemote = false)
         {
-            return _animator.GetCurrentAnimatorStateInfo(layer).length;
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+            }
+
+            _animator.applyRootMotion = isInteracting;
+            SetParameter(AnimatorParameters.IsInteracting, isInteracting);
+            _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
 
-        public void SetParameter(PlayerParameters parameter, bool value)
+        [PunRPC]
+        public void EnableCombo(bool isRemote = false)
+        {
+            if (!isRemote)
+            {
+                _photonView.RPC("EnableCombo", RpcTarget.Others, true);
+            }
+
+            SetParameter(AnimatorParameters.CanDoCombo, true);
+        }
+
+        public void DisableCombo() => SetParameter(AnimatorParameters.CanDoCombo, false);
+
+        public void SetParameter(AnimatorParameters state, bool value)
         {
             if (value)
             {
-                LastActiveAnimatorParameter = parameter;
+                LastActiveAnimatorState = state;
             }
 
-            _animator.SetBool(parameter.ToString(), value);
+            _animator.SetBool(state.ToString(), value);
         }
 
-        public void SetParameter(PlayerParameters parameter, float value)
-        {
-            _animator.SetFloat(parameter.ToString(), value);
-        }
+        public void SetParameter(AnimatorParameters state, float value) => _animator.SetFloat(state.ToString(), value);
+        public void SetParameter(AnimatorParameters state, int value) => _animator.SetInteger(state.ToString(), value);
 
-        public void SetParameter(PlayerParameters parameter, int value)
+        public bool GetBool(AnimatorParameters state)
         {
-            _animator.SetInteger(parameter.ToString(), value);
-        }
-
-        public bool GetParameterBool(PlayerParameters parameter)
-        {
-            return _animator.GetBool(parameter.ToString());
-        }
-
-        public float GetParameterFloat(PlayerParameters parameter)
-        {
-            return _animator.GetFloat(parameter.ToString());
-        }
-
-        public int GetParameterInteger(PlayerParameters parameter)
-        {
-            return _animator.GetInteger(parameter.ToString());
+            return _animator.GetBool(state.ToString());
         }
 
         public void ConfigureMediator(PlayerMediator med)

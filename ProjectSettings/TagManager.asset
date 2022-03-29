@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - PlayerFollowCamera
+  - Weapon
+  - Dummy
   layers:
   - Default
   - TransparentFX

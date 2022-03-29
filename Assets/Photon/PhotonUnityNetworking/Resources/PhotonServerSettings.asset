@@ -39,6 +39,11 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - DecreaseHealth
+  - OnTriggerEnter
+  - TakeDamage
+  - EnableCombo
+  - PlayTargetAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

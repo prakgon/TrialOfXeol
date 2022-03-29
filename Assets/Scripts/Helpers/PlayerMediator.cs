@@ -1,9 +1,9 @@
-using StarterAssets;
 using PlayerScripts;
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
 using TMPro;
+using TOX;
 using UIScripts;
 
 namespace Helpers
@@ -12,13 +12,12 @@ namespace Helpers
     {
         [Header("MOVEMENT-related dependencies")]
         [SerializeField] private PlayerMovement _playerMovement;
-        [SerializeField] private StarterAssetsInputs _starterAssetsInputs;
+        //[SerializeField] private StarterAssetsInputs _starterAssetsInputs;
         [Header("GUI-related dependencies")]
-        [SerializeField] private StamineBar _stamineBar;
+        //[SerializeField] private StamineBar _stamineBar;
         [SerializeField] private SliderBar healthBar;
         [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
-        [SerializeField] private PlayerMechanics _playerMechanics;
         private Animator _an;
         [Header("DEBUG-related dependencies")]
         [SerializeField] private PlayerDataSO playerData;
@@ -27,10 +26,8 @@ namespace Helpers
         [SerializeField] private TMP_Text playerTMPText;
 
         public PlayerMovement PlayerMovement { get => _playerMovement; set => _playerMovement = value; }
-        public StarterAssetsInputs StarterAssetsInputs { get => _starterAssetsInputs; set => _starterAssetsInputs = value; }
-        public StamineBar StamineBar { get => _stamineBar; set => _stamineBar = value; }
+        //public StamineBar StamineBar { get => _stamineBar; set => _stamineBar = value; }
         public PlayerAnimatorController PlayerAnimatorController { get => _playerAnimatorController; set => _playerAnimatorController = value; }
-        public PlayerMechanics PlayerMechanics { get => _playerMechanics; set => _playerMechanics = value; }
         public Animator An { get => _an; set => _an = value; }
         public TMP_Text PlayerTMPText { get => playerTMPText; set => playerTMPText = value; }
         public SkinnedMeshRenderer PlayerMeshRenderer { get => playerMeshRenderer; set => playerMeshRenderer = value; }
