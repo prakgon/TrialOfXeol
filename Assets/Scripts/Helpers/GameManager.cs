@@ -1,3 +1,4 @@
+using Helpers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -33,13 +34,13 @@ namespace TOX
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    UserTypes userType = (UserTypes) PhotonNetwork.LocalPlayer.CustomProperties["user_type"];
+                    Literals.UserTypes userType = (Literals.UserTypes) PhotonNetwork.LocalPlayer.CustomProperties["user_type"];
                     switch (userType)
                     {
-                        case UserTypes.Player:
+                        case Literals.UserTypes.Player:
                             PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                             break;
-                        case UserTypes.FreeSpectator:
+                        case Literals.UserTypes.FreeSpectator:
                             PhotonNetwork.Instantiate(this.freeSpectatorPrefab.name, new Vector3(0f, 5f, -10f), Quaternion.identity, 0);
                             break;
                     }
