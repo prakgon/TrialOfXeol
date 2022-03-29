@@ -98,6 +98,15 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""632f85fc-94f2-446d-8b55-f3531c5d9f9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -364,6 +373,17 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dd6f179-a514-4e05-9a37-0207b5ca53c2"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""TargetLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -428,6 +448,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
+        m_Player_TargetLock = m_Player.FindAction("TargetLock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -495,6 +516,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_SpecialAttack;
     private readonly InputAction m_Player_Block;
+    private readonly InputAction m_Player_TargetLock;
     public struct PlayerActions
     {
         private @InputActionSystem m_Wrapper;
@@ -507,6 +529,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputAction @TargetLock => m_Wrapper.m_Player_TargetLock;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -540,6 +563,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @TargetLock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
+                @TargetLock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
+                @TargetLock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -568,6 +594,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
+                @TargetLock.started += instance.OnTargetLock;
+                @TargetLock.performed += instance.OnTargetLock;
+                @TargetLock.canceled += instance.OnTargetLock;
             }
         }
     }
@@ -618,5 +647,6 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnTargetLock(InputAction.CallbackContext context);
     }
 }

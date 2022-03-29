@@ -80,7 +80,6 @@ namespace TOX
         private float _terminalVelocity = 53.0f;
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
-        private bool _targetLock = false;
 
         private CharacterController _controller;
         private PlayerInputHandler _input;
@@ -166,7 +165,7 @@ namespace TOX
         {
             if (!LockCameraPosition)
             {
-                switch (_targetLock)
+                switch (_input.targetLock)
                 {
                     case true:
                         _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
@@ -319,11 +318,11 @@ namespace TOX
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;
-            switch (_targetLock)
+            switch (_input.targetLock)
             {
                 case true:
                 {
-                    if (opponent is not null)
+                    if (opponent != null)
                     {
                         Vector3 targetPosition = new Vector3(opponent.transform.position.x, transform.position.y,
                             opponent.transform.position.z);
@@ -334,7 +333,7 @@ namespace TOX
                 }
                 default:
                 {
-                    if (_input.move != Vector2.zero && !_targetLock)
+                    if (_input.move != Vector2.zero && !_input.targetLock)
                     {
                         var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
                             ref _rotationVelocity,
@@ -448,6 +447,19 @@ namespace TOX
 
         #endregion
 
+        public void ToggleTargetLock()
+        {
+            players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player != gameObject)
+                {
+                    opponent = player;
+                }
+            }
+
+            _input.targetLock = !_input.targetLock;
+        }
 
         public void ConfigureMediator(PlayerMediator med)
         {

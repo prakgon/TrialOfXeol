@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public bool isSprinting;
     public bool canDoCombo;
     
-    
     // Start is called before the first frame update
     private void Start()
     {

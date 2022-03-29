@@ -1,6 +1,7 @@
 using System;
 using Helpers;
 using PlayerScripts;
+using TOX;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     public float moveAmount;
     public Vector2 look;
     public bool jump;
-
+    public bool targetLock = false;
     // Combat mechanics inputs
     [Header("Combat input flags")] public bool rollFlag;
     public bool sprintFlag;
@@ -35,12 +36,15 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerCombatManager _playerCombatManager;
     private PlayerInventory _playerInventory;
     private PlayerController _playerController;
+    private PlayerMovement _playerMovement;
 
     private void Start()
     {
         _playerCombatManager = GetComponent<PlayerCombatManager>();
         _playerInventory = GetComponent<PlayerInventory>();
         _playerController = GetComponent<PlayerController>();
+        _playerMovement = GetComponent<PlayerMovement>();
+
     }
 
     #region Input Events
@@ -52,7 +56,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnLightAttack(InputAction.CallbackContext context) => LightAttackHandler(context);
     public void OnHeavyAttack(InputAction.CallbackContext context) => HeavyAttackHandler(context);
     public void OnSpecialAttack(InputAction.CallbackContext context) => SpecialAttackHandler(context);
-
+    public void OnTargetLock(InputAction.CallbackContext context) => _playerMovement.ToggleTargetLock();
     public void OnBlock(InputAction.CallbackContext context)
     {
         Debug.Log(context.phase == InputActionPhase.Started);
