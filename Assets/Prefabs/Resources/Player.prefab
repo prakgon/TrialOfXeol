@@ -3672,9 +3672,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: CanDoCombo
-  - Type: 4
-    SynchronizeType: 2
-    Name: IntroAnimation
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -3846,6 +3843,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 97f8241e-e30d-43fb-afa0-71b26eb8ced1
     m_ActionName: Player/SpecialAttack[/Keyboard/r,/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4289067332944146655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnTargetLock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 632f85fc-94f2-446d-8b55-f3531c5d9f9a
+    m_ActionName: Player/TargetLock[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3867,6 +3880,7 @@ MonoBehaviour:
   moveAmount: 0
   look: {x: 0, y: 0}
   jump: 0
+  targetLock: 0
   rollFlag: 0
   sprintFlag: 0
   comboFlag: 0
