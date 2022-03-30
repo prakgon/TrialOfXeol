@@ -3573,9 +3573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51beaeb22b7c8cf47937104c76439548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInteracting: 0
-  isSprinting: 0
-  canDoCombo: 0
   MoveSpeed: 5
   SprintSpeed: 7
   RotationSmoothTime: 0.12
