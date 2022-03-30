@@ -3,6 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Helpers.Literals;
+using static Helpers.LiteralToStringParse;
 
 namespace PlayerScripts
 {
@@ -19,17 +20,9 @@ namespace PlayerScripts
         PhotonView _photonView;
         public bool HasAnimator { get; private set; }
 
-        public AnimatorStates CurrentAnimatorState
-        {
-            get => currentAnimatorState;
-            set => currentAnimatorState = value;
-        }
+        public AnimatorStates CurrentAnimatorState => currentAnimatorState;
 
-        public AnimatorParameters LastActiveAnimatorState
-        {
-            get => lastActiveAnimatorState;
-            set => lastActiveAnimatorState = value;
-        }
+        public AnimatorParameters LastActiveAnimatorState { set => lastActiveAnimatorState = value; }
 
         private void Start()
         {
@@ -53,7 +46,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -67,26 +60,36 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
             SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
-
-        [PunRPC]
-        public void EnableCombo(bool isRemote = false)
+        
+        public void EnableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager, bool isRemote = false)
         {
-            if (!isRemote)
-            {
-                _photonView.RPC("EnableCombo", RpcTarget.Others, true);
-            }
+            //if (!isRemote)
+            //{
+            //    _photonView.RPC(LiteralToStringParse.EnableCombo, RpcTarget.Others, true);
+            //}
 
             SetParameter(AnimatorParameters.CanDoCombo, true);
+            
+            PlayTargetAnimation(targetAnimation.ToString(), true, 1);
+            playerCombatManager.LastAttack = targetAnimation;
         }
 
-        public void DisableCombo() => SetParameter(AnimatorParameters.CanDoCombo, false);
+        public void DisableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager)
+        {
+            SetParameter(AnimatorParameters.CanDoCombo, false);
+            
+            PlayTargetAnimation(targetAnimation.ToString(), true, 1);
+            playerCombatManager.LastAttack = targetAnimation;
+        }
+
+        
 
         public void SetParameter(AnimatorParameters state, bool value)
         {

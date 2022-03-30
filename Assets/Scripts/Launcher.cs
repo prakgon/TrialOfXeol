@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
 using static Helpers.Literals;
+using static Helpers.LiteralToStringParse;
 
 namespace TOX
 {
@@ -85,9 +86,9 @@ namespace TOX
         public void Connect()
         {
             DontDestroyOnLoad(gameObject);
-            _playerProperties.Add("user_type", _userType);
+            _playerProperties.Add(UserType, _userType);
             PhotonNetwork.LocalPlayer.SetCustomProperties(_playerProperties);
-            SceneManager.LoadScene("LoadingScreen");
+            SceneManager.LoadScene(LoadingScreen);
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             _isConnecting = true;
             if (PhotonNetwork.IsConnected)
@@ -137,7 +138,7 @@ namespace TOX
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-                PhotonNetwork.LoadLevel("OnlineScene");
+                PhotonNetwork.LoadLevel(OnlineScene);
             }
         }
 

@@ -4897,7 +4897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f23fc0f29746bcae41bc3d1afd2300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAttack: 0
 --- !u!1 &1580924560571236571
 GameObject:
   m_ObjectHideFlags: 0
@@ -6065,9 +6064,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: CanDoCombo
-  - Type: 4
-    SynchronizeType: 2
-    Name: IntroAnimation
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -6986,8 +6982,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 0}
-  healthBar: {fileID: 5153147324983696241}
+  _playerController: {fileID: 0}
+  _healthBar: {fileID: 5153147324983696241}
   _playerAnimatorController: {fileID: 3699676049021717448}
+  _playerCombatManager: {fileID: 0}
+  _playerInventory: {fileID: 7995885840642531634}
+  _playerInputHandler: {fileID: 0}
+  _an: {fileID: 5751386587352800450}
   playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
   playerWeapon: {fileID: 0}
   playerMeshRenderer: {fileID: 7261630098546621842}

@@ -14,10 +14,4 @@ public class PreventDestroy : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Dont Destroy on Load: " + name);
         DontDestroyOnLoad(this.gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

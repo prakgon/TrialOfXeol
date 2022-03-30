@@ -88,10 +88,11 @@ namespace TOX
         private GameObject _mainCamera;
         private GameObject[] players;
         private GameObject opponent;
-        private PlayerMediator _med;
         private PlayerAnimatorController _animController;
+        private PlayerMediator _playerMediator;
 
-        private const float _threshold = 0.01f;
+        private const float _zero = 0.0f;
+        private const float _thousand = 1000f;
         private Vector3 _targetDirection;
 
         public static GameObject LocalPlayerInstance;
@@ -115,18 +116,6 @@ namespace TOX
 
         private void Start()
         {
-            if (photonView.IsMine)
-            {
-                _input = GetComponent<PlayerInputHandler>();
-                _playerInput = GetComponent<PlayerInput>();
-                _playerInput.enabled = true;
-                GameObject followCamera = Instantiate(_followCameraPrefab);
-                followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
-            }
-
-            _playerController = GetComponent<PlayerController>();
-            _controller = GetComponent<CharacterController>();
-            _input = GetComponent<PlayerInputHandler>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
@@ -282,7 +271,7 @@ namespace TOX
                     Time.deltaTime * SpeedChangeRate);
 
                 // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                _speed = Mathf.Round(_speed * _thousand) / _thousand;
             }
             else
             {
@@ -291,7 +280,7 @@ namespace TOX
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Vector3 inputDirection = new Vector3(_input.move.x, _zero, _input.move.y).normalized;
 
             if (_input.move != Vector2.zero)
             {
@@ -300,7 +289,7 @@ namespace TOX
 
             TransformRotation(inputDirection, RotationSmoothTime);
 
-            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            _targetDirection = Quaternion.Euler(_zero, _targetRotation, _zero) * Vector3.forward;
 
             // update animator if using character
             ControllerMove(_targetDirection, _speed);
@@ -449,7 +438,7 @@ namespace TOX
 
         public void ToggleTargetLock()
         {
-            players = GameObject.FindGameObjectsWithTag("Player");
+            players = GameObject.FindGameObjectsWithTag(LiteralToStringParse.Player);
             foreach (GameObject player in players)
             {
                 if (player != gameObject)
@@ -463,8 +452,21 @@ namespace TOX
 
         public void ConfigureMediator(PlayerMediator med)
         {
-            _med = med;
-            _animController = _med.PlayerAnimatorController;
+            _playerMediator = med;
+            _animController = med.PlayerAnimatorController;
+
+            if (photonView.IsMine)
+            {
+                _input = med.PlayerInputHandler;
+                _playerInput = med.PlayerInput;
+                _playerInput.enabled = true;
+                var followCamera = Instantiate(_followCameraPrefab);
+                followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+            }
+
+            _playerController = med.PlayerController;
+            _controller = med.CharacterController;
+            _input = med.PlayerInputHandler;
         }
     }
 }

@@ -3532,8 +3532,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 4017133197377439093}
-  healthBar: {fileID: 606694543231277429}
+  _playerController: {fileID: 1438482235913973120}
+  _playerInput: {fileID: 7999654713921530471}
+  _characterController: {fileID: 2147927287329898618}
+  _healthBar: {fileID: 606694543231277429}
   _playerAnimatorController: {fileID: 4387597190941284282}
+  _playerCombatManager: {fileID: 1898708954298292171}
+  _playerInventory: {fileID: 7008467895422926144}
+  _playerInputHandler: {fileID: 4289067332944146655}
+  _an: {fileID: 4640119409714086064}
   playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
   playerWeapon: {fileID: 0}
   playerMeshRenderer: {fileID: 7742388956085133792}
@@ -3859,6 +3866,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 632f85fc-94f2-446d-8b55-f3531c5d9f9a
     m_ActionName: Player/TargetLock[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d4deb0e-195e-453c-9271-20945686ee75
+    m_ActionName: FreeCamera/Move[/Keyboard/e,/Keyboard/c,/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d3ac37b3-5f3e-40be-82e4-d7ba0e783357
+    m_ActionName: FreeCamera/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3916,7 +3931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f23fc0f29746bcae41bc3d1afd2300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAttack: 0
 --- !u!114 &7008467895422926144
 MonoBehaviour:
   m_ObjectHideFlags: 0

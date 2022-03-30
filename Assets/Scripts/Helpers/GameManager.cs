@@ -1,10 +1,12 @@
-using Helpers;
+using static Helpers.LiteralToStringParse;
+using static Helpers.Literals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using TOX;
 
-namespace TOX
+namespace Helpers
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
@@ -34,14 +36,14 @@ namespace TOX
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    Literals.UserTypes userType = (Literals.UserTypes) PhotonNetwork.LocalPlayer.CustomProperties["user_type"];
+                    var userType = (UserTypes) PhotonNetwork.LocalPlayer.CustomProperties[UserType];
                     switch (userType)
                     {
-                        case Literals.UserTypes.Player:
-                            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                        case UserTypes.Player:
+                            PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                             break;
-                        case Literals.UserTypes.FreeSpectator:
-                            PhotonNetwork.Instantiate(this.freeSpectatorPrefab.name, new Vector3(0f, 5f, -10f), Quaternion.identity, 0);
+                        case UserTypes.FreeSpectator:
+                            PhotonNetwork.Instantiate(freeSpectatorPrefab.name, new Vector3(0f, 5f, -10f), Quaternion.identity, 0);
                             break;
                     }
                 }
@@ -104,7 +106,7 @@ namespace TOX
                 Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("SampleScene");
+            PhotonNetwork.LoadLevel(SampleScene);
         }
 
 
