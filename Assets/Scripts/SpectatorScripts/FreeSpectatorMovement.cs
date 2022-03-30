@@ -21,12 +21,11 @@ public class FreeSpectatorMovement : MonoBehaviourPunCallbacks
     public float TopClamp = 70.0f;
     public float BottomClamp = -30.0f;
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (photonView.IsMine)
         {
-            PlayerInput playerInput = GetComponent<PlayerInput>();
+            var playerInput = GetComponent<PlayerInput>();
             playerInput.enabled = true;
             followCamera = Instantiate(_followCameraPrefab);
             followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
@@ -34,9 +33,8 @@ public class FreeSpectatorMovement : MonoBehaviourPunCallbacks
         _cameraTargetTransform = CinemachineCameraTarget.transform;
         _controller = GetComponent<CharacterController>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         var directedMove = _cameraTargetTransform.right.normalized * _move.x + _cameraTargetTransform.up.normalized * _move.y + _cameraTargetTransform.forward.normalized * _move.z;
         _controller.Move(directedMove*Time.deltaTime*speed);

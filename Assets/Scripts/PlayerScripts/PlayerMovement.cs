@@ -91,7 +91,8 @@ namespace TOX
         private PlayerMediator _med;
         private PlayerAnimatorController _animController;
 
-        private const float _threshold = 0.01f;
+        private const float _zero = 0.0f;
+        private const float _thousand = 1000f;
         private Vector3 _targetDirection;
 
         public static GameObject LocalPlayerInstance;
@@ -282,7 +283,7 @@ namespace TOX
                     Time.deltaTime * SpeedChangeRate);
 
                 // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                _speed = Mathf.Round(_speed * _thousand) / _thousand;
             }
             else
             {
@@ -291,7 +292,7 @@ namespace TOX
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Vector3 inputDirection = new Vector3(_input.move.x, _zero, _input.move.y).normalized;
 
             if (_input.move != Vector2.zero)
             {
@@ -300,7 +301,7 @@ namespace TOX
 
             TransformRotation(inputDirection, RotationSmoothTime);
 
-            _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            _targetDirection = Quaternion.Euler(_zero, _targetRotation, _zero) * Vector3.forward;
 
             // update animator if using character
             ControllerMove(_targetDirection, _speed);

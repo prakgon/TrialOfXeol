@@ -3,6 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Helpers.Literals;
+using static Helpers.LiteralToStringParse;
 
 namespace PlayerScripts
 {
@@ -53,7 +54,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -67,7 +68,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("PlayTargetAnimation", RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -80,7 +81,7 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC("EnableCombo", RpcTarget.Others, true);
+                _photonView.RPC(LiteralToStringParse.EnableCombo, RpcTarget.Others, true);
             }
 
             SetParameter(AnimatorParameters.CanDoCombo, true);

@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using static Helpers.LiteralToStringParse;
+
 
 namespace PlayerScripts
 {
-    [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/Player/Data", order = 1)]
+    [CreateAssetMenu(fileName = PlayerData, menuName = PlayerDataPath, order = 1)]
     public class PlayerDataSO : ScriptableObject
     {
         public float maximumHealth;

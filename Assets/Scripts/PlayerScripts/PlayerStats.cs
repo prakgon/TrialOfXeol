@@ -1,5 +1,6 @@
 using System.Collections;
 using Helpers;
+using static Helpers.Literals;
 using TMPro;
 using UnityEngine;
 using WeaponScripts;
@@ -41,12 +42,12 @@ namespace PlayerScripts
             //Debug
             UpdateDebugUI();
             
-            _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_01.ToString(), true,1);
+            _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true,1);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
-                _animatorController.PlayTargetAnimation(Literals.DamageAnimations.Damage_Die.ToString(), true, 1);
+                _animatorController.PlayTargetAnimation(DamageAnimations.Damage_Die.ToString(), true, 1);
                 _effectsManager.PlayDeathFX();
                 // Handle player death
             }

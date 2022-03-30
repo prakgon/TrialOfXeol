@@ -96,11 +96,34 @@ namespace Helpers
             Player,
             FreeSpectator
         }
-        
-        public class TagsStrings
+
+        public enum ScriptableObjects
         {
-            public static readonly string MainCamera = Tags.MainCamera.ToString();
-            public static readonly string Weapon = Tags.Weapon.ToString();
+            //PlayerData
         }
+
+    }
+
+    internal static class LiteralToStringParse
+    {
+        //Tags
+        //public static readonly string MainCamera = Tags.MainCamera.ToString();
+        //public static readonly string Weapon = Tags.Weapon.ToString();
+
+        //ScriptableObjects
+        internal const string PlayerDataPath = "ScriptableObjects/Player/Data";
+        internal const string PlayerData = "PlayerData";
+        
+        //Photon && Method names
+        internal const string UserType = "user_type";
+        internal const string PlayTargetAnimation = "PlayTargetAnimation";
+        internal const string EnableCombo = "EnableCombo";
+        
+        //Scenes
+        internal const string LoadingScreen = "LoadingScreen";
+        internal const string OnlineScene = "OnlineScene";
+        internal const string SampleScene = "SampleScene";
+        
+
     }
 }
