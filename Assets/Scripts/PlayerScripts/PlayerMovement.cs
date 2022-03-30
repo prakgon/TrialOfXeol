@@ -116,18 +116,6 @@ namespace TOX
 
         private void Start()
         {
-            if (photonView.IsMine)
-            {
-                _input = GetComponent<PlayerInputHandler>();
-                _playerInput = GetComponent<PlayerInput>();
-                _playerInput.enabled = true;
-                GameObject followCamera = Instantiate(_followCameraPrefab);
-                followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
-            }
-
-            _playerController = GetComponent<PlayerController>();
-            _controller = GetComponent<CharacterController>();
-            _input = GetComponent<PlayerInputHandler>();
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
@@ -450,7 +438,7 @@ namespace TOX
 
         public void ToggleTargetLock()
         {
-            players = GameObject.FindGameObjectsWithTag("Player");
+            players = GameObject.FindGameObjectsWithTag(LiteralToStringParse.Player);
             foreach (GameObject player in players)
             {
                 if (player != gameObject)
@@ -466,6 +454,19 @@ namespace TOX
         {
             _playerMediator = med;
             _animController = med.PlayerAnimatorController;
+
+            if (photonView.IsMine)
+            {
+                _input = med.PlayerInputHandler;
+                _playerInput = med.PlayerInput;
+                _playerInput.enabled = true;
+                var followCamera = Instantiate(_followCameraPrefab);
+                followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+            }
+
+            _playerController = med.PlayerController;
+            _controller = med.CharacterController;
+            _input = med.PlayerInputHandler;
         }
     }
 }

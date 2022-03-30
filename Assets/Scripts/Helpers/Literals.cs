@@ -103,7 +103,7 @@ namespace Helpers
     {
         //Tags
         //public static readonly string MainCamera = Tags.MainCamera.ToString();
-        //public static readonly string Weapon = Tags.Weapon.ToString();
+        internal static readonly string Player = Player.ToString();
 
         //ScriptableObjects
         internal const string PlayerDataPath = "ScriptableObjects/Player/Data";

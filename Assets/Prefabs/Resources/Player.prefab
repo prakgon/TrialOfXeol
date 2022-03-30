@@ -3533,6 +3533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 4017133197377439093}
   _playerController: {fileID: 1438482235913973120}
+  _playerInput: {fileID: 7999654713921530471}
+  _characterController: {fileID: 2147927287329898618}
   _healthBar: {fileID: 606694543231277429}
   _playerAnimatorController: {fileID: 4387597190941284282}
   _playerCombatManager: {fileID: 1898708954298292171}

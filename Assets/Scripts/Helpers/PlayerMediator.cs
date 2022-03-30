@@ -14,7 +14,8 @@ namespace Helpers
         [Header("MOVEMENT-related dependencies")]
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerController _playerController;
-        //[SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private CharacterController _characterController;
         [Header("GUI-related dependencies")]
         //[SerializeField] private StamineBar _stamineBar;
         [SerializeField] private SliderBar _healthBar;
@@ -40,9 +41,10 @@ namespace Helpers
         public PlayerCombatManager PlayerCombatManager => _playerCombatManager;
         public PlayerInventory PlayerInventory => _playerInventory;
         public PlayerController PlayerController => _playerController;
-        //public PlayerInput PlayerInput => _playerInput;
+        public PlayerInput PlayerInput => _playerInput;
         public SliderBar HealthBar => _healthBar;
         public PlayerInputHandler PlayerInputHandler => _playerInputHandler;
+        public CharacterController CharacterController => _characterController;
 
         private void Awake()
         {
