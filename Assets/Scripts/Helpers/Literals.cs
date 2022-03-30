@@ -1,3 +1,5 @@
+using static Helpers.Literals;
+
 namespace Helpers
 {
     public static class Literals
@@ -103,7 +105,7 @@ namespace Helpers
     {
         //Tags
         //public static readonly string MainCamera = Tags.MainCamera.ToString();
-        internal static readonly string Player = Player.ToString();
+        internal static readonly string Player = Tags.Player.ToString();
 
         //ScriptableObjects
         internal const string PlayerDataPath = "ScriptableObjects/Player/Data";
