@@ -75,9 +75,9 @@ namespace PlayerScripts
             SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
-
+        
         [PunRPC]
-        public void EnableCombo(bool isRemote = false)
+        public void EnableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager, bool isRemote = false)
         {
             if (!isRemote)
             {
@@ -85,9 +85,20 @@ namespace PlayerScripts
             }
 
             SetParameter(AnimatorParameters.CanDoCombo, true);
+            
+            PlayTargetAnimation(targetAnimation.ToString(), true, 1);
+            playerCombatManager.LastAttack = targetAnimation;
         }
 
-        public void DisableCombo() => SetParameter(AnimatorParameters.CanDoCombo, false);
+        public void DisableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager)
+        {
+            SetParameter(AnimatorParameters.CanDoCombo, false);
+            
+            PlayTargetAnimation(targetAnimation.ToString(), true, 1);
+            playerCombatManager.LastAttack = targetAnimation;
+        }
+
+        
 
         public void SetParameter(AnimatorParameters state, bool value)
         {

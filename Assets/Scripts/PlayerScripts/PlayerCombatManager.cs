@@ -2,6 +2,7 @@ using System;
 using Photon.Pun.Demo.PunBasics;
 using static Helpers.Literals;
 using UnityEngine;
+using UnityEngine.Serialization;
 using WeaponScripts;
 
 namespace PlayerScripts
@@ -11,7 +12,7 @@ namespace PlayerScripts
         private PlayerAnimatorController _animController;
         private PlayerInputHandler _input;
         private PlayerController _playerController;
-        public AttackAnimations lastAttack = AttackAnimations.InitialState;
+        public AttackAnimations LastAttack { get; set; } = AttackAnimations.InitialState;
         private PlayerEffectsManager _playerEffectsManager;
 
         private void Awake()
@@ -25,122 +26,87 @@ namespace PlayerScripts
         #region Handle Combos
         public void HandleSkillWeaponCombo(WeaponDataSO weaponData)
         {
-            //if (!_input.comboFlag) return;
-            //_animController.SetParameter(AnimatorParameters.CanDoCombo, false);
-            
             CanDoCombo();
             
-            switch (lastAttack)
+            switch (LastAttack)
             {
                 case AttackAnimations.Skill_A:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_B.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_B;
+                    _animController.EnableCombo(weaponData.Skill_B, this);
                     Debug.Log("Skill Combo state 2");
                     break;
 
                 case AttackAnimations.Skill_B:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_C.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_C;
+                    _animController.EnableCombo(weaponData.Skill_C, this);
                     Debug.Log("Skill Combo state 3");
                     break;
 
                 case AttackAnimations.Skill_C:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_D.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_D;
+                    _animController.EnableCombo(weaponData.Skill_D, this);
                     Debug.Log("Skill Combo state 4");
                     break;
 
                 case AttackAnimations.Skill_D:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_E.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_E;
+                    _animController.EnableCombo(weaponData.Skill_E, this);
                     Debug.Log("Skill Combo state 5");
                     break;
 
                 case AttackAnimations.Skill_E:
-                    _animController.DisableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_F.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_F;
+                    _animController.DisableCombo(weaponData.Skill_F, this);
                     Debug.Log("Skill Combo state 6");
                     break;
 
                 case AttackAnimations.Skill_F:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_A.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_A;
+                    _animController.EnableCombo(weaponData.Skill_A, this);
                     Debug.Log("Skill Combo state 1, but reset");
                     break;
 
                 default:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.Skill_A.ToString(), true, 1);
-                    lastAttack = AttackAnimations.Skill_A;
+                    _animController.EnableCombo(weaponData.Skill_A, this);
                     Debug.Log("Skill Combo state 1, but default");
                     break;
             }
             
             _playerEffectsManager.PlayWeaponTrailFX(false);
-            //_playerEffectsManager.PlayWeaponGlowFX(false);
         }
 
         public void HandleLightWeaponCombo(WeaponDataSO weaponData)
         {
-            //if (!_input.comboFlag) return;
-            //_animController.SetParameter(AnimatorParameters.CanDoCombo, false);
-           
             CanDoCombo();
             
-            switch (lastAttack)
+            switch (LastAttack)
             {
                 case AttackAnimations.OH_Light_Attack_1:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_2.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_2;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_2, this);
                     Debug.Log("Light Combo state 2");
                     break;
 
                 case AttackAnimations.OH_Light_Attack_2:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_3.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_3;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_3, this);
                     Debug.Log("Light Combo state 3");
                     break;
 
                 case AttackAnimations.OH_Light_Attack_3:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_4.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_4;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_4, this);
                     Debug.Log("Light Combo state 4");
                     break;
 
                 case AttackAnimations.OH_Light_Attack_4:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_5.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_5;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_5, this);
                     Debug.Log("Light Combo state 5");
                     break;
 
                 case AttackAnimations.OH_Light_Attack_5:
-                    _animController.DisableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_6.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_6;
+                    _animController.DisableCombo(weaponData.OH_Light_Attack_6, this);
                     Debug.Log("Light Combo state 6");
                     break;
 
                 case AttackAnimations.OH_Light_Attack_6:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_1.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_1;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_1, this);
                     Debug.Log("Light Combo state 1, but reset");
                     break;
 
                 default:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_1.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Light_Attack_1;
+                    _animController.EnableCombo(weaponData.OH_Light_Attack_1, this);
                     Debug.Log("Light Combo state 1, but default");
                     break;
             }
@@ -150,65 +116,47 @@ namespace PlayerScripts
 
         public void HandleHeavyWeaponCombo(WeaponDataSO weaponData)
         {
-            //if (!_input.comboFlag) return;
-           
             CanDoCombo();
             
-            switch (lastAttack)
+            switch (LastAttack)
             {
                 case AttackAnimations.OH_Heavy_Attack_1:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_2.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_2;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_2, this);
                     Debug.Log("Heavy Combo state 2");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_2:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_3.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_3;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_3, this);
                     Debug.Log("Heavy Combo state 3");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_3:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_4.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_4;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_4, this);
                     Debug.Log("Heavy Combo state 4");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_4:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_5.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_5;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_5, this);
                     Debug.Log("Heavy Combo state 5");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_5:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_6.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_6;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_6, this);
                     Debug.Log("Heavy Combo state 6");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_6:
-                    _animController.DisableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_7.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_7;
+                    _animController.DisableCombo(weaponData.OH_Heavy_Attack_7, this);
                     Debug.Log("Heavy Combo state 7");
                     break;
 
                 case AttackAnimations.OH_Heavy_Attack_7:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_1.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_1;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_1, this);
                     Debug.Log("heavy reset");
                     break;
 
                 default:
-                    _animController.EnableCombo();
-                    _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_1.ToString(), true, 1);
-                    lastAttack = AttackAnimations.OH_Heavy_Attack_1;
+                    _animController.EnableCombo(weaponData.OH_Heavy_Attack_1, this);
                     Debug.Log("Heavy Combo state 1, but default");
                     break;
             }
@@ -220,32 +168,9 @@ namespace PlayerScripts
         {
             if (!_animController.GetBool(AnimatorParameters.CanDoCombo))
             {
-                lastAttack = AttackAnimations.InitialState;
+                LastAttack = AttackAnimations.InitialState;
             }
         }
         #endregion
-        
-        
-        public void HandleLightAttack(WeaponDataSO weaponData)
-        {
-            _animController.EnableCombo();
-            _animController.PlayTargetAnimation(weaponData.OH_Light_Attack_1.ToString(), true, 1);
-            lastAttack = weaponData.OH_Light_Attack_1;
-        }
-
-        public void HandleHeavyAttack(WeaponDataSO weaponData)
-        {
-            _animController.EnableCombo();
-            _animController.PlayTargetAnimation(weaponData.OH_Heavy_Attack_1.ToString(), true, 1);
-            lastAttack = weaponData.OH_Heavy_Attack_1;
-        }
-
-        public void HandleSkillAttack(WeaponDataSO weaponData)
-        {
-            _animController.EnableCombo();
-            _animController.PlayTargetAnimation(weaponData.Skill_A.ToString(), true, 1);
-            lastAttack = weaponData.Skill_A;
-            Debug.Log(_animController.GetBool(AnimatorParameters.CanDoCombo));
-        }
     }
 }
