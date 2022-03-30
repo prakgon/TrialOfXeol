@@ -2,11 +2,10 @@ using System;
 using Helpers;
 using PlayerScripts;
 using TOX;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 {
     // Basic inputs
     [Header("Basic player inputs")] public Vector2 move;
@@ -37,15 +36,6 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInventory _playerInventory;
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
-
-    private void Start()
-    {
-        _playerCombatManager = GetComponent<PlayerCombatManager>();
-        _playerInventory = GetComponent<PlayerInventory>();
-        _playerController = GetComponent<PlayerController>();
-        _playerMovement = GetComponent<PlayerMovement>();
-
-    }
 
     #region Input Events
 
@@ -183,4 +173,12 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     #endregion
+
+    public void ConfigureMediator(PlayerMediator med)
+    {
+        _playerCombatManager = med.PlayerCombatManager;
+        _playerInventory = med.PlayerInventory;
+        _playerController = med.PlayerController;
+        _playerMovement = med.PlayerMovement;
+    }
 }

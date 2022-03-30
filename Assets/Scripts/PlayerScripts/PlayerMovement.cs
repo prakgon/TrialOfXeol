@@ -88,8 +88,8 @@ namespace TOX
         private GameObject _mainCamera;
         private GameObject[] players;
         private GameObject opponent;
-        private PlayerMediator _med;
         private PlayerAnimatorController _animController;
+        private PlayerMediator _playerMediator;
 
         private const float _zero = 0.0f;
         private const float _thousand = 1000f;
@@ -464,8 +464,8 @@ namespace TOX
 
         public void ConfigureMediator(PlayerMediator med)
         {
-            _med = med;
-            _animController = _med.PlayerAnimatorController;
+            _playerMediator = med;
+            _animController = med.PlayerAnimatorController;
         }
     }
 }

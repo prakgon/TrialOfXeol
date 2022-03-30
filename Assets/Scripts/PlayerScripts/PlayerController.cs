@@ -6,53 +6,61 @@ using PlayerScripts;
 using TOX;
 using static Helpers.Literals;
 using UnityEngine;
+using Helpers;
 
-public class PlayerController : MonoBehaviour
+namespace PlayerScripts
 {
-    private PlayerInputHandler _input;
-    private PlayerAnimatorController _animatorController;
-    private PlayerMovement _playerMovement;
-    
-    [Header("Player Flags")]
-    public bool isInteracting;
-    public bool isSprinting;
-    public bool canDoCombo;
-    
-    // Start is called before the first frame update
-    private void Start()
+    public class PlayerController : MonoBehaviour, IMediatorUser
     {
-        _input = GetComponent<PlayerInputHandler>();
-        _animatorController = GetComponent<PlayerAnimatorController>();
-        _playerMovement = GetComponent<PlayerMovement>();
-    }
+        protected PlayerMediator _med;
+        private PlayerMovement _playerMovement;
+        private PlayerInputHandler _input;
+        private PlayerAnimatorController _animController;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (_playerMovement.CheckPhotonView()) return;
-        
-        float delta = Time.deltaTime;
-        
-        //_playerMovement.AnimationStateCheck();
-        
-        _playerMovement.JumpAndGravity();
-        _playerMovement.GroundedCheck();
+        [Header("Player Flags")]
+        public bool isInteracting;
+        public bool isSprinting;
+        public bool canDoCombo;
 
-        _playerMovement.HandlePlayerLocomotion();
-        _playerMovement.HandleRollingAndSprinting();
-        
-    }
+        private void Update()
+        {
+            if (_playerMovement.CheckPhotonView()) return;
 
-    private void LateUpdate()
-    {
-        _playerMovement.CameraRotation();
+            _playerMovement.JumpAndGravity();
+            _playerMovement.GroundedCheck();
 
-        _input.rollFlag = false;
-        isSprinting = _input.sprintFlag;
-        _input.rightTriggerInput = false; // Light attack
-        _input.rightTriggerInput = false; // Heavy Attack
-        isInteracting = _animatorController.GetBool(AnimatorParameters.IsInteracting);
-        _input.comboFlag = false;
-        canDoCombo = _animatorController.GetBool(AnimatorParameters.CanDoCombo);
+            _playerMovement.HandlePlayerLocomotion();
+            _playerMovement. HandleRollingAndSprinting();
+
+        }
+
+        private void LateUpdate()
+        {
+            _playerMovement.CameraRotation();
+
+            _input.rollFlag = false;
+            isSprinting = _input.sprintFlag;
+            _input.rightTriggerInput = false; // Light attack
+            _input.rightTriggerInput = false; // Heavy Attack
+            isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
+            _input.comboFlag = false;
+            canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
+        }
+        public void ConfigureMediator(PlayerMediator med)
+        {
+            _med = med;
+            _animController = med.PlayerAnimatorController;
+            _input = med.PlayerInputHandler;
+            _playerMovement = med.PlayerMovement;
+        }
+
+        //protected virtual bool CheckPhotonView(){ return true; }
+        //protected virtual void JumpAndGravity(){}
+        //protected virtual void GroundedCheck(){}
+        //protected virtual void HandlePlayerLocomotion(){}
+        //protected virtual void HandleRollingAndSprinting(){}
+        //protected virtual void CameraRotation(){}
     }
 }
+
+

@@ -3532,8 +3532,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 4017133197377439093}
-  healthBar: {fileID: 606694543231277429}
+  _playerController: {fileID: 1438482235913973120}
+  _healthBar: {fileID: 606694543231277429}
   _playerAnimatorController: {fileID: 4387597190941284282}
+  _playerCombatManager: {fileID: 1898708954298292171}
+  _playerInventory: {fileID: 7008467895422926144}
+  _playerInputHandler: {fileID: 4289067332944146655}
+  _an: {fileID: 4640119409714086064}
   playerData: {fileID: 11400000, guid: 4d299779dc34ea24bae4b9a000f01cd5, type: 2}
   playerWeapon: {fileID: 0}
   playerMeshRenderer: {fileID: 7742388956085133792}
@@ -3568,6 +3573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51beaeb22b7c8cf47937104c76439548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
+  isSprinting: 0
+  canDoCombo: 0
   MoveSpeed: 5
   SprintSpeed: 7
   RotationSmoothTime: 0.12
@@ -3924,7 +3932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f23fc0f29746bcae41bc3d1afd2300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastAttack: 0
 --- !u!114 &7008467895422926144
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using TOX;
 using UIScripts;
+using UnityEngine.InputSystem;
 
 namespace Helpers
 {
@@ -12,37 +13,39 @@ namespace Helpers
     {
         [Header("MOVEMENT-related dependencies")]
         [SerializeField] private PlayerMovement _playerMovement;
-        //[SerializeField] private StarterAssetsInputs _starterAssetsInputs;
+        [SerializeField] private PlayerController _playerController;
+        //[SerializeField] private PlayerInput _playerInput;
         [Header("GUI-related dependencies")]
         //[SerializeField] private StamineBar _stamineBar;
-        [SerializeField] private SliderBar healthBar;
+        [SerializeField] private SliderBar _healthBar;
         [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
-        private Animator _an;
+        [SerializeField] private PlayerCombatManager _playerCombatManager;
+        [SerializeField] private PlayerInventory _playerInventory;
+        [SerializeField] private PlayerInputHandler _playerInputHandler;
+        [SerializeField] private Animator _an;
         [Header("DEBUG-related dependencies")]
         [SerializeField] private PlayerDataSO playerData;
         [SerializeField] private GameObject playerWeapon;
         [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
         [SerializeField] private TMP_Text playerTMPText;
 
-        public PlayerMovement PlayerMovement { get => _playerMovement; set => _playerMovement = value; }
-        //public StamineBar StamineBar { get => _stamineBar; set => _stamineBar = value; }
-        public PlayerAnimatorController PlayerAnimatorController { get => _playerAnimatorController; set => _playerAnimatorController = value; }
-        public Animator An { get => _an; set => _an = value; }
-        public TMP_Text PlayerTMPText { get => playerTMPText; set => playerTMPText = value; }
-        public SkinnedMeshRenderer PlayerMeshRenderer { get => playerMeshRenderer; set => playerMeshRenderer = value; }
-        public GameObject PlayerWeapon { get => playerWeapon; set => playerWeapon = value; }
-        public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
-
-        public SliderBar HealthBar
-        {
-            get => healthBar;
-            set => healthBar = value;
-        }
+        public PlayerMovement PlayerMovement => _playerMovement;
+        public PlayerAnimatorController PlayerAnimatorController => _playerAnimatorController;
+        public Animator An => _an;
+        public TMP_Text PlayerTMPText => playerTMPText;
+        public SkinnedMeshRenderer PlayerMeshRenderer => playerMeshRenderer;
+        public GameObject PlayerWeapon => playerWeapon;
+        public PlayerDataSO PlayerData => playerData;
+        public PlayerCombatManager PlayerCombatManager => _playerCombatManager;
+        public PlayerInventory PlayerInventory => _playerInventory;
+        public PlayerController PlayerController => _playerController;
+        //public PlayerInput PlayerInput => _playerInput;
+        public SliderBar HealthBar => _healthBar;
+        public PlayerInputHandler PlayerInputHandler => _playerInputHandler;
 
         private void Awake()
         {
-            An = GetComponent<Animator>();
             var mediatorUsers = GetComponentsInChildren<MonoBehaviour>().OfType<IMediatorUser>();
             var mediatorUsers2 = GetComponentsInChildren<MonoBehaviourPunCallbacks>().OfType<IMediatorUser>();
 
