@@ -20,17 +20,9 @@ namespace PlayerScripts
         PhotonView _photonView;
         public bool HasAnimator { get; private set; }
 
-        public AnimatorStates CurrentAnimatorState
-        {
-            get => currentAnimatorState;
-            set => currentAnimatorState = value;
-        }
+        public AnimatorStates CurrentAnimatorState => currentAnimatorState;
 
-        public AnimatorParameters LastActiveAnimatorState
-        {
-            get => lastActiveAnimatorState;
-            set => lastActiveAnimatorState = value;
-        }
+        public AnimatorParameters LastActiveAnimatorState { set => lastActiveAnimatorState = value; }
 
         private void Start()
         {
@@ -76,13 +68,12 @@ namespace PlayerScripts
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
         
-        [PunRPC]
         public void EnableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager, bool isRemote = false)
         {
-            if (!isRemote)
-            {
-                _photonView.RPC(LiteralToStringParse.EnableCombo, RpcTarget.Others, true);
-            }
+            //if (!isRemote)
+            //{
+            //    _photonView.RPC(LiteralToStringParse.EnableCombo, RpcTarget.Others, true);
+            //}
 
             SetParameter(AnimatorParameters.CanDoCombo, true);
             
