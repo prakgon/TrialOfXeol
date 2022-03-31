@@ -45,6 +45,7 @@ namespace UIScripts.Menus
             {
                 var currentSelectedGO = EventSystem.current.currentSelectedGameObject;
 
+                if (currentSelectedGO == null) return;
                 if(currentSelectedGO.Equals(_justPlayButton))
                 {
                     _customGameCursors.SetActive(false);
