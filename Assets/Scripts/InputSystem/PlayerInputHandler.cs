@@ -46,7 +46,7 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     public void OnLightAttack(InputAction.CallbackContext context) => LightAttackHandler(context);
     public void OnHeavyAttack(InputAction.CallbackContext context) => HeavyAttackHandler(context);
     public void OnSpecialAttack(InputAction.CallbackContext context) => SpecialAttackHandler(context);
-    public void OnTargetLock(InputAction.CallbackContext context) => _playerMovement.ToggleTargetLock();
+    public void OnTargetLock(InputAction.CallbackContext context) => LockTarget(context);
     public void OnBlock(InputAction.CallbackContext context)
     {
         Debug.Log(context.phase == InputActionPhase.Started);
@@ -170,6 +170,15 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         {
             _playerAttacker.HandleSkillAttack(_playerInventory.rightWeapon);
         }*/
+    }
+
+    private void LockTarget(InputAction.CallbackContext context)
+    {
+        _playerMovement.ToggleTargetLock();
+        targetLock = !targetLock;
+        
+        _playerMovement.IsStrafeMoving(targetLock);
+        _playerController.isLocking = targetLock;
     }
 
     #endregion

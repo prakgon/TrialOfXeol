@@ -21,6 +21,7 @@ namespace PlayerScripts
         public bool isInteracting;
         public bool isSprinting;
         public bool canDoCombo;
+        public bool isLocking;
 
         private void Update()
         {
@@ -31,7 +32,6 @@ namespace PlayerScripts
 
             _playerMovement.HandlePlayerLocomotion();
             _playerMovement. HandleRollingAndSprinting();
-
         }
 
         private void LateUpdate()

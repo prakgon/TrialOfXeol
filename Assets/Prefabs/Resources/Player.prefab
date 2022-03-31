@@ -3919,6 +3919,7 @@ MonoBehaviour:
   isInteracting: 0
   isSprinting: 0
   canDoCombo: 0
+  isLocking: 0
 --- !u!114 &1898708954298292171
 MonoBehaviour:
   m_ObjectHideFlags: 0

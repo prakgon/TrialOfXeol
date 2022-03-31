@@ -297,6 +297,8 @@ namespace TOX
             {
                 _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
                 _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
+                _animController.SetParameter(AnimatorParameters.Horizontal, Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.01f));
+                _animController.SetParameter(AnimatorParameters.Vertical, Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.01f));
             }
         }
 
@@ -446,8 +448,11 @@ namespace TOX
                     opponent = player;
                 }
             }
+        }
 
-            _input.targetLock = !_input.targetLock;
+        public void IsStrafeMoving(bool strafe)
+        {
+            _animController.SetParameter(AnimatorParameters.IsLocking, strafe);
         }
 
         public void ConfigureMediator(PlayerMediator med)
