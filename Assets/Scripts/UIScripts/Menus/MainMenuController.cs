@@ -1,7 +1,9 @@
 using Helpers;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace UIScripts.Menus
 {
@@ -10,6 +12,7 @@ namespace UIScripts.Menus
         [SerializeField] private GameObject _title;
         [SerializeField] private GameObject _pressAnyButtonText;
         [SerializeField] private Animator _FadeOutAnimator;
+        [SerializeField] private GameObject _menuButtons;
 
         private bool isPhase2;
 
@@ -21,17 +24,20 @@ namespace UIScripts.Menus
         private void Update()
         {
             if (isPhase2) return;
-            if(Keyboard.current.anyKey.wasPressedThisFrame)
+            var gamepadButtonPressed = Gamepad.current.allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic);
+            var keyboardButtonPressed = Keyboard.current.anyKey.wasPressedThisFrame;
+            if (keyboardButtonPressed || gamepadButtonPressed)
             {
-                isPhase2 = true;
                 StartSecondPhaseMenu();
             }
         }
 
         private void StartSecondPhaseMenu()
         {
+            isPhase2 = true;
             _pressAnyButtonText.SetActive(false);
             _FadeOutAnimator.SetBool(LiteralToStringParse.FadeOut, true);
+            _menuButtons.SetActive(true);
         }
 
         IEnumerator ConcatAnimsWithMusic()

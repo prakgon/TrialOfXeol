@@ -416,7 +416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &326562387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1520967202}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1085994242
@@ -2188,6 +2188,7 @@ MonoBehaviour:
   _title: {fileID: 199596970}
   _pressAnyButtonText: {fileID: 208790415}
   _FadeOutAnimator: {fileID: 1620025737}
+  _menuButtons: {fileID: 326562386}
 --- !u!224 &117108224834836018
 RectTransform:
   m_ObjectHideFlags: 0
