@@ -2,6 +2,7 @@ using Helpers;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
@@ -14,6 +15,13 @@ namespace UIScripts.Menus
         [SerializeField] private Animator _FadeOutAnimator;
         [SerializeField] private GameObject _menuButtons;
 
+        [SerializeField] private GameObject _justPlayButton;
+        [SerializeField] private GameObject _customGameButton;
+        [SerializeField] private GameObject _optionsButton;
+
+        [SerializeField] private GameObject _justPlayCursors;
+        [SerializeField] private GameObject _customGameCursors;
+        [SerializeField] private GameObject _optionsCursors;
         private bool isPhase2;
 
         private void Start()
@@ -23,12 +31,37 @@ namespace UIScripts.Menus
 
         private void Update()
         {
-            if (isPhase2) return;
-            var gamepadButtonPressed = Gamepad.current.allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic);
-            var keyboardButtonPressed = Keyboard.current.anyKey.wasPressedThisFrame;
-            if (keyboardButtonPressed || gamepadButtonPressed)
+            if(!isPhase2)
             {
-                StartSecondPhaseMenu();
+                var gamepadButtonPressed = Gamepad.current.allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic);
+                var keyboardButtonPressed = Keyboard.current.anyKey.wasPressedThisFrame;
+                if (keyboardButtonPressed || gamepadButtonPressed)
+                {
+                    StartSecondPhaseMenu();
+                }
+            }
+
+            else
+            {
+                var currentSelectedGO = EventSystem.current.currentSelectedGameObject;
+
+                if(currentSelectedGO.Equals(_justPlayButton))
+                {
+                    _customGameCursors.SetActive(false);
+                    _optionsCursors.SetActive(false);
+                }
+
+                else if (currentSelectedGO.Equals(_customGameButton))
+                {
+                    _justPlayCursors.SetActive(false);
+                    _optionsCursors.SetActive(false);
+                }
+
+                else if(currentSelectedGO.Equals(_optionsButton))
+                {
+                    _justPlayCursors.SetActive(false);
+                    _customGameCursors.SetActive(false);
+                }
             }
         }
 
