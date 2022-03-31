@@ -1,17 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace UIScripts.Menus
 {
-    public class ButtonSelected : MonoBehaviour, ISelectHandler // required interface for OnSelect
+    public class ButtonSelected : MainMenuController, ISelectHandler
     {
-        [SerializeField] private GameObject _cursorImages;
+        private void Start()
+        {
+            //This empty start avoids a bug, don't ask why
+        }
         public void OnSelect(BaseEventData eventData)
         {
-            _cursorImages.SetActive(true);
+            var currentSelectedGO = EventSystem.current.currentSelectedGameObject;
+
+            if (currentSelectedGO == null) return;
+            if (currentSelectedGO.Equals(_quickGameButton))
+            {
+                _quickGameCursors.SetActive(true);
+                _customGameCursors.SetActive(false);
+                _optionsCursors.SetActive(false);
+            }
+
+            else if (currentSelectedGO.Equals(_customGameButton))
+            {
+                _customGameCursors.SetActive(true);
+                _quickGameCursors.SetActive(false);
+                _optionsCursors.SetActive(false);
+            }
+
+            else if (currentSelectedGO.Equals(_optionsButton))
+            {
+                _optionsCursors.SetActive(true);
+                _quickGameCursors.SetActive(false);
+                _customGameCursors.SetActive(false);
+            }
         }
     }
 }
