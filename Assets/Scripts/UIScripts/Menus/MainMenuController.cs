@@ -10,7 +10,7 @@ namespace UIScripts.Menus
     public class MainMenuController : MonoBehaviour
     {
         [SerializeField] private GameObject _title;
-        [SerializeField] private GameObject _pressAnyButtonText;
+        [SerializeField] private GameObject _launchScreenSubtitles;
         [SerializeField] private Animator _FadeOutAnimator;
         [SerializeField] private GameObject _menuButtons;
 
@@ -51,7 +51,7 @@ namespace UIScripts.Menus
         private void StartSecondPhaseMenu()
         {
             isPhase2 = true;
-            _pressAnyButtonText.SetActive(false);
+            _launchScreenSubtitles.SetActive(false);
             _FadeOutAnimator.SetBool(LiteralToStringParse.FadeOut, true);
             _menuButtons.SetActive(true);
         }
@@ -61,7 +61,7 @@ namespace UIScripts.Menus
             yield return new WaitForSeconds(3.3f);
             _title.SetActive(true);
             yield return new WaitForSeconds(2f);
-            _pressAnyButtonText.SetActive(true);
+            _launchScreenSubtitles.SetActive(true);
         }
     }
 }
