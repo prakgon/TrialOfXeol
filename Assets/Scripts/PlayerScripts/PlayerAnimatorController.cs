@@ -104,10 +104,9 @@ namespace PlayerScripts
         public void SetParameter(AnimatorParameters state, float value) => _animator.SetFloat(state.ToString(), value);
         public void SetParameter(AnimatorParameters state, int value) => _animator.SetInteger(state.ToString(), value);
 
-        public bool GetBool(AnimatorParameters state)
-        {
-            return _animator.GetBool(state.ToString());
-        }
+        public bool GetBool(AnimatorParameters state) => _animator.GetBool(state.ToString());
+        public float GetFloat(AnimatorParameters state) => _animator.GetFloat(state.ToString());
+        public float GetInteger(AnimatorParameters state) => _animator.GetInteger(state.ToString());
 
         public void ConfigureMediator(PlayerMediator med)
         {

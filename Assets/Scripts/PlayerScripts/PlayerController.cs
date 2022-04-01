@@ -21,6 +21,7 @@ namespace PlayerScripts
         public bool isInteracting;
         public bool isSprinting;
         public bool canDoCombo;
+        public bool isLocking;
 
         private void Update()
         {
@@ -31,13 +32,17 @@ namespace PlayerScripts
 
             _playerMovement.HandlePlayerLocomotion();
             _playerMovement. HandleRollingAndSprinting();
-
         }
 
         private void LateUpdate()
         {
             _playerMovement.CameraRotation();
 
+            if (!isInteracting)
+            { 
+                _playerMovement.HandleMoveAnimation();
+            }
+            
             _input.rollFlag = false;
             isSprinting = _input.sprintFlag;
             _input.rightTriggerInput = false; // Light attack
@@ -45,6 +50,8 @@ namespace PlayerScripts
             isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
             _input.comboFlag = false;
             canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
+            
+            
         }
         public void ConfigureMediator(PlayerMediator med)
         {

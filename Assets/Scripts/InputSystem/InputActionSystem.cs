@@ -384,6 +384,17 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""action"": ""TargetLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02b5dba6-8625-40bf-a328-526e28a51018"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TargetLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -502,7 +513,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""6a95bf09-d900-48c4-a160-185bd882721d"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -513,7 +524,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""08e3bf2a-055f-44ca-bdd7-b162f9af477e"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

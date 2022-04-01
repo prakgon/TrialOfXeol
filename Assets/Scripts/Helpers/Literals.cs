@@ -26,6 +26,7 @@ namespace Helpers
             Horizontal,
             Vertical,
             CanDoCombo,
+            IsLocking,
             IntroAnimation
         }
 

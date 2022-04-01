@@ -214,10 +214,17 @@ namespace TOX
                 {
                     _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
                     _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
-                    _animController.PlayTargetAnimation(AnimatorStates.Roll, true, 1);
-                    _targetDirection.y = 0;
-                    Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
-                    transform.rotation = rollRotation;
+
+
+                    _animController.PlayTargetAnimation(
+                        _input.targetLock ? AnimatorStates.Rolls : AnimatorStates.Roll, true, 1);
+                    
+                    if (!_input.targetLock)
+                    {
+                        _targetDirection.y = 0;
+                        Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
+                        transform.rotation = rollRotation;
+                    }
                 }
                 else
                 {
@@ -229,8 +236,6 @@ namespace TOX
                 Debug.Log(e);
             }
         }
-
-        #endregion
 
         private void HandleMovement()
         {
@@ -293,12 +298,23 @@ namespace TOX
 
             // update animator if using character
             ControllerMove(_targetDirection, _speed);
-            if (_animController.HasAnimator)
-            {
-                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
-                _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
-            }
+            
         }
+
+        public void HandleMoveAnimation()
+        {
+            if (!_animController.HasAnimator) return;
+            _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+            _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
+            _animController.SetParameter(AnimatorParameters.Horizontal,
+                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
+            _animController.SetParameter(AnimatorParameters.Vertical,
+                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
+        }
+        #endregion
+
+        
+        
 
 
         #region Player Rotation
@@ -446,8 +462,11 @@ namespace TOX
                     opponent = player;
                 }
             }
+        }
 
-            _input.targetLock = !_input.targetLock;
+        public void IsStrafeMoving(bool strafe)
+        {
+            _animController.SetParameter(AnimatorParameters.IsLocking, strafe);
         }
 
         public void ConfigureMediator(PlayerMediator med)
