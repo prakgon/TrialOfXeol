@@ -237,8 +237,6 @@ namespace TOX
             }
         }
 
-        #endregion
-
         private void HandleMovement()
         {
             float targetSpeed;
@@ -300,16 +298,23 @@ namespace TOX
 
             // update animator if using character
             ControllerMove(_targetDirection, _speed);
-            if (_animController.HasAnimator)
-            {
-                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
-                _animController.SetParameter(AnimatorParameters.MotionSpeed, inputMagnitude);
-                _animController.SetParameter(AnimatorParameters.Horizontal,
-                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
-                _animController.SetParameter(AnimatorParameters.Vertical,
-                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
-            }
+            
         }
+
+        public void HandleMoveAnimation()
+        {
+            if (!_animController.HasAnimator) return;
+            _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+            _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
+            _animController.SetParameter(AnimatorParameters.Horizontal,
+                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
+            _animController.SetParameter(AnimatorParameters.Vertical,
+                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
+        }
+        #endregion
+
+        
+        
 
 
         #region Player Rotation

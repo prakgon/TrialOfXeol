@@ -38,6 +38,11 @@ namespace PlayerScripts
         {
             _playerMovement.CameraRotation();
 
+            if (!isInteracting)
+            { 
+                _playerMovement.HandleMoveAnimation();
+            }
+            
             _input.rollFlag = false;
             isSprinting = _input.sprintFlag;
             _input.rightTriggerInput = false; // Light attack
@@ -45,6 +50,8 @@ namespace PlayerScripts
             isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
             _input.comboFlag = false;
             canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
+            
+            
         }
         public void ConfigureMediator(PlayerMediator med)
         {
