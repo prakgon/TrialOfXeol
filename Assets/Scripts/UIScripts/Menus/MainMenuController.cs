@@ -16,11 +16,14 @@ namespace UIScripts.Menus
 
         [SerializeField] protected GameObject _quickGameButton;
         [SerializeField] protected GameObject _customGameButton;
+        [SerializeField] protected GameObject _shopButton;
         [SerializeField] protected GameObject _optionsButton;
 
         [SerializeField] protected GameObject _quickGameCursors;
         [SerializeField] protected GameObject _customGameCursors;
+        [SerializeField] protected GameObject _shopCursors;
         [SerializeField] protected GameObject _optionsCursors;
+        
         private bool isPhase2;
 
         private void Start()
