@@ -17,7 +17,7 @@ namespace Helpers
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private CharacterController _characterController;
         [Header("GUI-related dependencies")]
-        //[SerializeField] private StamineBar _stamineBar;
+        [SerializeField] private SliderBar _staminaBar;
         [SerializeField] private SliderBar _healthBar;
         [Header("PLAYER MECHANICS-related dependencies")]
         [SerializeField] private PlayerAnimatorController _playerAnimatorController;
@@ -43,6 +43,7 @@ namespace Helpers
         public PlayerController PlayerController => _playerController;
         public PlayerInput PlayerInput => _playerInput;
         public SliderBar HealthBar => _healthBar;
+        public SliderBar StaminaBar => _staminaBar;
         public PlayerInputHandler PlayerInputHandler => _playerInputHandler;
         public CharacterController CharacterController => _characterController;
 

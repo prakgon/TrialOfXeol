@@ -293,7 +293,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &393319170
 Canvas:
   m_ObjectHideFlags: 0
@@ -6983,6 +6983,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 0}
   _playerController: {fileID: 0}
+  _playerInput: {fileID: 0}
+  _characterController: {fileID: 0}
   _healthBar: {fileID: 5153147324983696241}
   _playerAnimatorController: {fileID: 3699676049021717448}
   _playerCombatManager: {fileID: 0}
