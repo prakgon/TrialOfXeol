@@ -102,6 +102,11 @@ namespace Helpers
             FreeSpectator
         }
 
+        public enum MainMenuParameters
+        {
+            FadeOut
+        }
+
     }
 
     internal static class LiteralToStringParse
@@ -109,6 +114,9 @@ namespace Helpers
         //Tags
         //public static readonly string MainCamera = Tags.MainCamera.ToString();
         internal static readonly string Player = Tags.Player.ToString();
+
+        //MainMenu
+        internal static readonly string FadeOut = MainMenuParameters.FadeOut.ToString();
 
         //ScriptableObjects
         internal const string PlayerDataPath = "ScriptableObjects/Player/Data";
