@@ -8,5 +8,6 @@ namespace PlayerScripts
     public class PlayerDataSO : ScriptableObject
     {
         public float maximumHealth;
+        public float maximumStamina;
     }
 }

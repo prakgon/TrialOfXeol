@@ -8,6 +8,8 @@ TagManager:
   - PlayerFollowCamera
   - Weapon
   - Dummy
+  - InWorldHealthBar
+  - OnScreenHealthBar
   layers:
   - Default
   - TransparentFX

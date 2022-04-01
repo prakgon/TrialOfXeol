@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Helpers
 {
-    public class HelperFunctions
+    public static class HelperFunctions
     {
         public static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {

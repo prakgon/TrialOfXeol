@@ -90,7 +90,9 @@ namespace Helpers
             Weapon,
             Player,
             Dummy,
-            Enemy
+            Enemy,
+            InWorldHealthBar,
+            OnScreenHealthBar
         }
 
         public enum UserTypes
