@@ -69,6 +69,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "ChangeWeapon",
+                    "type": "Value",
+                    "id": "06a0cf8f-fa21-4e57-884e-fb76b8e5be38",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Block",
                     "type": "PassThrough",
                     "id": "24df0046-2c31-4597-ab14-3653e2013634",
@@ -371,6 +380,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "TargetLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a596ed3d-9e43-472c-945e-b57cc3845a00",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ChangeWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

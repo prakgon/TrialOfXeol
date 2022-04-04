@@ -91,6 +91,15 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""06a0cf8f-fa21-4e57-884e-fb76b8e5be38"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Block"",
                     ""type"": ""PassThrough"",
                     ""id"": ""24df0046-2c31-4597-ab14-3653e2013634"",
@@ -395,6 +404,17 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""action"": ""TargetLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a596ed3d-9e43-472c-945e-b57cc3845a00"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -660,6 +680,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
+        m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_TargetLock = m_Player.FindAction("TargetLock", throwIfNotFound: true);
         // FreeCamera
@@ -732,6 +753,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_SpecialAttack;
+    private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_TargetLock;
     public struct PlayerActions
@@ -745,6 +767,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @TargetLock => m_Wrapper.m_Player_TargetLock;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -777,6 +800,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @SpecialAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialAttack;
                 @SpecialAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialAttack;
                 @SpecialAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialAttack;
+                @ChangeWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon;
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
@@ -808,6 +834,9 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @SpecialAttack.started += instance.OnSpecialAttack;
                 @SpecialAttack.performed += instance.OnSpecialAttack;
                 @SpecialAttack.canceled += instance.OnSpecialAttack;
+                @ChangeWeapon.started += instance.OnChangeWeapon;
+                @ChangeWeapon.performed += instance.OnChangeWeapon;
+                @ChangeWeapon.canceled += instance.OnChangeWeapon;
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
@@ -904,6 +933,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnTargetLock(InputAction.CallbackContext context);
     }
