@@ -35,6 +35,12 @@ namespace Helpers
             BaseLayer = 0,
             Override = 1,
         }
+
+        public enum WeaponIdleAnimations
+        {
+            Right_Hand_Idle,
+            Left_Hand_Idle
+        }
         
         public enum AttackAnimations
         {

@@ -8,13 +8,15 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 {
     // Basic inputs
-    [Header("Basic player inputs")] public Vector2 move;
+    [Header("Basic player inputs")] 
+    public Vector2 move;
     public float moveAmount;
     public Vector2 look;
     public bool jump;
     public bool targetLock = false;
     // Combat mechanics inputs
-    [Header("Combat input flags")] public bool rollFlag;
+    [Header("Combat input flags")] 
+    public bool rollFlag;
     public bool sprintFlag;
     public bool comboFlag;
     public float rollInputTimer;
@@ -51,6 +53,8 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     {
         Debug.Log(context.phase == InputActionPhase.Started);
     }
+    
+    public void OnChangeWeapon(InputAction.CallbackContext context) => ChangeWeaponHandler(context);
 
     #endregion
 
@@ -179,6 +183,15 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         
         _playerMovement.IsStrafeMoving(targetLock);
         _playerController.isLocking = targetLock;
+    }
+    
+    private void ChangeWeaponHandler(InputAction.CallbackContext context)
+    {
+        if (context.phase is InputActionPhase.Started)
+        {
+            Debug.Log("Change Weapon");
+            _playerInventory.ChangeWeapon();
+        }
     }
 
     #endregion

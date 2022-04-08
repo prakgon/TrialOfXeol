@@ -4,14 +4,14 @@ using static Helpers.Literals;
 namespace WeaponScripts
 {
     [CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/Weapon/Data", order = 1)]
-    public class WeaponDataSO : ScriptableObject
+    public class WeaponDataSO : ItemDataSO
     {
-        [Header("Game logic related")]
-        public GameObject modelPrefab;
         public bool isUnarmed;
-        public Sprite iconSprite;
-        public ItemNames itemName;
 
+        [Header("Idle Animations")] 
+        public WeaponIdleAnimations Right_Hand_Idle;
+        public WeaponIdleAnimations Left_Hand_Idle;
+        
         [Header("One Handed Attack Animations")]
         public AttackAnimations OH_Light_Attack_1;
         public AttackAnimations OH_Light_Attack_2;
