@@ -8,6 +8,10 @@ namespace WeaponScripts
     {
         public bool isUnarmed;
 
+        [Header("Idle Animations")] 
+        public WeaponIdleAnimations Right_Hand_Idle;
+        public WeaponIdleAnimations Left_Hand_Idle;
+        
         [Header("One Handed Attack Animations")]
         public AttackAnimations OH_Light_Attack_1;
         public AttackAnimations OH_Light_Attack_2;
