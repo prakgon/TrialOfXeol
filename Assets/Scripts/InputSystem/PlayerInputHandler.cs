@@ -8,15 +8,15 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 {
     // Basic inputs
-    [Header("Basic player inputs")] 
-    public Vector2 move;
+    [Header("Basic player inputs")] public Vector2 move;
     public float moveAmount;
     public Vector2 look;
     public bool jump;
+
     public bool targetLock = false;
+
     // Combat mechanics inputs
-    [Header("Combat input flags")] 
-    public bool rollFlag;
+    [Header("Combat input flags")] public bool rollFlag;
     public bool sprintFlag;
     public bool comboFlag;
     public float rollInputTimer;
@@ -34,10 +34,23 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     [Tooltip("This button handles special attack inputs")]
     public bool leftTriggerInput;
 
+    [Tooltip("This button handles menu inputs")]
+    public bool startInput;
+
+    [SerializeField] private int _startCounter;
+
     private PlayerCombatManager _playerCombatManager;
     private PlayerInventory _playerInventory;
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
+    
+    
+    // Create UI Controller
+    [Header("Player Controls UI")]
+    [SerializeField] private GameObject _gamepadControlsSchema;
+    [SerializeField] private GameObject _gamepadControlsText;
+    [SerializeField] private GameObject _keyboardControlsText;
+    
 
     #region Input Events
 
@@ -49,11 +62,14 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     public void OnHeavyAttack(InputAction.CallbackContext context) => HeavyAttackHandler(context);
     public void OnSpecialAttack(InputAction.CallbackContext context) => SpecialAttackHandler(context);
     public void OnTargetLock(InputAction.CallbackContext context) => LockTarget(context);
+
     public void OnBlock(InputAction.CallbackContext context)
     {
         Debug.Log(context.phase == InputActionPhase.Started);
     }
-    
+
+    public void OnShowControls(InputAction.CallbackContext context) => ShowControlsHandler(context);
+
     public void OnChangeWeapon(InputAction.CallbackContext context) => ChangeWeaponHandler(context);
 
     #endregion
@@ -128,9 +144,9 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         rightButtonInput = context.phase is InputActionPhase.Started;
 
         if (!rightButtonInput || _playerController.isInteracting) return;
-            comboFlag = true;
-            _playerCombatManager.HandleLightWeaponCombo(_playerInventory.rightWeapon);
-            comboFlag = false;
+        comboFlag = true;
+        _playerCombatManager.HandleLightWeaponCombo(_playerInventory.rightWeapon);
+        comboFlag = false;
         /*
         if (_playerController.canDoCombo)
         */
@@ -147,9 +163,9 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         rightTriggerInput = context.phase is InputActionPhase.Started;
 
         if (!rightTriggerInput || _playerController.isInteracting) return;
-            comboFlag = true;
-            _playerCombatManager.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
-            comboFlag = false;
+        comboFlag = true;
+        _playerCombatManager.HandleHeavyWeaponCombo(_playerInventory.rightWeapon);
+        comboFlag = false;
         /*if (_playerController.canDoCombo)
         {
         }
@@ -164,9 +180,9 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         leftTriggerInput = context.phase is InputActionPhase.Started;
 
         if (!leftTriggerInput || _playerController.isInteracting) return;
-            comboFlag = true;
-            _playerCombatManager.HandleSkillWeaponCombo(_playerInventory.rightWeapon);
-            comboFlag = false;
+        comboFlag = true;
+        _playerCombatManager.HandleSkillWeaponCombo(_playerInventory.rightWeapon);
+        comboFlag = false;
         /*if (_playerController.canDoCombo)
         {
         }
@@ -180,17 +196,45 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     {
         _playerMovement.ToggleTargetLock();
         targetLock = !targetLock;
-        
+
         _playerMovement.IsStrafeMoving(targetLock);
         _playerController.isLocking = targetLock;
     }
-    
+
     private void ChangeWeaponHandler(InputAction.CallbackContext context)
     {
         if (context.phase is InputActionPhase.Started)
         {
             Debug.Log("Change Weapon");
             _playerInventory.ChangeWeapon();
+        }
+    }
+
+    private void ShowControlsHandler(InputAction.CallbackContext context)
+    {
+        startInput = context.phase == InputActionPhase.Performed;
+        _startCounter += startInput ? 1 : 0;
+        _startCounter = _startCounter >= 3 ? 0 : _startCounter;
+        
+        if (!startInput) return;
+        
+        switch (_startCounter)
+        {
+            case 0:
+                _gamepadControlsSchema.SetActive(false);
+                _gamepadControlsText.SetActive(false);
+                _keyboardControlsText.SetActive(false);
+                break;
+            case 1:
+                _gamepadControlsSchema.SetActive(true);
+                _gamepadControlsText.SetActive(false);
+                _keyboardControlsText.SetActive(false);
+                break;
+            case 2:
+                _gamepadControlsSchema.SetActive(false);
+                _gamepadControlsText.SetActive(true);
+                _keyboardControlsText.SetActive(true);
+                break;
         }
     }
 
