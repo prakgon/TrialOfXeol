@@ -10,6 +10,7 @@ TagManager:
   - Dummy
   - InWorldHealthBar
   - OnScreenHealthBar
+  - MainMenuController
   layers:
   - Default
   - TransparentFX
