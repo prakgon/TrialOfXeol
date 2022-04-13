@@ -64,18 +64,18 @@ namespace UIScripts.Menus
             _gamepadSchema.SetActive(true);
             _title.SetActive(false);
         }
-        
-        void OnGUI()
-        {
-            if ((Event.current.Equals(Event.KeyboardEvent("Escape")) || Gamepad.current[GamepadButton.East].isPressed))
-            {
-                _xeolIcon.SetActive(true);
-                _menuButtons.SetActive(true);
-                _gamepadSchema.SetActive(false);
-                _title.SetActive(true);
-            }
 
-        }
+        //void OnGUI() Esto no entiendo por qué quieres meterlo, y además peta, hace un nullreferenceException
+        //{
+        //    if ((Event.current.Equals(Event.KeyboardEvent("Escape")) || Gamepad.current[GamepadButton.East].isPressed))
+        //    {
+        //        _xeolIcon.SetActive(true);
+        //        _menuButtons.SetActive(true);
+        //        _gamepadSchema.SetActive(false);
+        //        _title.SetActive(true);
+        //    }
+
+        //}
 
         public void ActivateMenu()
         {
