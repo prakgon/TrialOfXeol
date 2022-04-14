@@ -17,6 +17,7 @@ namespace UIScripts.Menus
         [SerializeField] private GameObject _menuButtons;
         [SerializeField] private GameObject _gamepadSchema;
         [SerializeField] private GameObject _xeolIcon;
+        [SerializeField] private GameObject _fogVfx;
         
         [SerializeField] private GameObject _trainingButton;
         [SerializeField] private GameObject _multiplayerButton;
@@ -96,8 +97,15 @@ namespace UIScripts.Menus
             isPhase2 = true;
             _launchScreenSubtitles.SetActive(false);
             _FadeOutAnimator.SetBool(LiteralToStringParse.FadeOut, true);
+            StartCoroutine(ActivateFog());
         }
-        
+
+        IEnumerator ActivateFog()
+        {
+            yield return new WaitForSeconds(1.325f);
+            _fogVfx.SetActive(true);
+        }
+
         IEnumerator ConcatAnimsWithMusic()
         {
             yield return new WaitForSeconds(3.3f);
