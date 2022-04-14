@@ -17,24 +17,33 @@ namespace UIScripts.Menus
         [SerializeField] private GameObject _menuButtons;
         [SerializeField] private GameObject _gamepadSchema;
         [SerializeField] private GameObject _xeolIcon;
-
-        [SerializeField] protected GameObject _quickGameButton;
-        [SerializeField] protected GameObject _customGameButton;
-        [SerializeField] protected GameObject _shopButton;
-        [SerializeField] protected GameObject _optionsButton;
-
-        [SerializeField] protected GameObject _quickGameCursors;
-        [SerializeField] protected GameObject _customGameCursors;
-        [SerializeField] protected GameObject _shopCursors;
-        [SerializeField] protected GameObject _optionsCursors;
-
         
+        [SerializeField] private GameObject _trainingButton;
+        [SerializeField] private GameObject _multiplayerButton;
+        [SerializeField] private GameObject _settingsButton;
+        [SerializeField] private GameObject _spectatorButton;
+
+        [SerializeField] private GameObject _trainingCursors;
+        [SerializeField] private GameObject _multiplayerCursors;
+        [SerializeField] private GameObject _settingsCursors;
+        [SerializeField] private GameObject _spectatorCursors;
+
+
         private bool isPhase2;
+
+        public GameObject TrainingButton { get => _trainingButton; set => _trainingButton = value; }
+        public GameObject MultiplayerButton { get => _multiplayerButton; set => _multiplayerButton = value; }
+        public GameObject SettingsButton { get => _settingsButton; set => _settingsButton = value; }
+        public GameObject SpectatorButton { get => _spectatorButton; set => _spectatorButton = value; }
+        public GameObject TrainingCursors { get => _trainingCursors; set => _trainingCursors = value; }
+        public GameObject MultiplayerCursors { get => _multiplayerCursors; set => _multiplayerCursors = value; }
+        public GameObject SettingsCursors { get => _settingsCursors; set => _settingsCursors = value; }
+        public GameObject SpectatorCursors { get => _spectatorCursors; set => _spectatorCursors = value; }
 
         private void Start()
         {
             StartCoroutine(ConcatAnimsWithMusic());
-            _shopButton.GetComponent<Button>().onClick.AddListener(ShowSettings);
+            SettingsButton.GetComponent<Button>().onClick.AddListener(ShowSettings);
         }
 
         private void Update()

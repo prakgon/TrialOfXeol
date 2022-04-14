@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101924509}
   m_Layer: 5
-  m_Name: OptionsCursors
+  m_Name: SpectatorCursors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 294460934}
   m_Layer: 5
-  m_Name: QuickGameCursors
+  m_Name: TrainingCursors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 751007399}
   - component: {fileID: 751007402}
   m_Layer: 5
-  m_Name: CustomGame
+  m_Name: Multiplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,20 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381310819fb451641896d74be0debbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 199596970}
-  _launchScreenSubtitles: {fileID: 1616278266}
-  _FadeOutAnimator: {fileID: 1620025737}
-  _menuButtons: {fileID: 326562386}
-  _gamepadSchema: {fileID: 0}
-  _xeolIcon: {fileID: 0}
-  _quickGameButton: {fileID: 1520967202}
-  _customGameButton: {fileID: 751007397}
-  _shopButton: {fileID: 1003397436}
-  _optionsButton: {fileID: 826407058154886647}
-  _quickGameCursors: {fileID: 294460933}
-  _customGameCursors: {fileID: 2116668609}
-  _shopCursors: {fileID: 1014131818}
-  _optionsCursors: {fileID: 101924508}
+  _mainMenuController: {fileID: 2096852915}
 --- !u!1 &790563463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1504,7 @@ RectTransform:
   m_GameObject: {fileID: 911814225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.14, y: 0.29, z: 1}
+  m_LocalScale: {x: 2.4, y: 0.24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1520967203}
@@ -1525,7 +1512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.59, y: 0}
+  m_AnchoredPosition: {x: -0.44, y: 0.13999939}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &911814227
@@ -1731,7 +1718,7 @@ GameObject:
   - component: {fileID: 1003397439}
   - component: {fileID: 1003397438}
   m_Layer: 5
-  m_Name: Shop
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1773,20 +1760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381310819fb451641896d74be0debbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 199596970}
-  _launchScreenSubtitles: {fileID: 1616278266}
-  _FadeOutAnimator: {fileID: 1620025737}
-  _menuButtons: {fileID: 326562386}
-  _gamepadSchema: {fileID: 0}
-  _xeolIcon: {fileID: 0}
-  _quickGameButton: {fileID: 1520967202}
-  _customGameButton: {fileID: 751007397}
-  _shopButton: {fileID: 1003397436}
-  _optionsButton: {fileID: 826407058154886647}
-  _quickGameCursors: {fileID: 294460933}
-  _customGameCursors: {fileID: 2116668609}
-  _shopCursors: {fileID: 1014131818}
-  _optionsCursors: {fileID: 101924508}
+  _mainMenuController: {fileID: 2096852915}
 --- !u!114 &1003397439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1937,7 +1911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014131819}
   m_Layer: 5
-  m_Name: ShopCursors
+  m_Name: SettingsCursors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3223,7 +3197,7 @@ GameObject:
   - component: {fileID: 1520967204}
   - component: {fileID: 1520967207}
   m_Layer: 5
-  m_Name: QuickGame
+  m_Name: Training
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3332,20 +3306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381310819fb451641896d74be0debbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 199596970}
-  _launchScreenSubtitles: {fileID: 1616278266}
-  _FadeOutAnimator: {fileID: 1620025737}
-  _menuButtons: {fileID: 326562386}
-  _gamepadSchema: {fileID: 0}
-  _xeolIcon: {fileID: 0}
-  _quickGameButton: {fileID: 1520967202}
-  _customGameButton: {fileID: 751007397}
-  _shopButton: {fileID: 1003397436}
-  _optionsButton: {fileID: 826407058154886647}
-  _quickGameCursors: {fileID: 294460933}
-  _customGameCursors: {fileID: 2116668609}
-  _shopCursors: {fileID: 1014131818}
-  _optionsCursors: {fileID: 101924508}
+  _mainMenuController: {fileID: 2096852915}
 --- !u!1 &1555604464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,14 +4233,14 @@ MonoBehaviour:
   _menuButtons: {fileID: 326562386}
   _gamepadSchema: {fileID: 1517122382}
   _xeolIcon: {fileID: 1009423533}
-  _quickGameButton: {fileID: 1520967202}
-  _customGameButton: {fileID: 751007397}
-  _shopButton: {fileID: 1003397436}
-  _optionsButton: {fileID: 826407058154886647}
-  _quickGameCursors: {fileID: 294460933}
-  _customGameCursors: {fileID: 2116668609}
-  _shopCursors: {fileID: 1014131818}
-  _optionsCursors: {fileID: 101924508}
+  _trainingButton: {fileID: 1520967202}
+  _multiplayerButton: {fileID: 751007397}
+  _settingsButton: {fileID: 1003397436}
+  _spectatorButton: {fileID: 826407058154886647}
+  _trainingCursors: {fileID: 294460933}
+  _multiplayerCursors: {fileID: 2116668609}
+  _settingsCursors: {fileID: 1014131818}
+  _spectatorCursors: {fileID: 101924508}
 --- !u!1 &2116668609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,7 +4251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2116668610}
   m_Layer: 5
-  m_Name: CustomGameCursors
+  m_Name: MultiplayerCursors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4331,7 +4292,7 @@ GameObject:
   - component: {fileID: 2606310753468541114}
   - component: {fileID: 3555100739150922867}
   m_Layer: 5
-  m_Name: Options
+  m_Name: Spectator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4437,20 +4398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381310819fb451641896d74be0debbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 199596970}
-  _launchScreenSubtitles: {fileID: 1616278266}
-  _FadeOutAnimator: {fileID: 1620025737}
-  _menuButtons: {fileID: 326562386}
-  _gamepadSchema: {fileID: 0}
-  _xeolIcon: {fileID: 0}
-  _quickGameButton: {fileID: 1520967202}
-  _customGameButton: {fileID: 751007397}
-  _shopButton: {fileID: 1003397436}
-  _optionsButton: {fileID: 826407058154886647}
-  _quickGameCursors: {fileID: 294460933}
-  _customGameCursors: {fileID: 2116668609}
-  _shopCursors: {fileID: 1014131818}
-  _optionsCursors: {fileID: 101924508}
+  _mainMenuController: {fileID: 2096852915}
 --- !u!1001 &4642972661439658855
 PrefabInstance:
   m_ObjectHideFlags: 0
