@@ -15,17 +15,30 @@ namespace PlayerScripts
     public class PlayerStats : MonoBehaviour, IMediatorUser, IPunObservable
     {
         private PlayerDataSO _playerData;
-        private GameObject _playerWeapon;
-        private TMP_Text _playerTMPText;
-        private float _currentHealth;
-        private float _currentStamina;
-        private PlayerAnimatorController _animatorController;
-        private float _maximumHealth;
-        private float _maximumStamina;
+
+        [SerializeField] private int healthLevel = 10;
+        private int _maximumHealth;
+        private int _currentHealth;
+
+        [SerializeField] private int staminaLevel = 10;
+        private int _maximumStamina;
+        private int _currentStamina;
+        
+        [SerializeField] private int manaLevel = 10;
+        private int _maximumMana;
+        private int _currentMana;
+        
         private SliderBar _healthBar;
         [SerializeField] private SliderBar _staminaBar;
+        private PlayerAnimatorController _animatorController;
+        
+        private TMP_Text _playerTMPText;
         private PlayerEffectsManager _effectsManager;
+        
+        private GameObject _playerWeapon;
+        
         private PlayerMediator _med;
+
 
         private void Start() => InitializePlayer();
 
@@ -44,23 +57,24 @@ namespace PlayerScripts
                 _healthBar = inWorldHealthBar;
                 if (onScreenHealthBar is not null) onScreenHealthBar.gameObject.SetActive(false);
             }
-
-            _maximumHealth = _playerData.maximumHealth;
-            _currentHealth = _maximumHealth;
-            _maximumStamina = _playerData.maximumStamina;
-            _currentStamina = _maximumStamina;
-            InitializeHealthBar();
+            
+            _currentHealth = SetMaxHealthFormHealthLevel();
+            
+            _healthBar.SetMaxValue(_currentHealth);
+            
+            _currentStamina = SetMaxStaminaFromStaminaLevel();
+            
+            _staminaBar.SetMaxValue(_currentStamina);
+            
             //InitializeStaminaBar();
 
-            
-            //Debug
             UpdateDebugUI();
 
             _effectsManager = GetComponent<PlayerEffectsManager>();
         }
 
         [PunRPC]
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             DecreaseHealth(damage);
             UpdateHealthBar();
@@ -77,14 +91,28 @@ namespace PlayerScripts
                 // Handle player death
             }
         }
+         [PunRPC]
+        public void DrainStamina(int drain)
+        {
+            DecreaseStamina(drain);
+            UpdateStaminaBar();
+        }
         
         [PunRPC]
-        private void DecreaseHealth(float decrement) => _currentHealth -= decrement;
-        private void InitializeHealthBar() => _healthBar.SetMaxValue(_currentHealth);
+        private void DecreaseHealth(int decrement) => _currentHealth -= decrement;
+        private int SetMaxHealthFormHealthLevel()
+        {
+            _maximumHealth = _playerData.increasedHealthByLevel * healthLevel;
+            return _maximumHealth;
+        }
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
-        private void IncreaseStamina(float increment) => _currentStamina += increment;
-        private void DecreaseStamina(float decrement) => _currentStamina -= decrement;
-        private void InitializeStaminaBar() => _staminaBar.SetMaxValue(_currentStamina);
+        private void IncreaseStamina(int increment) => _currentStamina += increment;
+        private void DecreaseStamina(int decrement) => _currentStamina -= decrement;
+        private int SetMaxStaminaFromStaminaLevel()
+        {
+            _maximumStamina = _playerData.increasedStaminaByLevel * staminaLevel;
+            return _maximumStamina;
+        }
         private void UpdateStaminaBar() => _staminaBar.SetValue(_currentStamina);
         private void SetDebugText(string message) => _playerTMPText.text = message;
 
@@ -109,8 +137,8 @@ namespace PlayerScripts
             }
             else
             {
-                _currentHealth = (float) stream.ReceiveNext();
-                _currentStamina = (float) stream.ReceiveNext();
+                _currentHealth = (int) stream.ReceiveNext();
+                _currentStamina = (int) stream.ReceiveNext();
                 if (_currentHealth < _maximumHealth || _currentStamina < _maximumStamina)
                 {
                     UpdateDebugUI();

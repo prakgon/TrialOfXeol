@@ -57,7 +57,7 @@ namespace WeaponScripts
                 if (playerStats != null)
                 {
                     
-                    playerStats.TakeDamage(weaponData.damage);
+                    playerStats.TakeDamage(weaponData.baseDamage);
                 }
             }
 
@@ -68,7 +68,7 @@ namespace WeaponScripts
 
                 if (playerStats != null)
                 {
-                    playerStats.TakeDamage(weaponData.damage);
+                    playerStats.TakeDamage(weaponData.baseDamage);
                 }
             }
 

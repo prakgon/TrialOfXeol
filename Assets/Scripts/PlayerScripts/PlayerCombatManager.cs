@@ -12,6 +12,9 @@ namespace PlayerScripts
         private PlayerAnimatorController _animController;
         private PlayerInputHandler _input;
         private PlayerController _playerController;
+        private WeaponSlotManager _weaponSlotManager;
+        
+        
         public AttackAnimations LastAttack { get; set; } = AttackAnimations.InitialState;
         private PlayerEffectsManager _playerEffectsManager;
 
@@ -20,6 +23,7 @@ namespace PlayerScripts
             _animController = GetComponent<PlayerAnimatorController>();
             _input = GetComponent<PlayerInputHandler>();
             _playerController = GetComponent<PlayerController>();
+            _weaponSlotManager = GetComponent<WeaponSlotManager>();
             _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         }
 
@@ -28,6 +32,8 @@ namespace PlayerScripts
         {
             CanDoCombo();
             
+            _weaponSlotManager.weaponItem = weaponData;
+
             switch (LastAttack)
             {
                 case AttackAnimations.Skill_A:
@@ -73,6 +79,10 @@ namespace PlayerScripts
         {
             CanDoCombo();
             
+            _weaponSlotManager.weaponItem = weaponData;
+            
+            _weaponSlotManager.DrainStaminaLightAttack();
+
             switch (LastAttack)
             {
                 case AttackAnimations.OH_Light_Attack_1:
@@ -117,6 +127,10 @@ namespace PlayerScripts
         public void HandleHeavyWeaponCombo(WeaponDataSO weaponData)
         {
             CanDoCombo();
+            
+            _weaponSlotManager.weaponItem = weaponData;
+            
+            _weaponSlotManager.DrainStaminaHeavyAttack();
             
             switch (LastAttack)
             {

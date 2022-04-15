@@ -39,4 +39,9 @@ MonoBehaviour:
   Skill_D: 16
   Skill_E: 17
   Skill_F: 18
-  damage: 10
+  baseStamina: 10
+  lightStaminaMultiplier: 1.2
+  heavyStaminaMultiplier: 1.8
+  baseDamage: 10
+  lightDamageMultiplier: 1.2
+  heavyDamageMultiplier: 1.8
