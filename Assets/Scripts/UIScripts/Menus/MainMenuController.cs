@@ -75,7 +75,7 @@ namespace UIScripts.Menus
             _title.SetActive(false);
         }
 
-        //void OnGUI() Esto no entiendo por qué quieres meterlo, y además peta, hace un nullreferenceException
+        //void OnGUI() Esto no entiendo por quï¿½ quieres meterlo, y ademï¿½s peta, hace un nullreferenceException
         //{
         //    if ((Event.current.Equals(Event.KeyboardEvent("Escape")) || Gamepad.current[GamepadButton.East].isPressed))
         //    {
@@ -97,14 +97,15 @@ namespace UIScripts.Menus
             isPhase2 = true;
             _launchScreenSubtitles.SetActive(false);
             _FadeOutAnimator.SetBool(LiteralToStringParse.FadeOut, true);
-            StartCoroutine(ActivateFog());
+            //StartCoroutine(ActivateFog());
+            _fogVfx.SetActive(true);
         }
 
-        IEnumerator ActivateFog()
+        /*IEnumerator ActivateFog()
         {
             yield return new WaitForSeconds(1.325f);
             _fogVfx.SetActive(true);
-        }
+        }*/
 
         IEnumerator ConcatAnimsWithMusic()
         {
