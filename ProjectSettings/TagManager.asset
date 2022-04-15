@@ -11,6 +11,9 @@ TagManager:
   - InWorldHealthBar
   - OnScreenHealthBar
   - MainMenuController
+  - OnScreenStaminaBar
+  - OnScreenStatsBars
+  - PlayerCanvas
   layers:
   - Default
   - TransparentFX

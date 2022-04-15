@@ -99,7 +99,10 @@ namespace Helpers
             Dummy,
             Enemy,
             InWorldHealthBar,
-            OnScreenHealthBar
+            OnScreenHealthBar,
+            OnScreenStaminaBar,
+            OnScreenStatsBars,
+            PlayerCanvas
         }
 
         public enum UserTypes

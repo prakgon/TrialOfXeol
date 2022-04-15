@@ -29,7 +29,7 @@ namespace PlayerScripts
         private int _currentMana;
         
         private SliderBar _healthBar;
-        [SerializeField] private SliderBar _staminaBar;
+        private SliderBar _staminaBar;
         private PlayerAnimatorController _animatorController;
         
         private TMP_Text _playerTMPText;
@@ -44,30 +44,38 @@ namespace PlayerScripts
 
         private void InitializePlayer()
         {
+            /*var t = gameObject.transform.root;
+            foreach(Transform tr in t)
+            {
+                if (!tr.CompareTag(Tags.PlayerCanvas.ToString())) continue;
+                var o = tr.gameObject;
+                Debug.Log(o, o);
+            }*/
+
             SliderBar onScreenHealthBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.OnScreenHealthBar.ToString())); 
             SliderBar inWorldHealthBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.InWorldHealthBar.ToString())); 
 
+            SliderBar onScreenStaminaBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.OnScreenStaminaBar.ToString()));
+            
             if (PhotonView.Get(gameObject).IsMine)
             {
                 _healthBar = onScreenHealthBar;
+                _staminaBar = onScreenStaminaBar;
                 if (inWorldHealthBar is not null) inWorldHealthBar.gameObject.SetActive(false);
             }
             else
             {
                 _healthBar = inWorldHealthBar;
                 if (onScreenHealthBar is not null) onScreenHealthBar.gameObject.SetActive(false);
+                if (onScreenStaminaBar is not null) onScreenStaminaBar.gameObject.SetActive(false);
             }
             
             _currentHealth = SetMaxHealthFormHealthLevel();
-            
             _healthBar.SetMaxValue(_currentHealth);
             
             _currentStamina = SetMaxStaminaFromStaminaLevel();
-            
             _staminaBar.SetMaxValue(_currentStamina);
             
-            //InitializeStaminaBar();
-
             UpdateDebugUI();
 
             _effectsManager = GetComponent<PlayerEffectsManager>();
@@ -91,7 +99,7 @@ namespace PlayerScripts
                 // Handle player death
             }
         }
-         [PunRPC]
+
         public void DrainStamina(int drain)
         {
             DecreaseStamina(drain);

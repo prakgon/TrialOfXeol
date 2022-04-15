@@ -3528,7 +3528,6 @@ MonoBehaviour:
   healthLevel: 10
   staminaLevel: 10
   manaLevel: 10
-  _staminaBar: {fileID: 6871031931369555671}
 --- !u!114 &7999654713921530471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5869,9 +5868,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1622748115865606858}
     m_Modifications:
+    - target: {fileID: 94657599530529710, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 94657599530529710, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_TagString
+      value: OnScreenStaminaBar
+      objectReference: {fileID: 0}
     - target: {fileID: 1719327283080892966, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
         type: 3}
       propertyPath: m_Name
+      value: PlayerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719327283080892966, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719327283080892966, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_TagString
       value: PlayerCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1719327283080892968, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
@@ -5993,6 +6012,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294043082890956556, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294043082890956556, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_TagString
+      value: OnScreenStatsBars
       objectReference: {fileID: 0}
     - target: {fileID: 6314469689992787708, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
         type: 3}
