@@ -22,7 +22,10 @@ namespace PlayerScripts
 
         [SerializeField] private int staminaLevel = 10;
         private int _maximumStamina;
-        private int _currentStamina;
+        private float _currentStamina;
+        [SerializeField] private float staminaRegenerationAmount  = 20f;
+        [SerializeField] private float staminaRegenTimer = 0f;
+        [SerializeField] private float timeToStartStaminaRegen = 1f;
         
         [SerializeField] private int manaLevel = 10;
         private int _maximumMana;
@@ -88,9 +91,10 @@ namespace PlayerScripts
         public void TakeDamage(int damage)
         {
             if (_playerController.isInvulnerable) return;
-            if (damage <= 0) return;
+            if (_currentHealth <= 0) return;
             
             DecreaseHealth(damage);
+            
             UpdateHealthBar();
             
             //Debug
@@ -111,6 +115,24 @@ namespace PlayerScripts
         {
             DecreaseStamina(drain);
             UpdateStaminaBar();
+        }
+        
+        public void RegenerateStamina()
+        {
+            if (_playerController.isInteracting)
+            {
+                staminaRegenTimer = 0f;
+            }
+            else
+            {
+                staminaRegenTimer += Time.deltaTime;
+                
+                if (_currentStamina < _maximumStamina && staminaRegenTimer > timeToStartStaminaRegen)
+                {
+                    _currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                    _staminaBar.SetValue(Mathf.RoundToInt(_currentStamina));
+                }
+            }
         }
         
         [PunRPC]

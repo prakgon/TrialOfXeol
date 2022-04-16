@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Photon.Pun;
 using PlayerScripts;
 using TOX;
@@ -13,9 +14,10 @@ namespace PlayerScripts
     public class PlayerController : MonoBehaviour, IMediatorUser
     {
         protected PlayerMediator _med;
-        private PlayerMovement _playerMovement;
-        private PlayerInputHandler _input;
         private PlayerAnimatorController _animController;
+        private PlayerInputHandler _input;
+        private PlayerMovement _playerMovement;
+        private PlayerStats _playerStats;
 
         [Header("Player Flags")]
         public bool isInteracting;
@@ -24,26 +26,38 @@ namespace PlayerScripts
         public bool isLocking;
         public bool isInvulnerable;
 
+        public void ConfigureMediator(PlayerMediator med)
+        {
+            _med = med;
+            _animController = med.PlayerAnimatorController;
+            _input = med.PlayerInputHandler;
+            _playerMovement = med.PlayerMovement;
+        }
+        
+        private void Start()
+        {
+            _playerStats = GetComponent<PlayerStats>();
+        }
+        
         private void Update()
         {
             if (_playerMovement.CheckPhotonView()) return;
 
             _playerMovement.JumpAndGravity();
             _playerMovement.GroundedCheck();
-
+ 
             _playerMovement.HandlePlayerLocomotion();
-            _playerMovement. HandleRollingAndSprinting();
+            _playerMovement.HandleRollingAndSprinting();
+            
+            _playerStats.RegenerateStamina();
         }
 
         private void LateUpdate()
         {
             _playerMovement.CameraRotation();
 
-            if (!isInteracting)
-            { 
-                _playerMovement.HandleMoveAnimation();
-            }
-            
+            _playerMovement.HandleMoveAnimation();
+
             _input.rollFlag = false;
             isSprinting = _input.sprintFlag;
             _input.rightTriggerInput = false; // Light attack
@@ -54,13 +68,6 @@ namespace PlayerScripts
             canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
             isInvulnerable = _animController.GetBool(AnimatorParameters.IsInvulnerable);
 
-        }
-        public void ConfigureMediator(PlayerMediator med)
-        {
-            _med = med;
-            _animController = med.PlayerAnimatorController;
-            _input = med.PlayerInputHandler;
-            _playerMovement = med.PlayerMovement;
         }
 
         //protected virtual bool CheckPhotonView(){ return true; }

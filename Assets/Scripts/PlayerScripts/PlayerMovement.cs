@@ -6,6 +6,7 @@ using Photon.Pun;
 using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
+using Photon.Pun.Demo.PunBasics;
 using PlayerScripts;
 using UnityEngine.InputSystem;
 
@@ -303,13 +304,17 @@ namespace TOX
 
         public void HandleMoveAnimation()
         {
-            if (!_animController.HasAnimator) return;
-            _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
-            _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
-            _animController.SetParameter(AnimatorParameters.Horizontal,
-                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
-            _animController.SetParameter(AnimatorParameters.Vertical,
-                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
+            if (!_playerController.isInteracting)
+            {
+                if (!_animController.HasAnimator) return;
+                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+                _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
+                _animController.SetParameter(AnimatorParameters.Horizontal,
+                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
+                _animController.SetParameter(AnimatorParameters.Vertical,
+                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));    
+            }
+            
         }
         #endregion
 
