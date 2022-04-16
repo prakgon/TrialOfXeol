@@ -30,7 +30,9 @@ namespace PlayerScripts
         
         private SliderBar _healthBar;
         private SliderBar _staminaBar;
+        
         private PlayerAnimatorController _animatorController;
+        private PlayerController _playerController;
         
         private TMP_Text _playerTMPText;
         private PlayerEffectsManager _effectsManager;
@@ -78,14 +80,19 @@ namespace PlayerScripts
             
             UpdateDebugUI();
 
+            _playerController = GetComponent<PlayerController>();
             _effectsManager = GetComponent<PlayerEffectsManager>();
         }
 
         [PunRPC]
         public void TakeDamage(int damage)
         {
+            if (_playerController.isInvulnerable) return;
+            if (damage <= 0) return;
+            
             DecreaseHealth(damage);
             UpdateHealthBar();
+            
             //Debug
             UpdateDebugUI();
             

@@ -22,6 +22,7 @@ namespace PlayerScripts
         public bool isSprinting;
         public bool canDoCombo;
         public bool isLocking;
+        public bool isInvulnerable;
 
         private void Update()
         {
@@ -47,11 +48,12 @@ namespace PlayerScripts
             isSprinting = _input.sprintFlag;
             _input.rightTriggerInput = false; // Light attack
             _input.rightTriggerInput = false; // Heavy Attack
-            isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
             _input.comboFlag = false;
+            
+            isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
             canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
-            
-            
+            isInvulnerable = _animController.GetBool(AnimatorParameters.IsInvulnerable);
+
         }
         public void ConfigureMediator(PlayerMediator med)
         {
