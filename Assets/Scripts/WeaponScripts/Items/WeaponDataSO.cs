@@ -33,7 +33,14 @@ namespace WeaponScripts
         public AttackAnimations Skill_E;
         public AttackAnimations Skill_F;
         
-        [Header("Stats")]
-        public float damage;
+        [Header("Stamina Costs")]
+        public int baseStamina;
+        public float lightStaminaMultiplier;
+        public float heavyStaminaMultiplier;
+        
+        [Header("Damage Stats")]
+        public int baseDamage;
+        public float lightDamageMultiplier;
+        public float heavyDamageMultiplier;
     }
 }

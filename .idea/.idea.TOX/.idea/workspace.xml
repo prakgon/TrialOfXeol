@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f032a32-2e24-4396-8b08-2b3408f591bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TOX/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/GreatSword.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/GreatSword.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sword.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sword.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sword.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sword.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternPackages/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternPackages/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OnlineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OnlineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/GreatSword.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/GreatSword.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/Sword.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Weapons/Sword.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/HelperFunctions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/HelperFunctions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helpers/Literals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputActionSystem.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/Data/WeaponDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WeaponScripts/Data/WeaponDataSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerStats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +48,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.4/Runtime/Core/UnityVectorExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.sprite@1.0.0/Editor/SpriteEditor/SpriteRect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.2.0/InputSystem/Actions/InputActionMap.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SelectableEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -177,6 +169,7 @@
       <workItem from="1648796382260" duration="3651000" />
       <workItem from="1649071297725" duration="1759000" />
       <workItem from="1649416204667" duration="736000" />
+      <workItem from="1650024110576" duration="357000" />
     </task>
     <task id="LOCAL-00001" summary="Light attack input handler">
       <created>1646661520995</created>

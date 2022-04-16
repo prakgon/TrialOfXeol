@@ -6,6 +6,7 @@ using Photon.Pun;
 using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
+using Photon.Pun.Demo.PunBasics;
 using PlayerScripts;
 using UnityEngine.InputSystem;
 
@@ -28,6 +29,14 @@ namespace TOX
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
+        
+        [Tooltip("Roll Stamina Costs")]
+        [SerializeField] 
+        private float rollStaminaCost = 10.0f;
+        
+        [Tooltip("Jump Stamina Costs")]
+        [SerializeField] 
+        private float jumpStaminaCost = 5.0f;
 
         [Space(10)] [Tooltip("The height the player can jump")]
         public float JumpHeight = 1f;
@@ -85,6 +94,7 @@ namespace TOX
         private PlayerInputHandler _input;
         private PlayerInput _playerInput;
         private PlayerController _playerController;
+        private PlayerStats _playerStats;
         private GameObject _mainCamera;
         private GameObject[] players;
         private GameObject opponent;
@@ -111,6 +121,8 @@ namespace TOX
             }
 
             DontDestroyOnLoad(gameObject);
+
+            _playerStats = GetComponent<PlayerStats>();
         }
 
 
@@ -206,7 +218,12 @@ namespace TOX
 
         public void HandleRollingAndSprinting()
         {
-            if (_animController.GetBool(AnimatorParameters.IsInteracting)) return;
+            if (_animController.GetBool(AnimatorParameters.IsInteracting))
+                return;
+            
+            if (_playerStats.CurrentStamina <= 0) 
+                return;
+            
             try
             {
                 if (!_input.rollFlag) return;
@@ -214,8 +231,7 @@ namespace TOX
                 {
                     _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
                     _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
-
-
+                    
                     _animController.PlayTargetAnimation(
                         _input.targetLock ? AnimatorStates.Rolls : AnimatorStates.Roll, true, 1);
                     
@@ -230,6 +246,8 @@ namespace TOX
                 {
                     _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, 1);
                 }
+                
+                _playerStats.DrainStamina(rollStaminaCost);
             }
             catch (Exception e)
             {
@@ -240,7 +258,7 @@ namespace TOX
         private void HandleMovement()
         {
             float targetSpeed;
-            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5)
+            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5 && _playerStats.CurrentStamina > 0)
             {
                 targetSpeed = SprintSpeed;
                 _playerController.isSprinting = true;
@@ -255,6 +273,11 @@ namespace TOX
             {
                 targetSpeed = 0.0f;
                 _playerController.isSprinting = false;
+            }
+
+            if (_playerController.isSprinting)
+            {
+                _playerStats.DrainStamina(5 * Time.deltaTime);
             }
 
             // a reference to the players current horizontal velocity
@@ -303,13 +326,17 @@ namespace TOX
 
         public void HandleMoveAnimation()
         {
-            if (!_animController.HasAnimator) return;
-            _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
-            _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
-            _animController.SetParameter(AnimatorParameters.Horizontal,
-                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
-            _animController.SetParameter(AnimatorParameters.Vertical,
-                Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
+            if (!_playerController.isInteracting)
+            {
+                if (!_animController.HasAnimator) return;
+                _animController.SetParameter(AnimatorParameters.Speed, _animationBlend);
+                _animController.SetParameter(AnimatorParameters.MotionSpeed, _input.move.magnitude);
+                _animController.SetParameter(AnimatorParameters.Horizontal,
+                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
+                _animController.SetParameter(AnimatorParameters.Vertical,
+                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));    
+            }
+            
         }
         #endregion
 
@@ -360,6 +387,7 @@ namespace TOX
         {
             if (Grounded)
             {
+
                 _fallTimeoutDelta = FallTimeout;
 
                 if (_animController.HasAnimator)
@@ -375,17 +403,24 @@ namespace TOX
 
                 try
                 {
+                    
+                    if (_playerStats.CurrentStamina <= 0) 
+                        return;    
+                    
+
                     if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
                         if (_animController.CurrentAnimatorState == AnimatorStates.IdleWalkRunBlend &&
                             !_animController.IsInTransition() && !_playerController.isInteracting)
                         {
                             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
+                            
                             if (_animController.HasAnimator)
                             {
                                 _animController.SetParameter(AnimatorParameters.Jump, true);
                             }
+                            
+                            _playerStats.DrainStamina(jumpStaminaCost);
                         }
                     }
                 }

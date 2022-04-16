@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Photon.Pun;
 using PlayerScripts;
 using TOX;
@@ -13,52 +14,63 @@ namespace PlayerScripts
     public class PlayerController : MonoBehaviour, IMediatorUser
     {
         protected PlayerMediator _med;
-        private PlayerMovement _playerMovement;
-        private PlayerInputHandler _input;
         private PlayerAnimatorController _animController;
+        private PlayerInputHandler _input;
+        private PlayerMovement _playerMovement;
+        private PlayerStats _playerStats;
 
         [Header("Player Flags")]
         public bool isInteracting;
         public bool isSprinting;
         public bool canDoCombo;
         public bool isLocking;
+        public bool isInvulnerable;
+        public bool isJumping;
 
-        private void Update()
-        {
-            if (_playerMovement.CheckPhotonView()) return;
-
-            _playerMovement.JumpAndGravity();
-            _playerMovement.GroundedCheck();
-
-            _playerMovement.HandlePlayerLocomotion();
-            _playerMovement. HandleRollingAndSprinting();
-        }
-
-        private void LateUpdate()
-        {
-            _playerMovement.CameraRotation();
-
-            if (!isInteracting)
-            { 
-                _playerMovement.HandleMoveAnimation();
-            }
-            
-            _input.rollFlag = false;
-            isSprinting = _input.sprintFlag;
-            _input.rightTriggerInput = false; // Light attack
-            _input.rightTriggerInput = false; // Heavy Attack
-            isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
-            _input.comboFlag = false;
-            canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
-            
-            
-        }
         public void ConfigureMediator(PlayerMediator med)
         {
             _med = med;
             _animController = med.PlayerAnimatorController;
             _input = med.PlayerInputHandler;
             _playerMovement = med.PlayerMovement;
+        }
+        
+        private void Start()
+        {
+            _playerStats = GetComponent<PlayerStats>();
+        }
+        
+        private void Update()
+        {
+            if (_playerMovement.CheckPhotonView()) return;
+
+            _playerMovement.JumpAndGravity();
+            _playerMovement.GroundedCheck();
+ 
+            _playerMovement.HandlePlayerLocomotion();
+            _playerMovement.HandleRollingAndSprinting();
+            
+            _playerStats.RegenerateStamina();
+        }
+
+        private void LateUpdate()
+        {
+            _playerMovement.CameraRotation();
+
+            _playerMovement.HandleMoveAnimation();
+
+            _input.rollFlag = false;
+            isSprinting = _input.sprintFlag;
+            _input.rightTriggerInput = false; // Light attack
+            _input.rightTriggerInput = false; // Heavy Attack
+            _input.comboFlag = false;
+            
+            isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
+            canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
+            isInvulnerable = _animController.GetBool(AnimatorParameters.IsInvulnerable);
+
+            isJumping = _animController.GetBool(AnimatorParameters.Jump);
+
         }
 
         //protected virtual bool CheckPhotonView(){ return true; }

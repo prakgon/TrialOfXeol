@@ -1,10 +1,13 @@
 using System;
+using PlayerScripts;
 using UnityEngine;
 
 namespace WeaponScripts
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        public WeaponDataSO weaponItem;
+        
         private WeaponHolderSlot _leftHandSlot;
         private WeaponHolderSlot _rightHandSlot;
 
@@ -12,10 +15,14 @@ namespace WeaponScripts
         private DamageCollider _rightHandDamageCollider;
 
         private PlayerEffectsManager _playerEffectsManager; 
-
+        
+        private PlayerStats _playerStats;
+        
         private void Awake()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
+            _playerStats = GetComponent<PlayerStats>();
+            
             foreach (var weaponSlot in weaponHolderSlots)
             {
                 if (weaponSlot.isLeftHandSlot)
@@ -81,5 +88,17 @@ namespace WeaponScripts
         public void CloseRightDamageCollider() => _rightHandDamageCollider.DisableDamageCollider();
         #endregion
 
+        #region Handles Weapon's Stamina Drain
+        public void DrainStaminaLightAttack()
+        {
+            _playerStats.DrainStamina(Mathf.RoundToInt(weaponItem.baseStamina * weaponItem.lightStaminaMultiplier));
+        }
+        
+        public void DrainStaminaHeavyAttack()
+        {
+            _playerStats.DrainStamina(Mathf.RoundToInt(weaponItem.baseStamina * weaponItem.heavyStaminaMultiplier));
+        }
+
+        #endregion
     }
 }

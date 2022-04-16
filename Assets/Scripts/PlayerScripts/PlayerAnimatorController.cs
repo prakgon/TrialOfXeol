@@ -89,6 +89,8 @@ namespace PlayerScripts
             playerCombatManager.LastAttack = targetAnimation;
         }
 
+        public void EnableIsInvulnerable() => SetParameter(AnimatorParameters.IsInvulnerable, true);
+        public void DisableIsInvulnerable() => SetParameter(AnimatorParameters.IsInvulnerable, false);
         
 
         public void SetParameter(AnimatorParameters state, bool value)
