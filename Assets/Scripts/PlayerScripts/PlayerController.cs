@@ -25,6 +25,7 @@ namespace PlayerScripts
         public bool canDoCombo;
         public bool isLocking;
         public bool isInvulnerable;
+        public bool isJumping;
 
         public void ConfigureMediator(PlayerMediator med)
         {
@@ -67,6 +68,8 @@ namespace PlayerScripts
             isInteracting = _animController.GetBool(AnimatorParameters.IsInteracting);
             canDoCombo = _animController.GetBool(AnimatorParameters.CanDoCombo);
             isInvulnerable = _animController.GetBool(AnimatorParameters.IsInvulnerable);
+
+            isJumping = _animController.GetBool(AnimatorParameters.Jump);
 
         }
 

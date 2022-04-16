@@ -43,6 +43,8 @@ namespace PlayerScripts
         private GameObject _playerWeapon;
         
         private PlayerMediator _med;
+        
+        public float CurrentStamina => _currentStamina;
 
 
         private void Start() => InitializePlayer();
@@ -110,16 +112,16 @@ namespace PlayerScripts
                 // Handle player death
             }
         }
-
-        public void DrainStamina(int drain)
+        
+        public void DrainStamina(float drain)
         {
-            DecreaseStamina(drain);
+            _currentStamina -= drain;
             UpdateStaminaBar();
         }
         
         public void RegenerateStamina()
         {
-            if (_playerController.isInteracting)
+            if (_playerController.isInteracting || _playerController.isSprinting || _playerController.isJumping)
             {
                 staminaRegenTimer = 0f;
             }
@@ -143,8 +145,7 @@ namespace PlayerScripts
             return _maximumHealth;
         }
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
-        private void IncreaseStamina(int increment) => _currentStamina += increment;
-        private void DecreaseStamina(int decrement) => _currentStamina -= decrement;
+
         private int SetMaxStaminaFromStaminaLevel()
         {
             _maximumStamina = _playerData.increasedStaminaByLevel * staminaLevel;
