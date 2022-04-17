@@ -225,7 +225,7 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
             _playerMovement.ClearLockOnTargets();
         }
         
-        //_playerMovement.StrafeTransition(lockOnFlag);
+        _playerMovement.StrafeTransition(lockOnFlag);
         
         _playerController.isLocking = lockOnFlag;
     } 
