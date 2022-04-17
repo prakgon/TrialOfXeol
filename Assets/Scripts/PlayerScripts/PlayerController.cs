@@ -19,6 +19,9 @@ namespace PlayerScripts
         private PlayerMovement _playerMovement;
         private PlayerStats _playerStats;
 
+        [Tooltip("Use the PlayerCameraRoot transform")]
+        public Transform lockOnTransform;
+        
         [Header("Player Flags")]
         public bool isInteracting;
         public bool isSprinting;
@@ -26,7 +29,9 @@ namespace PlayerScripts
         public bool isLocking;
         public bool isInvulnerable;
         public bool isJumping;
-
+        
+        
+        
         public void ConfigureMediator(PlayerMediator med)
         {
             _med = med;

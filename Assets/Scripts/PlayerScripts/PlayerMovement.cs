@@ -1,12 +1,10 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using static Helpers.Literals;
 using Helpers;
-using Photon.Pun.Demo.PunBasics;
 using PlayerScripts;
 using UnityEngine.InputSystem;
 
@@ -29,13 +27,11 @@ namespace TOX
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
-        
-        [Tooltip("Roll Stamina Costs")]
-        [SerializeField] 
+
+        [Tooltip("Roll Stamina Costs")] [SerializeField]
         private float rollStaminaCost = 10.0f;
-        
-        [Tooltip("Jump Stamina Costs")]
-        [SerializeField] 
+
+        [Tooltip("Jump Stamina Costs")] [SerializeField]
         private float jumpStaminaCost = 5.0f;
 
         [Space(10)] [Tooltip("The height the player can jump")]
@@ -76,8 +72,19 @@ namespace TOX
         [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
         public float CameraAngleOverride = 0.0f;
 
-        [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
+        /*[Tooltip("For locking the camera position on all axis")]
+        public bool LockCameraPosition = false;*/
+
+        public Transform currentLockOnTarget;
+        [SerializeField] 
+        private List<PlayerController> availableTargets = new List<PlayerController>();
+        public Transform nearestLockOnTarget;
+        public Transform leftLockTarget;
+        public Transform rightLockTarget;
+        [Tooltip("Lock On Camera radius")] 
+        public float LockOnRadius = 26.0f;
+        [Tooltip("Maximum Lock On Camera 3radius")]
+        public float maximumLockOnDistance = 30.0f;
 
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -96,8 +103,6 @@ namespace TOX
         private PlayerController _playerController;
         private PlayerStats _playerStats;
         private GameObject _mainCamera;
-        private GameObject[] players;
-        private GameObject opponent;
         private PlayerAnimatorController _animController;
         private PlayerMediator _playerMediator;
 
@@ -132,6 +137,7 @@ namespace TOX
             _fallTimeoutDelta = FallTimeout;
         }
 
+
         #region Photon Methods
 
         public bool CheckPhotonView()
@@ -164,25 +170,42 @@ namespace TOX
 
         public void CameraRotation()
         {
-            if (!LockCameraPosition)
+            if (_input.lockOnFlag == false || currentLockOnTarget == null)
             {
-                switch (_input.targetLock)
-                {
-                    case true:
-                        _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
-                        break;
-                    default:
-                        _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-                        break;
-                }
+                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+
+                /*_mainCamera.transform.position += new Vector3(0, 0, -10);*/
 
                 _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
+                
+                _cinemachineTargetYaw =
+                    HelperFunctions.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+                _cinemachineTargetPitch = HelperFunctions.ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+                CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
+                    _cinemachineTargetPitch + CameraAngleOverride,
+                    _cinemachineTargetYaw, 0.0f);
             }
+            else
+            {
+                _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
 
-            _cinemachineTargetYaw = HelperFunctions.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = HelperFunctions.ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
+                float velocity = 0;
+
+                Vector3 dir = currentLockOnTarget.position - _mainCamera.transform.position;
+                dir.Normalize();
+                dir.y = 0;
+
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                CinemachineCameraTarget.transform.rotation = targetRotation;
+
+                dir = currentLockOnTarget.position - _mainCamera.transform.position;
+                dir.Normalize();
+
+                targetRotation = Quaternion.LookRotation(dir);
+                Vector3 eulerAngle = targetRotation.eulerAngles;
+                eulerAngle.y = 0;
+                _mainCamera.transform.localEulerAngles = eulerAngle;
+            }
         }
 
         #endregion
@@ -220,10 +243,10 @@ namespace TOX
         {
             if (_animController.GetBool(AnimatorParameters.IsInteracting))
                 return;
-            
-            if (_playerStats.CurrentStamina <= 0) 
+
+            if (_playerStats.CurrentStamina <= 0)
                 return;
-            
+
             try
             {
                 if (!_input.rollFlag) return;
@@ -231,11 +254,11 @@ namespace TOX
                 {
                     _animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
                     _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);
-                    
+
                     _animController.PlayTargetAnimation(
-                        _input.targetLock ? AnimatorStates.Rolls : AnimatorStates.Roll, true, 1);
-                    
-                    if (!_input.targetLock)
+                        _input.lockOnFlag ? AnimatorStates.Rolls : AnimatorStates.Roll, true, 1);
+
+                    if (!_input.lockOnFlag)
                     {
                         _targetDirection.y = 0;
                         Quaternion rollRotation = Quaternion.LookRotation(_targetDirection);
@@ -246,7 +269,7 @@ namespace TOX
                 {
                     _animController.PlayTargetAnimation(AnimatorStates.BackStep, true, 1);
                 }
-                
+
                 _playerStats.DrainStamina(rollStaminaCost);
             }
             catch (Exception e)
@@ -258,7 +281,8 @@ namespace TOX
         private void HandleMovement()
         {
             float targetSpeed;
-            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5 && _playerStats.CurrentStamina > 0)
+            if (_input.sprintFlag && _playerController.isSprinting && _input.moveAmount > 0.5 &&
+                _playerStats.CurrentStamina > 0)
             {
                 targetSpeed = SprintSpeed;
                 _playerController.isSprinting = true;
@@ -315,13 +339,12 @@ namespace TOX
                 TransformRotation(inputDirection, RotationSmoothTime);
             }
 
-            TransformRotation(inputDirection, RotationSmoothTime);
+            //TransformRotation(inputDirection, RotationSmoothTime);
 
             _targetDirection = Quaternion.Euler(_zero, _targetRotation, _zero) * Vector3.forward;
 
             // update animator if using character
             ControllerMove(_targetDirection, _speed);
-            
         }
 
         public void HandleMoveAnimation()
@@ -334,30 +357,40 @@ namespace TOX
                 _animController.SetParameter(AnimatorParameters.Horizontal,
                     Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Horizontal), _input.move.x, 0.1f));
                 _animController.SetParameter(AnimatorParameters.Vertical,
-                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));    
+                    Mathf.Lerp(_animController.GetFloat(AnimatorParameters.Vertical), _input.move.y, 0.1f));
+                /*_animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
+                _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);*/
             }
-            
         }
-        #endregion
 
-        
-        
+        #endregion
 
 
         #region Player Rotation
 
         private void TransformRotation(Vector3 inputDirection, float rotationSmoothTime)
         {
+            /*_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                              _mainCamera.transform.eulerAngles.y;
+            if (_input.move != Vector2.zero)
+            {
+                var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                    ref _rotationVelocity,
+                    rotationSmoothTime);
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }*/
+            
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;
-            switch (_input.targetLock)
+            /*if (_input.move != Vector2.zero)*/
+            switch (_input.lockOnFlag)
             {
                 case true:
                 {
-                    if (opponent != null)
+                    if (currentLockOnTarget != null)
                     {
-                        Vector3 targetPosition = new Vector3(opponent.transform.position.x, transform.position.y,
-                            opponent.transform.position.z);
+                        Vector3 targetPosition = new Vector3(currentLockOnTarget.transform.position.x, transform.position.y,
+                            currentLockOnTarget.transform.position.z);
                         transform.LookAt(targetPosition);
                     }
 
@@ -365,16 +398,20 @@ namespace TOX
                 }
                 default:
                 {
-                    if (_input.move != Vector2.zero && !_input.targetLock)
+                    if (_input.move != Vector2.zero && !_input.lockOnFlag)
                     {
-                        var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                        var rotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
                             ref _rotationVelocity,
                             rotationSmoothTime);
-                        transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                        transform.rotation = Quaternion.Euler(0.0f, rotationAngle, 0.0f);
                     }
 
                     break;
                 }
+                var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                    ref _rotationVelocity,
+                    rotationSmoothTime);
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
         }
 
@@ -387,7 +424,6 @@ namespace TOX
         {
             if (Grounded)
             {
-
                 _fallTimeoutDelta = FallTimeout;
 
                 if (_animController.HasAnimator)
@@ -403,10 +439,9 @@ namespace TOX
 
                 try
                 {
-                    
-                    if (_playerStats.CurrentStamina <= 0) 
-                        return;    
-                    
+                    if (_playerStats.CurrentStamina <= 0)
+                        return;
+
 
                     if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                     {
@@ -414,12 +449,12 @@ namespace TOX
                             !_animController.IsInTransition() && !_playerController.isInteracting)
                         {
                             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-                            
+
                             if (_animController.HasAnimator)
                             {
                                 _animController.SetParameter(AnimatorParameters.Jump, true);
                             }
-                            
+
                             _playerStats.DrainStamina(jumpStaminaCost);
                         }
                     }
@@ -486,22 +521,87 @@ namespace TOX
         }
 
         #endregion
-
-        public void ToggleTargetLock()
+        
+        public void StrafeTransition(bool strafe)
         {
-            players = GameObject.FindGameObjectsWithTag(LiteralToStringParse.Player);
-            foreach (GameObject player in players)
+            _animController.SetParameter(AnimatorParameters.IsLocking, strafe && currentLockOnTarget != null);
+        }
+
+        public void HandleLockOn()
+        {
+            float shortestDistance = Mathf.Infinity;
+            float shortestDistanceOfLeftTarget = Mathf.Infinity;
+            float shortestDistanceOfRightTarget = Mathf.Infinity;
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position, LockOnRadius);
+
+            foreach (var t in colliders)
             {
-                if (player != gameObject)
+                PlayerController otherPlayer = t.GetComponent<PlayerController>();
+
+                if (otherPlayer != null)
                 {
-                    opponent = player;
+                    Vector3 lockTargetDirection = otherPlayer.transform.position - transform.position;
+                    float distanceFromTarget = Vector3.Distance(transform.position, otherPlayer.transform.position);
+                    float viewableAngle = Vector3.Angle(lockTargetDirection, CinemachineCameraTarget.transform.forward);
+
+                    if (otherPlayer.transform.root != transform.root
+                        && viewableAngle is > -50 and < 50
+                        && distanceFromTarget <= maximumLockOnDistance)
+                    {
+                        availableTargets.Add(otherPlayer);
+                    }
+                }
+            }
+
+            foreach (var t in availableTargets)
+            {
+                float distanceFromTarget = Vector3.Distance(transform.position, t.transform.position);
+
+                if (distanceFromTarget < shortestDistance)
+                {
+                    shortestDistance = distanceFromTarget;
+                    nearestLockOnTarget = t.lockOnTransform;
+                }
+
+                if (_input.lockOnFlag)
+                {
+                    Vector3 relativeEnemyPosition = currentLockOnTarget.InverseTransformPoint(t.transform.position);
+                    float distanceFromLeftTarget = currentLockOnTarget.transform.position.x - t.transform.position.x;
+                    float distanceFromRightTarget = currentLockOnTarget.transform.position.x + t.transform.position.x;
+
+                    switch (relativeEnemyPosition.x)
+                    {
+                        case > 0 when distanceFromLeftTarget < shortestDistanceOfLeftTarget:
+                            shortestDistanceOfLeftTarget = distanceFromLeftTarget;
+                            leftLockTarget = t.lockOnTransform;
+                            break;
+                        case < 0 when distanceFromRightTarget < shortestDistanceOfRightTarget:
+                            shortestDistanceOfRightTarget = distanceFromRightTarget;
+                            rightLockTarget = t.lockOnTransform;
+                            break;
+                    }
+
+                    /*if (relativeEnemyPosition.x > 0 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
+                    {
+                        shortestDistanceOfLeftTarget = distanceFromLeftTarget;
+                        leftLockTarget = t.lockOnTransform;
+                    }
+                    
+                    if (relativeEnemyPosition.x < 0 && distanceFromRightTarget < shortestDistanceOfRightTarget) 
+                    {
+                        shortestDistanceOfRightTarget = distanceFromRightTarget;
+                        rightLockTarget = t.lockOnTransform;
+                    }*/
                 }
             }
         }
-
-        public void IsStrafeMoving(bool strafe)
+        
+        public void ClearLockOnTargets()
         {
-            _animController.SetParameter(AnimatorParameters.IsLocking, strafe);
+            availableTargets.Clear();
+            nearestLockOnTarget = null;
+            currentLockOnTarget = null;
         }
 
         public void ConfigureMediator(PlayerMediator med)

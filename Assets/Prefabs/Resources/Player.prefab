@@ -3405,6 +3405,8 @@ MonoBehaviour:
   SprintSpeed: 7
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
+  rollStaminaCost: 10
+  jumpStaminaCost: 5
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.5
@@ -3419,7 +3421,13 @@ MonoBehaviour:
   TopClamp: 70
   BottomClamp: -30
   CameraAngleOverride: 0
-  LockCameraPosition: 0
+  currentLockOnTarget: {fileID: 0}
+  availableTargets: []
+  nearestLockOnTarget: {fileID: 0}
+  leftLockTarget: {fileID: 0}
+  rightLockTarget: {fileID: 0}
+  LockOnRadius: 26
+  maximumLockOnDistance: 30
   _followCameraPrefab: {fileID: 2070925441746177671, guid: a1a802ecaf6775746bb2a929fb554ad8,
     type: 3}
 --- !u!114 &1784342461813926238
@@ -3508,6 +3516,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: IsLocking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsInvulnerable
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -3527,6 +3538,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthLevel: 10
   staminaLevel: 10
+  staminaRegenerationAmount: 20
+  staminaRegenTimer: 0
+  timeToStartStaminaRegen: 1
   manaLevel: 10
 --- !u!114 &7999654713921530471
 MonoBehaviour:
@@ -3738,6 +3752,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 28943289-9910-4ca5-8c24-2d7dbc791d36
     m_ActionName: Player/ShowControls[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4289067332944146655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnLockOnTargetLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a34349b5-4dc7-41ea-bc4f-34ca4b3d9277
+    m_ActionName: Player/Lock On Target Left[/XInputControllerWindows/rightStick/left,/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4289067332944146655}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnLockOnTargetRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 08859b29-aead-4814-a5ff-16135b9a9160
+    m_ActionName: Player/Lock On Target Right[/XInputControllerWindows/leftStick/right,/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3759,15 +3805,18 @@ MonoBehaviour:
   moveAmount: 0
   look: {x: 0, y: 0}
   jump: 0
-  targetLock: 0
   rollFlag: 0
   sprintFlag: 0
+  lockOnFlag: 0
   comboFlag: 0
   rollInputTimer: 0
   eastButtonInput: 0
   rightButtonInput: 0
   rightTriggerInput: 0
   leftTriggerInput: 0
+  lockOnInput: 0
+  lockOnRightInput: 0
+  lockOnLeftInput: 0
   startInput: 0
   _startCounter: 0
   _gamepadControlsSchema: {fileID: 6077278288557243258}
@@ -3785,11 +3834,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dea4bc493539df4fb03b79eefe96ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnTransform: {fileID: 5996792806643808556}
   isInteracting: 0
   isSprinting: 0
   canDoCombo: 0
   isLocking: 0
   isInvulnerable: 0
+  isJumping: 0
 --- !u!114 &1898708954298292171
 MonoBehaviour:
   m_ObjectHideFlags: 0
