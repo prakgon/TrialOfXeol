@@ -171,13 +171,11 @@ namespace PlayerScripts
             if (stream.IsWriting)
             {
                 stream.SendNext(_currentHealth);
-                stream.SendNext(_currentStamina);
             }
             else
             {
                 _currentHealth = (int) stream.ReceiveNext();
-                _currentStamina = (int) stream.ReceiveNext();
-                if (_currentHealth < _maximumHealth || _currentStamina < _maximumStamina)
+                if (_currentHealth < _maximumHealth)
                 {
                     UpdateDebugUI();
                     UpdateHealthBar();
