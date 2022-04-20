@@ -129,11 +129,19 @@ namespace TOX
             Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            Hashtable roomProperties = new Hashtable();
+            roomProperties.Add("fighters", 0);
+            roomProperties.Add("spectators", 0);
+            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom, CustomRoomProperties = roomProperties });
         }
 
         public override void OnJoinedRoom()
         {
+            
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("fighters", out object fighters);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable{{"fighters", (int)fighters + 1}});
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("fighters", out object fightersNow);
+            Debug.Log(fightersNow);
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
