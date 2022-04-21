@@ -118,9 +118,19 @@ namespace TOX
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+            string sqlLobbyFilter = "";
             if (_isConnecting)
             {
-                string sqlLobbyFilter = ToxSqlProperties.FighterCount + "<" + ToxSqlProperties.MaxFighters;
+                switch (_userType)
+                {
+                    case UserTypes.Player:
+                        sqlLobbyFilter = ToxSqlProperties.FighterCount + "<" + ToxSqlProperties.MaxFighters;
+                        break;
+                    case UserTypes.FreeSpectator:
+                        sqlLobbyFilter = ToxSqlProperties.SpectatorCount + "<" + ToxSqlProperties.MaxSpectators;
+                        break;
+                }
+
                 PhotonNetwork.JoinRandomRoom(null, multiplayerConfiguration.maxPlayersPerRoom, MatchmakingMode.FillRoom,
                     sqlLobby,
                     sqlLobbyFilter);
@@ -162,12 +172,22 @@ namespace TOX
 
         public override void OnJoinedRoom()
         {
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount, out object fighters);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
-                { { ToxSqlProperties.FighterCount, (int)fighters + 1 } });
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
-                out object fightersNow);
-            Debug.Log(fightersNow);
+            switch (_userType)
+            {
+                case UserTypes.Player:
+                    PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
+                        out object fighterCount);
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+                        { { ToxSqlProperties.FighterCount, (int)fighterCount + 1 } });
+                    break;
+                case UserTypes.FreeSpectator:
+                    PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.SpectatorCount,
+                        out object spectatorCount);
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+                        { { ToxSqlProperties.SpectatorCount, (int)spectatorCount + 1 } });
+                    break;
+            }
+
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
