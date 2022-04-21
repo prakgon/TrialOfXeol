@@ -27,6 +27,7 @@ namespace TOX
         private bool _isConnecting;
         private Hashtable _playerProperties;
         private UserTypes _userType;
+        private TypedLobby sqlLobby = new TypedLobby("Lobby", LobbyType.SqlLobby);
 
         #endregion
 
@@ -114,7 +115,8 @@ namespace TOX
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
             if (_isConnecting)
             {
-                PhotonNetwork.JoinRandomRoom();
+                string sqlLobbyFilter = "C0 < C1";
+                PhotonNetwork.JoinRandomRoom(null, maxPlayersPerRoom, MatchmakingMode.FillRoom, sqlLobby, sqlLobbyFilter);
             }
         }
 
@@ -129,18 +131,25 @@ namespace TOX
             Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            Hashtable roomProperties = new Hashtable();
-            roomProperties.Add("fighters", 0);
-            roomProperties.Add("spectators", 0);
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom, CustomRoomProperties = roomProperties });
+            RoomOptions options = new RoomOptions ();
+            options.CustomRoomProperties = new Hashtable ();
+            options.CustomRoomProperties.Add ("C0", 0);
+            options.CustomRoomProperties.Add("C1", 2);
+            options.CustomRoomProperties.Add("C2", 0);
+            options.CustomRoomProperties.Add("C3", 3);
+            
+            options.CustomRoomPropertiesForLobby = new[] {"C0", "C1", "C2", "C3"};
+
+            options.MaxPlayers = maxPlayersPerRoom;
+            PhotonNetwork.CreateRoom(null, options, sqlLobby);
         }
 
         public override void OnJoinedRoom()
         {
             
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("fighters", out object fighters);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable{{"fighters", (int)fighters + 1}});
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("fighters", out object fightersNow);
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fighters);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable{{"C0", (int)fighters + 1}});
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fightersNow);
             Debug.Log(fightersNow);
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
