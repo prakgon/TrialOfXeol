@@ -164,4 +164,12 @@ namespace Helpers
         // internal static readonly string Skill_F = Literals.AttackAnimations.Skill_F.ToString();
 
     }
+
+    internal static class ToxSqlProperties
+    {
+        internal const string FighterCount = "C0";
+        internal const string MaxFighters = "C1";
+        internal const string SpectatorCount = "C2";
+        internal const string MaxSpectators = "C3";
+    }
 }

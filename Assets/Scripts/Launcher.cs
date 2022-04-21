@@ -4,6 +4,7 @@ using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
+using Helpers;
 using static Helpers.Literals;
 using static Helpers.LiteralToStringParse;
 
@@ -12,18 +13,24 @@ namespace TOX
     public class Launcher : MonoBehaviourPunCallbacks
     {
         #region Private Serializable Fields
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
+
+        [Tooltip(
+            "The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
+
         [SerializeField] Button _singleButton, _multiButton, _spectatorButton;
+
         #endregion
 
 
         #region Private Fields
+
         /// <summary>
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
+
         private bool _isConnecting;
         private Hashtable _playerProperties;
         private UserTypes _userType;
@@ -33,7 +40,6 @@ namespace TOX
 
 
         #region MonoBehaviour CallBacks
-
 
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
@@ -58,10 +64,10 @@ namespace TOX
             _spectatorButton.onClick.AddListener(StartFreeSpectator);
         }
 
-
         #endregion
 
         #region Private Methods
+
         private void StartSingleplayer()
         {
             PhotonNetwork.OfflineMode = true;
@@ -77,7 +83,6 @@ namespace TOX
         #endregion
 
         #region Public Methods
-
 
         /// <summary>
         /// Start the connection process.
@@ -105,40 +110,48 @@ namespace TOX
             }
         }
 
-
         #endregion
-        #region MonoBehaviourPunCallbacks Callbacks
 
+        #region MonoBehaviourPunCallbacks Callbacks
 
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
             if (_isConnecting)
             {
-                string sqlLobbyFilter = "C0 < C1";
-                PhotonNetwork.JoinRandomRoom(null, maxPlayersPerRoom, MatchmakingMode.FillRoom, sqlLobby, sqlLobbyFilter);
+                string sqlLobbyFilter = ToxSqlProperties.FighterCount + "<" + ToxSqlProperties.MaxFighters;
+                PhotonNetwork.JoinRandomRoom(null, maxPlayersPerRoom, MatchmakingMode.FillRoom, sqlLobby,
+                    sqlLobbyFilter);
             }
         }
 
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}",
+                cause);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+            Debug.Log(
+                "PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            RoomOptions options = new RoomOptions ();
-            options.CustomRoomProperties = new Hashtable ();
-            options.CustomRoomProperties.Add ("C0", 0);
-            options.CustomRoomProperties.Add("C1", 2);
-            options.CustomRoomProperties.Add("C2", 0);
-            options.CustomRoomProperties.Add("C3", 3);
-            
-            options.CustomRoomPropertiesForLobby = new[] {"C0", "C1", "C2", "C3"};
+            RoomOptions options = new RoomOptions();
+            options.CustomRoomProperties = new Hashtable();
+            options.CustomRoomProperties = new Hashtable
+            {
+                { ToxSqlProperties.FighterCount, 0 }, { ToxSqlProperties.MaxFighters, 2 },
+                { ToxSqlProperties.SpectatorCount, 0 }, { ToxSqlProperties.MaxSpectators, 3 }
+            };
+            ;
+
+            options.CustomRoomPropertiesForLobby = new[]
+            {
+                ToxSqlProperties.FighterCount, ToxSqlProperties.MaxFighters, ToxSqlProperties.SpectatorCount,
+                ToxSqlProperties.MaxSpectators
+            };
 
             options.MaxPlayers = maxPlayersPerRoom;
             PhotonNetwork.CreateRoom(null, options, sqlLobby);
@@ -146,9 +159,8 @@ namespace TOX
 
         public override void OnJoinedRoom()
         {
-            
             PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fighters);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable{{"C0", (int)fighters + 1}});
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable { { "C0", (int)fighters + 1 } });
             PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fightersNow);
             Debug.Log(fightersNow);
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
@@ -160,6 +172,5 @@ namespace TOX
         }
 
         #endregion
-
     }
 }
