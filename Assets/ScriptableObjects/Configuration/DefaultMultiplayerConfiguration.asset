@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db7cd680752d8604381cad0800a72739, type: 3}
-  m_Name: DefaultConfiguration
+  m_Name: DefaultMultiplayerConfiguration
   m_EditorClassIdentifier: 
   maxPlayersPerRoom: 5
   maxFighters: 2
