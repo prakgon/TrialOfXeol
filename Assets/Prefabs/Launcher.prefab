@@ -44,4 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96ccb33ef1526a46b929a7842835854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayersPerRoom: 4
+  _singleButton: {fileID: 0}
+  _multiButton: {fileID: 0}
+  _spectatorButton: {fileID: 0}
+  multiplayerConfiguration: {fileID: 11400000, guid: b3e010f715db91c4fb8b75c429a62d94,
+    type: 2}

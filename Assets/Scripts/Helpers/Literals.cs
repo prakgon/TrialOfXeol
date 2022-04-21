@@ -142,6 +142,9 @@ namespace Helpers
         internal const string OnlineScene = "OnlineScene";
         internal const string SampleScene = "SampleScene";
         
+        //Configuration
+        internal const string MultiplayerConfiguration = "MultiplayerConfiguration";
+        internal const string MultiplayerConfigurationPath = "ScriptableObjects/Configuration/Multiplayer";
         //AttackAnimations
         // internal static readonly string OH_Light_Attack_1 = Literals.AttackAnimations.OH_Light_Attack_1.ToString();
         // internal static readonly string OH_Light_Attack_2 = Literals.AttackAnimations.OH_Light_Attack_2.ToString();

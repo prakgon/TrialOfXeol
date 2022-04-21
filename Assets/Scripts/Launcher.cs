@@ -1,3 +1,4 @@
+using Configuration;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -17,9 +18,9 @@ namespace TOX
         [Tooltip(
             "The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
-        private byte maxPlayersPerRoom = 4;
+        Button _singleButton, _multiButton, _spectatorButton;
 
-        [SerializeField] Button _singleButton, _multiButton, _spectatorButton;
+        [SerializeField] private MultiplayerConfigurationSO multiplayerConfiguration;
 
         #endregion
 
@@ -120,7 +121,8 @@ namespace TOX
             if (_isConnecting)
             {
                 string sqlLobbyFilter = ToxSqlProperties.FighterCount + "<" + ToxSqlProperties.MaxFighters;
-                PhotonNetwork.JoinRandomRoom(null, maxPlayersPerRoom, MatchmakingMode.FillRoom, sqlLobby,
+                PhotonNetwork.JoinRandomRoom(null, multiplayerConfiguration.maxPlayersPerRoom, MatchmakingMode.FillRoom,
+                    sqlLobby,
                     sqlLobbyFilter);
             }
         }
@@ -139,13 +141,14 @@ namespace TOX
 
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
             RoomOptions options = new RoomOptions();
-            options.CustomRoomProperties = new Hashtable();
             options.CustomRoomProperties = new Hashtable
             {
-                { ToxSqlProperties.FighterCount, 0 }, { ToxSqlProperties.MaxFighters, 2 },
-                { ToxSqlProperties.SpectatorCount, 0 }, { ToxSqlProperties.MaxSpectators, 3 }
+                { ToxSqlProperties.FighterCount, 0 },
+                { ToxSqlProperties.MaxFighters, multiplayerConfiguration.maxFighters },
+                { ToxSqlProperties.SpectatorCount, 0 },
+                { ToxSqlProperties.MaxSpectators, multiplayerConfiguration.maxSpectators }
             };
-            ;
+
 
             options.CustomRoomPropertiesForLobby = new[]
             {
@@ -153,15 +156,17 @@ namespace TOX
                 ToxSqlProperties.MaxSpectators
             };
 
-            options.MaxPlayers = maxPlayersPerRoom;
+            options.MaxPlayers = multiplayerConfiguration.maxPlayersPerRoom;
             PhotonNetwork.CreateRoom(null, options, sqlLobby);
         }
 
         public override void OnJoinedRoom()
         {
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fighters);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable { { "C0", (int)fighters + 1 } });
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("C0", out object fightersNow);
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount, out object fighters);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+                { { ToxSqlProperties.FighterCount, (int)fighters + 1 } });
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
+                out object fightersNow);
             Debug.Log(fightersNow);
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
