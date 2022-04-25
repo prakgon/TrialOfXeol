@@ -8,21 +8,24 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 {
     // Basic inputs
-    [Header("Basic player inputs")] public Vector2 move;
+    [Header("Basic player inputs")] 
+    public Vector2 move;
     public float moveAmount;
     public Vector2 look;
     public bool jump;
 
-    public bool targetLock = false;
 
     // Combat mechanics inputs
-    [Header("Combat input flags")] public bool rollFlag;
+    [Header("Combat input flags")] 
+    public bool rollFlag;
     public bool sprintFlag;
+    public bool lockOnFlag = false;
     public bool comboFlag;
     public float rollInputTimer;
 
     // Controller convection keys Input Handlers
-    [Header("Controller convection inputs")] [Tooltip("This button handles roll and sprint inputs")]
+    [Header("Controller convection inputs")] 
+    [Tooltip("This button handles roll and sprint inputs")]
     public bool eastButtonInput;
 
     [Tooltip("This button handles right handed light attack inputs")]
@@ -33,6 +36,15 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 
     [Tooltip("This button handles special attack inputs")]
     public bool leftTriggerInput;
+    
+    [Tooltip("This input handles camera lock on target")]
+    public bool lockOnInput;
+
+    [Tooltip("This input changes camera lock on to right target")]
+    public bool lockOnRightInput;
+    
+    [Tooltip("This input changes camera lock on to left target")]
+    public bool lockOnLeftInput;
 
     [Tooltip("This button handles menu inputs")]
     public bool startInput;
@@ -62,15 +74,14 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     public void OnHeavyAttack(InputAction.CallbackContext context) => HeavyAttackHandler(context);
     public void OnSpecialAttack(InputAction.CallbackContext context) => SpecialAttackHandler(context);
     public void OnTargetLock(InputAction.CallbackContext context) => LockTarget(context);
-
     public void OnBlock(InputAction.CallbackContext context)
     {
         Debug.Log(context.phase == InputActionPhase.Started);
     }
-
     public void OnShowControls(InputAction.CallbackContext context) => ShowControlsHandler(context);
-
     public void OnChangeWeapon(InputAction.CallbackContext context) => ChangeWeaponHandler(context);
+    public void OnLockOnTargetLeft(InputAction.CallbackContext context) => LockOnTargetLeftHandler(context);
+    public void OnLockOnTargetRight(InputAction.CallbackContext context) => LockOnTargetRightHandler(context);
 
     #endregion
 
@@ -194,25 +205,74 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 
     private void LockTarget(InputAction.CallbackContext context)
     {
-        _playerMovement.ToggleTargetLock();
-        targetLock = !targetLock;
+        lockOnInput = context.phase == InputActionPhase.Performed;
 
-        _playerMovement.IsStrafeMoving(targetLock);
-        _playerController.isLocking = targetLock;
-    }
+        if (lockOnInput && lockOnFlag == false)
+        {
+            lockOnInput = false;
+            _playerMovement.HandleLockOn();
+            if (_playerMovement.nearestLockOnTarget != null)
+            {
+                _playerMovement.currentLockOnTarget = _playerMovement.nearestLockOnTarget;
+                lockOnFlag = true;
+            }
+        }
+        else if (lockOnInput && lockOnFlag)
+        {
+            lockOnFlag = false;
+            lockOnInput = false;
+                
+            _playerMovement.ClearLockOnTargets();
+        }
+        
+        _playerMovement.StrafeTransition(lockOnFlag);
+        
+        _playerController.isLocking = lockOnFlag;
+    } 
 
     private void ChangeWeaponHandler(InputAction.CallbackContext context)
     {
         if (context.phase is InputActionPhase.Started)
         {
-            Debug.Log("Change Weapon");
             _playerInventory.ChangeWeapon();
         }
     }
 
+    private void LockOnTargetLeftHandler(InputAction.CallbackContext context)
+    {
+        lockOnLeftInput = context.phase == InputActionPhase.Performed;
+
+        if (lockOnFlag && lockOnLeftInput)
+        {
+            lockOnRightInput = false;
+            _playerMovement.HandleLockOn();
+            if (_playerMovement.leftLockTarget != null)
+            {
+                _playerMovement.currentLockOnTarget = _playerMovement.leftLockTarget;
+            }
+        }
+    } 
+    
+    private void LockOnTargetRightHandler(InputAction.CallbackContext context)
+    {
+        lockOnRightInput = context.phase == InputActionPhase.Performed;
+        
+        if (lockOnFlag && lockOnRightInput)
+        {
+            lockOnLeftInput = false;
+            _playerMovement.HandleLockOn();
+            if (_playerMovement.rightLockTarget != null)
+            {
+                _playerMovement.currentLockOnTarget = _playerMovement.rightLockTarget;
+            }
+        }
+    }
+    
+
     private void ShowControlsHandler(InputAction.CallbackContext context)
     {
         startInput = context.phase == InputActionPhase.Performed;
+        
         _startCounter += startInput ? 1 : 0;
         _startCounter = _startCounter >= 3 ? 0 : _startCounter;
         

@@ -64,7 +64,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""LightAttack"",
+                    ""name"": ""Light Attack"",
                     ""type"": ""Value"",
                     ""id"": ""d77173c7-8d24-461b-952f-8d6ddf28941e"",
                     ""expectedControlType"": ""Analog"",
@@ -73,7 +73,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""HeavyAttack"",
+                    ""name"": ""Heavy Attack"",
                     ""type"": ""Value"",
                     ""id"": ""2baf1d1e-5551-43b1-ada5-86049c0bf6ea"",
                     ""expectedControlType"": ""Analog"",
@@ -82,7 +82,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SpecialAttack"",
+                    ""name"": ""Special Attack"",
                     ""type"": ""Value"",
                     ""id"": ""97f8241e-e30d-43fb-afa0-71b26eb8ced1"",
                     ""expectedControlType"": ""Analog"",
@@ -91,7 +91,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ChangeWeapon"",
+                    ""name"": ""Change Weapon"",
                     ""type"": ""Value"",
                     ""id"": ""06a0cf8f-fa21-4e57-884e-fb76b8e5be38"",
                     ""expectedControlType"": ""Analog"",
@@ -109,7 +109,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TargetLock"",
+                    ""name"": ""Lock On"",
                     ""type"": ""Button"",
                     ""id"": ""632f85fc-94f2-446d-8b55-f3531c5d9f9a"",
                     ""expectedControlType"": ""Button"",
@@ -118,10 +118,28 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShowControls"",
+                    ""name"": ""Show Controls"",
                     ""type"": ""Button"",
                     ""id"": ""28943289-9910-4ca5-8c24-2d7dbc791d36"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock On Target Left"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a34349b5-4dc7-41ea-bc4f-34ca4b3d9277"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock On Target Right"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""08859b29-aead-4814-a5ff-16135b9a9160"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -289,7 +307,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""LightAttack"",
+                    ""action"": ""Light Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,7 +318,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""LightAttack"",
+                    ""action"": ""Light Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -311,7 +329,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""Heavy Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,7 +340,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""Heavy Attack"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -333,7 +351,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""Heavy Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -344,7 +362,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""Heavy Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -399,7 +417,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""Special Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -410,7 +428,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""Special Attack"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -421,7 +439,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""Special Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -432,7 +450,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""Special Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -443,7 +461,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""TargetLock"",
+                    ""action"": ""Lock On"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -454,7 +472,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TargetLock"",
+                    ""action"": ""Lock On"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -465,7 +483,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -476,7 +494,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -487,7 +505,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ChangeWeapon"",
+                    ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -498,7 +516,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""ShowControls"",
+                    ""action"": ""Show Controls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -509,7 +527,51 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""ShowControls"",
+                    ""action"": ""Show Controls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9d05d13-45da-44c5-b46e-dc214c4f2407"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": ""Tap(duration=0.2,pressPoint=1)"",
+                    ""processors"": ""StickDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Lock On Target Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f17f9f66-0ab8-4ebd-a041-b536ff2d7f7b"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock On Target Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b745e405-16bd-483d-bd53-c0a4aab190ed"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": ""Tap(duration=0.2,pressPoint=1)"",
+                    ""processors"": ""StickDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Lock On Target Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65c53e96-cffa-441e-b4a0-d2fdd571e634"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock On Target Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -774,13 +836,15 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_RollandSprint = m_Player.FindAction("Roll and Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
-        m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
-        m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
-        m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_Player_LightAttack = m_Player.FindAction("Light Attack", throwIfNotFound: true);
+        m_Player_HeavyAttack = m_Player.FindAction("Heavy Attack", throwIfNotFound: true);
+        m_Player_SpecialAttack = m_Player.FindAction("Special Attack", throwIfNotFound: true);
+        m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
-        m_Player_TargetLock = m_Player.FindAction("TargetLock", throwIfNotFound: true);
-        m_Player_ShowControls = m_Player.FindAction("ShowControls", throwIfNotFound: true);
+        m_Player_LockOn = m_Player.FindAction("Lock On", throwIfNotFound: true);
+        m_Player_ShowControls = m_Player.FindAction("Show Controls", throwIfNotFound: true);
+        m_Player_LockOnTargetLeft = m_Player.FindAction("Lock On Target Left", throwIfNotFound: true);
+        m_Player_LockOnTargetRight = m_Player.FindAction("Lock On Target Right", throwIfNotFound: true);
         // FreeCamera
         m_FreeCamera = asset.FindActionMap("FreeCamera", throwIfNotFound: true);
         m_FreeCamera_Move = m_FreeCamera.FindAction("Move", throwIfNotFound: true);
@@ -853,8 +917,10 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SpecialAttack;
     private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_Block;
-    private readonly InputAction m_Player_TargetLock;
+    private readonly InputAction m_Player_LockOn;
     private readonly InputAction m_Player_ShowControls;
+    private readonly InputAction m_Player_LockOnTargetLeft;
+    private readonly InputAction m_Player_LockOnTargetRight;
     public struct PlayerActions
     {
         private @InputActionSystem m_Wrapper;
@@ -868,8 +934,10 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @Block => m_Wrapper.m_Player_Block;
-        public InputAction @TargetLock => m_Wrapper.m_Player_TargetLock;
+        public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
         public InputAction @ShowControls => m_Wrapper.m_Player_ShowControls;
+        public InputAction @LockOnTargetLeft => m_Wrapper.m_Player_LockOnTargetLeft;
+        public InputAction @LockOnTargetRight => m_Wrapper.m_Player_LockOnTargetRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -906,12 +974,18 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
-                @TargetLock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
-                @TargetLock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
-                @TargetLock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetLock;
+                @LockOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOn;
+                @LockOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOn;
+                @LockOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOn;
                 @ShowControls.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowControls;
                 @ShowControls.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowControls;
                 @ShowControls.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowControls;
+                @LockOnTargetLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetRight;
+                @LockOnTargetRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetRight;
+                @LockOnTargetRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLockOnTargetRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -943,12 +1017,18 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
-                @TargetLock.started += instance.OnTargetLock;
-                @TargetLock.performed += instance.OnTargetLock;
-                @TargetLock.canceled += instance.OnTargetLock;
+                @LockOn.started += instance.OnLockOn;
+                @LockOn.performed += instance.OnLockOn;
+                @LockOn.canceled += instance.OnLockOn;
                 @ShowControls.started += instance.OnShowControls;
                 @ShowControls.performed += instance.OnShowControls;
                 @ShowControls.canceled += instance.OnShowControls;
+                @LockOnTargetLeft.started += instance.OnLockOnTargetLeft;
+                @LockOnTargetLeft.performed += instance.OnLockOnTargetLeft;
+                @LockOnTargetLeft.canceled += instance.OnLockOnTargetLeft;
+                @LockOnTargetRight.started += instance.OnLockOnTargetRight;
+                @LockOnTargetRight.performed += instance.OnLockOnTargetRight;
+                @LockOnTargetRight.canceled += instance.OnLockOnTargetRight;
             }
         }
     }
@@ -1041,8 +1121,10 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
-        void OnTargetLock(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
         void OnShowControls(InputAction.CallbackContext context);
+        void OnLockOnTargetLeft(InputAction.CallbackContext context);
+        void OnLockOnTargetRight(InputAction.CallbackContext context);
     }
     public interface IFreeCameraActions
     {

@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LightAttack",
+                    "name": "Light Attack",
                     "type": "Value",
                     "id": "d77173c7-8d24-461b-952f-8d6ddf28941e",
                     "expectedControlType": "Analog",
@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "HeavyAttack",
+                    "name": "Heavy Attack",
                     "type": "Value",
                     "id": "2baf1d1e-5551-43b1-ada5-86049c0bf6ea",
                     "expectedControlType": "Analog",
@@ -60,7 +60,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpecialAttack",
+                    "name": "Special Attack",
                     "type": "Value",
                     "id": "97f8241e-e30d-43fb-afa0-71b26eb8ced1",
                     "expectedControlType": "Analog",
@@ -69,7 +69,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ChangeWeapon",
+                    "name": "Change Weapon",
                     "type": "Value",
                     "id": "06a0cf8f-fa21-4e57-884e-fb76b8e5be38",
                     "expectedControlType": "Analog",
@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TargetLock",
+                    "name": "Lock On",
                     "type": "Button",
                     "id": "632f85fc-94f2-446d-8b55-f3531c5d9f9a",
                     "expectedControlType": "Button",
@@ -96,10 +96,28 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ShowControls",
+                    "name": "Show Controls",
                     "type": "Button",
                     "id": "28943289-9910-4ca5-8c24-2d7dbc791d36",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Lock On Target Left",
+                    "type": "PassThrough",
+                    "id": "a34349b5-4dc7-41ea-bc4f-34ca4b3d9277",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Lock On Target Right",
+                    "type": "PassThrough",
+                    "id": "08859b29-aead-4814-a5ff-16135b9a9160",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -267,7 +285,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "LightAttack",
+                    "action": "Light Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -278,7 +296,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "LightAttack",
+                    "action": "Light Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,7 +307,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "HeavyAttack",
+                    "action": "Heavy Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,7 +318,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HeavyAttack",
+                    "action": "Heavy Attack",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -311,7 +329,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HeavyAttack",
+                    "action": "Heavy Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -322,7 +340,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HeavyAttack",
+                    "action": "Heavy Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -377,7 +395,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "SpecialAttack",
+                    "action": "Special Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -388,7 +406,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialAttack",
+                    "action": "Special Attack",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -399,7 +417,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialAttack",
+                    "action": "Special Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -410,7 +428,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialAttack",
+                    "action": "Special Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -421,7 +439,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "TargetLock",
+                    "action": "Lock On",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -432,7 +450,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "TargetLock",
+                    "action": "Lock On",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -443,7 +461,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ChangeWeapon",
+                    "action": "Change Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -454,7 +472,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ChangeWeapon",
+                    "action": "Change Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -465,7 +483,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ChangeWeapon",
+                    "action": "Change Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -476,7 +494,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ShowControls",
+                    "action": "Show Controls",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -487,7 +505,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ShowControls",
+                    "action": "Show Controls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9d05d13-45da-44c5-b46e-dc214c4f2407",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "Tap(duration=0.2,pressPoint=1)",
+                    "processors": "StickDeadzone(min=0.1,max=1)",
+                    "groups": "",
+                    "action": "Lock On Target Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f17f9f66-0ab8-4ebd-a041-b536ff2d7f7b",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock On Target Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b745e405-16bd-483d-bd53-c0a4aab190ed",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "Tap(duration=0.2,pressPoint=1)",
+                    "processors": "StickDeadzone(min=0.1,max=1)",
+                    "groups": "",
+                    "action": "Lock On Target Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65c53e96-cffa-441e-b4a0-d2fdd571e634",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock On Target Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
