@@ -142,6 +142,9 @@ namespace Helpers
         internal const string OnlineScene = "OnlineScene";
         internal const string SampleScene = "SampleScene";
         
+        //Configuration
+        internal const string MultiplayerConfiguration = "MultiplayerConfiguration";
+        internal const string MultiplayerConfigurationPath = "ScriptableObjects/Configuration/Multiplayer";
         //AttackAnimations
         // internal static readonly string OH_Light_Attack_1 = Literals.AttackAnimations.OH_Light_Attack_1.ToString();
         // internal static readonly string OH_Light_Attack_2 = Literals.AttackAnimations.OH_Light_Attack_2.ToString();
@@ -163,5 +166,13 @@ namespace Helpers
         // internal static readonly string Skill_E = Literals.AttackAnimations.Skill_E.ToString();
         // internal static readonly string Skill_F = Literals.AttackAnimations.Skill_F.ToString();
 
+    }
+
+    internal static class ToxSqlProperties
+    {
+        internal const string FighterCount = "C0";
+        internal const string MaxFighters = "C1";
+        internal const string SpectatorCount = "C2";
+        internal const string MaxSpectators = "C3";
     }
 }
