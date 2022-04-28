@@ -1,14 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Helpers;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MatchManager : MonoBehaviourPun
+public class MatchManager : MonoBehaviourPun, IOnEventCallback
 {
     [SerializeField] private TMP_Text gameOverText;
+    public const byte GameOverEvent = 1;
+
+
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+        if (eventCode == GameOverEvent)
+        {
+            GameOver((Literals.MatchResults)photonEvent.CustomData);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +45,10 @@ public class MatchManager : MonoBehaviourPun
 
     public int PlayerDied()
     {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+        PhotonNetwork.RaiseEvent(GameOverEvent, Literals.MatchResults.Victory, raiseEventOptions,
+            SendOptions.SendReliable);
         GameOver(Literals.MatchResults.Defeat);
-        photonView.RPC("GameOver", RpcTarget.Others, Literals.MatchResults.Victory);
         return 1;
     }
 
@@ -46,8 +71,8 @@ public class MatchManager : MonoBehaviourPun
 
     private IEnumerator GameOverSequence(string gameOverMessage)
     {
+        if (!photonView.IsMine) yield break;
         gameOverText.text = gameOverMessage;
-        gameOverText.enabled = true;
         yield return new WaitForSeconds(10);
         Debug.Log("disc");
         PhotonNetwork.Disconnect();
