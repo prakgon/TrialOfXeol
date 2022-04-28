@@ -116,6 +116,13 @@ namespace Helpers
         {
             FadeOut
         }
+        
+        public enum MatchResults
+        {
+            Victory,
+            Defeat,
+            NoFightersLeft
+        }
 
     }
 
