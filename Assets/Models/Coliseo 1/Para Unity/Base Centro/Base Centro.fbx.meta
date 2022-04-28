@@ -3,7 +3,12 @@ guid: d2b793b7ac5e83f4fbdb1f05e8874f0c
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base Centro
+    second: {fileID: 2100000, guid: aefabd8f6780c6a4b975201c9ec5c47e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

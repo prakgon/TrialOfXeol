@@ -3,7 +3,12 @@ guid: 8f67f2462bd255740a6085211b2942e2
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Puente
+    second: {fileID: 2100000, guid: 11445d1cb45435d49847d7df03192a3a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

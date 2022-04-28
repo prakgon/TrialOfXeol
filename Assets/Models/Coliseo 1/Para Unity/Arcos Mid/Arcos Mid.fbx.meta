@@ -3,7 +3,12 @@ guid: e8c77db5ed49f4949823a9253f2bb814
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arcos Sup
+    second: {fileID: 2100000, guid: 8d52bf006227f514ea84c8e1b2ec4beb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

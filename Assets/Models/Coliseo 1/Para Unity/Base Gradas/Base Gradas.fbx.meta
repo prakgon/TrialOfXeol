@@ -3,7 +3,12 @@ guid: 7b52662247ca3064380b564d30adbab3
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base Gradas
+    second: {fileID: 2100000, guid: 01e8ad4e9fec924439aba727d1fd65e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

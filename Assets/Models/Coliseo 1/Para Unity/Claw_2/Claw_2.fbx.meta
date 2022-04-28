@@ -3,7 +3,12 @@ guid: ab32c9df363cadb499d83c6faca32c20
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Claw_2
+    second: {fileID: 2100000, guid: dcdf1c684df775c4e85e4c0be2c17e3f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
