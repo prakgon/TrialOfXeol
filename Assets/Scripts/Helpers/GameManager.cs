@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using static Helpers.LiteralToStringParse;
 using static Helpers.Literals;
 using UnityEngine;
@@ -58,10 +59,10 @@ namespace Helpers
                     switch (userType)
                     {
                         case UserTypes.Player:
-                            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
-                                out object fighterCount);
-                            Debug.Log(fighterCount);
-                            Vector3 spawnPoint = (int) fighterCount > 1 ? spawnPoints[0].transform.position : spawnPoints[1].transform.position;
+                            int playerCount = DirectUserCount(UserTypes.Player);
+                            Vector3 spawnPoint = playerCount > 1
+                                ? spawnPoints[0].transform.position
+                                : spawnPoints[1].transform.position;
                             PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity,
                                 0);
                             break;
@@ -76,13 +77,6 @@ namespace Helpers
                     Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
                 }
             }
-        }
-
-        private void Update()
-        {
-            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
-                out object fighterCount);
-            Debug.Log(fighterCount);
         }
 
         public override void OnPlayerEnteredRoom(Player other)
@@ -139,6 +133,19 @@ namespace Helpers
 
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
             PhotonNetwork.LoadLevel(SampleScene);
+        }
+
+        private int DirectUserCount(UserTypes userType)
+        {
+            Player[] players = PhotonNetwork.PlayerList;
+
+            int playerCount = players.Where(p =>
+            {
+                p.CustomProperties.TryGetValue(UserType, out object pType);
+                return (UserTypes)pType == userType;
+            }).Count();
+
+            return playerCount;
         }
 
         #endregion
