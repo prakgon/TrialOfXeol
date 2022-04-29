@@ -110,6 +110,7 @@ namespace PlayerScripts
                 _animatorController.PlayTargetAnimation(DamageAnimations.Damage_Die.ToString(), true, 1);
                 _effectsManager.PlayDeathFX();
                 // Handle player death
+                GetComponent<MatchManager>().PlayerDied();
             }
         }
         

@@ -167,6 +167,7 @@ namespace TOX
             };
 
             options.MaxPlayers = multiplayerConfiguration.maxPlayersPerRoom;
+            options.BroadcastPropsChangeToAll = false;
             PhotonNetwork.CreateRoom(null, options, sqlLobby);
         }
 
