@@ -172,20 +172,23 @@ namespace TOX
 
         public override void OnJoinedRoom()
         {
-            switch (_userType)
+            if (!PhotonNetwork.OfflineMode)
             {
-                case UserTypes.Player:
-                    PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
-                        out object fighterCount);
-                    PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
-                        { { ToxSqlProperties.FighterCount, (int)fighterCount + 1 } });
-                    break;
-                case UserTypes.FreeSpectator:
-                    PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.SpectatorCount,
-                        out object spectatorCount);
-                    PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
-                        { { ToxSqlProperties.SpectatorCount, (int)spectatorCount + 1 } });
-                    break;
+                switch (_userType)
+                {
+                    case UserTypes.Player:
+                        PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.FighterCount,
+                            out object fighterCount);
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+                            { { ToxSqlProperties.FighterCount, (int)fighterCount + 1 } });
+                        break;
+                    case UserTypes.FreeSpectator:
+                        PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ToxSqlProperties.SpectatorCount,
+                            out object spectatorCount);
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable
+                            { { ToxSqlProperties.SpectatorCount, (int)spectatorCount + 1 } });
+                        break;
+                }
             }
 
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
