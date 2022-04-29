@@ -4183,6 +4183,7 @@ GameObject:
   - component: {fileID: 1898708954298292171}
   - component: {fileID: 7008467895422926144}
   - component: {fileID: 2942225279807303887}
+  - component: {fileID: 8029026286801566205}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4800,6 +4801,19 @@ MonoBehaviour:
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
   deathFX: {fileID: 198325895038918106, guid: 7e6767444726b234c868079dec6d7ae0, type: 3}
+--- !u!114 &8029026286801566205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147927287329898608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c0ed5633cbd9c4ba3da5ab7fc3cd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverText: {fileID: 3125352060779954173}
 --- !u!1 &2153199111737482366
 GameObject:
   m_ObjectHideFlags: 0
@@ -10273,6 +10287,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: OnScreenStaminaBar
       objectReference: {fileID: 0}
+    - target: {fileID: 1383264232697363141, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1719327283080892966, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
         type: 3}
       propertyPath: m_Name
@@ -10496,6 +10515,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 478116902160266428}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3125352060779954173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3314059892595985217, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+    type: 3}
+  m_PrefabInstance: {fileID: 478116902160266428}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5837540809946829272 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6314469689722758500, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
