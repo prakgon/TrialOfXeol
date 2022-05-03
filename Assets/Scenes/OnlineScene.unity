@@ -1630,6 +1630,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dummyData: {fileID: 11400000, guid: 8de07a1dedc4bc24c9c48f6ab54f0e77, type: 2}
   dummyTMPText: {fileID: 786259651}
+--- !u!114 &2125140653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125140647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bb50eebe705ea48aa3121940515418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfiniteDecal: 0
+  DirLight: {fileID: 0}
+  isVR: 1
+  BloodAttach: {fileID: 0}
+  BloodFX: []
+  direction: {x: 0, y: 0, z: 0}
 --- !u!4 &31356529144585469
 Transform:
   m_ObjectHideFlags: 0
