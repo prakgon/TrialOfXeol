@@ -58,6 +58,7 @@ namespace WeaponScripts
                 {
                     
                     playerStats.TakeDamage(weaponData.baseDamage);
+                    playerStats.PlayBloodVFX(other);
                 }
             }
 
@@ -68,7 +69,7 @@ namespace WeaponScripts
 
                 if (playerStats != null)
                 {
-                    playerStats.TakeDamage(weaponData.baseDamage);
+                    playerStats.TakeDamage(weaponData.baseDamage, other);
                 }
             }
 

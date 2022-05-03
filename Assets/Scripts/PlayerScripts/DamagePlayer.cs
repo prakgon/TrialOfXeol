@@ -15,6 +15,7 @@ public class DamagePlayer : MonoBehaviour
         if (playerStats != null)
         {
             playerStats.TakeDamage(damage);
+            // playerStats.PlayBloodVFX(other);
         }
     }
 }

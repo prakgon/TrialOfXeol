@@ -5,20 +5,13 @@ using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BloodEffects : MonoBehaviour
+public class DummyBloodEffects : MonoBehaviour
 {
     public bool InfiniteDecal;
     public Light DirLight;
     public bool isVR = true;
     public GameObject BloodAttach;
     public GameObject[] BloodFX;
-    private PhotonView _photonView;
-
-
-    private void Start()
-    {
-        _photonView = PhotonView.Get(gameObject);
-    }
 
     Transform GetNearestObject(Transform hit, Vector3 hitPos)
     {
@@ -49,20 +42,20 @@ public class BloodEffects : MonoBehaviour
     public Vector3 direction;
     int effectIdx;
 
-    [PunRPC]
-    public void InstantiateBloodEffect(float originX, float originY, float originZ,
-        float directionX, float directionY, float directionZ,
-        bool isRemote = false)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!isRemote)
-        {
-            _photonView.RPC("InstantiateBloodEffect", RpcTarget.Others, originX, 
-                originY, originZ, directionX, directionY, directionZ, true);
-        }
+        var transformPosition = transform.position;
+        var collisionPoint = other.ClosestPoint(transformPosition);
+        var collisionNormal = transformPosition - collisionPoint;
+        print("ClosestPoint colliding: " + collisionPoint);
+        print("Collision Normal: " + collisionNormal);
+        var ray = new Ray(collisionPoint, collisionNormal);
+        InstantiateBloodEffect(ray);
+    }
 
-        var origin = new Vector3(originX, originY, originZ);
-        var rayDirection = new Vector3(directionX, directionY, directionZ);
-        var ray = new Ray(origin, rayDirection);
+    public void InstantiateBloodEffect(Ray ray)
+    {
+  
 
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
@@ -98,6 +91,7 @@ public class BloodEffects : MonoBehaviour
             if (!InfiniteDecal) Destroy(instance, 20);
         }
     }
+
 
 
     public float CalculateAngle(Vector3 from, Vector3 to) =>
