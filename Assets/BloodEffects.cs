@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Blood_Effects : MonoBehaviour
+public class BloodEffects : MonoBehaviour
 {
     public bool InfiniteDecal;
     public Light DirLight;
@@ -43,7 +44,17 @@ public class Blood_Effects : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Play Blood Effect");
-        Debug.Log(other.contactOffset);
+        /*var colliderPosition = other.transform.position;
+        Debug.Log(colliderPosition);*/
+        var transformPosition = transform.position;
+        var collisionPoint = other.ClosestPoint(transformPosition);
+        var collisionNormal = transformPosition - collisionPoint;
+        print("ClosestPoint colliding: " + collisionPoint);
+        print("Collision Normal: " + collisionNormal);
+        var ray = new Ray(collisionPoint, collisionNormal);
+        InstantiateBloodEffect(ray);
+
+
     }
 
     void Update()
@@ -75,8 +86,7 @@ public class Blood_Effects : MonoBehaviour
       //  else
         {
             
-                /*
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                /*var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -113,16 +123,51 @@ public class Blood_Effects : MonoBehaviour
                 }*/
             
         }
+        
 
     }
 
-
-    public float CalculateAngle(Vector3 from, Vector3 to)
+    private void InstantiateBloodEffect(Ray ray)
     {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // var randRotation = new Vector3(0, Random.value * 360f, 0);
+            // var dir = CalculateAngle(Vector3.forward, hit.normal);
+            float angle = Mathf.Atan2(hit.normal.x, hit.normal.z) * Mathf.Rad2Deg + 180;
 
-        return Quaternion.FromToRotation(Vector3.up, to - from).eulerAngles.z;
+            //var effectIdx = Random.Range(0, BloodFX.Length);
+            if (effectIdx == BloodFX.Length) effectIdx = 0;
 
+            var instance = Instantiate(BloodFX[effectIdx], hit.point, Quaternion.Euler(0, angle + 90, 0));
+            effectIdx++;
+
+            var settings = instance.GetComponent<BFX_BloodSettings>();
+            settings.DecalLiveTimeInfinite = InfiniteDecal;
+            settings.LightIntensityMultiplier = DirLight.intensity;
+
+            var nearestBone = GetNearestObject(hit.transform.root, hit.point);
+            if(nearestBone != null)
+            {
+                var attachBloodInstance = Instantiate(BloodAttach);
+                var bloodT = attachBloodInstance.transform;
+                bloodT.position = hit.point;
+                bloodT.localRotation = Quaternion.identity;
+                bloodT.localScale = Vector3.one * Random.Range(0.75f, 1.2f);
+                bloodT.LookAt(hit.point + hit.normal, direction);
+                bloodT.Rotate(90, 0, 0);
+                bloodT.transform.parent = nearestBone;
+                Destroy(attachBloodInstance, 20);
+            }
+
+            if (!InfiniteDecal) Destroy(instance, 20);
+
+        }
     }
+
+
+    public float CalculateAngle(Vector3 from, Vector3 to) => Quaternion.FromToRotation(Vector3.up, to - from).eulerAngles.z;
+    
 
 }
 
