@@ -41,22 +41,20 @@ public class DummyBloodEffects : MonoBehaviour
 
     public Vector3 direction;
     int effectIdx;
+    private Vector3 collisionPoint;
 
     private void OnTriggerEnter(Collider other)
     {
         var transformPosition = transform.position;
-        var collisionPoint = other.ClosestPoint(transformPosition);
+        collisionPoint = other.ClosestPoint(transformPosition);
         var collisionNormal = transformPosition - collisionPoint;
-        print("ClosestPoint colliding: " + collisionPoint);
-        print("Collision Normal: " + collisionNormal);
         var ray = new Ray(collisionPoint, collisionNormal);
+        Debug.DrawRay(ray.origin, ray.direction, Color.magenta, 5f);
         InstantiateBloodEffect(ray);
     }
 
     public void InstantiateBloodEffect(Ray ray)
     {
-  
-
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {

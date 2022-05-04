@@ -70,6 +70,8 @@ namespace WeaponScripts
                 if (playerStats != null)
                 {
                     playerStats.TakeDamage(weaponData.baseDamage, other);
+                    /*Ray ray = new Ray(transform.position, transform.forward);
+                    Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);*/
                 }
             }
 
