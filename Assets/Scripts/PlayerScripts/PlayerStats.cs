@@ -33,6 +33,7 @@ namespace PlayerScripts
         
         private SliderBar _healthBar;
         private SliderBar _staminaBar;
+        private SpriteSwapper _headSpriteSwapper;
         
         private PlayerAnimatorController _animatorController;
         private PlayerController _playerController;
@@ -77,13 +78,15 @@ namespace PlayerScripts
                 if (onScreenStaminaBar is not null) onScreenStaminaBar.gameObject.SetActive(false);
             }
             
+            _headSpriteSwapper = GetComponentInChildren<SpriteSwapper>();
+            
             _currentHealth = SetMaxHealthFormHealthLevel();
             _healthBar.SetMaxValue(_currentHealth);
             
             _currentStamina = SetMaxStaminaFromStaminaLevel();
             _staminaBar.SetMaxValue(_currentStamina);
             
-            UpdateDebugUI();
+            //UpdateDebugUI();
 
             _playerController = GetComponent<PlayerController>();
             _effectsManager = GetComponent<PlayerEffectsManager>();
@@ -98,9 +101,10 @@ namespace PlayerScripts
             DecreaseHealth(damage);
             
             UpdateHealthBar();
+            UpdateHead();
             
             //Debug
-            UpdateDebugUI();
+            //UpdateDebugUI();
             
             _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true,1);
 
@@ -146,7 +150,7 @@ namespace PlayerScripts
             return _maximumHealth;
         }
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
-
+        private void UpdateHead() => _headSpriteSwapper.SetValue(_currentHealth);
         private int SetMaxStaminaFromStaminaLevel()
         {
             _maximumStamina = _playerData.increasedStaminaByLevel * staminaLevel;
@@ -163,7 +167,7 @@ namespace PlayerScripts
             _med = med;
             _playerData = _med.PlayerData;
             _playerWeapon = _med.PlayerWeapon;
-            _playerTMPText = _med.PlayerTMPText;
+            //_playerTMPText = _med.PlayerTMPText;
             _animatorController = _med.PlayerAnimatorController;
         }
 
@@ -178,7 +182,7 @@ namespace PlayerScripts
                 _currentHealth = (int) stream.ReceiveNext();
                 if (_currentHealth < _maximumHealth)
                 {
-                    UpdateDebugUI();
+                    //UpdateDebugUI();
                     UpdateHealthBar();
                     //UpdateStaminaBar();
                 }
