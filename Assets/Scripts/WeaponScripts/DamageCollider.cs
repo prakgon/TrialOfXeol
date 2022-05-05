@@ -1,3 +1,4 @@
+using System;
 using DummyScripts;
 using Helpers;
 using Photon.Pun;
@@ -34,6 +35,7 @@ namespace WeaponScripts
         {
             FindPlayerReference();
         }
+        
 
         private void FindPlayerReference()
         {
@@ -58,6 +60,7 @@ namespace WeaponScripts
                 {
                     
                     playerStats.TakeDamage(weaponData.baseDamage);
+                    playerStats.PlayBloodVFX(other);
                 }
             }
 
@@ -68,7 +71,7 @@ namespace WeaponScripts
 
                 if (playerStats != null)
                 {
-                    playerStats.TakeDamage(weaponData.baseDamage);
+                    playerStats.TakeDamage(weaponData.baseDamage, other);
                 }
             }
 
@@ -78,5 +81,30 @@ namespace WeaponScripts
             }*/
             
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
+            {
+                PlayerStats playerStats = other.GetComponent<PlayerStats>();
+
+                if (playerStats != null)
+                {
+                    playerStats.PlayBloodVFX(other);
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
+            {
+                PlayerStats playerStats = other.GetComponent<PlayerStats>();
+
+                if (playerStats != null)
+                {
+                    playerStats.PlayBloodVFX(other);
+                }
+            }        }
     }
 }

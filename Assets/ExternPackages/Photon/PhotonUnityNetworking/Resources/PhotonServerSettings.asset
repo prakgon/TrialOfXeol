@@ -46,6 +46,7 @@ MonoBehaviour:
   - PlayTargetAnimation
   - DrainStamina
   - GameOver
+  - InstantiateBloodEffect
   - PlayWeaponTrailFX
   DisableAutoOpenWizard: 1
   ShowSettings: 1

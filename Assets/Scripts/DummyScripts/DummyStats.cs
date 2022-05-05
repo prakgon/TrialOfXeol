@@ -11,6 +11,7 @@ namespace DummyScripts
         [SerializeField] private DummyDataSO dummyData;
         [SerializeField] private TMP_Text dummyTMPText;
         private float _currentHealth;
+        private BloodEffects _bloodEffects;
 
         private void Start() => InitializeDummy();
 
@@ -19,6 +20,8 @@ namespace DummyScripts
             _currentHealth = dummyData.maximumHealth;
 
             UpdateUI();
+            
+            _bloodEffects = GetComponent<BloodEffects>();
         }
 
         /*private void OnTriggerEnter(Collider other)
@@ -29,12 +32,14 @@ namespace DummyScripts
 
             StartCoroutine(TakeDamage(damage));
         }*/
+        
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, Collider other)
         {
             DecreaseHealth(damage);
             UpdateUI();
         }
+
 
         private void UpdateUI() =>
             SetText(_currentHealth > 0 ? $"Current dummy health: {_currentHealth}" : "Death");

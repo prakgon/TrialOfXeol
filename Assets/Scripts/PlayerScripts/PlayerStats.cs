@@ -23,27 +23,28 @@ namespace PlayerScripts
         [SerializeField] private int staminaLevel = 10;
         private int _maximumStamina;
         private float _currentStamina;
-        [SerializeField] private float staminaRegenerationAmount  = 20f;
+        [SerializeField] private float staminaRegenerationAmount = 20f;
         [SerializeField] private float staminaRegenTimer = 0f;
         [SerializeField] private float timeToStartStaminaRegen = 1f;
-        
+
         [SerializeField] private int manaLevel = 10;
         private int _maximumMana;
         private int _currentMana;
-        
+
         private SliderBar _healthBar;
         private SliderBar _staminaBar;
-        
+
         private PlayerAnimatorController _animatorController;
         private PlayerController _playerController;
-        
+
         private TMP_Text _playerTMPText;
         private PlayerEffectsManager _effectsManager;
-        
+        private BloodEffects _bloodEffects;
+
         private GameObject _playerWeapon;
-        
+
         private PlayerMediator _med;
-        
+
         public float CurrentStamina => _currentStamina;
 
 
@@ -59,11 +60,14 @@ namespace PlayerScripts
                 Debug.Log(o, o);
             }*/
 
-            SliderBar onScreenHealthBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.OnScreenHealthBar.ToString())); 
-            SliderBar inWorldHealthBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.InWorldHealthBar.ToString())); 
+            SliderBar onScreenHealthBar = GetComponentsInChildren<SliderBar>()
+                .FirstOrDefault(r => r.CompareTag(Tags.OnScreenHealthBar.ToString()));
+            SliderBar inWorldHealthBar = GetComponentsInChildren<SliderBar>()
+                .FirstOrDefault(r => r.CompareTag(Tags.InWorldHealthBar.ToString()));
 
-            SliderBar onScreenStaminaBar = GetComponentsInChildren<SliderBar>().FirstOrDefault(r => r.CompareTag(Tags.OnScreenStaminaBar.ToString()));
-            
+            SliderBar onScreenStaminaBar = GetComponentsInChildren<SliderBar>()
+                .FirstOrDefault(r => r.CompareTag(Tags.OnScreenStaminaBar.ToString()));
+
             if (PhotonView.Get(gameObject).IsMine)
             {
                 _healthBar = onScreenHealthBar;
@@ -76,17 +80,18 @@ namespace PlayerScripts
                 if (onScreenHealthBar is not null) onScreenHealthBar.gameObject.SetActive(false);
                 if (onScreenStaminaBar is not null) onScreenStaminaBar.gameObject.SetActive(false);
             }
-            
+
             _currentHealth = SetMaxHealthFormHealthLevel();
             _healthBar.SetMaxValue(_currentHealth);
-            
+
             _currentStamina = SetMaxStaminaFromStaminaLevel();
             _staminaBar.SetMaxValue(_currentStamina);
-            
+
             UpdateDebugUI();
 
             _playerController = GetComponent<PlayerController>();
             _effectsManager = GetComponent<PlayerEffectsManager>();
+            _bloodEffects = GetComponent<BloodEffects>();
         }
 
         [PunRPC]
@@ -94,15 +99,15 @@ namespace PlayerScripts
         {
             if (_playerController.isInvulnerable) return;
             if (_currentHealth <= 0) return;
-            
+
             DecreaseHealth(damage);
-            
+
             UpdateHealthBar();
-            
+
             //Debug
             UpdateDebugUI();
-            
-            _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true,1);
+
+            _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true, 1);
 
             if (_currentHealth <= 0)
             {
@@ -113,13 +118,13 @@ namespace PlayerScripts
                 GetComponent<MatchManager>().PlayerDied();
             }
         }
-        
+
         public void DrainStamina(float drain)
         {
             _currentStamina -= drain;
             UpdateStaminaBar();
         }
-        
+
         public void RegenerateStamina()
         {
             if (_playerController.isInteracting || _playerController.isSprinting || _playerController.isJumping)
@@ -129,7 +134,7 @@ namespace PlayerScripts
             else
             {
                 staminaRegenTimer += Time.deltaTime;
-                
+
                 if (_currentStamina < _maximumStamina && staminaRegenTimer > timeToStartStaminaRegen)
                 {
                     _currentStamina += staminaRegenerationAmount * Time.deltaTime;
@@ -137,14 +142,16 @@ namespace PlayerScripts
                 }
             }
         }
-        
+
         [PunRPC]
         private void DecreaseHealth(int decrement) => _currentHealth -= decrement;
+
         private int SetMaxHealthFormHealthLevel()
         {
             _maximumHealth = _playerData.increasedHealthByLevel * healthLevel;
             return _maximumHealth;
         }
+
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
 
         private int SetMaxStaminaFromStaminaLevel()
@@ -152,11 +159,37 @@ namespace PlayerScripts
             _maximumStamina = _playerData.increasedStaminaByLevel * staminaLevel;
             return _maximumStamina;
         }
+
         private void UpdateStaminaBar() => _staminaBar.SetValue(_currentStamina);
         private void SetDebugText(string message) => _playerTMPText.text = message;
 
         private void UpdateDebugUI() =>
             SetDebugText(_currentHealth > 0 ? $"Current {gameObject.name} health: {_currentHealth}" : "Death");
+
+
+        
+        public void PlayBloodVFX(Collider other)
+        {
+            /*var myPosition = transform.position;
+            var otherPosition = other.transform.position;
+            var differencePosition = otherPosition - myPosition;
+            differencePosition = differencePosition.normalized;
+
+            var collisionPoint = other.ClosestPoint(myPosition);
+
+            Ray ray = new Ray(collisionPoint, differencePosition);
+            Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+            _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
+                differencePosition.x, differencePosition.y, differencePosition.z);*/
+            
+            var transformPosition = transform.position;
+            var collisionPoint = other.ClosestPoint(transformPosition);
+            var collisionNormal =  collisionPoint - transformPosition;
+            _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
+                collisionNormal.x, collisionNormal.y, collisionNormal.z);
+        }
+        
 
         public void ConfigureMediator(PlayerMediator med)
         {
@@ -175,7 +208,7 @@ namespace PlayerScripts
             }
             else
             {
-                _currentHealth = (int) stream.ReceiveNext();
+                _currentHealth = (int)stream.ReceiveNext();
                 if (_currentHealth < _maximumHealth)
                 {
                     UpdateDebugUI();
