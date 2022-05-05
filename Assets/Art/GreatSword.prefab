@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 4b1d9907cbacc604088c98fd5cabe074, type: 2}
+  myTransform: {fileID: 5258386163203060726}
 --- !u!1 &1591733350125243027
 GameObject:
   m_ObjectHideFlags: 0

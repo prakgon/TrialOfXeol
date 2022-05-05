@@ -41,37 +41,93 @@ public class DummyBloodEffects : MonoBehaviour
 
     public Vector3 direction;
     int effectIdx;
-    private Vector3 collisionPoint;
 
     private void OnTriggerEnter(Collider other)
     {
-        var transformPosition = transform.position;
+        PlayBloodV1(other);
+        
+        /*var myPosition = transform.position;
+        var otherPosition = other.transform.position;
+        var differencePosition = otherPosition - myPosition;
+        differencePosition = differencePosition.normalized;
+
+        var collisionPoint = other.ClosestPoint(myPosition);
+
+        Ray ray = new Ray(collisionPoint, differencePosition);
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+        InstantiateBloodEffect(ray);*/
+        /*var transformPosition = transform.position;
         //var transformPosition = transform.position + new Vector3 (0, 0, 0.03f);
         collisionPoint = other.ClosestPoint(transformPosition);
         var collisionNormal = transformPosition - collisionPoint;
         var ray = new Ray(collisionPoint, collisionNormal);
-        Debug.DrawRay(ray.origin, ray.direction, Color.magenta, 5f);
+        Debug.DrawRay(ray.origin, ray.direction, Color.magenta, 5f);*/
         /*StartCoroutine(DelayPosition(other));*/
-        
     }
 
-    private IEnumerator DelayPosition(Collider other)
+
+    void PlayBloodV1(Collider other)
     {
-        yield return new WaitForSeconds(0.01f);
-        var delayPoint = other.ClosestPoint(transform.position);
-        var collisionDirection = delayPoint - collisionPoint;
-        var ray = new Ray(collisionPoint, collisionDirection);
-        Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+        var transformPosition = transform.position;
+        var collisionPoint = other.ClosestPoint(transformPosition);
+        var collisionNormal =  collisionPoint - transformPosition;
+        var ray = new Ray(collisionPoint, collisionNormal);
         InstantiateBloodEffect(ray);
     }
+    
+    void PlayBloodV2(Collider other)
+    {
+        var myPosition = transform.position;
+        var otherPosition = other.transform.position;
+        var differencePosition = otherPosition - myPosition;
+        differencePosition = differencePosition.normalized;
 
+        var collisionPoint = other.ClosestPoint(myPosition);
+
+        Ray ray = new Ray(collisionPoint, differencePosition);
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+        InstantiateBloodEffect(ray);
+    }
+    
     private void OnTriggerStay(Collider other)
     {
-        var delayPoint = other.ClosestPoint(transform.position);
+        /*var delayPoint = other.ClosestPoint(transform.position);
         var collisionDirection = delayPoint - collisionPoint;
         var ray = new Ray(collisionPoint, collisionDirection);
         Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
-        InstantiateBloodEffect(ray);
+        InstantiateBloodEffect(ray);*/
+
+        /*var myPosition = transform.position;
+        var otherPosition = other.transform.position;
+        var differencePosition = otherPosition - myPosition;
+        differencePosition = differencePosition.normalized;
+
+        var collisionPoint = other.ClosestPoint(myPosition);
+
+        Ray ray = new Ray(collisionPoint, differencePosition);
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+        InstantiateBloodEffect(ray);*/
+        
+        PlayBloodV1(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayBloodV1(other);
+        /*var myPosition = transform.position;
+        var otherPosition = other.transform.position;
+        var differencePosition = otherPosition - myPosition;
+        differencePosition = differencePosition.normalized;
+
+        var collisionPoint = other.ClosestPoint(myPosition);
+
+        Ray ray = new Ray(collisionPoint, differencePosition);
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+        InstantiateBloodEffect(ray);*/
     }
 
     public void InstantiateBloodEffect(Ray ray)
@@ -110,7 +166,6 @@ public class DummyBloodEffects : MonoBehaviour
             if (!InfiniteDecal) Destroy(instance, 20);
         }
     }
-
 
 
     public float CalculateAngle(Vector3 from, Vector3 to) =>

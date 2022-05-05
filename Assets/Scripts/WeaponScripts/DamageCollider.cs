@@ -1,3 +1,4 @@
+using System;
 using DummyScripts;
 using Helpers;
 using Photon.Pun;
@@ -34,6 +35,7 @@ namespace WeaponScripts
         {
             FindPlayerReference();
         }
+        
 
         private void FindPlayerReference()
         {
@@ -70,8 +72,6 @@ namespace WeaponScripts
                 if (playerStats != null)
                 {
                     playerStats.TakeDamage(weaponData.baseDamage, other);
-                    /*Ray ray = new Ray(transform.position, transform.forward);
-                    Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);*/
                 }
             }
 
@@ -81,5 +81,30 @@ namespace WeaponScripts
             }*/
             
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
+            {
+                PlayerStats playerStats = other.GetComponent<PlayerStats>();
+
+                if (playerStats != null)
+                {
+                    playerStats.PlayBloodVFX(other);
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
+            {
+                PlayerStats playerStats = other.GetComponent<PlayerStats>();
+
+                if (playerStats != null)
+                {
+                    playerStats.PlayBloodVFX(other);
+                }
+            }        }
     }
 }

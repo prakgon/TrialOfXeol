@@ -167,16 +167,29 @@ namespace PlayerScripts
             SetDebugText(_currentHealth > 0 ? $"Current {gameObject.name} health: {_currentHealth}" : "Death");
 
 
+        
         public void PlayBloodVFX(Collider other)
         {
+            /*var myPosition = transform.position;
+            var otherPosition = other.transform.position;
+            var differencePosition = otherPosition - myPosition;
+            differencePosition = differencePosition.normalized;
+
+            var collisionPoint = other.ClosestPoint(myPosition);
+
+            Ray ray = new Ray(collisionPoint, differencePosition);
+            Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+
+            _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
+                differencePosition.x, differencePosition.y, differencePosition.z);*/
+            
             var transformPosition = transform.position;
             var collisionPoint = other.ClosestPoint(transformPosition);
-            var collisionNormal = transformPosition - collisionPoint;
-            print("ClosestPoint colliding: " + collisionPoint);
-            print("Collision Normal: " + collisionNormal);
+            var collisionNormal =  collisionPoint - transformPosition;
             _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
                 collisionNormal.x, collisionNormal.y, collisionNormal.z);
         }
+        
 
         public void ConfigureMediator(PlayerMediator med)
         {
