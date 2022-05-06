@@ -1931,6 +1931,7 @@ MonoBehaviour:
   staminaRegenTimer: 0
   timeToStartStaminaRegen: 1
   manaLevel: 10
+  playerCanvas: {fileID: 1260686597397145242}
 --- !u!114 &7999654713921530471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7698,6 +7699,12 @@ PrefabInstance:
 --- !u!224 &1260686597397145238 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1719327283080892970, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
+    type: 3}
+  m_PrefabInstance: {fileID: 478116902160266428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260686597397145242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1719327283080892966, guid: 0b5ea2ea0637de641a8ddcebfa2b9d24,
     type: 3}
   m_PrefabInstance: {fileID: 478116902160266428}
   m_PrefabAsset: {fileID: 0}
