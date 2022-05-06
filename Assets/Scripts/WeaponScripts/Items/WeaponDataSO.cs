@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using static Helpers.Literals;
 
 namespace WeaponScripts
@@ -32,6 +33,8 @@ namespace WeaponScripts
         public AttackAnimations Skill_D;
         public AttackAnimations Skill_E;
         public AttackAnimations Skill_F;
+        public AttackAnimations OH_Sprint_Light_Attack;
+        public AttackAnimations OH_Sprint_Heavy_Attack;
         
         [Header("Stamina Costs")]
         public int baseStamina;
