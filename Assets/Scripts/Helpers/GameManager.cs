@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using ExitGames.Client.Photon;
 using static Helpers.LiteralToStringParse;
 using static Helpers.Literals;
 using UnityEngine;
@@ -60,6 +61,11 @@ namespace Helpers
                     {
                         case UserTypes.Player:
                             int playerCount = DirectUserCount(UserTypes.Player);
+                            Hashtable playerProperties = new Hashtable
+                            {
+                                { "playerIndex", playerCount }
+                            };
+                            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
                             Vector3 spawnPoint = playerCount > 1
                                 ? spawnPoints[0].transform.position
                                 : spawnPoints[1].transform.position;
@@ -135,7 +141,7 @@ namespace Helpers
             PhotonNetwork.LoadLevel(SampleScene);
         }
 
-        private int DirectUserCount(UserTypes userType)
+        public int DirectUserCount(UserTypes userType)
         {
             Player[] players = PhotonNetwork.PlayerList;
 
