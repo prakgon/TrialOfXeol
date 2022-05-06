@@ -1499,6 +1499,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8973728762712910594, guid: 928315d18aceb104fb17450bb89be396, type: 3}
+--- !u!1 &2125140649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 928315d18aceb104fb17450bb89be396,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125140645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &2125140651
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13328,6 +13334,41 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[1]
       value: 
       objectReference: {fileID: 43524898}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: SwitchableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: SwitchableObjects.Array.data[0].action
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.data[0].action
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: SwitchableObjects.Array.data[0].context
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: SwitchableObjects.Array.data[0].gameObject
+      value: 
+      objectReference: {fileID: 2125140649}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.data[0].gameObject
+      value: 
+      objectReference: {fileID: 2125140649}
     - target: {fileID: 4259618138718668099, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
       propertyPath: m_Name

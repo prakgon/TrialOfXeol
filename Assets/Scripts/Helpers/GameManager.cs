@@ -15,6 +15,7 @@ namespace Helpers
         public GameObject playerPrefab;
         public GameObject freeSpectatorPrefab;
         public GameObject[] spawnPoints;
+        public SwitchableObject[] switchableObjects;
 
         private static GameManager _instance;
 
@@ -77,6 +78,8 @@ namespace Helpers
                     Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
                 }
             }
+
+            SetSwitchableObjects();
         }
 
         public override void OnPlayerEnteredRoom(Player other)
@@ -148,6 +151,46 @@ namespace Helpers
             return playerCount;
         }
 
+        private void SetSwitchableObjects()
+        {
+            foreach (SwitchableObject switchableObject in switchableObjects)
+            {
+                switchableObject.Set();
+            }
+        }
+
         #endregion
+    }
+
+    [Serializable]
+    public struct SwitchableObject
+    {
+        public enum Context
+        {
+            Online,
+            Offline
+        }
+
+        public enum Action
+        {
+            Activate,
+            Deactivate
+        }
+
+        public GameObject gameObject;
+        public Context context;
+        public Action action;
+
+        public void Set()
+        {
+            if (context == Context.Offline && PhotonNetwork.OfflineMode)
+            {
+                gameObject.SetActive(action == Action.Activate);
+            }
+            else if (context == Context.Online && !PhotonNetwork.OfflineMode)
+            {
+                gameObject.SetActive(action == Action.Activate);
+            }
+        }
     }
 }
