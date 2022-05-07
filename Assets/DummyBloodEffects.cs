@@ -45,7 +45,7 @@ public class DummyBloodEffects : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayBloodV1(other);
-        
+
         /*var myPosition = transform.position;
         var otherPosition = other.transform.position;
         var differencePosition = otherPosition - myPosition;
@@ -71,11 +71,19 @@ public class DummyBloodEffects : MonoBehaviour
     {
         var transformPosition = transform.position;
         var collisionPoint = other.ClosestPoint(transformPosition);
-        var collisionNormal =  collisionPoint - transformPosition;
+        var collisionNormal = collisionPoint - transformPosition;
         var ray = new Ray(collisionPoint, collisionNormal);
-        InstantiateBloodEffect(ray);
+        
+        try
+        {
+            InstantiateBloodEffect(ray);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
-    
+
     void PlayBloodV2(Collider other)
     {
         var myPosition = transform.position;
@@ -88,9 +96,16 @@ public class DummyBloodEffects : MonoBehaviour
         Ray ray = new Ray(collisionPoint, differencePosition);
         Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
 
-        InstantiateBloodEffect(ray);
+        try
+        {
+            InstantiateBloodEffect(ray);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
         /*var delayPoint = other.ClosestPoint(transform.position);
@@ -110,7 +125,7 @@ public class DummyBloodEffects : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
 
         InstantiateBloodEffect(ray);*/
-        
+
         PlayBloodV1(other);
     }
 
