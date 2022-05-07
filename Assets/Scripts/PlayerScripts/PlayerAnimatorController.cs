@@ -22,7 +22,10 @@ namespace PlayerScripts
 
         public AnimatorStates CurrentAnimatorState => currentAnimatorState;
 
-        public AnimatorParameters LastActiveAnimatorState { set => lastActiveAnimatorState = value; }
+        public AnimatorParameters LastActiveAnimatorState
+        {
+            set => lastActiveAnimatorState = value;
+        }
 
         private void Start()
         {
@@ -46,7 +49,8 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation,
+                    isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
@@ -60,15 +64,17 @@ namespace PlayerScripts
         {
             if (!isRemote)
             {
-                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation, isInteracting, indexLayer, true);
+                _photonView.RPC(LiteralToStringParse.PlayTargetAnimation, RpcTarget.Others, targetAnimation,
+                    isInteracting, indexLayer, true);
             }
 
             _animator.applyRootMotion = isInteracting;
             SetParameter(AnimatorParameters.IsInteracting, isInteracting);
             _animator.CrossFade(targetAnimation.ToString(), 0.2f, indexLayer);
         }
-        
-        public void EnableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager, bool isRemote = false)
+
+        public void EnableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager,
+            AttackAnimations comboPhase, bool isRemote = false)
         {
             //if (!isRemote)
             //{
@@ -76,22 +82,23 @@ namespace PlayerScripts
             //}
 
             SetParameter(AnimatorParameters.CanDoCombo, true);
-            
+
             PlayTargetAnimation(targetAnimation.ToString(), true, 1);
-            playerCombatManager.LastAttack = targetAnimation;
+            playerCombatManager.LastAttack = comboPhase;
         }
 
-        public void DisableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager)
+        public void DisableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager,
+            AttackAnimations comboPhase)
         {
             SetParameter(AnimatorParameters.CanDoCombo, false);
-            
+
             PlayTargetAnimation(targetAnimation.ToString(), true, 1);
-            playerCombatManager.LastAttack = targetAnimation;
+            playerCombatManager.LastAttack = comboPhase;
         }
 
         public void EnableIsInvulnerable() => SetParameter(AnimatorParameters.IsInvulnerable, true);
         public void DisableIsInvulnerable() => SetParameter(AnimatorParameters.IsInvulnerable, false);
-        
+
 
         public void SetParameter(AnimatorParameters state, bool value)
         {

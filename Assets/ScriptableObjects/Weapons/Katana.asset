@@ -14,34 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 8368131331464666792, guid: 26fdfbae11ccf014eaccb8a62680bdf5,
     type: 3}
-  itemName: 0
+  itemName: 2
   itemDescription: 
   itemIcon: {fileID: 0}
   isUnarmed: 0
   Right_Hand_Idle: 0
   Left_Hand_Idle: 1
-  OH_Light_Attack_1: 0
-  OH_Light_Attack_2: 1
-  OH_Light_Attack_3: 2
-  OH_Light_Attack_4: 3
-  OH_Light_Attack_5: 4
-  OH_Light_Attack_6: 5
-  OH_Heavy_Attack_1: 6
-  OH_Heavy_Attack_2: 7
-  OH_Heavy_Attack_3: 8
-  OH_Heavy_Attack_4: 9
-  OH_Heavy_Attack_5: 10
-  OH_Heavy_Attack_6: 11
-  OH_Heavy_Attack_7: 12
-  Skill_A: 13
-  Skill_B: 14
-  Skill_C: 15
-  Skill_D: 16
-  Skill_E: 17
-  Skill_F: 18
-  OH_Sprint_Light_Attack: 20
-  OH_Sprint_Heavy_Attack: 22
-  baseStamina: 5
+  OH_Light_Attack_1: 6
+  OH_Light_Attack_2: 7
+  OH_Light_Attack_3: 8
+  OH_Light_Attack_4: 9
+  OH_Light_Attack_5: 10
+  OH_Light_Attack_6: 11
+  OH_Heavy_Attack_1: 19
+  OH_Heavy_Attack_2: 20
+  OH_Heavy_Attack_3: 21
+  OH_Heavy_Attack_4: 22
+  OH_Heavy_Attack_5: 23
+  OH_Heavy_Attack_6: 24
+  OH_Heavy_Attack_7: 25
+  Skill_A: 32
+  Skill_B: 33
+  Skill_C: 34
+  Skill_D: 35
+  Skill_E: 36
+  Skill_F: 37
+  OH_Sprint_Light_Attack: 39
+  OH_Sprint_Heavy_Attack: 41
+  baseStamina: 0
   lightStaminaMultiplier: 1.2
   heavyStaminaMultiplier: 1.8
   baseDamage: 10
