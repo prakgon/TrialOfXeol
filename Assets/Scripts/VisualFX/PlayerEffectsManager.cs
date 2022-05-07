@@ -15,8 +15,8 @@ public class PlayerEffectsManager : CharacterFXManager
 
     public void PlayDeathFX()
     {
-        var particles = Instantiate(deathFX, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        /*particles.transform.rotation = transform.rotation*/
+        var deathFXRotation = transform.rotation * Vector3.back;
+        var particles = Instantiate(deathFX, transform.position + new Vector3(0, 1, 0),  Quaternion.LookRotation(deathFXRotation));
         Destroy(particles, particles.time);
         /*deathFX.Play();*/
     }
@@ -24,7 +24,6 @@ public class PlayerEffectsManager : CharacterFXManager
     public void PlayDashFX()
     {
         var dashTransform = transform.rotation * Vector3.back;
-        
         var particles = Instantiate(dashFX, transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(dashTransform));
         Destroy(particles, particles.time);
     }
