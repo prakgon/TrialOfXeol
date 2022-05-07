@@ -65,7 +65,9 @@ namespace Helpers
             Skill_E,
             Skill_F,
             OH_Sprint_Light_Attack,
+            OH_Sprint_Light_Attack_1,
             OH_Sprint_Heavy_Attack,
+            OH_Sprint_Heavy_Attack_1,
             InitialState
         }
 

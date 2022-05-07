@@ -40,7 +40,7 @@ MonoBehaviour:
   Skill_E: 17
   Skill_F: 18
   OH_Sprint_Light_Attack: 19
-  OH_Sprint_Heavy_Attack: 20
+  OH_Sprint_Heavy_Attack: 21
   baseStamina: 5
   lightStaminaMultiplier: 1.2
   heavyStaminaMultiplier: 1.8

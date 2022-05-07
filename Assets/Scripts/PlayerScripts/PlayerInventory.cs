@@ -45,14 +45,22 @@ public class PlayerInventory : MonoBehaviour
         {
             case WeaponSlots.Primary:
                 _weaponSlotManager.LoadWeaponOnSlot(firstWeapon, false);
+                rightWeapon = firstWeapon;
                 nextWeaponSlot = WeaponSlots.Secondary;
                 break;
             case WeaponSlots.Secondary:
                 _weaponSlotManager.LoadWeaponOnSlot(secondaryWeapon, false);
+                rightWeapon = secondaryWeapon;
                 nextWeaponSlot = WeaponSlots.Primary;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public void AddWeapon(WeaponDataSO weaponDataSo)
+    {
+        _weaponSlotManager.LoadWeaponOnSlot(weaponDataSo, false);
+        rightWeapon = weaponDataSo;
     }
 }

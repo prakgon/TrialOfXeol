@@ -43,6 +43,9 @@ namespace PlayerScripts
             {
                 _animController.EnableCombo(weaponData.OH_Sprint_Heavy_Attack, this);
                 Debug.Log("Sprint light attack");
+                _playerEffectsManager.PlayDashFX();
+
+                _playerEffectsManager.PlayDashFX();
             }
             else
             {
@@ -103,6 +106,7 @@ namespace PlayerScripts
             {
                 _animController.EnableCombo(weaponData.OH_Sprint_Light_Attack, this);
                 Debug.Log("Sprint light attack");
+                _playerEffectsManager.PlayDashFX();
             }
             else
             {
@@ -162,6 +166,7 @@ namespace PlayerScripts
             {
                 _animController.EnableCombo(weaponData.OH_Sprint_Heavy_Attack, this);
                 Debug.Log("Sprint light attack");
+                _playerEffectsManager.PlayDashFX();
             }
             else
             {
