@@ -1,3 +1,4 @@
+using Helpers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Helpers.Literals;
@@ -45,5 +46,7 @@ namespace WeaponScripts
         public int baseDamage;
         public float lightDamageMultiplier;
         public float heavyDamageMultiplier;
+
+        [Header("Color FXs")] public Literals.Colors colorFX;
     }
 }

@@ -8,6 +8,12 @@ using WeaponScripts;
         [SerializeField] private GameObject prefab;
         [SerializeField] private WeaponDataSO _weaponDataSo;
 
+        [SerializeField] private ParticleSystem _pickUpFX;
+
+        private void Awake()
+        {
+            _pickUpFX.Stop();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -16,7 +22,8 @@ using WeaponScripts;
             if (playerInventory != null)
             {
                 playerInventory.AddWeapon(_weaponDataSo);
-                // playerStats.PlayBloodVFX(other);
+                _pickUpFX.Play();
+                //Destroy(gameObject);
             }
         }
     }

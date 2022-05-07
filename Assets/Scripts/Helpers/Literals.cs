@@ -128,6 +128,17 @@ namespace Helpers
             NoFightersLeft
         }
 
+        public enum Colors
+        {
+            White,
+            Red,
+            Green,
+            Blue,
+            Yellow,
+            Purple
+            
+        }
+
     }
 
     internal static class LiteralToStringParse

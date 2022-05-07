@@ -150,6 +150,40 @@ namespace PlayerScripts
         }
 
         [PunRPC]
+        public bool HealPlayer(int heal)
+        {
+            if (heal + _currentHealth <= _maximumHealth)
+            {
+                _currentHealth += heal;
+                _effectsManager.PlayHealFX();
+                UpdateHealthBar();
+                UpdateHead();
+                return true;
+            }
+            else
+            {
+                _currentHealth = _maximumHealth;
+                return false;
+            }
+        }
+        
+        [PunRPC]
+        public bool RestoreStamina(int stamina)
+        {
+            if (stamina + _currentStamina <= _maximumStamina)
+            {
+                _currentStamina += stamina;
+                UpdateStaminaBar();
+                return true;
+            }
+            else
+            {
+                _currentStamina = _maximumStamina;
+                return false;
+            }
+        }
+
+        [PunRPC]
         private void DecreaseHealth(int decrement) => _currentHealth -= decrement;
 
         private int SetMaxHealthFormHealthLevel()

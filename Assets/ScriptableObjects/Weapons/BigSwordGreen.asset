@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1fca05779425448a8e95d26fa03f22, type: 3}
+  m_Name: BigSwordGreen
+  m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 8368131331464666792, guid: 9ee18c7db44d2ef49822864221ded9ed,
+    type: 3}
+  itemName: 0
+  itemDescription: 
+  itemIcon: {fileID: 0}
+  isUnarmed: 0
+  Right_Hand_Idle: 0
+  Left_Hand_Idle: 0
+  OH_Light_Attack_1: 0
+  OH_Light_Attack_2: 1
+  OH_Light_Attack_3: 2
+  OH_Light_Attack_4: 3
+  OH_Light_Attack_5: 4
+  OH_Light_Attack_6: 5
+  OH_Heavy_Attack_1: 6
+  OH_Heavy_Attack_2: 7
+  OH_Heavy_Attack_3: 8
+  OH_Heavy_Attack_4: 9
+  OH_Heavy_Attack_5: 10
+  OH_Heavy_Attack_6: 11
+  OH_Heavy_Attack_7: 12
+  Skill_A: 13
+  Skill_B: 14
+  Skill_C: 15
+  Skill_D: 16
+  Skill_E: 17
+  Skill_F: 18
+  OH_Sprint_Light_Attack: 20
+  OH_Sprint_Heavy_Attack: 21
+  baseStamina: 5
+  lightStaminaMultiplier: 1.2
+  heavyStaminaMultiplier: 1.8
+  baseDamage: 10
+  lightDamageMultiplier: 1.2
+  heavyDamageMultiplier: 1.5
+  colorFX: 2

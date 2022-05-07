@@ -47,3 +47,4 @@ MonoBehaviour:
   baseDamage: 10
   lightDamageMultiplier: 1.2
   heavyDamageMultiplier: 1.8
+  colorFX: 0
