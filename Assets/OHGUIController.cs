@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class OHGUIController : MonoBehaviour
@@ -14,5 +15,8 @@ public class OHGUIController : MonoBehaviour
         var position = _localCameraTransform.position;
         transform.LookAt(new Vector3(position.x, transform.position.y,
             position.z));
+        
+        transform.rotation = Quaternion.LookRotation(transform.rotation * Vector3.back);
+        // Bug solved: flip the UI to face the camera correctly
     }
 }

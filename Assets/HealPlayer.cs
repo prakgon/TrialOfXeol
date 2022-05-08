@@ -26,6 +26,12 @@ public class HealPlayer : MonoBehaviour
             if (canHeal)
             {
                 destroyFX.Play();
+                
+                var destroy = GetComponent<PropDestroyer>(); 
+                if (destroy != null)
+                {
+                    destroy.DestroyProp(gameObject);
+                }
                 //loopFX.Stop();
                 //Destroy(gameObject);
             }
