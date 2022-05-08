@@ -23,8 +23,9 @@ public class PickUpPlayer : MonoBehaviour
         if (playerInventory != null)
         {
             playerInventory.AddWeapon(_weaponDataSo);
-            /*_pickUpFX.Play();*/
+            
             PlayFX();
+            
             var destroy = GetComponent<PropDestroyer>();
             if (destroy != null)
             {

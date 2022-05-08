@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class RestoreStaminaPlayer : MonoBehaviour
 {
-    public int staminaRestore = 25;
-    
+    public int staminaRestore = 100;
+
     [SerializeField] private ParticleSystem loopFX;
     [SerializeField] private ParticleSystem destroyFX;
 
@@ -25,15 +25,14 @@ public class RestoreStaminaPlayer : MonoBehaviour
             var canRestore = playerStats.RestoreStamina(staminaRestore);
             if (canRestore)
             {
-                destroyFX.Play();
+                PlayFX(other.transform);
 
-                var destroy = GetComponent<PropDestroyer>(); 
+                var destroy = GetComponent<PropDestroyer>();
                 if (destroy != null)
                 {
-                    destroy.DestroyProp(gameObject);
+                    loopFX.Stop();
+                    destroy.DestroyProp(gameObject, 0.5f);
                 }
-                //loopFX.Stop();
-                //Destroy(gameObject);
             }
         }
     }
@@ -41,5 +40,14 @@ public class RestoreStaminaPlayer : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         destroyFX.Stop();
+    }
+
+    private void PlayFX(Transform player)
+    {
+        var fxTransform = destroyFX.transform;
+        var particles = Instantiate(destroyFX, player.position, player.rotation, player.transform);
+        particles.gameObject.SetActive(true);
+        particles.gameObject.AddComponent<StaminaPowerUp>();
+        Destroy(particles.gameObject, destroyFX.main.duration + 1f);
     }
 }

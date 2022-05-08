@@ -25,17 +25,23 @@ public class HealPlayer : MonoBehaviour
             var canHeal = playerStats.HealPlayer(heal);
             if (canHeal)
             {
-                destroyFX.Play();
+                PlayFX();
                 
                 var destroy = GetComponent<PropDestroyer>(); 
                 if (destroy != null)
                 {
+                    loopFX.Stop();
                     destroy.DestroyProp(gameObject);
                 }
-                //loopFX.Stop();
-                //Destroy(gameObject);
             }
         }
     
+    }
+    
+    private void PlayFX()
+    {
+        var fxTransform = destroyFX.transform;
+        var particles = Instantiate(destroyFX, fxTransform.position, fxTransform.rotation);
+        Destroy(particles.gameObject, destroyFX.main.duration + 1f);
     }
 }

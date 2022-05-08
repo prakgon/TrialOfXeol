@@ -131,6 +131,12 @@ namespace PlayerScripts
             _currentStamina -= drain;
             UpdateStaminaBar();
         }
+        
+        public void IncreaseStamina()
+        {
+            _currentStamina = _maximumStamina;
+            UpdateStaminaBar();
+        }
 
         public void RegenerateStamina()
         {
@@ -161,11 +167,14 @@ namespace PlayerScripts
                 UpdateHead();
                 return true;
             }
-            else
-            {
-                _currentHealth = _maximumHealth;
-                return false;
-            }
+
+            if (_currentHealth >= _maximumHealth) return false;
+            
+            _currentHealth = _maximumHealth;
+            _effectsManager.PlayHealFX();
+            UpdateHealthBar();
+            UpdateHead();
+            return true;
         }
         
         [PunRPC]
@@ -177,11 +186,12 @@ namespace PlayerScripts
                 UpdateStaminaBar();
                 return true;
             }
-            else
-            {
-                _currentStamina = _maximumStamina;
-                return false;
-            }
+            
+            if (_currentStamina >= _maximumStamina) return false;
+
+            _currentStamina = _maximumStamina;
+            UpdateStaminaBar();
+            return true;
         }
 
         [PunRPC]

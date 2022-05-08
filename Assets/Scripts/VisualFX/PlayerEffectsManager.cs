@@ -36,10 +36,10 @@ namespace VisualFX
 
         public void PlayDeathFX()
         {
-            var deathFXRotation = transform.rotation * Vector3.back;
+            var deathFXRotation = transform.rotation * Vector3.up;
             var particles = Instantiate(deathFX, transform.position + new Vector3(0, 1, 0),
                 Quaternion.LookRotation(deathFXRotation));
-            Destroy(particles.gameObject, deathFX.main.duration);
+            Destroy(particles.gameObject, deathFX.main.duration + 1f);
         }
 
         public void PlayDashFX()
@@ -47,22 +47,21 @@ namespace VisualFX
             var dashTransform = transform.rotation * Vector3.back;
             var particles = Instantiate(currentDashFX, transform.position + new Vector3(0, 1, 0),
                 Quaternion.LookRotation(dashTransform));
-            Destroy(particles.gameObject, currentDashFX.main.duration);
+            Destroy(particles.gameObject, currentDashFX.main.duration + 1f);
         }
 
         public void PlayHealFX()
         {
-            var healTransform = transform.rotation * Vector3.back;
-            var particles = Instantiate(healFX, transform.position + new Vector3(0, 1, 0),
-                Quaternion.LookRotation(healTransform));
-            Destroy(particles.gameObject, healFX.main.duration);
+            var particles = Instantiate(healFX, transform.position,
+                Quaternion.LookRotation(transform.rotation * Vector3.up), transform);
+            Destroy(particles.gameObject, healFX.main.duration + 1f);
         }
-        
+
         public void PlayMoveFX()
         {
             var moveTransform = transform.rotation * Vector3.back;
             var particles = Instantiate(moveFX, transform.position, Quaternion.LookRotation(moveTransform));
-            Destroy(particles.gameObject, moveFX.main.duration);
+            Destroy(particles.gameObject, moveFX.main.duration + 1f);
         }
 
         public void SetCurrentDashFX(Literals.Colors dashFXColor)
