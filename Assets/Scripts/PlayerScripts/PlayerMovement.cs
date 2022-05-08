@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Photon.Pun;
@@ -7,6 +8,7 @@ using static Helpers.Literals;
 using Helpers;
 using PlayerScripts;
 using UnityEngine.InputSystem;
+using VisualFX;
 
 
 namespace TOX
@@ -105,10 +107,12 @@ namespace TOX
         private GameObject _mainCamera;
         private PlayerAnimatorController _animController;
         private PlayerMediator _playerMediator;
+        private PlayerEffectsManager _playerEffectsManager;
 
         private const float _zero = 0.0f;
         private const float _thousand = 1000f;
         private Vector3 _targetDirection;
+        private bool spawnMoveFX = true;
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
@@ -128,6 +132,7 @@ namespace TOX
             DontDestroyOnLoad(gameObject);
 
             _playerStats = GetComponent<PlayerStats>();
+            _playerEffectsManager = GetComponent<PlayerEffectsManager>();
         }
 
 
@@ -361,6 +366,22 @@ namespace TOX
                 /*_animController.SetParameter(AnimatorParameters.Horizontal, _input.move.x);
                 _animController.SetParameter(AnimatorParameters.Vertical, _input.move.y);*/
             }
+        }
+
+        public void HandleMoveEffects()
+        {
+            if (Grounded && _speed > _zero && spawnMoveFX)
+            {
+                _playerEffectsManager.PlayMoveFX();
+                StartCoroutine(ResetMoveFX());
+            }
+        }
+
+        private IEnumerator ResetMoveFX()
+        {
+            spawnMoveFX = false;
+            yield return new WaitForSeconds(_speed > MoveSpeed ? 0.2f : 0.15f);
+            spawnMoveFX = true;
         }
 
         #endregion
@@ -622,5 +643,6 @@ namespace TOX
             _controller = med.CharacterController;
             _input = med.PlayerInputHandler;
         }
+        
     }
 }

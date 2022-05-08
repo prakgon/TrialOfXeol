@@ -9973,7 +9973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8368131331464561288}
   m_Layer: 0
-  m_Name: Sword_V2
+  m_Name: RedSword
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

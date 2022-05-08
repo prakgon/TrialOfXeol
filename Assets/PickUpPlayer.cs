@@ -3,27 +3,27 @@ using UnityEngine;
 using WeaponScripts;
 
 
-    public class PickUpPlayer : MonoBehaviour
+public class PickUpPlayer : MonoBehaviour
+{
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private WeaponDataSO _weaponDataSo;
+
+    [SerializeField] private ParticleSystem _pickUpFX;
+
+    private void Awake()
     {
-        [SerializeField] private GameObject prefab;
-        [SerializeField] private WeaponDataSO _weaponDataSo;
+        _pickUpFX.Stop();
+    }
 
-        [SerializeField] private ParticleSystem _pickUpFX;
+    private void OnTriggerEnter(Collider other)
+    {
+        var playerInventory = other.GetComponent<PlayerInventory>();
 
-        private void Awake()
+        if (playerInventory != null)
         {
-            _pickUpFX.Stop();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var playerInventory = other.GetComponent<PlayerInventory>();
-
-            if (playerInventory != null)
-            {
-                playerInventory.AddWeapon(_weaponDataSo);
-                _pickUpFX.Play();
-                //Destroy(gameObject);
-            }
+            playerInventory.AddWeapon(_weaponDataSo);
+            _pickUpFX.Play();
+            //Destroy(gameObject);
         }
     }
+}

@@ -9,6 +9,7 @@ using WeaponScripts;
 using Photon.Pun;
 using UIScripts;
 using UnityEngine.UI;
+using VisualFX;
 
 namespace PlayerScripts
 {

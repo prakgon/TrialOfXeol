@@ -26,21 +26,21 @@ MonoBehaviour:
   OH_Light_Attack_4: 3
   OH_Light_Attack_5: 4
   OH_Light_Attack_6: 5
-  OH_Heavy_Attack_1: 6
-  OH_Heavy_Attack_2: 7
-  OH_Heavy_Attack_3: 8
-  OH_Heavy_Attack_4: 9
-  OH_Heavy_Attack_5: 10
-  OH_Heavy_Attack_6: 11
-  OH_Heavy_Attack_7: 12
-  Skill_A: 13
-  Skill_B: 14
-  Skill_C: 15
-  Skill_D: 16
-  Skill_E: 17
-  Skill_F: 18
-  OH_Sprint_Light_Attack: 20
-  OH_Sprint_Heavy_Attack: 21
+  OH_Heavy_Attack_1: 12
+  OH_Heavy_Attack_2: 13
+  OH_Heavy_Attack_3: 14
+  OH_Heavy_Attack_4: 15
+  OH_Heavy_Attack_5: 16
+  OH_Heavy_Attack_6: 17
+  OH_Heavy_Attack_7: 18
+  Skill_A: 26
+  Skill_B: 27
+  Skill_C: 28
+  Skill_D: 29
+  Skill_E: 30
+  Skill_F: 31
+  OH_Sprint_Light_Attack: 38
+  OH_Sprint_Heavy_Attack: 40
   baseStamina: 5
   lightStaminaMultiplier: 1.2
   heavyStaminaMultiplier: 1.8

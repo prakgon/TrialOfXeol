@@ -3,6 +3,7 @@ using Photon.Pun.Demo.PunBasics;
 using static Helpers.Literals;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VisualFX;
 using WeaponScripts;
 
 namespace PlayerScripts

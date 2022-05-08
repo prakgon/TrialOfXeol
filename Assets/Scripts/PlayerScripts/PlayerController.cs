@@ -63,6 +63,8 @@ namespace PlayerScripts
             _playerMovement.CameraRotation();
 
             _playerMovement.HandleMoveAnimation();
+            
+            _playerMovement.HandleMoveEffects();
 
             _input.rollFlag = false;
             isSprinting = _input.sprintFlag;
