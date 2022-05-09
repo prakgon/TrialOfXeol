@@ -1,6 +1,7 @@
 using System;
 using PlayerScripts;
 using UnityEngine;
+using VisualFX;
 
 namespace WeaponScripts
 {

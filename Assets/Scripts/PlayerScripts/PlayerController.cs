@@ -43,6 +43,8 @@ namespace PlayerScripts
         private void Start()
         {
             _playerStats = GetComponent<PlayerStats>();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         
         private void Update()
@@ -63,6 +65,8 @@ namespace PlayerScripts
             _playerMovement.CameraRotation();
 
             _playerMovement.HandleMoveAnimation();
+            
+            _playerMovement.HandleMoveEffects();
 
             _input.rollFlag = false;
             isSprinting = _input.sprintFlag;

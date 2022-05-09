@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 198767885585187816}
   - component: {fileID: 199058140628632918}
   m_Layer: 0
-  m_Name: HealNova
+  m_Name: HealNovaGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

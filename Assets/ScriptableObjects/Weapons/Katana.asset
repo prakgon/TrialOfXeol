@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1fca05779425448a8e95d26fa03f22, type: 3}
+  m_Name: Katana
+  m_EditorClassIdentifier: 
+  modelPrefab: {fileID: 8368131331464666792, guid: 26fdfbae11ccf014eaccb8a62680bdf5,
+    type: 3}
+  itemName: 2
+  itemDescription: 
+  itemIcon: {fileID: 0}
+  isUnarmed: 0
+  Right_Hand_Idle: 0
+  Left_Hand_Idle: 1
+  OH_Light_Attack_1: 6
+  OH_Light_Attack_2: 7
+  OH_Light_Attack_3: 8
+  OH_Light_Attack_4: 9
+  OH_Light_Attack_5: 10
+  OH_Light_Attack_6: 11
+  OH_Heavy_Attack_1: 19
+  OH_Heavy_Attack_2: 20
+  OH_Heavy_Attack_3: 21
+  OH_Heavy_Attack_4: 22
+  OH_Heavy_Attack_5: 23
+  OH_Heavy_Attack_6: 24
+  OH_Heavy_Attack_7: 25
+  Skill_A: 32
+  Skill_B: 33
+  Skill_C: 34
+  Skill_D: 35
+  Skill_E: 36
+  Skill_F: 37
+  OH_Sprint_Light_Attack: 39
+  OH_Sprint_Heavy_Attack: 41
+  baseStamina: 0
+  lightStaminaMultiplier: 1.2
+  heavyStaminaMultiplier: 1.8
+  baseDamage: 10
+  lightDamageMultiplier: 1.2
+  heavyDamageMultiplier: 1.8
+  colorFX: 1

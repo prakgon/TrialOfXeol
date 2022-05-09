@@ -9,6 +9,7 @@ using WeaponScripts;
 using Photon.Pun;
 using UIScripts;
 using UnityEngine.UI;
+using VisualFX;
 
 namespace PlayerScripts
 {
@@ -47,6 +48,7 @@ namespace PlayerScripts
         private PlayerMediator _med;
 
         public float CurrentStamina => _currentStamina;
+        public float CurrentHealth => _currentHealth;
 
 
         private void Start() => InitializePlayer();
@@ -130,6 +132,12 @@ namespace PlayerScripts
             _currentStamina -= drain;
             UpdateStaminaBar();
         }
+        
+        public void IncreaseStamina()
+        {
+            _currentStamina = _maximumStamina;
+            UpdateStaminaBar();
+        }
 
         public void RegenerateStamina()
         {
@@ -147,6 +155,44 @@ namespace PlayerScripts
                     _staminaBar.SetValue(Mathf.RoundToInt(_currentStamina));
                 }
             }
+        }
+
+        [PunRPC]
+        public bool HealPlayer(int heal)
+        {
+            if (heal + _currentHealth <= _maximumHealth)
+            {
+                _currentHealth += heal;
+                _effectsManager.PlayHealFX();
+                UpdateHealthBar();
+                UpdateHead();
+                return true;
+            }
+
+            if (_currentHealth >= _maximumHealth) return false;
+            
+            _currentHealth = _maximumHealth;
+            _effectsManager.PlayHealFX();
+            UpdateHealthBar();
+            UpdateHead();
+            return true;
+        }
+        
+        [PunRPC]
+        public bool RestoreStamina(int stamina)
+        {
+            if (stamina + _currentStamina <= _maximumStamina)
+            {
+                _currentStamina += stamina;
+                UpdateStaminaBar();
+                return true;
+            }
+            
+            if (_currentStamina >= _maximumStamina) return false;
+
+            _currentStamina = _maximumStamina;
+            UpdateStaminaBar();
+            return true;
         }
 
         [PunRPC]

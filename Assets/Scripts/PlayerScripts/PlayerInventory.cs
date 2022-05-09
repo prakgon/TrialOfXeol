@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using VisualFX;
 using WeaponScripts;
 
 public class PlayerInventory : MonoBehaviour
@@ -25,12 +26,15 @@ public class PlayerInventory : MonoBehaviour
 
     public WeaponSlots nextWeaponSlot;
     
+    [SerializeField] private PlayerEffectsManager playerEffectsManager;
+    
     [Header("Consumable Inventory")]
     public ItemDataSO[] consumableInventory;
 
     private void Awake()
     {
         _weaponSlotManager = GetComponent<WeaponSlotManager>();
+        playerEffectsManager = GetComponent<PlayerEffectsManager>();
     }
 
     private void Start()
@@ -45,14 +49,25 @@ public class PlayerInventory : MonoBehaviour
         {
             case WeaponSlots.Primary:
                 _weaponSlotManager.LoadWeaponOnSlot(firstWeapon, false);
+                rightWeapon = firstWeapon;
+                playerEffectsManager.SetCurrentDashFX(firstWeapon.colorFX);
                 nextWeaponSlot = WeaponSlots.Secondary;
                 break;
             case WeaponSlots.Secondary:
                 _weaponSlotManager.LoadWeaponOnSlot(secondaryWeapon, false);
+                rightWeapon = secondaryWeapon;
+                playerEffectsManager.SetCurrentDashFX(secondaryWeapon.colorFX);
                 nextWeaponSlot = WeaponSlots.Primary;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public void AddWeapon(WeaponDataSO weaponDataSo)
+    {
+        _weaponSlotManager.LoadWeaponOnSlot(weaponDataSo, false);
+        rightWeapon = weaponDataSo;
+        playerEffectsManager.SetCurrentDashFX(weaponDataSo.colorFX);
     }
 }

@@ -28,6 +28,10 @@ public class WeaponFX : MonoBehaviour
             {
                 normalWeaponTrail.Play();
             }
+            else
+            {
+                normalWeaponTrail.Play();
+            }
         }
         catch (Exception e)
         {

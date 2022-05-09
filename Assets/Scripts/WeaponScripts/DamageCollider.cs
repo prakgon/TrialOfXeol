@@ -51,7 +51,6 @@ namespace WeaponScripts
         [PunRPC]
         private void OnTriggerEnter(Collider other)
         {
-            
             if (other.CompareTag(Tags.Player.ToString()) && other.gameObject != _player)
             {
                 PlayerStats playerStats = other.GetComponent<PlayerStats>();
