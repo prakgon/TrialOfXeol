@@ -43,6 +43,8 @@ namespace PlayerScripts
         private void Start()
         {
             _playerStats = GetComponent<PlayerStats>();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         
         private void Update()
