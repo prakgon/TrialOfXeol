@@ -370,7 +370,7 @@ namespace TOX
 
         public void HandleMoveEffects()
         {
-            if (Grounded && _speed > _zero && spawnMoveFX)
+            if (Grounded && _speed > _zero && spawnMoveFX && _playerStats.CurrentHealth > 0)
             {
                 _playerEffectsManager.PlayMoveFX();
                 StartCoroutine(ResetMoveFX());

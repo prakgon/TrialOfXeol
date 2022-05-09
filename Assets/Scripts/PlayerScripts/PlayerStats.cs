@@ -48,6 +48,7 @@ namespace PlayerScripts
         private PlayerMediator _med;
 
         public float CurrentStamina => _currentStamina;
+        public float CurrentHealth => _currentHealth;
 
 
         private void Start() => InitializePlayer();
