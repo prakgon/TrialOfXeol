@@ -38,7 +38,8 @@ namespace VisualFX
         {
             var deathFXRotation = transform.rotation * Vector3.up;
             var particles = Instantiate(deathFX, transform.position + new Vector3(0, 1, 0),
-                Quaternion.LookRotation(deathFXRotation));
+                deathFX.transform.rotation);
+            particles.Play();
             Destroy(particles.gameObject, deathFX.main.duration + 1f);
         }
 
