@@ -32,10 +32,11 @@ namespace PlayerScripts
         private int _maximumMana;
         private int _currentMana;
 
+        [SerializeField] private GameObject playerCanvas;
         private SliderBar _healthBar;
         private SliderBar _staminaBar;
         private SpriteSwapper _headSpriteSwapper;
-        
+
         private PlayerAnimatorController _animatorController;
         private PlayerController _playerController;
 
@@ -62,6 +63,7 @@ namespace PlayerScripts
                 var o = tr.gameObject;
                 Debug.Log(o, o);
             }*/
+            _headSpriteSwapper = GetComponentInChildren<SpriteSwapper>();
 
             SliderBar onScreenHealthBar = GetComponentsInChildren<SliderBar>()
                 .FirstOrDefault(r => r.CompareTag(Tags.OnScreenHealthBar.ToString()));
@@ -79,19 +81,19 @@ namespace PlayerScripts
             }
             else
             {
+                playerCanvas.SetActive(false);
                 _healthBar = inWorldHealthBar;
                 if (onScreenHealthBar is not null) onScreenHealthBar.gameObject.SetActive(false);
                 if (onScreenStaminaBar is not null) onScreenStaminaBar.gameObject.SetActive(false);
             }
-            
-            _headSpriteSwapper = GetComponentInChildren<SpriteSwapper>();
-            
+
+
             _currentHealth = SetMaxHealthFormHealthLevel();
             _healthBar.SetMaxValue(_currentHealth);
 
             _currentStamina = SetMaxStaminaFromStaminaLevel();
             _staminaBar.SetMaxValue(_currentStamina);
-            
+
             //UpdateDebugUI();
 
             _playerController = GetComponent<PlayerController>();
@@ -109,11 +111,11 @@ namespace PlayerScripts
 
             UpdateHealthBar();
             UpdateHead();
-            
+
             //Debug
             //UpdateDebugUI();
-            
-            _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true,1);
+
+            _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true, 1);
 
             _animatorController.PlayTargetAnimation(DamageAnimations.Damage_01.ToString(), true, 1);
 
@@ -206,6 +208,7 @@ namespace PlayerScripts
 
         private void UpdateHealthBar() => _healthBar.SetValue(_currentHealth);
         private void UpdateHead() => _headSpriteSwapper.SetValue(_currentHealth);
+
         private int SetMaxStaminaFromStaminaLevel()
         {
             _maximumStamina = _playerData.increasedStaminaByLevel * staminaLevel;
@@ -219,7 +222,6 @@ namespace PlayerScripts
             SetDebugText(_currentHealth > 0 ? $"Current {gameObject.name} health: {_currentHealth}" : "Death");
 
 
-        
         public void PlayBloodVFX(Collider other)
         {
             /*var myPosition = transform.position;
@@ -234,14 +236,14 @@ namespace PlayerScripts
 
             _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
                 differencePosition.x, differencePosition.y, differencePosition.z);*/
-            
+
             var transformPosition = transform.position;
             var collisionPoint = other.ClosestPoint(transformPosition);
-            var collisionNormal =  collisionPoint - transformPosition;
+            var collisionNormal = collisionPoint - transformPosition;
             _bloodEffects.InstantiateBloodEffect(collisionPoint.x, collisionPoint.y, collisionPoint.z,
                 collisionNormal.x, collisionNormal.y, collisionNormal.z);
         }
-        
+
 
         public void ConfigureMediator(PlayerMediator med)
         {
