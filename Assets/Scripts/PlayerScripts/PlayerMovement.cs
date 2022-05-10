@@ -64,6 +64,8 @@ namespace TOX
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
+        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
+        public GameObject CinemachineCameraTargetLockOn;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -78,13 +80,12 @@ namespace TOX
         public bool LockCameraPosition = false;*/
 
         public Transform currentLockOnTarget;
-        [SerializeField] 
-        private List<PlayerController> availableTargets = new List<PlayerController>();
+        [SerializeField] private List<PlayerController> availableTargets = new List<PlayerController>();
         public Transform nearestLockOnTarget;
         public Transform leftLockTarget;
         public Transform rightLockTarget;
-        [Tooltip("Lock On Camera radius")] 
-        public float LockOnRadius = 26.0f;
+        [Tooltip("Lock On Camera radius")] public float LockOnRadius = 26.0f;
+
         [Tooltip("Maximum Lock On Camera 3radius")]
         public float maximumLockOnDistance = 30.0f;
 
@@ -116,6 +117,7 @@ namespace TOX
 
         public static GameObject LocalPlayerInstance;
         [SerializeField] private GameObject _followCameraPrefab;
+        [SerializeField] private CinemachineVirtualCamera _currentVirtualCamera;
 
         private void Awake()
         {
@@ -177,12 +179,13 @@ namespace TOX
         {
             if (_input.lockOnFlag == false || currentLockOnTarget == null)
             {
+                _currentVirtualCamera.Follow = CinemachineCameraTarget.transform;
                 _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
 
                 /*_mainCamera.transform.position += new Vector3(0, 0, -10);*/
 
                 _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
-                
+
                 _cinemachineTargetYaw =
                     HelperFunctions.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
                 _cinemachineTargetPitch = HelperFunctions.ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -192,8 +195,8 @@ namespace TOX
             }
             else
             {
+                _currentVirtualCamera.Follow = CinemachineCameraTargetLockOn.transform;
                 _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
-
                 float velocity = 0;
 
                 Vector3 dir = currentLockOnTarget.position - _mainCamera.transform.position;
@@ -201,7 +204,7 @@ namespace TOX
                 dir.y = 0;
 
                 Quaternion targetRotation = Quaternion.LookRotation(dir);
-                CinemachineCameraTarget.transform.rotation = targetRotation;
+                CinemachineCameraTargetLockOn.transform.rotation = targetRotation;
 
                 dir = currentLockOnTarget.position - _mainCamera.transform.position;
                 dir.Normalize();
@@ -210,6 +213,7 @@ namespace TOX
                 Vector3 eulerAngle = targetRotation.eulerAngles;
                 eulerAngle.y = 0;
                 _mainCamera.transform.localEulerAngles = eulerAngle;
+                
             }
         }
 
@@ -400,7 +404,7 @@ namespace TOX
                     rotationSmoothTime);
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }*/
-            
+
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;
             /*if (_input.move != Vector2.zero)*/
@@ -410,7 +414,8 @@ namespace TOX
                 {
                     if (currentLockOnTarget != null)
                     {
-                        Vector3 targetPosition = new Vector3(currentLockOnTarget.transform.position.x, transform.position.y,
+                        Vector3 targetPosition = new Vector3(currentLockOnTarget.transform.position.x,
+                            transform.position.y,
                             currentLockOnTarget.transform.position.z);
                         transform.LookAt(targetPosition);
                     }
@@ -429,10 +434,10 @@ namespace TOX
 
                     break;
                 }
-                var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
-                    ref _rotationVelocity,
-                    rotationSmoothTime);
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                    var rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation,
+                        ref _rotationVelocity,
+                        rotationSmoothTime);
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
         }
 
@@ -542,7 +547,7 @@ namespace TOX
         }
 
         #endregion
-        
+
         public void StrafeTransition(bool strafe)
         {
             _animController.SetParameter(AnimatorParameters.IsLocking, strafe && currentLockOnTarget != null);
@@ -617,7 +622,7 @@ namespace TOX
                 }
             }
         }
-        
+
         public void ClearLockOnTargets()
         {
             availableTargets.Clear();
@@ -637,12 +642,12 @@ namespace TOX
                 _playerInput.enabled = true;
                 var followCamera = Instantiate(_followCameraPrefab);
                 followCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+                _currentVirtualCamera = followCamera.GetComponent<CinemachineVirtualCamera>();
             }
 
             _playerController = med.PlayerController;
             _controller = med.CharacterController;
             _input = med.PlayerInputHandler;
         }
-        
     }
 }

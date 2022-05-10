@@ -126,7 +126,9 @@ namespace Helpers
             OnScreenHealthBar,
             OnScreenStaminaBar,
             OnScreenStatsBars,
-            PlayerCanvas
+            PlayerCanvas,
+            Ground,
+            Wall
         }
 
         public enum UserTypes

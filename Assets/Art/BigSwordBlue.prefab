@@ -5239,6 +5239,7 @@ GameObject:
   - component: {fileID: 4882725327025726558}
   - component: {fileID: 9110114114106021953}
   - component: {fileID: 4748938605214874623}
+  - component: {fileID: 6247051098590341987}
   m_Layer: 0
   m_Name: Sword Two-Hander Blue
   m_TagString: Untagged
@@ -5288,6 +5289,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: ef98b9a28ad6bcf4dabeebda467c9a29, type: 2}
+  sparksFX: {fileID: 1000011396044746, guid: 3c6c40ee0b6fe0d498e776ebf1508afc, type: 3}
+--- !u!54 &6247051098590341987
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5226775346746736356}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 2
 --- !u!1 &5647358632191970416
 GameObject:
   m_ObjectHideFlags: 0
