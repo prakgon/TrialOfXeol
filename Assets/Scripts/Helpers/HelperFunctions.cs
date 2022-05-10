@@ -28,5 +28,10 @@ namespace Helpers
 
             return null;
         }
+        public static IEnumerator ExecuteAfterDelay(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action();
+        }
     }
 }

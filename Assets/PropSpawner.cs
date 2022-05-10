@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
+using Photon.Pun;
 using PlayerScripts;
 using Unity.Mathematics;
 using UnityEngine;
@@ -15,34 +16,20 @@ public class PropSpawner : MonoBehaviour
     [SerializeField] private float _timeToNextSpawn;
     [SerializeField] private List<GameObject> spawnedProps = new List<GameObject>();
     [SerializeField] private float timer;
+    [SerializeField] private Vector3 myPosition;
+    
+    
 
     void Start()
     {
-        for (int i = 0; i < numberOfProps; i++)
-        {
-            SpawnInCircle();
-        }
-
+        if (!PhotonNetwork.IsMasterClient) return;
+        myPosition = transform.position;
         _timeToNextSpawn = spawnIntervalTime;
-    }
-
-    private void SpawnInCircle()
-    {
-        // Set new prop position
-        var myPosition = transform.position;
-        var pos = Random.insideUnitSphere * spawnRadius;
-        pos.y = 0;
-        pos += myPosition;
-
-        // Spawn prop
-        var prop = Instantiate(propsToSpawn[Random.Range(0, propsToSpawn.Length)], pos, quaternion.identity);
-        spawnedProps.Add(prop);
-        prop.AddComponent<PropDestroyer>();
-        prop.SetActive(false);
     }
 
     void Update()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         timer += Time.deltaTime;
 
         if (timer > _timeToNextSpawn)
@@ -50,8 +37,13 @@ public class PropSpawner : MonoBehaviour
             if (propsToSpawn.Length <= 0) return;
             
             _timeToNextSpawn = timer + spawnIntervalTime;
-            spawnedProps[0].SetActive(true);
-            spawnedProps.RemoveAt(0);
+            var pos = Random.insideUnitSphere * spawnRadius;
+            pos.y = 0;
+            pos += myPosition;
+
+            // Spawn prop
+            var prop = PhotonNetwork.Instantiate(propsToSpawn[Random.Range(0, propsToSpawn.Length)].name, pos, quaternion.identity);
+            prop.AddComponent<PropDestroyer>();
         }
     }
 

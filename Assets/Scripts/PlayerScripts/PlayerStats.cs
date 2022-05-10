@@ -162,6 +162,7 @@ namespace PlayerScripts
         [PunRPC]
         public bool HealPlayer(int heal)
         {
+            if (!PhotonView.Get(gameObject).IsMine) return false;
             if (heal + _currentHealth <= _maximumHealth)
             {
                 _currentHealth += heal;

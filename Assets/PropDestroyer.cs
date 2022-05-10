@@ -1,15 +1,17 @@
+using Helpers;
+using Photon.Pun;
 using UnityEngine;
 
 public class PropDestroyer : MonoBehaviour
 {
     public void DestroyProp(GameObject prop)
     {
-        Destroy(prop);
+        PhotonNetwork.Destroy(prop);
     }
 
     public void DestroyProp(GameObject prop, float time)
     {
         GetComponent<Collider>().enabled = false;
-        Destroy(prop, time);  
-    } 
+        HelperFunctions.ExecuteAfterDelay(() => PhotonNetwork.Destroy(prop), time);
+    }
 }
