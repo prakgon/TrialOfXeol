@@ -15,8 +15,9 @@ namespace WeaponScripts
         private Animator _animator;
         private Collider _damageCollider;
         private bool _canCheckAnimator;
-        public WeaponDataSO weaponData; 
+        public WeaponDataSO weaponData;
         private GameObject _player; // This gameObject handles player reference collision with his own weapon
+        [SerializeField] private GameObject sparksFX;
 
         public void ConfigureMediator(PlayerMediator med)
         {
@@ -35,19 +36,20 @@ namespace WeaponScripts
         {
             FindPlayerReference();
         }
-        
+
 
         private void FindPlayerReference()
         {
             // Refactor this
-            _player = gameObject.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.gameObject;
+            _player = gameObject.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent
+                .parent.parent.gameObject;
         }
 
-        public void EnableDamageCollider() => _damageCollider.enabled = true;  
-        
+        public void EnableDamageCollider() => _damageCollider.enabled = true;
+
 
         public void DisableDamageCollider() => _damageCollider.enabled = false;
-        
+
         [PunRPC]
         private void OnTriggerEnter(Collider other)
         {
@@ -57,7 +59,6 @@ namespace WeaponScripts
 
                 if (playerStats != null)
                 {
-                    
                     playerStats.TakeDamage(weaponData.baseDamage);
                     playerStats.PlayBloodVFX(other);
                 }
@@ -74,12 +75,18 @@ namespace WeaponScripts
                 }
             }
 
-            /*if (other.CompareTag(Tags.Enemy.ToString()))
+
+            if (other.CompareTag(Tags.Ground.ToString()))
             {
-                //EnemyStats enemyStats;
-            }*/
-            
+                SparksFXOnGround(other);
+            }
+
+            if (other.CompareTag(Tags.Wall.ToString()))
+            {
+                SparksFXOnWall(other);
+            }
         }
+
 
         private void OnTriggerStay(Collider other)
         {
@@ -91,6 +98,16 @@ namespace WeaponScripts
                 {
                     playerStats.PlayBloodVFX(other);
                 }
+            }
+            
+            if (other.CompareTag(Tags.Ground.ToString()))
+            {
+                SparksFXOnGround(other);
+            }
+
+            if (other.CompareTag(Tags.Wall.ToString()))
+            {
+                SparksFXOnWall(other);
             }
         }
 
@@ -104,6 +121,32 @@ namespace WeaponScripts
                 {
                     playerStats.PlayBloodVFX(other);
                 }
-            }        }
+            }
+        }
+
+        private void SparksFXOnGround(Collider other)
+        {
+            var collisionPoint = other.ClosestPointOnBounds(transform.position);
+            var collisionNormal = transform.position - collisionPoint;
+            Ray hit = new Ray(collisionPoint, collisionNormal);
+            Debug.DrawRay(hit.origin, hit.direction, Color.red, 10);
+            var tmpRotation = Quaternion.LookRotation(collisionNormal);
+            var particles = Instantiate(sparksFX, collisionPoint,
+                tmpRotation);
+            Destroy(particles.gameObject, sparksFX.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
+        }
+        
+        private void SparksFXOnWall(Collider other)
+        {
+            var collisionPoint = other.ClosestPoint(transform.position);
+            //var collisionNormal = collisionPoint - transform.position; to swap the direction
+            var collisionNormal = transform.position - collisionPoint;
+            Ray hit = new Ray(collisionPoint, collisionNormal);
+            Debug.DrawRay(hit.origin, hit.direction, Color.red, 10);
+            var tmpRotation = Quaternion.LookRotation(collisionNormal);
+            var particles = Instantiate(sparksFX, collisionPoint,
+                tmpRotation);
+            Destroy(particles.gameObject, sparksFX.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
+        }
     }
 }

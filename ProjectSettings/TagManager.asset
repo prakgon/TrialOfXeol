@@ -14,6 +14,10 @@ TagManager:
   - OnScreenStaminaBar
   - OnScreenStatsBars
   - PlayerCanvas
+  - Bullet
+  - GreatSword
+  - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX
