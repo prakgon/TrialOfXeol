@@ -14,6 +14,7 @@ namespace Helpers
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public GameObject playerPrefab;
+        public GameObject playerPrefab2;
         public GameObject freeSpectatorPrefab;
         public GameObject[] spawnPoints;
         public SwitchableObject[] switchableObjects;
@@ -70,7 +71,7 @@ namespace Helpers
                             Vector3 spawnPoint = playerCount > 1
                                 ? spawnPoints[0].transform.position
                                 : spawnPoints[1].transform.position;
-                            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity,
+                            PhotonNetwork.Instantiate(playerCount > 1 ? playerPrefab2.name : playerPrefab.name , spawnPoint, Quaternion.identity,
                                 0);
                             break;
                         case UserTypes.FreeSpectator:
