@@ -21917,12 +21917,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 4b1d9907cbacc604088c98fd5cabe074, type: 2}
   leftWeapon: {fileID: 0}
-  firstWeapon: {fileID: 11400000, guid: 98ada7580339ced47a35788a24667fa0, type: 2}
-  secondaryWeapon: {fileID: 11400000, guid: 4b1d9907cbacc604088c98fd5cabe074, type: 2}
-  index: 0
   weaponInventory: []
+  index: 0
   playerEffectsManager: {fileID: 0}
-  consumableInventory: []
 --- !u!114 &2942225279807303887
 MonoBehaviour:
   m_ObjectHideFlags: 0
