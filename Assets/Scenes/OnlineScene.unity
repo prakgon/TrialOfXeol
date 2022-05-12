@@ -13771,6 +13771,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
+      propertyPath: playerPrefab2
+      value: 
+      objectReference: {fileID: 2147927287329898608, guid: 0e565b15b13b5ad4aa78b2b73ad9d596,
+        type: 3}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
       propertyPath: spawnPoints.Array.size
       value: 2
       objectReference: {fileID: 0}
