@@ -50,6 +50,12 @@ MonoBehaviour:
   - PlayWeaponTrailFX
   - HealPlayer
   - RestoreStamina
+  - PlayDashFX
+  - PlayDeathFX
+  - PlayHealFX
+  - PlayMoveFX
+  - SetCurrentDashFX
+  - PlayFX
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

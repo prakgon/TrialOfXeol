@@ -1,6 +1,7 @@
 using System;
 using DefaultNamespace;
 using Helpers;
+using Photon.Pun;
 using UnityEngine;
 
 namespace VisualFX
@@ -12,6 +13,7 @@ namespace VisualFX
         [SerializeField] private ParticleSystem currentDashFX;
         [SerializeField] public ParticleSystem healFX;
         [SerializeField] public ParticleSystem moveFX;
+        private PhotonView _photonView;
 
         [Serializable]
         public struct DashFX
@@ -32,10 +34,18 @@ namespace VisualFX
             {
                 t.dashFX.Stop();
             }
+
+            _photonView = PhotonView.Get(gameObject);
         }
 
-        public void PlayDeathFX()
+        [PunRPC]
+        public void PlayDeathFX(bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayDeathFX", RpcTarget.Others, true);
+            }
+
             var deathFXRotation = transform.rotation * Vector3.up;
             var particles = Instantiate(deathFX, transform.position + new Vector3(0, 1, 0),
                 deathFX.transform.rotation);
@@ -43,30 +53,55 @@ namespace VisualFX
             Destroy(particles.gameObject, deathFX.main.duration + 1f);
         }
 
-        public void PlayDashFX()
+
+        [PunRPC]
+        public void PlayDashFX(bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayDashFX", RpcTarget.Others, true);
+            }
+
             var dashTransform = transform.rotation * Vector3.back;
             var particles = Instantiate(currentDashFX, transform.position + new Vector3(0, 1, 0),
                 Quaternion.LookRotation(dashTransform));
             Destroy(particles.gameObject, currentDashFX.main.duration + 1f);
         }
 
-        public void PlayHealFX()
+        [PunRPC]
+        public void PlayHealFX(bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayHealFX", RpcTarget.Others, true);
+            }
+
             var particles = Instantiate(healFX, transform.position,
                 Quaternion.LookRotation(transform.rotation * Vector3.up), transform);
             Destroy(particles.gameObject, healFX.main.duration + 1f);
         }
 
-        public void PlayMoveFX()
+        [PunRPC]
+        public void PlayMoveFX(bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("PlayMoveFX", RpcTarget.Others, true);
+            }
+
             var moveTransform = transform.rotation * Vector3.back;
             var particles = Instantiate(moveFX, transform.position, Quaternion.LookRotation(moveTransform));
             Destroy(particles.gameObject, moveFX.main.duration + 1f);
         }
 
-        public void SetCurrentDashFX(Literals.Colors dashFXColor)
+        [PunRPC]
+        public void SetCurrentDashFX(Literals.Colors dashFXColor, bool isRemote = false)
         {
+            if (!isRemote)
+            {
+                _photonView.RPC("SetCurrentDashFX", RpcTarget.Others, dashFXColor, true);
+            }
+
             foreach (var t in dashFXs)
             {
                 if (t.color != dashFXColor) continue;
