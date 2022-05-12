@@ -94,7 +94,7 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""name"": ""Change Weapon"",
                     ""type"": ""Value"",
                     ""id"": ""06a0cf8f-fa21-4e57-884e-fb76b8e5be38"",
-                    ""expectedControlType"": ""Analog"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -437,33 +437,44 @@ public partial class @InputActionSystem : IInputActionCollection2, IDisposable
                     ""id"": ""a596ed3d-9e43-472c-945e-b57cc3845a00"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale(factor=0.0084)"",
                     ""groups"": ""KeyboardMouse"",
                     ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""b5088375-51ae-476d-a69f-7f16ee5a3a54"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c0208074-5ed4-4a97-a590-bc42de4214d5"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change Weapon"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eac299b8-7bfa-498b-943f-8aec8e051d7b"",
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Change Weapon"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""becb2f1c-245e-4160-afeb-7bddfb541344"",
+                    ""name"": ""positive"",
+                    ""id"": ""18593702-f013-4c25-b3ac-91ed642ad06c"",
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": """",
                     ""action"": ""Change Weapon"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",

@@ -234,7 +234,7 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     {
         if (context.phase is InputActionPhase.Started)
         {
-            _playerInventory.ChangeWeapon();
+            _playerInventory.ChangeWeapon((int)Math.Round(context.ReadValue<float>()));
         }
     }
 

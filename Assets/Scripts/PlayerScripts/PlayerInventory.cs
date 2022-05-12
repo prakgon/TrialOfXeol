@@ -8,28 +8,17 @@ using WeaponScripts;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public enum WeaponSlots
-    {
-        Primary,
-        Secondary,
-    }
-
     private WeaponSlotManager _weaponSlotManager;
 
-    [Header("Current Weapons")]
+    [Header("Current Weapons")] 
     public WeaponDataSO rightWeapon;
     public WeaponDataSO leftWeapon;
 
     [Header("Weapon Inventory Slots")]
-    public WeaponDataSO firstWeapon;
-    public WeaponDataSO secondaryWeapon;
+    [SerializeField] private List<WeaponDataSO> weaponInventory;
+    [SerializeField] private int index;
 
-    public WeaponSlots nextWeaponSlot;
-    
     [SerializeField] private PlayerEffectsManager playerEffectsManager;
-    
-    [Header("Consumable Inventory")]
-    public ItemDataSO[] consumableInventory;
 
     private void Awake()
     {
@@ -41,30 +30,36 @@ public class PlayerInventory : MonoBehaviour
     {
         _weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
         _weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+
+        index = 0;
+        weaponInventory.Add(rightWeapon);
     }
 
-    public void ChangeWeapon()
+    public void ChangeWeapon(int newValue)
     {
-        switch (nextWeaponSlot)
-        {
-            case WeaponSlots.Primary:
-                _weaponSlotManager.LoadWeaponOnSlot(firstWeapon, false);
-                rightWeapon = firstWeapon;
-                playerEffectsManager.SetCurrentDashFX(firstWeapon.colorFX);
-                nextWeaponSlot = WeaponSlots.Secondary;
-                break;
-            case WeaponSlots.Secondary:
-                _weaponSlotManager.LoadWeaponOnSlot(secondaryWeapon, false);
-                rightWeapon = secondaryWeapon;
-                playerEffectsManager.SetCurrentDashFX(secondaryWeapon.colorFX);
-                nextWeaponSlot = WeaponSlots.Primary;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        index += newValue;
+        index = index >  weaponInventory.Count - 1 ? 0 : index < 0 ?  weaponInventory.Count - 1 : index;
+        SetCurrentWeapon(weaponInventory[index]);
     }
 
     public void AddWeapon(WeaponDataSO weaponDataSo)
+    {
+        for (var i = 0; i < weaponInventory.Count; i++) 
+        {
+            if (weaponInventory[i].Equals(weaponDataSo))
+            {
+                SetCurrentWeapon(weaponInventory[i]);
+                index = i;
+                return;
+            }
+        }
+        
+        SetCurrentWeapon(weaponDataSo);
+        weaponInventory.Add(weaponDataSo);
+        index = weaponInventory.Count - 1;
+    }
+
+    private void SetCurrentWeapon(WeaponDataSO weaponDataSo)
     {
         _weaponSlotManager.LoadWeaponOnSlot(weaponDataSo, false);
         rightWeapon = weaponDataSo;
