@@ -40,7 +40,6 @@ namespace WeaponScripts
             if (model != null)
             {
                 model.transform.parent = parentOverride != null ? parentOverride : transform;
-
                 model.transform.localPosition = Vector3.zero;
                 model.transform.localRotation = Quaternion.identity;
                 model.transform.localScale = Vector3.one;
