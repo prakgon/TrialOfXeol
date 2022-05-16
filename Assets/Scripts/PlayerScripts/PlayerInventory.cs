@@ -73,6 +73,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetCurrentWeapon(WeaponDataSO weaponDataSo, bool isRemote = false)
     {
+        if(!_photonView.IsMine && !isRemote) return;
         if (!isRemote)
         {
             Debug.Log("INDEX: " + weaponRepository.GetWeaponIndex(weaponDataSo));

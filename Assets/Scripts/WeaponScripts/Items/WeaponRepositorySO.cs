@@ -23,7 +23,8 @@ namespace WeaponScripts
 
         public int GetWeaponIndex(WeaponDataSO weapon)
         {
-            return weapons.IndexOf(weapon);
+            Debug.Log(weapon.name);
+            return weapons.FindIndex(w => w.name == weapon.name);
         }
     }
 }
