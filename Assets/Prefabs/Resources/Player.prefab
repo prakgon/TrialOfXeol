@@ -21949,6 +21949,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 11400000, guid: 4b1d9907cbacc604088c98fd5cabe074, type: 2}
   leftWeapon: {fileID: 0}
   weaponInventory: []
+  weaponRepository: {fileID: 11400000, guid: b6fc3892260823d43a23f77fd1fd5fce, type: 2}
   index: 0
   playerEffectsManager: {fileID: 0}
 --- !u!114 &8029026286801566205
