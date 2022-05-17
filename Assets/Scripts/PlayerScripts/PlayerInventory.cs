@@ -66,17 +66,16 @@ public class PlayerInventory : MonoBehaviour
     }
 
     [PunRPC]
-    private void SetCurrentWeapon(int weaponIndex, bool isRemote = false)
+    private void SetCurrentWeapon(int repoWeaponindex, bool isRemote = false)
     {
-        SetCurrentWeapon(weaponRepository.GetWeapon(index), isRemote);
+        SetCurrentWeapon(weaponRepository.GetWeapon(repoWeaponindex), isRemote);
     }
 
     private void SetCurrentWeapon(WeaponDataSO weaponDataSo, bool isRemote = false)
     {
-        if(!_photonView.IsMine && !isRemote) return;
+        if (!_photonView.IsMine && !isRemote) return;
         if (!isRemote)
         {
-            Debug.Log("INDEX: " + weaponRepository.GetWeaponIndex(weaponDataSo));
             _photonView.RPC("SetCurrentWeapon", RpcTarget.Others, weaponRepository.GetWeaponIndex(weaponDataSo), true);
         }
 
