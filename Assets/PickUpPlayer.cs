@@ -19,6 +19,7 @@ public class PickUpPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!PhotonView.Get(other.gameObject).IsMine) return;
         var playerInventory = other.GetComponent<PlayerInventory>();
 
         if (playerInventory != null)

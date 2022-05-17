@@ -17,8 +17,7 @@ public class PropSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> spawnedProps = new List<GameObject>();
     [SerializeField] private float timer;
     [SerializeField] private Vector3 myPosition;
-    
-    
+
 
     void Start()
     {
@@ -35,14 +34,16 @@ public class PropSpawner : MonoBehaviour
         if (timer > _timeToNextSpawn)
         {
             if (propsToSpawn.Length <= 0) return;
-            
+
             _timeToNextSpawn = timer + spawnIntervalTime;
             var pos = Random.insideUnitSphere * spawnRadius;
             pos.y = 0;
             pos += myPosition;
 
             // Spawn prop
-            var prop = PhotonNetwork.Instantiate(propsToSpawn[Random.Range(0, propsToSpawn.Length)].name, pos, quaternion.identity);
+
+            var prop = PhotonNetwork.InstantiateRoomObject(propsToSpawn[Random.Range(0, propsToSpawn.Length)].name, pos,
+                quaternion.identity);
             prop.AddComponent<PropDestroyer>();
         }
     }

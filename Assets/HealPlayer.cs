@@ -19,20 +19,22 @@ public class HealPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!PhotonView.Get(other.gameObject).IsMine) return;
         var playerStats = other.GetComponent<PlayerStats>();
-
+        Debug.Log(playerStats);
         if (playerStats != null)
         {
             var canHeal = playerStats.HealPlayer(heal);
+            Debug.Log(canHeal);
             if (canHeal)
             {
                 PlayFX();
 
                 var destroy = GetComponent<PropDestroyer>();
+                Debug.Log(destroy);
                 if (destroy != null)
                 {
                     loopFX.Stop();
-                    Debug.Log("DESTROY");
                     destroy.DestroyProp(gameObject);
                 }
             }
