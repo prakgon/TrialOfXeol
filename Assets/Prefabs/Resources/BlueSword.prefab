@@ -34384,6 +34384,7 @@ GameObject:
   - component: {fileID: 2471591950329758120}
   - component: {fileID: 2471591950329758121}
   - component: {fileID: -8865255943156527500}
+  - component: {fileID: 6758460095282139635}
   m_Layer: 0
   m_Name: BlueSword
   m_TagString: Untagged
@@ -34454,12 +34455,24 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 1
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6758460095282139635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471591950329758123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6722129fb18e4d3cb8887bf96025b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3119138405039485350
 GameObject:
   m_ObjectHideFlags: 0

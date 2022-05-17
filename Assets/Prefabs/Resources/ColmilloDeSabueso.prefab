@@ -54521,6 +54521,7 @@ GameObject:
   - component: {fileID: 8711277017250564177}
   - component: {fileID: 8711277017250564182}
   - component: {fileID: 344671796404497443}
+  - component: {fileID: 928445903618599323}
   m_Layer: 0
   m_Name: ColmilloDeSabueso
   m_TagString: Untagged
@@ -54592,9 +54593,21 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 1
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &928445903618599323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711277017250564180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6722129fb18e4d3cb8887bf96025b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

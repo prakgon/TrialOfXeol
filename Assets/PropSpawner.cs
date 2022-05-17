@@ -44,7 +44,6 @@ public class PropSpawner : MonoBehaviour
 
             var prop = PhotonNetwork.InstantiateRoomObject(propsToSpawn[Random.Range(0, propsToSpawn.Length)].name, pos,
                 quaternion.identity);
-            prop.AddComponent<PropDestroyer>();
         }
     }
 
