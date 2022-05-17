@@ -160,6 +160,19 @@ namespace Helpers
             
         }
 
+        public enum AudioType
+        {
+            AirSlash,
+            HitSlash,
+            SteelSlash,
+            Footstep,
+            Death,
+            PowerUp,
+            Heal,
+            BuffEffect,
+            GroundHit
+        }
+
     }
 
     internal static class LiteralToStringParse

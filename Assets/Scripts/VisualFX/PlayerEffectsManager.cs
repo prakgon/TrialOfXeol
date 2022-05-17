@@ -1,12 +1,15 @@
 using System;
 using DefaultNamespace;
 using Helpers;
+using PlayerScripts;
 using UnityEngine;
 
 namespace VisualFX
 {
     public class PlayerEffectsManager : CharacterFXManager
     {
+        private PlayerController _playerController;
+
         // Reference on inspector
         [SerializeField] private ParticleSystem deathFX;
         [SerializeField] private ParticleSystem currentDashFX;
@@ -32,6 +35,8 @@ namespace VisualFX
             {
                 t.dashFX.Stop();
             }
+
+            _playerController = GetComponent<PlayerController>();
         }
 
         public void PlayDeathFX()
@@ -73,6 +78,19 @@ namespace VisualFX
                 currentDashFX = t.dashFX;
                 return;
             }
+        }
+
+        public void PlayMoveAudio()
+        {
+            if (!_playerController.isInteracting)
+            {
+                AudioManager.Instance.AtPoint(Literals.AudioType.Footstep, transform.position);
+            }
+        }
+
+        public void PlayRollAudio()
+        {
+            AudioManager.Instance.AtPoint(Literals.AudioType.GroundHit, transform.position);
         }
     }
 }

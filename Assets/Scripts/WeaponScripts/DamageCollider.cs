@@ -61,6 +61,7 @@ namespace WeaponScripts
                 {
                     playerStats.TakeDamage(weaponData.baseDamage);
                     playerStats.PlayBloodVFX(other);
+                    AudioManager.Instance.AtPoint(Literals.AudioType.HitSlash, transform.position);
                 }
             }
 
@@ -72,6 +73,7 @@ namespace WeaponScripts
                 if (playerStats != null)
                 {
                     playerStats.TakeDamage(weaponData.baseDamage, other);
+                    AudioManager.Instance.AtPoint(Literals.AudioType.HitSlash, transform.position);
                 }
             }
 
@@ -79,11 +81,13 @@ namespace WeaponScripts
             if (other.CompareTag(Tags.Ground.ToString()))
             {
                 SparksFXOnGround(other);
+                AudioManager.Instance.AtPoint(Literals.AudioType.SteelSlash, transform.position);
             }
 
             if (other.CompareTag(Tags.Wall.ToString()))
             {
                 SparksFXOnWall(other);
+                AudioManager.Instance.AtPoint(Literals.AudioType.SteelSlash, transform.position);
             }
         }
 

@@ -21297,6 +21297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1622748115865606858}
+  - component: {fileID: 2942225279807303887}
   - component: {fileID: 4387597190941284282}
   - component: {fileID: 5745716703444602817}
   - component: {fileID: 4640119409714086064}
@@ -21312,7 +21313,6 @@ GameObject:
   - component: {fileID: 1438482235913973120}
   - component: {fileID: 1898708954298292171}
   - component: {fileID: 7008467895422926144}
-  - component: {fileID: 2942225279807303887}
   - component: {fileID: 8029026286801566205}
   - component: {fileID: 8463264008509331323}
   m_Layer: 8
@@ -21344,6 +21344,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2942225279807303887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147927287329898608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc895aedbe0f55f43aa80ca9cbd5ff25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
+  deathFX: {fileID: 8663900642558672855}
+  currentDashFX: {fileID: 3663232319889708}
+  healFX: {fileID: 8717432150123682238}
+  moveFX: {fileID: 9109366839303400012}
+  dashFXs:
+  - dashFX: {fileID: 3663232319889708}
+    color: 0
+  - dashFX: {fileID: 3147205237838950236}
+    color: 3
+  - dashFX: {fileID: 1848289902327659252}
+    color: 2
+  - dashFX: {fileID: 8362559521780829868}
+    color: 5
+  - dashFX: {fileID: 4750850250646818196}
+    color: 1
+  - dashFX: {fileID: 2651907427216588886}
+    color: 4
 --- !u!114 &4387597190941284282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21920,37 +21951,6 @@ MonoBehaviour:
   weaponInventory: []
   index: 0
   playerEffectsManager: {fileID: 0}
---- !u!114 &2942225279807303887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147927287329898608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc895aedbe0f55f43aa80ca9cbd5ff25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
-  deathFX: {fileID: 8663900642558672855}
-  currentDashFX: {fileID: 3663232319889708}
-  healFX: {fileID: 8717432150123682238}
-  moveFX: {fileID: 9109366839303400012}
-  dashFXs:
-  - dashFX: {fileID: 3663232319889708}
-    color: 0
-  - dashFX: {fileID: 3147205237838950236}
-    color: 3
-  - dashFX: {fileID: 1848289902327659252}
-    color: 2
-  - dashFX: {fileID: 8362559521780829868}
-    color: 5
-  - dashFX: {fileID: 4750850250646818196}
-    color: 1
-  - dashFX: {fileID: 2651907427216588886}
-    color: 4
 --- !u!114 &8029026286801566205
 MonoBehaviour:
   m_ObjectHideFlags: 0
