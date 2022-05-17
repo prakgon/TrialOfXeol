@@ -49,14 +49,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAtPoint(Literals.AudioType audioType, Vector3 vector3)
+    public void AtPoint(Literals.AudioType audioType, Vector3 vector3)
     {
         foreach (var audio in audiosStruct)
         {
             if (audio.AudioType == audioType)
             {
-                AudioSource.PlayClipAtPoint(audio.AudioClip, vector3);
-                Debug.Log("Play " + audio.AudioClip);
+                AudioSource.PlayClipAtPoint(audio.AudioClip, vector3, audio.Volume);
             }
         }
     }

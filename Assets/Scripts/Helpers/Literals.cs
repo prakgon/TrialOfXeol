@@ -164,7 +164,13 @@ namespace Helpers
         {
             AirSlash,
             HitSlash,
-            SteelSlash
+            SteelSlash,
+            Footstep,
+            Death,
+            PowerUp,
+            Heal,
+            BuffEffect,
+            GroundHit
         }
 
     }
