@@ -85,6 +85,8 @@ namespace PlayerScripts
 
             PlayTargetAnimation(targetAnimation.ToString(), true, 1);
             playerCombatManager.LastAttack = comboPhase;
+            
+            AudioManager.Instance.PlayAtPoint(Literals.AudioType.AirSlash, transform.position);
         }
 
         public void DisableCombo(AttackAnimations targetAnimation, PlayerCombatManager playerCombatManager,

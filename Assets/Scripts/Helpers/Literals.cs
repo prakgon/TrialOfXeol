@@ -160,6 +160,13 @@ namespace Helpers
             
         }
 
+        public enum AudioType
+        {
+            AirSlash,
+            HitSlash,
+            SteelSlash
+        }
+
     }
 
     internal static class LiteralToStringParse
