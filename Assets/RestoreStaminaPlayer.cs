@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using PlayerScripts;
 using UnityEngine;
 
@@ -42,12 +43,24 @@ public class RestoreStaminaPlayer : MonoBehaviour
         destroyFX.Stop();
     }
 
-    private void PlayFX(Transform player)
+    private void PlayFX(Transform player, bool isRemote = false)
     {
+        if (!isRemote)
+        {
+            PhotonView.Get(gameObject).RPC("PlayFX", RpcTarget.Others, PhotonView.Get(player.gameObject).ViewID, true);
+        }
+
         var fxTransform = destroyFX.transform;
         var particles = Instantiate(destroyFX, player.position, player.rotation, player.transform);
         particles.gameObject.SetActive(true);
         particles.gameObject.AddComponent<StaminaPowerUp>();
         Destroy(particles.gameObject, destroyFX.main.duration + 1f);
+    }
+
+    [PunRPC]
+    private void PlayFX(int playerId, bool isRemote = false)
+    {
+        var player = PhotonView.Find(playerId).transform;
+        PlayFX(player, isRemote);
     }
 }

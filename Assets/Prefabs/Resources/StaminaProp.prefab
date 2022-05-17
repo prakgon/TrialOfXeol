@@ -33822,8 +33822,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8986360616647578890}
   - component: {fileID: 8986360616647578888}
-  - component: {fileID: 8986360616647578895}
   - component: {fileID: -8762169138090847648}
+  - component: {fileID: 8986360616647578895}
+  - component: {fileID: -1240019401539348730}
   m_Layer: 0
   m_Name: StaminaProp
   m_TagString: Untagged
@@ -33862,21 +33863,6 @@ CapsuleCollider:
   m_Height: 2.46
   m_Direction: 1
   m_Center: {x: 0, y: 0.47, z: 0}
---- !u!114 &8986360616647578895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8986360616647578891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41aa8b8f4a9aaca48a782dc2cbc4b0fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staminaRestore: 25
-  loopFX: {fileID: 8878275686565822638}
-  destroyFX: {fileID: 7401125221094385876}
 --- !u!114 &-8762169138090847648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33893,9 +33879,36 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 1
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8986360616647578895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986360616647578891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41aa8b8f4a9aaca48a782dc2cbc4b0fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaRestore: 25
+  loopFX: {fileID: 8878275686565822638}
+  destroyFX: {fileID: 7401125221094385876}
+--- !u!114 &-1240019401539348730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986360616647578891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6722129fb18e4d3cb8887bf96025b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
