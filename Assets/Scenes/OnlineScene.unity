@@ -5436,7 +5436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814128370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.35, y: -1.928, z: 1.5100002}
+  m_LocalPosition: {x: 18.35, y: -2.97, z: 1.5100002}
   m_LocalScale: {x: 2, y: 2.29, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18767,7 +18767,7 @@ PrefabInstance:
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
       propertyPath: switchableObjects.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
@@ -18792,7 +18792,12 @@ PrefabInstance:
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
       propertyPath: switchableObjects.Array.data[3].action
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.data[4].action
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
@@ -18802,6 +18807,11 @@ PrefabInstance:
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
       propertyPath: switchableObjects.Array.data[1].context
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.data[4].context
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
@@ -18828,7 +18838,12 @@ PrefabInstance:
         type: 3}
       propertyPath: switchableObjects.Array.data[3].gameObject
       value: 
-      objectReference: {fileID: 922614375}
+      objectReference: {fileID: 1814128370}
+    - target: {fileID: 4259618138718668098, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
+        type: 3}
+      propertyPath: switchableObjects.Array.data[4].gameObject
+      value: 
+      objectReference: {fileID: 1814128370}
     - target: {fileID: 4259618138718668099, guid: 6d579115b6c8e59409f46c8e7a7d1c14,
         type: 3}
       propertyPath: m_Name
