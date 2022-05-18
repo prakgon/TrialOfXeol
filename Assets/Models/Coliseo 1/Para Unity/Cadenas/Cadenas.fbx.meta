@@ -3,12 +3,7 @@ guid: 00494d90d1deac5489a1e880db750cb2
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cadenas
-    second: {fileID: 2100000, guid: 2d4eab5e257329b40be7ab8ec7c4760c, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
