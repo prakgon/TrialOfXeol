@@ -21724,7 +21724,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: IsLocking
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: IsInvulnerable
   m_SynchronizeLayers:
   - SynchronizeType: 2
@@ -22136,7 +22136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InfiniteDecal: 0
-  DirLight: {fileID: 1071948742337914928, guid: 384a49156c665e8479a48391b72a857a,
+  DirLight: {fileID: 4821340229936090640, guid: 384a49156c665e8479a48391b72a857a,
     type: 3}
   isVR: 0
   BloodAttach: {fileID: 3136605153214515430, guid: 45eef0a861a8a8946b4c23fb9f4f779a,
