@@ -20,7 +20,7 @@ public class CursorController : MonoBehaviour
     private void Start()
     {
         SetDefaultCursor();
-        Cursor.visible = true;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
     }
 
