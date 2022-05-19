@@ -278,17 +278,23 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         
         if (!startInput) return;
         
+        
+        
         switch (_startCounter)
         {
             case 0:
                 _gamepadControlsSchema.SetActive(false);
                 _gamepadControlsText.SetActive(false);
                 _keyboardControlsText.SetActive(false);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 break;
             case 1:
                 _gamepadControlsSchema.SetActive(true);
                 _gamepadControlsText.SetActive(false);
                 _keyboardControlsText.SetActive(false);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 break;
             case 2:
                 _gamepadControlsSchema.SetActive(false);

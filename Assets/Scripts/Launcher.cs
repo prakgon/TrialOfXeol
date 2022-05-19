@@ -86,6 +86,7 @@ namespace TOX
 
         private IEnumerator DelayCoroutine()
         {
+            PointerController.Instance.DisableAll();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             yield return new WaitForSeconds(1.5f);

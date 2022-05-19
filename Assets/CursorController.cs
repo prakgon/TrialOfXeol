@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    public static CursorController instance;
+    public static CursorController Instance;
 
     public Texture2D cursorTexture;
     // public Texture2D loadingTexture;
@@ -14,7 +14,7 @@ public class CursorController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Start()
