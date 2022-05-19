@@ -23,6 +23,7 @@ public class SpriteSwapper : MonoBehaviour
                 if (sprites[i] != null)
                 {
                     _image.sprite = sprites[i];
+                    _image.material.mainTexture = sprites[i].texture;
                 }
 
                 return;

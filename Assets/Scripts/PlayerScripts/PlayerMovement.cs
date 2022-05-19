@@ -131,7 +131,6 @@ namespace TOX
                 LocalPlayerInstance = gameObject;
             }
 
-            DontDestroyOnLoad(gameObject);
 
             _playerStats = GetComponent<PlayerStats>();
             _playerEffectsManager = GetComponent<PlayerEffectsManager>();
