@@ -14,7 +14,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -67,7 +67,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
-  - {fileID: 1371483839869224856}
+  - {fileID: 2118344084559924166}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -94,7 +94,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95e99895437b7a439652f5c51e263a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenuController: {fileID: 0}
+--- !u!114 &2118344084559924166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a044721e24e50c94ca6401fd7864b290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &3905042775059740088
 AnimatorState:
   serializedVersion: 6
@@ -139,7 +150,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1073322706763863264}
-    m_Position: {x: 580, y: 240, z: 0}
+    m_Position: {x: 260, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

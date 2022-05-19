@@ -10,13 +10,18 @@ public class MenuController : MonoBehaviour
 {
     public static MenuController Instance;
 
-    [SerializeField] private GameObject titleText;
-    [SerializeField] private GameObject startText;
+    [SerializeField] private GameObject title;
+    
+    [SerializeField] private GameObject start;
+    [SerializeField] private GameObject startImage;
+    [SerializeField] private GameObject startCanvas;
+    [SerializeField] private GameObject logo;
     [SerializeField] private GameObject mainMenu;
     
     [SerializeField] private InputAction anyKey;
 
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator fadeOutAnimator;
+    [SerializeField] private Animator startAnimator;
     private static readonly int FadeOut = Animator.StringToHash("FadeOut");
 
     [SerializeField] private AudioClip startAudioClip;
@@ -55,9 +60,9 @@ public class MenuController : MonoBehaviour
 
     private void AnyKeyPerformed(InputAction.CallbackContext context)
     {
-        if (goNextPhase && startText.activeSelf)
+        if (goNextPhase && start.activeSelf)
         {
-            animator.SetTrigger(FadeOut);
+            fadeOutAnimator.SetTrigger(FadeOut);
             AudioMenuManager.Instance.PlayOneShot(startAudioClip);
             anyKey.performed -= AnyKeyPerformed;
         }
@@ -65,7 +70,7 @@ public class MenuController : MonoBehaviour
 
     public void ShowMenu()
     {
-        startText.SetActive(false);
+        start.SetActive(false);
         mainMenu.SetActive(true);
     }
 
@@ -75,6 +80,8 @@ public class MenuController : MonoBehaviour
     public void SetSelected(GameObject selected) => EventSystem.current.SetSelectedGameObject(selected);
 
     public void Exit() => StartCoroutine(QuitGame());
+
+    public void DestroyCanvas() => Destroy(startCanvas);
 
     private IEnumerator QuitGame()
     {
@@ -88,8 +95,8 @@ public class MenuController : MonoBehaviour
     private IEnumerator StartMenu()
     {
         yield return new WaitForSeconds(3.3f);
-        titleText.SetActive(true);
+        title.SetActive(true);
         yield return new WaitForSeconds(2f);
-        startText.SetActive(true);
+        start.SetActive(true);
     }
 }
