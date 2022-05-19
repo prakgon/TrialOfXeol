@@ -28,7 +28,6 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
     
-    
     [SerializeField] private AudioStruct[] audiosStruct;
     
     private AudioSource _audioSource;
