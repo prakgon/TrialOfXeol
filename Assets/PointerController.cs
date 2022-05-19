@@ -9,8 +9,8 @@ public class PointerController : MonoBehaviour
     [SerializeField] private InputAction pointerPosition;
     [SerializeField] private InputAction gamepadInput;
 
-    [SerializeField] Vector2 _currentPointerPosition;
-    [SerializeField] Vector2 _currentGamepadPosition;
+    // [SerializeField] Vector2 _currentPointerPosition;
+    // [SerializeField] Vector2 _currentGamepadPosition;
 
     private void Awake()
     {
@@ -25,24 +25,22 @@ public class PointerController : MonoBehaviour
 
         // pointerPosition.performed += action => _currentPointerPosition = action.ReadValue<Vector2>();
         // gamepadInput.performed += action => _currentGamepadPosition = action.ReadValue<Vector2>();
-        pointerPosition.performed += PointerPerfomed;
-        gamepadInput.performed += GamepadPerfomed;
+        pointerPosition.performed += PointerPerformed;
+        gamepadInput.performed += GamepadPerformed;
 
         pointerPosition.Enable();
         gamepadInput.Enable();
     }
 
-    void PointerPerfomed(InputAction.CallbackContext context)
+    private void PointerPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("PointerPerfomed");
-        Debug.Log(context.ReadValue<Vector2>());
+        // Debug.Log(context.ReadValue<Vector2>());
         Cursor.visible = true;
     }
 
-    void GamepadPerfomed(InputAction.CallbackContext context)
+    private void GamepadPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("GamepadPerfomed");
-        Debug.Log(context.ReadValue<Vector2>());
+        // Debug.Log(context.ReadValue<Vector2>());
         Cursor.visible = false;
     }
 
