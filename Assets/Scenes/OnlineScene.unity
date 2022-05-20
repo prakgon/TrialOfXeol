@@ -3377,7 +3377,7 @@ MonoBehaviour:
   - AudioType: 6
     AudioClip: {fileID: 8300000, guid: 266d5dc7fdbeaeb47871c253e918da8c, type: 3}
     Volume: 1
-  - AudioType: 6
+  - AudioType: 9
     AudioClip: {fileID: 8300000, guid: f9e1ddb87eb6a0c44bd42c2dbd7ecf74, type: 3}
     Volume: 1
   - AudioType: 10

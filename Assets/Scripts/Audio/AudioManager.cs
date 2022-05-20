@@ -45,7 +45,7 @@ namespace Audio
 
         public void OneShot(Literals.AudioType audioType)
         {
-            if (!audioController.isOn) return;
+            if (audioController.mute) return;
 
             foreach (var audio in audiosStruct)
             {
@@ -58,7 +58,7 @@ namespace Audio
 
         public void AtPoint(Literals.AudioType audioType, Vector3 vector3)
         {
-            if (!audioController.isOn) return;
+            if (audioController.mute) return;
             foreach (var audio in audiosStruct)
             {
                 if (audio.AudioType == audioType)
@@ -68,7 +68,7 @@ namespace Audio
             }
         }
 
-        public void ToggleMute() => _audioSource.mute = !audioController.isOn;
+        public void ToggleMute() => _audioSource.mute = audioController.mute;
         public void SetVolume() => _audioSource.volume = audioController.volume;
     }
 }

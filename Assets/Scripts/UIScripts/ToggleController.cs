@@ -15,7 +15,7 @@ namespace UIScripts
 
         void Start()
         {
-            toggle.isOn = audioData.isOn;
+            toggle.isOn = audioData.mute;
             
             ToggleValueChanged();
             CallMenuManager();
@@ -28,7 +28,7 @@ namespace UIScripts
             offToggle.SetActive(!toggle.isOn);
         }
 
-        public void SetIsOnData() => audioData.isOn = toggle.isOn;
+        public void SetIsOnData() => audioData.mute = toggle.isOn;
         
         public void CallManager() => AudioManager.Instance.ToggleMute();
 

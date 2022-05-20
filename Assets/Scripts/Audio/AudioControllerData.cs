@@ -6,6 +6,6 @@ namespace TOX.Audio
     public class AudioControllerData : ScriptableObject
     {
         public float volume = 1f;   
-        public bool isOn = true;
+        public bool mute = false;
     }
 }

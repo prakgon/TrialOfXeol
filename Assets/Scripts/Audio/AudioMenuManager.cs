@@ -42,7 +42,7 @@ public class AudioMenuManager : MonoBehaviour
         _audioSource.PlayOneShot(clip);
     }
 
-    public void ToggleMute() => _audioSource.mute = !audioController.isOn;
+    public void ToggleMute() => _audioSource.mute = audioController.mute;
     public void SetVolume() => _audioSource.volume = audioController.volume;
 
 }

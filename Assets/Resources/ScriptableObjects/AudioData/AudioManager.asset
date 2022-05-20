@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AudioManager
   m_EditorClassIdentifier: 
   volume: 1
-  isOn: 1
+  mute: 0
