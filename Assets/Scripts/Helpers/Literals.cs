@@ -170,7 +170,9 @@ namespace Helpers
             PowerUp,
             Heal,
             BuffEffect,
-            GroundHit
+            GroundHit,
+            Victory,
+            ChangeWeapon
         }
 
     }

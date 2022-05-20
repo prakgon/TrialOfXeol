@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
+using Helpers;
 using Photon.Pun;
 using PlayerScripts;
 using UnityEngine;
@@ -29,6 +31,7 @@ public class HealPlayer : MonoBehaviour
             if (canHeal)
             {
                 PlayFX();
+                AudioManager.Instance.OneShot(Literals.AudioType.Heal);
 
                 var destroy = GetComponent<PropDestroyer>();
                 Debug.Log(destroy);

@@ -1,4 +1,6 @@
 using System;
+using Audio;
+using Helpers;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -26,7 +28,9 @@ public class PickUpPlayer : MonoBehaviour
         {
             playerInventory.AddWeapon(_weaponDataSo);
 
-            PlayFX();
+            PlayFX();        
+            //AudioManager.Instance.OneShot(Literals.AudioType.PowerUp);
+
 
             var destroy = GetComponent<PropDestroyer>();
             if (destroy != null)

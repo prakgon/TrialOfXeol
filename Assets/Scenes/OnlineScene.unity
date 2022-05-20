@@ -3329,6 +3329,7 @@ GameObject:
   - component: {fileID: 1046549392}
   - component: {fileID: 1046549391}
   - component: {fileID: 1046549393}
+  - component: {fileID: 1046549394}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3362,14 +3363,27 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 15202d785b135234fb0b3f2774d14e5d, type: 3}
     Volume: 1
   - AudioType: 4
-    AudioClip: {fileID: 8300000, guid: 334af903c3ca4ea42b10ff89e9b4831e, type: 3}
+    AudioClip: {fileID: 8300000, guid: 1276572f46589b7418236d58198041fe, type: 3}
     Volume: 1
   - AudioType: 7
-    AudioClip: {fileID: 8300000, guid: bfa5fc26661cfe540a630462fcc399de, type: 3}
+    AudioClip: {fileID: 8300000, guid: 56398a43db5ccbf44be9efa737ff80cf, type: 3}
     Volume: 1
   - AudioType: 8
     AudioClip: {fileID: 8300000, guid: 058c049257035274299f14a87503f143, type: 3}
     Volume: 1
+  - AudioType: 5
+    AudioClip: {fileID: 8300000, guid: ea94fbb5c2718f844a74184b54ee0055, type: 3}
+    Volume: 1
+  - AudioType: 6
+    AudioClip: {fileID: 8300000, guid: 266d5dc7fdbeaeb47871c253e918da8c, type: 3}
+    Volume: 1
+  - AudioType: 6
+    AudioClip: {fileID: 8300000, guid: f9e1ddb87eb6a0c44bd42c2dbd7ecf74, type: 3}
+    Volume: 1
+  - AudioType: 10
+    AudioClip: {fileID: 8300000, guid: 47d61d5d2a1452d4e9cd5fcb99566c29, type: 3}
+    Volume: 1
+  audioController: {fileID: 11400000, guid: 383013a96a81c314db35f3561d00cea0, type: 2}
 --- !u!4 &1046549392
 Transform:
   m_ObjectHideFlags: 0
@@ -3395,11 +3409,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: cc508c2362cbd3b48b04d142aa3c457b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3481,6 +3495,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1046549394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046549390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a17e0241609e294897e8fb9c002a594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hornClip: {fileID: 8300000, guid: afa656958aa9b524d812632bf3840d06, type: 3}
+  hornAudioSource: {fileID: 1046549393}
+  timeInterval: 70
 --- !u!4 &1083025122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3013308475569499214, guid: 3fcd1481bbf27a64d8f224a4dc4614d7,

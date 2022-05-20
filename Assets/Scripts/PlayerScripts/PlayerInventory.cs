@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
+using Helpers;
 using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
@@ -46,6 +48,10 @@ public class PlayerInventory : MonoBehaviour
         index += newValue;
         index = index > weaponInventory.Count - 1 ? 0 : index < 0 ? weaponInventory.Count - 1 : index;
         SetCurrentWeapon(weaponInventory[index]);
+        if (weaponInventory.Count > 1)
+        {
+            AudioManager.Instance.OneShot(Literals.AudioType.ChangeWeapon);
+        }
     }
 
     public void AddWeapon(WeaponDataSO weaponDataSo)
@@ -63,6 +69,8 @@ public class PlayerInventory : MonoBehaviour
         SetCurrentWeapon(weaponDataSo);
         weaponInventory.Add(weaponDataSo);
         index = weaponInventory.Count - 1;
+        
+        AudioManager.Instance.OneShot(Literals.AudioType.PowerUp);
     }
 
     [PunRPC]

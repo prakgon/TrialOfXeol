@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
+using Helpers;
 using Photon.Pun;
 using PlayerScripts;
 using UnityEngine;
@@ -27,7 +29,8 @@ public class RestoreStaminaPlayer : MonoBehaviour
             if (canRestore)
             {
                 PlayFX(other.transform);
-
+                AudioManager.Instance.OneShot(Literals.AudioType.BuffEffect);
+                
                 var destroy = GetComponent<PropDestroyer>();
                 if (destroy != null)
                 {

@@ -56,11 +56,12 @@ namespace Audio
 
         public void AtPoint(Literals.AudioType audioType, Vector3 vector3)
         {
+            if (!audioController.isOn) return;
             foreach (var audio in audiosStruct)
             {
                 if (audio.AudioType == audioType)
                 {
-                    AudioSource.PlayClipAtPoint(audio.AudioClip, vector3, audio.Volume);
+                    AudioSource.PlayClipAtPoint(audio.AudioClip, vector3, audio.Volume * audioController.volume);
                 }
             }
         }

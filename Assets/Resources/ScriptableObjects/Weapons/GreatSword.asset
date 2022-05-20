@@ -44,7 +44,7 @@ MonoBehaviour:
   baseStamina: 5
   lightStaminaMultiplier: 1.2
   heavyStaminaMultiplier: 1.8
-  baseDamage: 10
+  baseDamage: 8
   lightDamageMultiplier: 1.2
   heavyDamageMultiplier: 1.8
   colorFX: 0

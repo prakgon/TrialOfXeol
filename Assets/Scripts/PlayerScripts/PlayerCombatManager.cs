@@ -40,6 +40,8 @@ namespace PlayerScripts
 
             _weaponSlotManager.weaponItem = weaponData;
 
+            _weaponSlotManager.DrainStaminaHeavyAttack();
+
             if (_playerController.isSprinting)
             {
                 _animController.EnableCombo(weaponData.OH_Sprint_Heavy_Attack, this, AttackAnimations.OH_Sprint_Heavy_Attack);

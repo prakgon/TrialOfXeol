@@ -41,10 +41,10 @@ MonoBehaviour:
   Skill_F: 37
   OH_Sprint_Light_Attack: 39
   OH_Sprint_Heavy_Attack: 41
-  baseStamina: 5
+  baseStamina: 4
   lightStaminaMultiplier: 1.2
   heavyStaminaMultiplier: 1.8
-  baseDamage: 10
+  baseDamage: 6
   lightDamageMultiplier: 1.2
   heavyDamageMultiplier: 1.8
   colorFX: 4
