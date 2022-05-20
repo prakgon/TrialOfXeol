@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
     [SerializeField] private GameObject _audioPanel;
     [SerializeField] private GameObject _controlsPanel;
-    [SerializeField] private GameObject _videoPanel;
+    [SerializeField] private GameObject gamepadPanel;
+    [SerializeField] private GameObject keyboardPanel;
+    [SerializeField] private Button close;
+    [SerializeField] private Button audio;
+    [SerializeField] private Slider volume;
+    [SerializeField] private Toggle mute;
+    private bool currentPanel;
     
     public void MoveToPanel(GameObject origin, GameObject destination)
     {
@@ -17,6 +24,36 @@ public class SettingsManager : MonoBehaviour
     
     public void DisablePanel(GameObject panel) => panel.SetActive(false);
     public void EnablePanel(GameObject panel) => panel.SetActive(true);
+
+    public void EnableControlsPanel()
+    {
+        
+    }
+    
+    public void ControlsNavToClose(Button button)
+    {
+        var buttonNavigation = button.navigation;
+        buttonNavigation.selectOnDown = close;
+    } 
+    
+    public void ControlsNavFromClose(Button button)
+    {
+        var buttonNavigation = button.navigation;
+        buttonNavigation.selectOnUp = audio;
+    }
+    
+    
+    public void AudioNavToVolume(Button button)
+    {
+        var buttonNavigation = button.navigation;
+        buttonNavigation.selectOnDown = volume;
+    }
+    
+    public void AudioNavFromClose(Button button)
+    {
+        var buttonNavigation = button.navigation;
+        buttonNavigation.selectOnUp = mute;
+    } 
     
     public void SetQuality(int qualityIndex)
     {
