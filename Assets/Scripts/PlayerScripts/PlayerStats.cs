@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Audio;
 using Helpers;
 using static Helpers.Literals;
 using TMPro;
@@ -129,7 +130,6 @@ namespace PlayerScripts
                 _currentHealth = 0;
                 _animatorController.PlayTargetAnimation(DamageAnimations.Damage_Die.ToString(), true, 1);
                 _effectsManager.PlayDeathFX();
-                // Handle player death
                 GetComponent<MatchManager>().PlayerDied();
             }
         }

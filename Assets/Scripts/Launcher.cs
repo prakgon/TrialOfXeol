@@ -1,13 +1,14 @@
+using System.Collections;
 using Configuration;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using ExitGames.Client.Photon;
 using Helpers;
 using static Helpers.Literals;
 using static Helpers.LiteralToStringParse;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace TOX
 {
@@ -60,8 +61,8 @@ namespace TOX
         void Start()
         {
             _userType = UserTypes.Player;
-            _singleButton.onClick.AddListener(StartSingleplayer);
-            _multiButton.onClick.AddListener(Connect);
+            _singleButton.onClick.AddListener(StartSinglePlayer);
+            _multiButton.onClick.AddListener(DelayedConnect);
             _spectatorButton.onClick.AddListener(StartFreeSpectator);
         }
 
@@ -69,15 +70,26 @@ namespace TOX
 
         #region Private Methods
 
-        private void StartSingleplayer()
+        private void StartSinglePlayer()
         {
             PhotonNetwork.OfflineMode = true;
-            Connect();
+            DelayedConnect();
         }
 
         private void StartFreeSpectator()
         {
             _userType = UserTypes.FreeSpectator;
+            DelayedConnect();
+        }
+
+        private void DelayedConnect() => StartCoroutine(DelayCoroutine());
+
+        private IEnumerator DelayCoroutine()
+        {
+            PointerController.Instance.DisableAll();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            yield return new WaitForSeconds(2f);
             Connect();
         }
 

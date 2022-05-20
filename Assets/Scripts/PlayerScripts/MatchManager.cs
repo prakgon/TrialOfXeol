@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using ExitGames.Client.Photon;
 using Helpers;
 using Photon.Pun;
@@ -60,10 +61,14 @@ public class MatchManager : MonoBehaviourPun, IOnEventCallback
         {
             case Literals.MatchResults.Victory:
                 //StartCoroutine(GameOverSequence("VICTORY"));
+                AudioManager.Instance.OneShot(Literals.AudioType.Victory);
+
                 StartCoroutine(nameof(GameOverSequence), "VICTORY");
                 break;
             case Literals.MatchResults.Defeat:
                 //StartCoroutine(GameOverSequence("DEFEAT"));
+                AudioManager.Instance.OneShot(Literals.AudioType.Death);
+
                 StartCoroutine(nameof(GameOverSequence), "DEFEAT");
                 break;
         }
