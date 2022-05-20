@@ -14,7 +14,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Button audio;
     [SerializeField] private Slider volume;
     [SerializeField] private Toggle mute;
-    private bool currentPanel;
+    private bool _currentPanel;
     
     public void MoveToPanel(GameObject origin, GameObject destination)
     {
@@ -25,9 +25,11 @@ public class SettingsManager : MonoBehaviour
     public void DisablePanel(GameObject panel) => panel.SetActive(false);
     public void EnablePanel(GameObject panel) => panel.SetActive(true);
 
-    public void EnableControlsPanel()
+    public void SwitchControlPanel()
     {
-        
+        EnablePanel(!_currentPanel ? gamepadPanel : keyboardPanel);
+        DisablePanel(_currentPanel ? gamepadPanel : keyboardPanel);
+        _currentPanel = !_currentPanel;
     }
     
     public void ControlsNavToClose(Button button)
