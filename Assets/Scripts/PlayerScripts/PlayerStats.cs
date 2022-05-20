@@ -8,6 +8,7 @@ using UnityEngine;
 using WeaponScripts;
 using Photon.Pun;
 using UIScripts;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VisualFX;
 
@@ -106,6 +107,10 @@ namespace PlayerScripts
         {
             if (_playerController.isInvulnerable) return;
             if (_currentHealth <= 0) return;
+            if (PhotonView.Get(gameObject).IsMine)
+            {
+                StartCoroutine(PlayerInputHandler.ShortVibration(0.8f, 0f, 0.5f));
+            }
 
             DecreaseHealth(damage);
 
@@ -134,7 +139,7 @@ namespace PlayerScripts
             _currentStamina -= drain;
             UpdateStaminaBar();
         }
-        
+
         public void IncreaseStamina()
         {
             _currentStamina = _maximumStamina;
@@ -173,14 +178,14 @@ namespace PlayerScripts
             }
 
             if (_currentHealth >= _maximumHealth) return false;
-            
+
             _currentHealth = _maximumHealth;
             _effectsManager.PlayHealFX();
             UpdateHealthBar();
             UpdateHead();
             return true;
         }
-        
+
         [PunRPC]
         public bool RestoreStamina(int stamina)
         {
@@ -190,7 +195,7 @@ namespace PlayerScripts
                 UpdateStaminaBar();
                 return true;
             }
-            
+
             if (_currentStamina >= _maximumStamina) return false;
 
             _currentStamina = _maximumStamina;

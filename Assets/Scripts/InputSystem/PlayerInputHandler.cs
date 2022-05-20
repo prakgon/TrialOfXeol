@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Helpers;
 using PlayerScripts;
 using TOX;
@@ -306,5 +307,12 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         _playerInventory = med.PlayerInventory;
         _playerController = med.PlayerController;
         _playerMovement = med.PlayerMovement;
+    }
+    
+    public static IEnumerator ShortVibration(float lowFrequency, float highFrequency, float duration)
+    {
+        Gamepad.current.SetMotorSpeeds(lowFrequency, highFrequency);
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0, 0);
     }
 }
