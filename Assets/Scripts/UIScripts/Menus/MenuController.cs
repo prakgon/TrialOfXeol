@@ -71,7 +71,6 @@ public class MenuController : MonoBehaviour
         if (goNextPhase && start.activeSelf)
         {
             startAnimator.SetTrigger(FadeOut);
-            fadeOutAnimator.SetTrigger(FadeOut);
             startImageAnimator.SetTrigger(FadeOut);
             AudioMenuManager.Instance.PlayOneShot(startAudioClip);
             anyKey.performed -= AnyKeyPerformed;
@@ -92,16 +91,12 @@ public class MenuController : MonoBehaviour
         mainMenu.SetActive(true);
         buttons.ToList().ForEach(b => b.interactable = true);
     }
-    
-    public void DestroyStart()
-    {
-        Destroy(start);
-    }
 
     public void CloseDialog(GameObject dialog) => dialog.SetActive(false);
     public void OpenDialog(GameObject dialog) => dialog.SetActive(true);
 
     public void SetSelected(GameObject selected) => EventSystem.current.SetSelectedGameObject(selected);
+    public void SetFadeOutTrigger() => fadeOutAnimator.SetTrigger(FadeOut);
 
     public void Exit() => StartCoroutine(QuitGame());
 

@@ -8,5 +8,7 @@ public class DestroyOnEnter : StateMachineBehaviour
     {
         MenuController.Instance.ShowMenu();
         MenuController.Instance.DestroyCanvas();
+        MenuController.Instance.DestroyInitialText();
+        MenuController.Instance.DestroyInitialImage();
     }
 }

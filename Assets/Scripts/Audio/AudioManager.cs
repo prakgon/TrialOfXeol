@@ -1,61 +1,71 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Helpers;
+using TOX.Audio;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public class AudioManager : MonoBehaviour
+namespace Audio
 {
-    #region  Singleton
-    private static AudioManager _instance;
-    
-    public static AudioManager Instance
+    [RequireComponent(typeof(AudioSource))]
+    public class AudioManager : MonoBehaviour
     {
-        get
+        #region  Singleton
+        private static AudioManager _instance;
+    
+        public static AudioManager Instance
         {
-            return _instance;
-        }
-    }
-    
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        _instance = this;
-    }
-    #endregion
-    
-    [SerializeField] private AudioStruct[] audiosStruct;
-    
-    private AudioSource _audioSource;
-
-    void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
-    public void OneShot(Literals.AudioType audioType)
-    {
-        foreach (var audio in audiosStruct)
-        {
-            if (audio.AudioType == audioType)
+            get
             {
-                _audioSource.PlayOneShot(audio.AudioClip);
+                return _instance;
             }
         }
-    }
-
-    public void AtPoint(Literals.AudioType audioType, Vector3 vector3)
-    {
-        foreach (var audio in audiosStruct)
+    
+        private void Awake()
         {
-            if (audio.AudioType == audioType)
+            if (_instance != null && _instance != this)
             {
-                AudioSource.PlayClipAtPoint(audio.AudioClip, vector3, audio.Volume);
+                Destroy(this.gameObject);
+            }
+            _instance = this;
+        }
+        #endregion
+    
+        [SerializeField] private AudioStruct[] audiosStruct;
+    
+        private AudioSource _audioSource;
+    
+        [SerializeField] private AudioControllerData audioController;
+
+
+        void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+            
+            ToggleMute();
+            SetVolume();
+        }
+
+        public void OneShot(Literals.AudioType audioType)
+        {
+            foreach (var audio in audiosStruct)
+            {
+                if (audio.AudioType == audioType)
+                {
+                    _audioSource.PlayOneShot(audio.AudioClip);
+                }
             }
         }
+
+        public void AtPoint(Literals.AudioType audioType, Vector3 vector3)
+        {
+            foreach (var audio in audiosStruct)
+            {
+                if (audio.AudioType == audioType)
+                {
+                    AudioSource.PlayClipAtPoint(audio.AudioClip, vector3, audio.Volume);
+                }
+            }
+        }
+    
+        public void ToggleMute() => _audioSource.mute = !audioController.isOn;
+        public void SetVolume() => _audioSource.volume = audioController.volume;
     }
 }
