@@ -6,7 +6,7 @@ using UnityEngine;
 public class CursorController : MonoBehaviour
 {
     public static CursorController Instance;
-
+    
     public Texture2D cursorTexture;
     // public Texture2D loadingTexture;
     public CursorMode cursorMode = CursorMode.Auto;
@@ -20,7 +20,7 @@ public class CursorController : MonoBehaviour
     private void Start()
     {
         SetDefaultCursor();
-        Cursor.visible = false;
+        SetVisibility(false);
         Cursor.lockState = CursorLockMode.None;
     }
 

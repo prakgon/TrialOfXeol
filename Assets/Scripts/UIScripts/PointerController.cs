@@ -6,7 +6,7 @@ public class PointerController : MonoBehaviour
 {
     public static PointerController Instance;
     
-    [SerializeField] private InputAction pointerPosition;
+    public InputAction pointerPosition;
     [SerializeField] private InputAction gamepadInput;
 
     // [SerializeField] Vector2 _currentPointerPosition;
@@ -25,14 +25,15 @@ public class PointerController : MonoBehaviour
 
         // pointerPosition.performed += action => _currentPointerPosition = action.ReadValue<Vector2>();
         // gamepadInput.performed += action => _currentGamepadPosition = action.ReadValue<Vector2>();
-        pointerPosition.performed += PointerPerformed;
+        // pointerPosition.performed += PointerPerformed;
+        pointerPosition.performed += _ => CursorController.Instance.SetVisibility(false);
         gamepadInput.performed += GamepadPerformed;
 
         pointerPosition.Enable();
         gamepadInput.Enable();
     }
 
-    private void PointerPerformed(InputAction.CallbackContext context)
+    public void PointerPerformed(InputAction.CallbackContext context)
     {
         // Debug.Log(context.ReadValue<Vector2>());
         Cursor.visible = true;
