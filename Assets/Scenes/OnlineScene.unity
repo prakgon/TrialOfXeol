@@ -1348,6 +1348,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.5943396
       objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_Name
@@ -2108,6 +2113,7 @@ GameObject:
   - component: {fileID: 795643854}
   - component: {fileID: 795643853}
   - component: {fileID: 795643855}
+  - component: {fileID: 795643856}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2184,6 +2190,19 @@ MonoBehaviour:
     type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+--- !u!114 &795643856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795643851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6e4e80a161b1c4ea5df6c2043b6a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!4 &832690454 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5572018929513519258, guid: e01ab15eae11ceb439fa7693fa575be7,
@@ -2957,7 +2976,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 1
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0

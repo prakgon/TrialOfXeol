@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using Helpers;
 using PlayerScripts;
+using TMPro;
 using TOX;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using WebSocketSharp;
 
 public class PlayerInputHandler : MonoBehaviour, IMediatorUser
 {
@@ -51,6 +54,7 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     public bool startInput;
 
     [SerializeField] private int _startCounter;
+    [SerializeField] private bool _showMenu;
 
     private PlayerCombatManager _playerCombatManager;
     private PlayerInventory _playerInventory;
@@ -60,10 +64,12 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
     
     // Create UI Controller
     [Header("Player Controls UI")]
+    [SerializeField] private GameObject _controlsPanel;
     [SerializeField] private GameObject _gamepadControlsSchema;
-    [SerializeField] private GameObject _gamepadControlsText;
     [SerializeField] private GameObject _keyboardControlsText;
+    [SerializeField] private TMP_Text _controlsTitle;
     
+
 
     #region Input Events
 
@@ -277,29 +283,34 @@ public class PlayerInputHandler : MonoBehaviour, IMediatorUser
         _startCounter += startInput ? 1 : 0;
         _startCounter = _startCounter >= 3 ? 0 : _startCounter;
         
-        if (!startInput) return;
+        /*if (!startInput) return;
+        _showMenu = !_showMenu;
+        _gamepadControlsSchema.SetActive(_showMenu);
         
+        _playerMovement.enabled = !_showMenu;
+
+        Cursor.visible = _showMenu;
+        Cursor.lockState = _showMenu ? CursorLockMode.None : CursorLockMode.Locked;*/
         
         
         switch (_startCounter)
         {
             case 0:
-                _gamepadControlsSchema.SetActive(false);
-                _gamepadControlsText.SetActive(false);
-                _keyboardControlsText.SetActive(false);
-                Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                _controlsPanel.SetActive(false);
+                _controlsTitle.text = "gamepad controls";
                 break;
             case 1:
-                _gamepadControlsSchema.SetActive(true);
-                _gamepadControlsText.SetActive(false);
-                _keyboardControlsText.SetActive(false);
-                Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                _controlsPanel.SetActive(true);
+                _gamepadControlsSchema.SetActive(true);
+                _keyboardControlsText.SetActive(false);
                 break;
             case 2:
+                _controlsTitle.text = "keyboard controls";
                 _gamepadControlsSchema.SetActive(false);
-                _gamepadControlsText.SetActive(true);
                 _keyboardControlsText.SetActive(true);
                 break;
         }

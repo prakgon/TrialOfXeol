@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -31,6 +32,8 @@ public class SettingsManager : MonoBehaviour
         DisablePanel(_currentPanel ? gamepadPanel : keyboardPanel);
         _currentPanel = !_currentPanel;
     }
+
+
     
     public void ControlsNavToClose(Button button)
     {

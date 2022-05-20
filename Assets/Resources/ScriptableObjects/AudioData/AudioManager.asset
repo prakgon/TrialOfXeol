@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90494af03c6b4dff8f8e09fed661c1d4, type: 3}
   m_Name: AudioManager
   m_EditorClassIdentifier: 
-  volume: 1
+  volume: 0.2
   mute: 0
