@@ -172,7 +172,8 @@ namespace Helpers
             BuffEffect,
             GroundHit,
             Victory,
-            ChangeWeapon
+            ChangeWeapon,
+            Horn
         }
 
     }

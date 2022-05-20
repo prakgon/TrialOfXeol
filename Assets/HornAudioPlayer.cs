@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
+using Helpers;
 using UnityEngine;
 
 public class HornAudioPlayer : MonoBehaviour
 {
-    public AudioClip hornClip;
-    public AudioSource hornAudioSource;
     public float timeInterval = 60f;
     
     private void Start()
@@ -16,7 +16,7 @@ public class HornAudioPlayer : MonoBehaviour
 
     private void PlayHorn()
     {
-        hornAudioSource.PlayOneShot(hornClip);
+        AudioManager.Instance.OneShot(Literals.AudioType.Horn);
         StartCoroutine(WaitForHorn());
     }
 

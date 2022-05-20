@@ -3383,6 +3383,9 @@ MonoBehaviour:
   - AudioType: 10
     AudioClip: {fileID: 8300000, guid: 47d61d5d2a1452d4e9cd5fcb99566c29, type: 3}
     Volume: 1
+  - AudioType: 11
+    AudioClip: {fileID: 8300000, guid: afa656958aa9b524d812632bf3840d06, type: 3}
+    Volume: 0.2
   audioController: {fileID: 11400000, guid: 383013a96a81c314db35f3561d00cea0, type: 2}
 --- !u!4 &1046549392
 Transform:
@@ -3507,8 +3510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a17e0241609e294897e8fb9c002a594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hornClip: {fileID: 8300000, guid: afa656958aa9b524d812632bf3840d06, type: 3}
-  hornAudioSource: {fileID: 1046549393}
   timeInterval: 70
 --- !u!4 &1083025122 stripped
 Transform:
