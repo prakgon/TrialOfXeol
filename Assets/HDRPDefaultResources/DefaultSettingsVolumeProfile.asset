@@ -140,10 +140,10 @@ MonoBehaviour:
     m_Value: {fileID: 0}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 0.15
   m_MaxSamples:
     m_OverrideState: 1
-    m_Value: 24
+    m_Value: 3
 --- !u!114 &448115243408767295
 MonoBehaviour:
   m_ObjectHideFlags: 3
